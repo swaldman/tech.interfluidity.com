@@ -46,6 +46,18 @@ code strong, code b {
     font-size: 24pt;
     letter-spacing: -1px;
 }
+.main-title a {
+    color: black;
+    text-decoration: none;
+}
+.main-title a:visited {
+    color: black;
+    text-decoration: none;
+}
+.main-title a:hover {
+    color: black;
+    text-decoration: underline;
+}
 .tagline {
     font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
     font-size: 14pt;
