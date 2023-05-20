@@ -1,0 +1,11 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+> //  "Title"     -> "Another Test Entry",
+>   "PubDate"   -> "2023-05-19T01:45:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+This is just another test post. Let's see how they look together!

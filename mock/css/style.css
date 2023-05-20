@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Monoid';
+    src: url('../font/Monoid-XtraLarge/Monoid-Regular-XtraLarge.ttf');
+}
+@font-face {
+    font-family: 'Monoid-Bold';
+    src: url('../font/Monoid-XtraLarge/Monoid-Bold-XtraLarge.ttf');
+}
+@font-face {
+    font-family: 'Podkova';
+    src: url('../font/Podkova/Podkova-VariableFont_wght.ttf');
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+    background-image: url("../image/graph-paper-tile-small-lighter.png");
+    background-color: white;
+    font-family: 'Podkova', Times, serif;
+    font-variation-settings: "wght" 300;
+}
+code {
+    font-family: 'Monoid', "Lucida Console", "Courier New", monospace;
+}
+code strong, code b {
+    font-family: 'Monoid-Bold', "Lucida Console", "Courier New", monospace;
+}
+.main-title {
+    font-family: 'Monoid-Bold', "Lucida Console", "Courier New", monospace;
+    font-size: 24pt;
+    letter-spacing: -1px;
+}
+.tagline {
+    font-family: 'Monoid', "Lucida Console", "Courier New", monospace;
+    font-size: 14pt;
+    letter-spacing: 3px;
+}
+#rss-link-container {
+    float: right;
+}
+a#rss-link {
+    color: black;
+    text-decoration: none;
+    font-family: 'Monoid';
+    font-weight: normal;
+}
+a#rss-link span {
+    color: #FF8800;
+}
+a#rss-link span.bullet {
+    color: black;
+}
+#header {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+}
+#left-sidebar {
+    /* border: 2px solid blue; */
+}
+#right-sidebar {
+    /* border: 2px solid yellow; */
+}
+#main {
+    display: grid;
+    grid-template-columns: minmax(min-content, 100px) minmax(300px, auto) minmax(min-content, 100px);
+    grid-template-rows:    1fr;
+}
+#content {
+    /* border: 2px solid green; */
+}
+#content article {
+    background-color: rgba(255, 255, 255, 0.625);
+    margin-bottom: 3rem;
+    padding: 1rem;
+    border: 1px solid black;
+}

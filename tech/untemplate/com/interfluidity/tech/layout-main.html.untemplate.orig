@@ -1,0 +1,22 @@
+import com.interfluidity.tech.TechSite
+
+import unstatic.PageBase
+
+val site   = input.renderLocation.site
+val cssLoc = site.location("css/style.css")
+
+val title = input.mbTitle.getOrElse("tech")
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : TechSite.MainLayoutInput)[]~()>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="<( cssLoc.relative )>" />
+    <title><( title )></title>
+  </head>
+  <body>
+    <( input.mainContentHtml )>
+  </body>  
+</html>

@@ -1,0 +1,28 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Test Entry",
+>   "PubDate"   -> "2023-05-20T04:05:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+This is some text. But what if we added a code block? How would that be?
+
+Oooooh...
+
+```scala
+object Archive:
+  val location = site.location("/archive.html")              
+  case class Input( renderLocation : SiteLocation, entryUntemplatesResolved : immutable.SortedSet[EntryResolved] )
+
+  val task = zio.ZIO.attempt {
+     val contentsHtml = blog.layout_archive_html( Input( location, entriesResolved ) ).text
+     layout_main_html( MainLayoutInput( location, contentsHtml, Nil ) ).text
+  }
+  val endpointBinding = ZTEndpointBinding.publicReadOnlyHtml( location, task, None, immutable.Set("archive") )
+end Archive
+```
+
+How does it look? Should we add some fancy javascript?

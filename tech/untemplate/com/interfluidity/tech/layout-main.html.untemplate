@@ -1,0 +1,54 @@
+import com.interfluidity.tech.TechSite
+
+import unstatic.PageBase
+import unstatic.ztapir.simple.Attribute.Key.*
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+val site = input.renderLocation.site
+val blog = site.MainBlog
+
+val feedLoc = blog.rssFeed
+val cssLoc = site.location("css")
+val jsLoc = site.location("js")
+val mainLoc = site.location("/index.html")
+val archiveLoc = TechSite.MainBlog.Archive.location
+
+val title =
+  val mbTitle =
+    if input.sourceUntemplates.size == 1 then input.sourceUntemplates.head.checkAttributeKey(`Title`) else None
+  mbTitle.getOrElse("tech &mdash; interfluidity")
+end title
+
+(input : TechSite.MainLayoutInput)[]~()>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="<( feedLoc.relative )>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<( cssLoc.relative )>/style.css" />
+    <link rel="stylesheet" href="<( cssLoc.relative )>/highlightjs/night-owl.css" /><!-- theme for highlight.js -->
+    <script src="<( jsLoc.relative )>/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title><( title )></title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title">tech.interfluidity.com</div>
+      <div class="tagline">a notebook by steve randy waldman</div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <( input.mainContentHtml )>
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+@font-face {
+    font-family: 'FiraCode-Light';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Light.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-Regular';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Medium.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-Medium';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Medium.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-SemiBold';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'Podkova';
+    src: url('../font/Podkova/Podkova-VariableFont_wght.ttf');
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+    background-image: url("../image/graph-paper-tile-small-lighter.png");
+    background-color: white;
+    font-family: 'Podkova', Times, serif;
+    font-variation-settings: "wght" 300;
+}
+code {
+    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+}
+code strong, code b {
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+}
+.main-title {
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-size: 24pt;
+    letter-spacing: -1px;
+}
+.tagline {
+    font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
+    font-size: 14pt;
+    letter-spacing: 3px;
+}
+#rss-link-container {
+    float: right;
+}
+a#rss-link {
+    color: black;
+    text-decoration: none;
+    font-family: 'FiraCode-Light';
+    font-weight: normal;
+}
+a#rss-link span {
+    color: #FF8800;
+}
+a#rss-link span.bullet {
+    color: black;
+}
+#header {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+}
+#left-sidebar {
+    /* border: 2px solid blue; */
+}
+#right-sidebar {
+    /* border: 2px solid yellow; */
+}
+#main {
+    display: grid;
+    grid-template-columns: minmax(min-content, 100px) minmax(300px, auto) minmax(min-content, 100px);
+    grid-template-rows:    1fr;
+}
+#content {
+    /* border: 2px solid green; */
+}
+#content article {
+    background-color: rgba(255, 255, 255, 0.625);
+    padding-top: 1rem;
+    padding-left: 1rem;
+    border: 1px solid black;
+}
+#content article h1 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-size: 14pt;
+}
+#content article h1 a {
+    text-decoration: none;
+    color: black;
+}
+#content article h1 a:hover {
+    text-decoration: underline;
+}
+#content .day-stamp {
+    position: relative;
+    left: -1em;
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-size: 12pt;
+    margin-bottom: 0.25em;
+}
+#content .post-metainfo {
+    width: 100%;
+    text-align: right;
+    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-size: 70%;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+#content .post-metainfo a {
+    color: #00FF00;
+    text-decoration: none;
+    background-color: black;
+    padding: 5px;
+    border-radius: 3px;
+}
+#content .post-metainfo a:visited {
+    color: #00FF00;
+    text-decoration: none;
+}
+#content .post-metainfo a:hover {
+    color: orange;
+    /* text-decoration: underline; */
+}
+#content .prev-top-next {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:    1fr;
+    width 100%;
+    font-family: 'FiraCode-Medium', "Lucida Console", "Courier New", monospace;
+    font-size: 12pt;
+}
+#content .prev-top-next .prev {
+    text-align: left;
+}
+#content .prev-top-next .top {
+    text-align: center;
+}
+#content .prev-top-next .next {
+    text-align: right;
+}
+#content .after-article {
+    margin-top: 0.25rem;
+}
+#content .entry-separator {
+    height: 2em;
+}
+#content pre code {
+    margin-left: 1rem;
+    margin-right: 2rem;
+    border-radius: 10px;
+    font-size: 90%;
+}

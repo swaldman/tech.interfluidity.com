@@ -1,0 +1,116 @@
+import java.time.format.DateTimeFormatter
+import com.interfluidity.tech.TechSite
+import unstatic.PageBase
+import unstatic.ztapir.simple.Attribute.Key.*
+
+> val DayFormatter = DateTimeFormatter.ofPattern("""yyyy'-'MM'-'dd""").withZone(java.time.ZoneId.systemDefault())
+> val HourFormatter = DateTimeFormatter.ofPattern("""hh':'mm' 'a' 'zzz""").withZone(java.time.ZoneId.systemDefault())
+> val DefaultAuthor = "Steve Randy Waldman"
+
+val presentationTypeClass =
+  s"presentation-${input.presentation.toString().toLowerCase}"
+
+val info = input.info
+val resolved = input.sourceEntry
+val ut = resolved.entryUntemplate
+val permalink = resolved.permalink
+val entryAnchor = ut.checkAttributeKey(`Anchor`)
+val articleClasses = presentationTypeClass + entryAnchor.fold("")(anchor => "uid-" + anchor)
+val mbTitle  = info.mbTitle
+val authors = info.authors
+val authorsString =
+  authors.size match
+    case 0 => DefaultAuthor
+    case 1 => authors.head
+    case 2 => authors.mkString(" and ")
+    case sz =>
+      val (init, last) =
+        authors.splitAt(sz-1)
+      init.mkString(", ", ", ", "") + last.head
+val pubDate = ut.checkAttributeKey(`PubDate`).getOrElse( throw new Exception("Attribute PubDate required, not found: " + resolved) )
+val dayStr  = DayFormatter.format(pubDate)
+val hourStr = HourFormatter.format(pubDate)
+
+val mbNextDay = input.nextEntry.map( entryResolved => DayFormatter.format(entryResolved.entryInfo.pubDate) )
+
+val newDay = mbNextDay match
+  case Some( nextDayStr ) => nextDayStr != dayStr
+  case None               => true
+
+val mbPrevPermalinkLoc = input.previousEntry.map( _.permalink )
+val prevTitle = input.previousEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("previous")
+
+val mbNextPermalinkLoc = input.nextEntry.map( _.permalink )
+val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.Layout.Input.Entry)[]~()>
+<()
+if newDay || input.presentation == input.blog.Entry.Presentation.Single then {
+()>
+      <div class="day-stamp"><( dayStr )></div>
+<()
+}
+()>
+      <article class="<( articleClasses )>">
+        <div class="entry-header">
+<()
+  if input.presentation != input.blog.Entry.Presentation.Rss then {
+    mbTitle.fold("") { title =>
+()>
+          <h1><a href="<( permalink.relative )>"><( title )></a></h1>
+<()
+    }
+  }
+()>
+        </div>
+        <div class="entry-body">
+          <( input.articleContentHtml )>
+        </div>
+        <div class="entry-footer">
+          <div class="post-metainfo">
+<()
+  if input.presentation == input.blog.Entry.Presentation.Rss then {
+()>
+  by <( authorsString )> on <( dayStr )> @
+<()
+  }
+()>
+            <a href="<( permalink.relative )>"><( hourStr )></a>
+          </div>
+        </div>
+      </article>
+      <div class="after-article">
+<()
+if input.presentation == input.blog.Entry.Presentation.Single then {
+()>
+        <div class="prev-top-next">
+          <div class="prev">
+<()
+  mbPrevPermalinkLoc.foreach { prevLoc =>
+()>
+             &larr; <a href="<( prevLoc.relative )>"><( prevTitle )></a>
+<()
+  } // mbPrevPermalinkLoc
+()>
+          </div>
+          <div class="top">
+              <a href="<( input.blog.frontPage.relative )>">&uarr;&uarr;&uarr;</a>
+          </div>
+          <div class="next">
+<()
+  mbNextPermalinkLoc.foreach { nextLoc =>
+()>
+             <a href="<( nextLoc.relative )>"><( nextTitle )></a> &rarr;
+<()
+  } // mbNextPermalinkLoc
+()>
+           </div>
+        </div>
+<()
+} // if
+()>
+      </div> <!-- after-article -->
+  
+
