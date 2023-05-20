@@ -90,7 +90,7 @@ if input.presentation == input.blog.Entry.Presentation.Single then {
 <()
   mbPrevPermalinkLoc.foreach { prevLoc =>
 ()>
-             &larr; <a href="<( prevLoc.relative )>"><( prevTitle )></a>
+             <a href="<( prevLoc.relative )>">&larr; <( prevTitle )></a>
 <()
   } // mbPrevPermalinkLoc
 ()>
@@ -102,7 +102,7 @@ if input.presentation == input.blog.Entry.Presentation.Single then {
 <()
   mbNextPermalinkLoc.foreach { nextLoc =>
 ()>
-             <a href="<( nextLoc.relative )>"><( nextTitle )></a> &rarr;
+             <a href="<( nextLoc.relative )>"> &rarr;<( nextTitle )></a>
 <()
   } // mbNextPermalinkLoc
 ()>
