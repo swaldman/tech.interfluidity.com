@@ -45,6 +45,9 @@ code {
 code strong, code b {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
 }
+a:visited {
+    color: #7777ff;
+}
 .main-title {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
     font-size: 24pt;
