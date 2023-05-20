@@ -16,8 +16,12 @@
 }
 @font-face {
     font-family: 'IbarraRealNova';
-    /* src: url('../font/Podkova/Podkova-VariableFont_wght.ttf'); */
     src: url('../font/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'IbarraRealNova';
+    src: url('../font/Ibarra_Real_Nova/IbarraRealNova-Italic-VariableFont_wght.ttf');
+    font-style: italic;
 }
 @font-face {
     font-family: 'Caroni';
@@ -39,7 +43,7 @@ body {
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
     font-size: 85%;
-    background-color: #dde;
+    background-color: #eeeeff;
     padding: 1px;
 }
 code strong, code b {
