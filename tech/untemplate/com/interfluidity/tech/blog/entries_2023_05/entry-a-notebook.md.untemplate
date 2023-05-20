@@ -11,7 +11,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 I hope to use this site as a kind of notebook of tech stuff I think about or encounter.
 I do a fair amount of online writing, but it's mostly finance, economics, politics, policy.
 
-But I also do a lot of coding, and stuff comes up that I think is worth noting, but that
+But I also do a lot of coding. Stuff comes up that I think is worth noting, but that
 would not really interest my blog readership.
 
 So, now I have here.
