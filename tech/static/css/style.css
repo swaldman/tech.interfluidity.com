@@ -195,15 +195,14 @@ a#rss-link span.bullet {
     font-size: 12pt;
 }
 #content .prev-top-next a {
-    color: blue;
+    color: var( --see-also-color );
     text-decoration: none;
 }
 #content .prev-top-next a:visited {
-    color: blue;
-    text-decoration: none;
+    color: var( --see-also-color );
 }
-#content .prev-top-next a:hoverf {
-    background-color: #ccccff;
+#content .prev-top-next a:hover {
+    color: black;
 }
 #content .prev-top-next .prev {
     text-align: left;
