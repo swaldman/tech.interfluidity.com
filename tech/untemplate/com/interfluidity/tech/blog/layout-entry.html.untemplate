@@ -46,7 +46,7 @@ val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
 given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.Layout.Input.Entry)[]~(.daystamp)>
-      <div class="day-stamp"><( dayStr )></div>
+      <div class="day-stamp"><( dayStr )> <span class="arrow">&rArr;</arrow></div>
 <()
 input.presentation match {
   case input.blog.Entry.Presentation.Single             => writer.write(daystamp())
@@ -61,6 +61,7 @@ input.presentation match {
     mbTitle.fold("") { title =>
 ()>
           <h1><a href="<( permalink.relative )>"><( title )></a></h1>
+	  <hr class="below-title" />
 <()
     }
   }
@@ -103,7 +104,7 @@ if input.presentation == input.blog.Entry.Presentation.Single then {
 <()
   mbNextPermalinkLoc.foreach { nextLoc =>
 ()>
-             <a href="<( nextLoc.relative )>"> &rarr;<( nextTitle )></a>
+             <a href="<( nextLoc.relative )>"><( nextTitle )> &rarr;</a>
 <()
   } // mbNextPermalinkLoc
 ()>

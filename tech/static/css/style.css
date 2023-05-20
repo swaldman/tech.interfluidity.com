@@ -15,8 +15,9 @@
     src: url('../font/Fira_Code_v6.2/ttf/FiraCode-SemiBold.ttf');
 }
 @font-face {
-    font-family: 'Podkova';
-    src: url('../font/Podkova/Podkova-VariableFont_wght.ttf');
+    font-family: 'IbarraRealNova';
+    /* src: url('../font/Podkova/Podkova-VariableFont_wght.ttf'); */
+    src: url('../font/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
 }
 @font-face {
     font-family: 'Caroni';
@@ -32,11 +33,14 @@
 body {
     background-image: url("../image/graph-paper-tile-small-lighter.png");
     background-color: white;
-    font-family: 'Podkova', Times, serif;
-    font-variation-settings: "wght" 300;
+    font-family: 'IbarraRealNova', Times, serif;
+    font-variation-settings: "wght" 200;
 }
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-size: 85%;
+    background-color: #dde;
+    padding: 1px;
 }
 code strong, code b {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
@@ -149,6 +153,10 @@ a#rss-link span.bullet {
 #content article h1 a:hover {
     text-decoration: underline;
 }
+#content hr.below-title {
+    border-top: 1px solid black;
+    margin-right: 1rem;
+}
 #content .entry-body {
     font-size: 115%;
     line-height: 125%;
@@ -157,10 +165,13 @@ a#rss-link span.bullet {
 }
 #content .day-stamp {
     position: relative;
-    left: -1em;
+    left: -1.5em;
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
     font-size: 12pt;
     margin-bottom: 0.25em;
+}
+#content .day-stamp .arrow {
+    font-size: 150%;
 }
 #content .post-metainfo {
     width: 100%;
@@ -227,6 +238,7 @@ a#rss-link span.bullet {
 }
 .archive h1 {
     font-family: 'FiraCode-SemiBold';
+    letter-spacing: -1px;
     margin-top: 0.25rem;
     margin-bottom: 0.5rem;
 }
@@ -264,7 +276,7 @@ a#rss-link span.bullet {
 .archive .archive-table td.entry-link {
     font-family: 'FiraCode-Regular';
     /*
-    font-family: 'Podkova';
+    font-family: 'IbarraRealNova';
     font-size: 125%;
     font-variation-settings: "wght" 600;
     */

@@ -1,0 +1,49 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "pdfcat as a Scala script",
+>   "PubDate"   -> "2023-05-20T17:00:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I am really enjoying scripting in Scala with [`scala-cli`](https://scala-cli.virtuslab.org/).
+
+Scala has long supported scripting in theory, but for your scripts to run, all the dependencies had to be
+preinstalled in your `CLASSPATH`. That rendered the feature not so useful. Under `scala-cli`, however, dependencies
+are delightfully automanaged for your script. This has rendered JVM scripting practical and convenient for me.
+
+I find that psychologically this is a BFD. It dissolves the boundary between app and library. Usually, I want to
+get something done, I look for an app. If I want to merge a bunch of PDFs together, I might fire up <i>Adobe Acrobat</i>,
+curse myself, and mess around until I figure out how you do that.
+
+However, the Java [PDFBox](https://pdfbox.apache.org/) library exists. ([itextpdf](https://itextpdf.com/) too!)
+With easy scripting, the library can substitute for the app. A glance at a
+[tutorial](https://www.tutorialspoint.com/pdfbox/pdfbox_merging_multiple_pdf_documents.htm) on how to merge PDFs
+with PDFBox and we were [off to the races](https://github.com/swaldman/scalascripts-misc/blob/main/bin/pdfcat).
+
+The meaningful code is trivial:
+
+```scala
+val files = args.map(fn => new File(fn))
+val merger = new PDFMergerUtility();
+merger.setDestinationFileName(args.last)
+files.init.foreach( merger.addSource )
+merger.mergeDocuments()
+```
+
+The [full script](https://github.com/swaldman/scalascripts-misc/blob/main/bin/pdfcat) is longer than this, of course,
+but the rest is sanity-checking the command line and aborting if it isn't right.
+
+In fact, I often find command-line parsing outweighs functional code when I build scripts. Of course that's all
+optional &mdash; you can skip a nice command line if you really mean to script a one-off. But it is great to
+retain the capacity to solve probems you've already solved instantly on a nice command line. And it's great practice
+with the Scala ecosystem's rich set of command-line parsing libraries.
+
+A few days ago I needed to quickly serve a directory by HTTP from my laptop. There's some Python command I've used
+for that in the past. I'd have to look it up, and figure out how to get it to bind to the laptop's public
+interface rather than localhost. It was quick instead to script up Li Haoyi's [`cask`](https://github.com/com-lihaoyi/cask)
+library, and build a nice command line with [`decline`](https://ben.kirw.in/decline/). Check out
+[`http-serve`](https://github.com/swaldman/scalascripts-misc/blob/main/bin/http-serve).
+
