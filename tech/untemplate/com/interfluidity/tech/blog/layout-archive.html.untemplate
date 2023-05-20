@@ -1,43 +1,34 @@
 import java.time.format.DateTimeFormatter
-import com.interfluidity.tech.TechSite
-import unstatic.PageBase
 import unstatic.ztapir.simple.Attribute.Key.*
 
-> val MonthFormatter = DateTimeFormatter.ofPattern("yyyy'-'MM").withZone(java.time.ZoneId.systemDefault())
+> val TimestampFormatter = DateTimeFormatter.ofPattern("""yyyy'-'MM'-'dd' @ 'hh':'mm' 'a' 'zzz""").withZone(java.time.ZoneId.systemDefault())
 
 given PageBase = PageBase.fromPage(input.renderLocation)
 
-val entryUntemplatesResolvedByMonthStr =
-  val raw =
-    input.entryUntemplatesResolved.groupBy( eutr => MonthFormatter.format( eutr.entryUntemplate.checkAttributeKey(`PubDate`).getOrElse( throw new Exception("No PubDate on Entry! " + eutr) ) ) )
-  immutable.SortedMap.from( raw )( summon[Ordering[String]].reverse )
 val site = input.renderLocation.site
 
-(input : TechSite.MainBlog.Archive.Input)[]~()>
+(input : MainBlog.Archive.Input)[]~()>
 <div class="archive">
   <h1>archive</h1>
 
-  <dl>
+  <table class="archive-table">
 <()  
-  entryUntemplatesResolvedByMonthStr.foreach { case ( ms, eutrs ) =>
+  input.entryUntemplatesResolved.foreach { eutr =>
+    val pubDate      = eutr.entryInfo.pubDate
+    val permalinkLoc = site.location( eutr.entryInfo.permalinkPathSiteRooted )
+    val title        = eutr.entryInfo.mbTitle.getOrElse("Untitled Post")
 ()>
-    <dt><( ms )></dt>
-    <dd>
-      <ul>
-<()
-    eutrs.foreach { eutr =>
-      val permalinkLoc = site.location( eutr.entryInfo.permalinkPathSiteRooted )
-      val title        = eutr.entryInfo.mbTitle.getOrElse("(Untitled Post)")
-()>
-        <li><a href="<( permalinkLoc.relative )>"><( title )></a></li>	
-<()
-    }
-()>
-      </ul> 
-    </dd>
+    <tr>
+      <td class="timestamp">
+	<a href="<( permalinkLoc.relative )>"><( TimestampFormatter.format(pubDate) )></a>
+      </td>
+      <td class="entry-link">
+        <a href="<( permalinkLoc.relative )>"><( title )></td>
+      </td>
+    </tr>
 <()
   }
 ()>
-  </dl>
+  </table>
 </div>
 

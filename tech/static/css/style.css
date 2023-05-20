@@ -225,6 +225,51 @@ a#rss-link span.bullet {
     border-radius: 10px;
     font-size: 90%;
 }
+.archive h1 {
+    font-family: 'FiraCode-SemiBold';
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+.archive .archive-table {
+    position: relative;
+    left: 2.5rem;
+}
+.archive .archive-table td {
+    vertical-align: bottom;
+}
+.archive .archive-table td.timestamp {
+    font-family: 'FiraCode-Regular';
+    font-size: 80%;
+}
+.archive .archive-table td.timestamp a {
+    color: var( --see-also-color );
+    text-decoration: none;
+}
+.archive .archive-table td.timestamp a:visited {
+    color: var( --see-also-color );
+}
+.archive .archive-table td.timestamp a:hover {
+    color: black;
+}
+.archive .archive-table td.entry-link a {
+    color: black;
+    text-decoration: none;
+}
+.archive .archive-table td.entry-link a:visited {
+    color: black;
+}
+.archive .archive-table td.entry-link a:hover {
+    text-decoration: underline;
+}
+.archive .archive-table td.entry-link {
+    font-family: 'FiraCode-Regular';
+    /*
+    font-family: 'Podkova';
+    font-size: 125%;
+    font-variation-settings: "wght" 600;
+    */
+    padding-left: 1rem;
+}
 @media only screen and (max-width: 700px) {
     .main-title {
 	font-size: 18pt;
