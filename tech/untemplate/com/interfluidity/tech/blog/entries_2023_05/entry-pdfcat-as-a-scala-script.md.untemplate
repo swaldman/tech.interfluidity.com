@@ -36,7 +36,7 @@ merger.mergeDocuments()
 The [full script](https://github.com/swaldman/scalascripts-misc/blob/main/bin/pdfcat) is longer than this, of course,
 but the rest is sanity-checking the command line and aborting if it isn't right.
 
-In fact, I often find command-line parsing outweighs functional code when I build scripts. Of course that's all
+In fact, I often find command-line parsing outweighs functional code when I write scripts. Of course that's all
 optional &mdash; you can skip a nice command line if you really mean to script a one-off. But it is great to
 retain the capacity to solve probems you've already solved instantly on a nice command line. And it's great practice
 with the Scala ecosystem's rich set of command-line parsing libraries.
