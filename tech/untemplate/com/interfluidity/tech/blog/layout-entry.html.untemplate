@@ -45,12 +45,13 @@ val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
 
 given PageBase = PageBase.fromPage(input.renderLocation)
 
-(input : MainBlog.Layout.Input.Entry)[]~()>
-<()
-if newDay || input.presentation == input.blog.Entry.Presentation.Single then {
-()>
+(input : MainBlog.Layout.Input.Entry)[]~(.daystamp)>
       <div class="day-stamp"><( dayStr )></div>
 <()
+input.presentation match {
+  case input.blog.Entry.Presentation.Single             => writer.write(daystamp())
+  case input.blog.Entry.Presentation.Multiple if newDay => writer.write(daystamp())
+  case _                                                => ()
 }
 ()>
       <article class="<( articleClasses )>">
