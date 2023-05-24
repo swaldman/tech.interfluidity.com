@@ -9,7 +9,8 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 (input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
 
 I hope to use this site as a kind of notebook of tech stuff I think about or encounter.
-I do a fair amount of online writing, but it's mostly finance, economics, politics, policy.
+I do a fair amount of [online](https://www.interfluidity.com/) [writing](https://drafts.interfluidity.com/),
+but it's mostly finance, economics, politics, policy.
 
 But I also do a lot of coding. Stuff comes up that I think is worth noting, but that
 would not really interest my blog readership.
