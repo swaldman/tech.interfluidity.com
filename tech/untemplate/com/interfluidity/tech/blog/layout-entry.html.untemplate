@@ -61,7 +61,7 @@ input.presentation match {
     mbTitle.fold("") { title =>
 ()>
           <h1><a href="<( permalink.relative )>"><( title )></a></h1>
-	  <hr class="below-title" />
+          <hr class="below-title" />
 <()
     }
   }

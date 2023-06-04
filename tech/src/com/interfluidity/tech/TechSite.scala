@@ -10,6 +10,8 @@ import unstatic.*, UrlPath.*
 
 import java.nio.file.Path as JPath
 
+import java.time.ZoneId
+
 import untemplate.Untemplate.AnyUntemplate
 
 object TechSite extends ZTSite.SingleRootComposite( JPath.of("tech/static") ):
@@ -28,6 +30,7 @@ object TechSite extends ZTSite.SingleRootComposite( JPath.of("tech/static") ):
     override val frontPage = site.location("/index.html")
     override val frontPageIdentifiers = super.frontPageIdentifiers ++ immutable.Set("home","home-page") // since we are using the blog as home
     override val maxFrontPageEntries = Some(10)
+    override val timeZone = ZoneId.of("America/New_York")
     override def entryUntemplates =
       IndexFilter.fromIndex( IndexedUntemplates )
         .inOrBeneathPackage("com.interfluidity.tech.blog")
@@ -36,7 +39,7 @@ object TechSite extends ZTSite.SingleRootComposite( JPath.of("tech/static") ):
         .map( _.asInstanceOf[EntryUntemplate] )
     override def mediaPathPermalink( ut : AnyUntemplate ) : MediaPathPermalink =
       import MediaPathPermalink.*
-        overridable( yearMonthDayNameDir, ut )
+        overridable( yearMonthDayNameDir(timeZone), ut )
 
     override def defaultAuthors : immutable.Seq[String] = List("Steve Randy Waldman")
 
