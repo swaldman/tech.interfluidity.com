@@ -231,7 +231,7 @@ However I tried to encode `media_ids`, I couldn't get media to attach, even afte
 
 Thanks to [Chris Jones](https://chrisjones.io/articles/using-php-and-curl-to-post-media-to-the-mastodon-api/), who also had a hard
 time getting form-data-encoded requests to attach media, I learned that you can hit these endpoints with JSON
-rather tha form data. `media_ids` worked just fine with a JSON-ifed version of `post(...)`:
+rather than form data. `media_ids` worked just fine with a JSON-ifed version of `post(...)`:
 
 ```scala
 // the return value will become the exit code of our script
