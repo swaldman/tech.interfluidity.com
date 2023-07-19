@@ -177,7 +177,7 @@ As I write, [this](https://github.com/swaldman/scalascripts-misc/blob/dc1ec71728
 of my script.
 
 Uploading media turned out to be very easy. Uploads are supposed to be in `multipart/form-data` format, which `requests-scala` supports
-painlessly. The image is uploaded as of the fourth statement. Again, the method is long only because I wanted to support detailed tracing
+painlessly. The image is uploaded as of the fourth statement below. Again, the method is long only because I wanted to support detailed tracing
 of bad outcomes when the `--verbose` flag is set.
 
 We have to decode a JSON response, which we do with Li Haoyi's `ujson` library. (See [upickle](https://com-lihaoyi.github.io/upickle/) for docs.)
