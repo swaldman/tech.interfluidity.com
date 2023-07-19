@@ -49,6 +49,9 @@ code {
 code strong, code b {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
 }
+strong, b {
+    font-variation-settings: "wght" 800;
+}
 a:visited {
     color: #7777ff;
 }
@@ -145,13 +148,23 @@ a#rss-link span.bullet {
     padding-left: 1rem;
     border: 1px solid black;
 }
+h1, h2, h3 {
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+}
+h1 {
+    font-size: 14pt;
+}
+h2 {
+    font-size: 13pt;
+}
+h3 {
+    font-size: 12pt;
+}
 #content article h1 {
     margin-top: 0;
     padding-top: 0;
     margin-bottom: 0;
     padding-bottom: 0;
-    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
-    font-size: 14pt;
 }
 #content article h1 a {
     text-decoration: none;
