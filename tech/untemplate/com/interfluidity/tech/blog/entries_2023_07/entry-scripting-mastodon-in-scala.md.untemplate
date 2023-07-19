@@ -271,7 +271,7 @@ def post( config : Config ) : Int =
 There's a bit of busy-work getting from arguments to `InputStream` plus `filename` (which I bundle together as
 `MediaStream` in the script), but it's straightforward if slightly more verbose than I had hoped.
 
-Anyway, please check out [the current version of the script](https://github.com/swaldman/scalascripts-misc/blob/main/bin/mastopost) for more details.
+Anyway, please check out [the latest evolving version of the script](https://github.com/swaldman/scalascripts-misc/blob/main/bin/mastopost) for more details.
 
 ### Miscellaneous
 
