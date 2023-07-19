@@ -1,5 +1,5 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
->   "Title"     -> "Scripting mastodon in Scala",
+>   "Title"     -> "Scripting Mastodon in Scala",
 >   "PubDate"   -> "2023-07-19T19:00:00-04:00",
 >   // "Anchor"    -> "first-post"
 > )
@@ -12,7 +12,7 @@ I want to learn more about how to work with "fediverse" tech &mdash; [Mastodon](
 [ActivityPub](https://activitypub.rocks/), [WebFinger](https://webfinger.net/), etc.
 
 ```text
-$ mastopost --text "Hi. This is some stupid shit I wanna say"
+$ mastopost --text "Hi. This is some stupid shit I wanna say."
 ```
 
 One thing I soon hope
@@ -27,7 +27,7 @@ called `mastopost`. This version successfully posted text, but did not implement
 
 With the help of [a post by Roy Tang](https://roytang.net/2021/11/mastodon-api-python/),
 using Li Haoyi's wonderful libraries [requests-scala](https://github.com/com-lihaoyi/requests-scala) and [pprint](https://com-lihaoyi.github.io/PPrint/),
-this was super simple. The relevant API docs are [here](https://docs.joinmastodon.org/methods/statuses/#create).
+this was super simple. The relevant Mastodon API docs are [here](https://docs.joinmastodon.org/methods/statuses/#create).
 
 The heart of the script was initially just:
 
@@ -284,7 +284,7 @@ try to modify the script to support that.
 For now, I'm going to keep `MASTO_INSTANCE_URL` and `MASTO_ACCESS_TOKEN` set in my environment, and posting will just be
 
 ```text
-$ mastopost --text "Hi. This is some stupid shit I wanna say"
+$ mastopost --text "Hi. This is some stupid shit I wanna say."
 ```
 
 along with some optional stupid `--media`.
