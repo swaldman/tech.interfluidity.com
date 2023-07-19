@@ -160,7 +160,7 @@ The `command.parse(...)` line yields an `Either`, which gives me my `Config` obj
 it is not.
 
 Note how nicely `decline` supports values that can be supplied either as command-line options or as enviroment variables.
-It enforces that instance URL and access token must be supplied, but accepts it from either source.
+It enforces that instance URL and access token must be supplied, but accepts them from either source.
 
 **Be careful though! `decline` won't find environment variables unless you explicitly supply the environment you want
 (as a `Map[String,String]`) in the call to `command.parse(...)`.** Usually you will just supply `sys.env`. This tripped me up for a few minutes.
