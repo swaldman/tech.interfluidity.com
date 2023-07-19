@@ -278,7 +278,7 @@ Anyway, please check out [the current version of the script](https://github.com/
 Since the initial version, I've modified the `image` command-line argument to be `media` instead, since in theory you might
 want to upload videos and stuff.
 
-Right now text is a required argument to the script, but it's legal to have media only post. Sometime soon, I'll
+Right now `--text` is a required argument to the script, but it's legal to have media-only posts. Sometime soon, I'll
 try to modify the script to support that.
 
 For now, I'm going to keep `MASTO_INSTANCE_URL` and `MASTO_ACCESS_TOKEN` set in my environment, and posting will just be
