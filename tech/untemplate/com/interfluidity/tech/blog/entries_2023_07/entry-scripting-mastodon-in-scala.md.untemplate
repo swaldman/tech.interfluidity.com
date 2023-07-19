@@ -55,7 +55,7 @@ def post( config : Config ) : Int =
 ```
 This works fine!
 
-You do have to create an access token. Go to the "Preferences" page of your logged-in Mastodon instance, the select "Development",
+You do have to create an access token. Go to the "Preferences" page of your logged-in Mastodon instance, then select "Development",
 then press the "New Application" button and fill out the form. When you are done, you will have an access code that will work!
 
 Eventually my `post(...)` method grew, only because I wanted to be able to verbosely inspect responses, including bad responses.
