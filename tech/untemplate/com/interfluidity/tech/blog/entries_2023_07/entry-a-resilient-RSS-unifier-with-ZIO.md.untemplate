@@ -30,8 +30,9 @@ It's a pretty trivial application, but it does need to be fault tolerant. It oug
 the source feeds go down.
 
 Error-handling / retry logic needn't complicated, but in my experience it often becomes
-verbose. It can render core "happy path" functionality less clear and readable, and applications more complicated to maintain.
-But ZIO really shines at this. This was the first project where I was sure the extra indirection of functional effects was "worth it".
+verbose. It can render core "happy path" functionality less clear and readable, and make applications more complicated to maintain.
+But ZIO really shines at concisely "transforming effects", so that retry logic mostly stays out of the way.
+This was the first project where I was sure the extra indirection of functional effects was "worth it".
 
 Simplifying, the basic logic of the application looks like this:
 
