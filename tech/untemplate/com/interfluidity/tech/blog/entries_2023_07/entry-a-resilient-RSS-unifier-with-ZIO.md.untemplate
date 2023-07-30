@@ -94,7 +94,7 @@ The super concise refresh loop logic was definitely a ZIO advantage.
 updateMergedFeed( config, ref ).schedule( Schedule.fixed( Duration.fromSeconds(config.refreshSeconds) ) )
 ```
 
-But we are not resilient yet! What if `updateMergedFeed(...)` fails. For now the effect would just end, and our
+But we are not resilient yet! What if `updateMergedFeed(...)` fails? For now the effect would just end, and our
 server would break. An RSS feed that never updates is worse than no RSS feed at all.
 
 But, with ZIO it is trivial to solve this problem. We just define a retry
