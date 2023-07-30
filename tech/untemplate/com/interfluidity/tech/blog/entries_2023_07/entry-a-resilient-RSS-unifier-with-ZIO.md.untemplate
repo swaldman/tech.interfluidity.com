@@ -85,7 +85,7 @@ object Main extends ZIOAppDefault:
 ```
 
 It's super simple. We set up a thread-safe (well, um, fiber-safe) [`zio.Ref`](https://javadoc.io/doc/dev.zio/zio_3/latest/zio/Ref.html)
-to hold the initial merged feed, then we fork a separate fiber to run an effect in a seprate fiber that periodically updates the `Ref`,
+to hold the initial merged feed, then we fork a separate fiber to run an effect that periodically updates the `Ref`,
 then we start up an http service that serves the contents of the ref.
 
 The super concise refresh loop logic was definitely a ZIO advantage.
