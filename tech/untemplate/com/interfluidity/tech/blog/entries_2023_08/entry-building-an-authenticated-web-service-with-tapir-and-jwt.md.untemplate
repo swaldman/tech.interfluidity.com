@@ -228,7 +228,7 @@ The `.widen[Any]` is to override the inferred environment type to `Any` so that 
 
 That’s about it!
 
-If you’d like to see the full code, the project is [here](https://github.com/swaldman/hotsauce-devilla). Instructions for running or playing with it are in the [README](https://github.com/swaldman/hotsauce-devilla/blob/main/README.md). To play with it, you'll have to set up an account on `auth0`, or else use (or become!) some similar JWT authentication provider.
+If you’d like to see the full code, the project is [here](https://github.com/swaldman/hotsauce-devilla). Instructions for running it are in the [README](https://github.com/swaldman/hotsauce-devilla/blob/main/README.md). To play with it, you'll have to set up an account on `auth0`, or else use (or become!) some similar JWT authentication provider.
 
 All of this is based on Joey deVilla’s excellent work, and you'll find very detailed instructions for setting up JWT authentication in [his article](https://auth0.com/blog/build-and-secure-an-api-with-spring-boot/).
 
