@@ -173,6 +173,9 @@ h3 {
 #content article h1 a:hover {
     text-decoration: underline;
 }
+#content article h2, #content article h3 {
+    margin-top: 2em;
+}
 #content hr.below-title {
     border-top: 1px solid black;
     margin-right: 1rem;

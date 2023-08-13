@@ -1,0 +1,234 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Building an authenticated web service in Scala with tapir and JWT",
+>   "PubDate"   -> "2023-08-13T12:45:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+A few days ago, [Joey Devilla](https://www.globalnerdy.com/) gave an [excellent talk](https://www.meetup.com/tampa-jug/events/295033023/) for the
+[Tampa Java Users Group](https://www.meetup.com/tampa-jug/) on building an authenticated web service in Kotlin using Spring Boot and JWT (“JSON Web Tokens”). He worked through [a detailed article](https://auth0.com/blog/build-and-secure-an-api-with-spring-boot/) he had previously published.
+
+I didn’t really understand how the authentication worked, so I decided to reimplement Joey’s project quick-and-dirty in order to figure it out. I used my own preferred tools — Scala and its libraries — to try to make sense of things.
+
+The (working, yay!) project is available [here](https://github.com/swaldman/hotsauce-devilla).
+
+### Library selection
+
+After starting with some other favorites, I ultimately settled on [tapir](https://tapir.softwaremill.com/en/latest/) +
+[zio-http](https://tapir.softwaremill.com/en/latest/server/ziohttp.html) as my http stack
+and [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala).
+
+deVilla's API is heavily overloaded: All endpoints begin with, and several include only, the path `/api/hotsauces`. They are distinguished sometimes only by their HTTP methods or the types of subpath elements. `tapir` handled this
+nicely, while simpler libraries complained about overlapping routes and would have
+required some hand-coding to discriminate between endpoints.
+
+The API includes an update method (`PUT /api/hotsauces/:id`) that want users to be able to provide very partial specifications in JSON.
+
+The basic record the application manages is
+
+```scala
+case class HotSauce( id : Long, brandName : String, sauceName : String, description : String, url : String, heat : Int )
+```
+
+We want to be able to perform partial updates, supplying JSON like `{ “heat” : 52300 }` and omitting everything else. So I define
+
+```scala
+case class HotSauceData( brandName : Option[String], sauceName : Option[String], description : Option[String], url : Option[String], heat : Option[Int] )
+```
+
+For this to work, we need our JSON serializer to treat `Option`s in objects as literally optional values
+that can be omitted in reads (omitted values get read back as `None`). Some JSON libraries make this choice.
+Other libraries &mdash; like my usual go-to, `upickle` &mdash; encode optional values as JSON arrays, either empty or single-valued.
+
+You can [make a strong case](https://github.com/com-lihaoyi/upickle/issues/75) for `upickle`’s choice on consistency grounds: If you are going to just sometimes omit `Option`-valued object fields, what do you do if you are encoding a sequence of `Option`s? Is it really safe to filter away the `None`s? Is it sufficiently informative to leave only ordinary values remaining? How should one enforce nested `Option` values, should `Some(Some(3))` really just be `3`?
+
+Still, for our application we want `Option`-valued fields to be omittable. We could have written our own codec to override `upickle`’s default behavior, but [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala) implements what we're after by default, so I switched.
+
+### Tapir endpoints
+
+`tapir` turned out to be a great choice for this project. The heavy overloading of the API means we can just factor much of the API specification into a common "base" endpoint:
+
+```scala
+object TapirEndpoint:
+  val Base          = endpoint.in("api").in("hotsauces").errorOut(either404or500)
+  val Authenticated = Base.securityIn( auth.bearer[String]() )
+
+  val GetAll      = Base.get.in(queryParams).out(jsonBody[List[HotSauce]])
+  val GetCount    = Base.get.in("count").out(jsonBody[Long])
+  val GetById     = Base.get.in(path[Long]).out(jsonBody[HotSauce])
+  val PostNoId    = Authenticated.post.in(jsonBody[HotSauceData]).out(jsonBody[HotSauce])
+  val PostWithId  = Authenticated.post.in(path[Long]).in(jsonBody[HotSauceData]).out(jsonBody[HotSauce])
+  val PutById     = Authenticated.put.in(path[Long]).in(jsonBody[HotSauceData]).out(jsonBody[HotSauce])
+  val DeleteById  = Authenticated.delete.in(path[Long]).out(jsonBody[HotSauce])
+end TapirEndpoint
+```
+
+For this quick and dirty project, I just wanted errors to dump stack trace to clients as `String`  with a `500 Internal Server Error` status code, but I did want to emit `404 Not Found` when users asked for a record nor present. My base endpoint could standardize on an error-out of type `Option[String]`. We let `NONE` result in `404`, while `Some(stackTraceDump)` yields `500`.
+
+Since authentication will work identically across all authenticated inputs, I could create a single, modified base endpoint incorporating it. Final endpoints are built on top of either `Base` or `Authenticated`, each one specifying only distinct characteristics &mdash; request method, subpaths, whether they accept query params, what kind of output they would yield (to be JSON-encoded back to the client).
+
+### Tapir authentication
+
+`tapir` offers a special security workflow. When you specify endpoints, in addition to specifying "normal" inputs (path elements, query params, request headers, request body, etc.), you can specify special security inputs.
+
+```scala
+val Authenticated = Base.securityIn( auth.bearer[String]() )
+```
+
+This specifies of security input of type `String`, to be extracted from a header like `Authorization: Bearer <token-value>`. At runtime, the endpoint will be ready with a security token, or else it will have responded `401 Unauthorized` before it ever hits our logic. Great!
+
+Using [`tapir` + `zio-http`](https://tapir.softwaremill.com/en/latest/server/ziohttp.html) binding an endpoint to the logic that will handle it ordinarily looks something like this:
+
+```scala
+val serverEndpoint = myEndpoint.zServerLogic( logic )
+```
+
+where `logic` is a function of type
+
+```scala
+MyEndpointInput => ZIO[Any,MyErrorOutput,MyIntendedOutput]
+```
+
+Embedded in the definition of every tapir endpoint is a specification of an intended output, an error output, and an input. For example, our `GetAll` endpoint defined as…
+
+```scala
+val Base   = endpoint.in("api").in("hotsauces").errorOut(either404or500)
+val GetAll = Base.get.in(queryParams).out(jsonBody[List[HotSauce]])
+```
+
+defines an error output of `Option[String]` (see the [definition](https://github.com/swaldman/hotsauce-devilla/blob/main/hotsauce/HotSauceServer.scala) of `either404or500`) and a desired output of `List[HotSauce]`. It defines an input of type `QueryParams`. So, for our endpoint logic, we need a function of type
+
+```scala
+QueryParams => ZIO[Any,Option[String],List[HotSauce]]
+```
+
+That’s great!
+
+But what if we *also* have authentication input? How do we bind both our security logic and our application logic to the endpoint then? Let's look at an example:
+
+```scala
+val Base          = endpoint.in("api").in("hotsauces").errorOut(either404or500)
+val Authenticated = Base.securityIn( auth.bearer[String]() )
+val DeleteById    = Authenticated.delete.in(path[Long]).out(jsonBody[HotSauce])
+```
+
+Now we have two inputs (a `String` as security input, and a `Long` extracted from a path element as normal application logic input).
+
+Rather than ask us to define one function for both of these inputs, `tapir` requires that we handle security logic first and separately. We have security logic that takes security input and converts it to some kind of authentication token, in our case of type
+
+```scala
+String => AuthenticationInfo
+```
+
+*Then* we supply a curried function, a function from the `AuthenticationInfo` to our usual logic function (which would be `Long ⇒ ZIO[Any,Option[String],HotSauce]` for our example). So we provide
+
+```scala
+AuthenticationInfo => Long => ZIO[Any,Option[String],HotSauce]
+```
+
+for our second-stage, after-authentication logic.
+
+***Note:** `AuthenticationInfo` is just a type we made up! The actual type of the credential we generate from security inputs is generic, entirely up to us as developers!*
+
+The full process looks like
+
+```scala
+val serverEndpoint =
+  myAuthenticatingEndpoint
+    .zServerSecurityLogic( securityLogic ) // String => AuthenticationInfo
+    .serverLogic( applicationLogic )       // AuthenticationInfo => Long => ZIO[Any,Option[String],HotSauce]
+```
+
+### Decoding JWT
+
+But what should our security logic actually look like? In our case, all we want to know is that the token decodes as a [JWT](https://jwt.io/), properly signed by our authentication provider (`auth0` here).
+
+Given a public key from our provider, we write a function that accepts a `String` bearer token and yields a `ZIO[Any,Option[String],AuthenticationInfo]`. The ZIO will evaluate successfully to `AuthenticationInfo` if and only if the bearer token decodes and validates.
+
+We use the Java [jjwt](https://github.com/jwtk/jjwt) library to decode and verify.
+
+```scala
+type ZOut[T] = ZIO[Any,Option[String],T]
+
+// t.fullStackTrace is an extension we've defined elsewhere
+def mapPlainError[U]( task : Task[U] ) : ZOut[U] = task.mapError( t => Some( t.fullStackTrace ) )
+
+def authenticate( key : Key )( bearerToken : String ) : ZOut[AuthenticationInfo] =
+  val task = ZIO.attempt:
+    val decoded =
+      Jwts.parserBuilder()
+        .setSigningKey(key)
+        .build()
+        .parse(bearerToken)
+    println(s"Decoded JWT: ${decoded}")
+    AuthenticationInfo() // someday, maybe I'll inspect the decoded key and include real information
+  mapPlainError(task)
+```
+
+For now, the “AuthenticationInfo” that we generate contains no information at all, other than that it managed to get constructed, which means that the token decoded. If we wanted more fine-grained authentication, we might inspect the contents of the decoded JWT and use that to define what would effectively become permissions for our different API methods in the `AuthenticationInfo` object. For now, we dump the decoded contents to the console, and see something like:
+
+```plaintext
+Decoded JWT: header={alg=RS256, typ=JWT, kid=M8YYbGPBjl7YNzuzm1Dnc},body={iss=https://<my-auth0-domain>.auth0.com/, sub=ojokl5P7EkyPBN2Vu7qcdqaIYDLDDtwm@clients, aud=https://hotsauces-devilla.example.mchange.com/, iat=1691883039, exp=1691969439, azp=ojokl5P7EkyPBN2Vu7qcdqaIYDLDDtwm, gty=client-credentials},signature=dYkYOZzPv77zZDpqwhCmuxio_oZWIVA9bydr5yCwqYcRrCdJRZW_bNzgHufI4LLM-fnVJsQP9pMl34yZGm4jDRzd9c8sEgeKaSozKL1HYW-g70epFAfGx0MG-STPVKMour4fE6ZMm3RkpApcxUrd4TL-lYRm5gDKZMX6XW0cgQSMJlM-PT5wuhkDiS-zqLFIkKhZplTjjbbxjjXxxbfF17EPBqi_og2X5T3FNpugejnfQH9EZiAZT4CXPea14NtaE2c3aZY0ivQPYn2bkoaV5WWwjGECsYP_e_HkA1rI994xv-ZXjbCNF7-4jRmOON1bUv_Nz0LB8X4mzKJDnYzD-g
+```
+(I've masked the actual value of `<my-auth0-domain>`.)
+
+
+We needed a `java.security.Key` object, representing the public key of the authenticator that signs the JWT. We extract that from a [pem-formatted certificate](https://community.auth0.com/t/where-is-the-auth0-public-key-to-be-used-in-jwt-io-to-verify-the-signature-of-a-rs256-token/8455/2) provided at a URL by `auth0.` (Signing keys are offered [in several formats](https://auth0.com/docs/get-started/tenant-settings/signing-keys).) This required a little bit of work &mdash; or, more accurately, some [scraping from StackExchange](https://stackoverflow.com/questions/6358555/obtaining-public-key-from-certificate):
+
+```scala
+def keyFromCertificatePemUrl( pemUrl : String ) : Key =
+    Using.resource( new java.io.BufferedInputStream( new java.net.URL(pemUrl).openStream ) ): is =>
+      val cf = CertificateFactory.getInstance("X.509");
+      val certificate = cf.generateCertificate(is)
+      certificate.getPublicKey()
+```
+
+### A tapir / Scala 3 gotcha!
+
+For obscure reasons, when you construct “server endpoints” in calls like
+
+```scala
+val serverEndpoint = myEndpoint.zServerLogic( logic ) // yields ZServerEndpoint[R,C]
+```
+
+the type of the generic variable `R`, which represents the requirements or “environment” of a `ZIO`, fruitlessly and mischievously gets inferred as `Nothing`. The effect of this is that, before you can actually run the logic, or run the server that could run the logic, you are required to supply a `scala.Nothing`, instances of which by definition do not exist, and so cannot be provided.
+
+If, when trying to compile a `tapir` / `zio-http` application you see a message like…
+
+```plaintext
+[error] ──── ZIO APP ERROR ───────────────────────────────────────────────────
+[error] 
+[error]  Your effect requires a service that is not in the environment.
+[error]  Please provide a layer for the following type:
+[error] 
+[error]    1. scala.Nothing
+[error] 
+[error]  Call your effect's provide method with the layers you need.
+[error]  You can read more about layers and providing services here:
+[error]  
+[error]    https://zio.dev/reference/contextual/
+[error] 
+[error] ──────────────────────────────────────────────────────────────────────
+```
+
+…then you have very likely run into this type-inference issue.
+
+In our code you’ll see expressions like
+
+```scala
+GetAll.zServerLogic( allFiltered(db) ).widen[Any]
+```
+
+The `.widen[Any]` is to override the inferred environment type to `Any` so that anything will do, rather than a `Nothing` is required.
+
+### Conclusion
+
+That’s about it!
+
+If you’d like to see the full code, the project is [here](https://github.com/swaldman/hotsauce-devilla). Instructions for running or playing with it are in the [README](https://github.com/swaldman/hotsauce-devilla/blob/main/README.md). To play with it, you'll have to set up an account on `auth0`, or else use (or become!) some similar JWT authentication provider.
+
+All of this is based on Joey deVilla’s excellent work, and you'll find very detailed instructions for setting up JWT authentication in [his article](https://auth0.com/blog/build-and-secure-an-api-with-spring-boot/).
+
