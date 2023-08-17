@@ -45,7 +45,7 @@ Other libraries &mdash; like my usual go-to, `upickle` &mdash; encode optional v
 
 You can [make a strong case](https://github.com/com-lihaoyi/upickle/issues/75) for `upickle`’s choice on consistency grounds: If you are going to just sometimes omit `Option`-valued object fields, what do you do if you are encoding a sequence of `Option`s? Is it really safe to filter away the `None`s? Is it sufficiently informative to leave only ordinary values remaining? How should one enforce nested `Option` values, should `Some(Some(3))` really just be `3`?
 
-Still, for our application we want `Option`-valued fields to be omittable. We could have written our own codec to override `upickle`’s default behavior, but [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala) implements what we're after by default, so I switched.
+Still, for our application we want `Option`-valued fields to be omittable. We could have [written our own codec](https://github.com/swaldman/zap/blob/9f7c1c885c258205fcb6f3e6a6a433f5b4772b47/com/mchange/zap/webfinger/Jrd.scala) to override `upickle`’s default behavior, but [jsoniter-scala](https://github.com/plokhotnyuk/jsoniter-scala) implements what we're after by default, so I switched.
 
 ### Tapir endpoints
 
