@@ -222,7 +222,7 @@ In our code you’ll see expressions like
 GetAll.zServerLogic( allFiltered(db) ).widen[Any]
 ```
 
-The `.widen[Any]` is to override the inferred environment type to `Any` so that anything will do, rather than a `Nothing` is required.
+The `.widen[Any]` is to override the inferred environment type to `Any` so that anything will do, rather than specify that an impossible `Nothing` is required.
 
 ### Conclusion
 
