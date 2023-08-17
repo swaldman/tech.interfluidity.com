@@ -80,7 +80,7 @@ val Authenticated = Base.securityIn( auth.bearer[String]() )
 
 This specifies of security input of type `String`, to be extracted from a header like `Authorization: Bearer <token-value>`. At runtime, the endpoint will be ready with a security token, or else it will have responded `401 Unauthorized` before it ever hits our logic. Great!
 
-Using [`tapir` + `zio-http`](https://tapir.softwaremill.com/en/latest/server/ziohttp.html) binding an endpoint to the logic that will handle it ordinarily looks something like this:
+Using [`tapir` + `zio-http`](https://tapir.softwaremill.com/en/latest/server/ziohttp.html), binding an endpoint to the logic that will handle it ordinarily looks something like this:
 
 ```scala
 val serverEndpoint = myEndpoint.zServerLogic( logic )
