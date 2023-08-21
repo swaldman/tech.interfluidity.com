@@ -176,8 +176,14 @@ h3 {
 #content article h2, #content article h3 {
     margin-top: 2em;
 }
+#content hr {
+    margin-top: 2em;
+    margin-right: 1rem;
+    border-top: 2px solid black;
+}
 #content hr.below-title {
     border-top: 1px solid black;
+    margin-top: 0.4rem;
     margin-right: 1rem;
 }
 #content .entry-body {

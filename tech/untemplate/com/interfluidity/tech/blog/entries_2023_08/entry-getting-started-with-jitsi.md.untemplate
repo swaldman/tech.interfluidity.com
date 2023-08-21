@@ -1,0 +1,289 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Getting started with Jitsi",
+>   "PubDate"   -> "2023-08-21T16:00:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+## TL;DR
+
+[Jitsi](https://jitsi.org/) is a complicated system! It was surprisingly easy to set up, though.
+
+I'd feel better if I understood it better so I'd know that I can do what I want and fix whatever breaks.
+
+Nevertheless, it works, and it's very cool to be able to [embed a teleconference in straight HTML/CSS](/html/jitsi-frame.html?roomName=Welcome+Room&description=Welcome+to+an+embedded+teleconference!)!
+
+## Introduction
+
+A few weeks ago there was a
+[bit of a kerfuffle](https://stackdiary.com/zoom-terms-now-allow-training-ai-on-user-content-with-no-opt-out/)
+as Zoom updated their terms of service in ways that would apparently permit training AIs with surveillance
+of our interactions in Zoom teleconferences. Zoom has since
+[clarified this, or walked it back,](https://www.theverge.com/2023/8/11/23828649/zoom-communications-like-data-train-ai-artificial-intelligence-models)
+depending upon how generously you want to interpret their original intentions.
+
+I've been a paying Zoom subscriber for years, and I'm willing to take the more generous interpretation.
+But regardless of Zoom's intentions, the incident was another reminder that large, centralized tech platforms are just
+a dangerous architecture, under which again and again firms and people I used to admire have succumbed to temptations of
+"[enshittification](https://pluralistic.net/2023/01/21/potemkin-ai/)".
+
+Plus, I want to be able to play with the technology I use. I don't want to tether my own skills and habits to some company's propriety
+plug-ins and APIs if I can help it. I want to use open, freely available tools to play with how my teleconferences work and
+any experiments or extras I might wish to bring into them.
+
+There are a few self-hostable, open source teleconferencing platforms, such as [Jitsi](https://jitsi.org/) and [Edumeet](https://edumeet.org/).
+Then there are lower level libraries like [Mediasoup](https://mediasoup.org/) and [Janus](https://janus.conf.meetecho.com/).
+
+I don't have a clue about any of this stuff. (I am very open to advice!) So I'm playing.
+
+My first attempt has been with [Jitsi](https://jitsi.org/). On the one-hand, I like that it has been
+[easy to set up](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart), and easy to
+embed into HTML and mess with with ordinary css and javascript. I am tentatively very happy!
+
+On the other hand, I am very aware that it's a complicated stack full of components I am still struggling to understand. When (due to my own error!)
+the cookbook set-up seemed to fail, I was really at a loss about how I might debug the thing. (See below on the details of how I made my own life complicated.)
+
+## What (little) I understand about the Jitsi stack
+
+Ultimately, Jitsi requires the collaboration of several services, which can be run on a single or multiple machines, in order to function.
+On my setup, I have
+
+* [prosody](https://prosody.im/)
+* [jicofo](https://github.com/jitsi/jicofo)
+* [jitsi-videobridge](https://jitsi.org/jitsi-videobridge/)
+* [coturn](https://github.com/coturn/coturn)
+
+Then I configure and serve (via [nginx](https://nginx.org/)) `jitsi-meet`, which is a client-side application that hits these services.
+You can see a diagram of those services [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker)
+
+
+As I understand (or perhaps misunderstand)
+
+* `prosody` is an [XMPP server](https://xmpp.org/), the standard invented and used by open-source instant messaging platform
+[Jabber](https://www.jabber.org/), which was eventually embraced, then eclipsed and support discontinued, by Google. Of course
+`Jabber` lives on, albeit more quietly. Importantly, the XMPP protocol its developers invented was extended far beyond organizing
+text-based "MUCs" (multiuser conferences) into the realm of audio and videoconferencing via "[Jingle](https://xmpp.org/extensions/xep-0166.html)".
+Jitsi uses prosody for establishing conferences and authentication of participants, as far as I can tell.
+* `jicofo`, as I understand it, is a service that intermediates between clients (ie web browsers) and the XMPP server `prosody`,
+and via that XMPP server, the "videobridge" that actually serves audiovideo data, using the aforementioned Jingle protocol with
+clients and a distinct protocol called `colibri v2` with the videobridge component.
+* `jitsi-videobridge` is &mdash; I think! &mdash; the component that actually serves audiovideo data to clients.
+* `coturn` is relatively straightforward. It helps clients behind NAT (network address translation, ie using fake IP addresses)
+find and reach their outward-facing IP addresses ([STUN protocol](https://en.wikipedia.org/wiki/STUN)),
+and if necessary proxies audiovisual data to circumvent nettlesome layers of NAT and firewalls (TURN protocol(https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT)).
+`coturn` makes it possible for the significant share of the internet that can't reach the network without translation or proxying
+to participate in teleconferences.
+
+There is so much I don't understand about all this. Are `jicofo`/`prosidy` are only involved in establishing and terminating
+sessions, or do they have a role throughout a "MUC"? Via `nginx`, clients seem to have access both to audiovisual data (as [BOSH](https://en.wikipedia.org/wiki/BOSH_(protocol))),
+and to XMPP via `prosody`, and to the `videobridge` service via directly. Who hits `jicofo` when?
+
+I don't know. Again, if something in this complex collaboration broke, how would I figure out how to debug and fix it?
+That so far is my main issue with `Jitsi`.
+
+There are two components in the Jitsi stack that I am not yet using. [Jigasi](https://github.com/jitsi/jigasi) would be a bridge from `Jitsi` to
+and from standard VoIP "[Session Initiation Protocol (SIP)](https://en.wikipedia.org/wiki/Session_Initiation_Protocol)" sessions,
+allowing telephone dial-in and piping of audio into external transcription services. [Jibri](https://github.com/jitsi/jibri) is a very
+resource intensive service that basically runs a headless chrome browser which silently joins a conference to receive video and audio and translate it into MP4 data
+for recording and streaming.
+
+It's a lot!
+
+## An interesting note about prosody configuration
+
+The host on which I've (perhaps only temporarily!) deployed `Jitsi` is called `loiter.interfluidity.com`.
+My prosody configuration contains lines like
+
+```plaintext
+VirtualHost "loiter.interfluidity.com"
+  ...
+VirtualHost "auth.loiter.interfluidity.com"
+  ...
+Component "focus.loiter.interfluidity.com" "client_proxy"
+  ...  
+```
+
+None of these subdomains are configured, or are required to be configured, in DNS.
+
+The installation created a self-signed certificate for the "virtual host" `auth.loiter.interfluidity.com`, as well
+as for parent domain `loiter.interfluidity.com`.
+
+I am guessing that services make secure connections internally, via `localhost`, to `auth.loiter.interfluidity.com`,
+using that "virtual host" name in a `Host:` header. I think this configuration scheme is intended for at least `auth`
+(not necessarily "component" `focus`) to be a separate host, but when we want to host it all in one place, rather than
+having us go to the trouble of `CNAME`-ing our server `auth.loiter.interfluidity.com`, it is configured to just pretend
+internally. It feels like a cell absorbing some precambrian bacteria to invent the mirochondrion.
+
+## Installation
+
+I basically followed [the developers' Ubuntu deployment docs](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart).
+
+I created a [digitalocean](https://www.digitalocean.com/) Ubuntu 22.04 (LTS) "basic" "regular" 4GB/2CPU/80GB for $24/month.
+
+Then, simplifying just a bit...
+
+```plaintext
+# apt update
+# apt upgrade
+# apt install emacs-nox
+# apt-add-repository universe
+# hostnamectl set-hostname loiter.interfluidity.com
+emacs /etc/hosts
+```
+
+I fill in my server's IP address for `loiter.interfluidity.com loiter`.
+
+Then I just paste in the following from [Jitsu's cookbook instructions](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart),
+which trusts prosody's developers to maintain a repository from which I can install and update via `apt`:
+
+```plaintext
+sudo curl -sL https://prosody.im/files/prosody-debian-packages.key -o /etc/apt/keyrings/prosody-debian-packages.key
+echo "deb [signed-by=/etc/apt/keyrings/prosody-debian-packages.key] http://packages.prosody.im/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/prosody-debian-packages.list
+sudo apt install lua5.2
+```
+
+Then I do the same for `jitsi.org` (pasting another short script):
+
+```plaintext
+curl -sL https://download.jitsi.org/jitsi-key.gpg.key | sudo sh -c 'gpg --dearmor > /usr/share/keyrings/jitsi-keyring.gpg'
+echo "deb [signed-by=/usr/share/keyrings/jitsi-keyring.gpg] https://download.jitsi.org stable/" | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
+```
+
+Then
+
+```plaintext
+# apt update
+# apt upgrade
+```
+
+Here I deviate a bit from the canned instructions. I know I want nginx and certbot certs...
+
+```plaintext
+# apt install nginx
+# apt install certbot
+```
+
+I manually fetch my certificates (I've already configured a DNS `A` record for `loiter.interfluidity.com`.):
+
+```plaintext
+# certbot certonly -d loiter.interfluidity.com
+```
+
+During the later installation of `Jitsi` components, I'll have to supply a path to my `fullchain.pem` and `privkey.pem` files.
+The installation has the option of running certbot for you, but if you do it yourself, you'll want to note these paths.
+
+There were some differences in recommended firewall config between the written instructions and
+[a video tutorial](https://jitsi.org/blog/new-tutorial-installing-jitsi-meet-on-your-own-linux-server/).
+I went with the following hybrid. So far, it seems fine.
+
+```plaintext
+# ufw allow in ssh
+# ufw allow in 80/tcp
+# ufw allow in 443/tcp
+# ufw allow in 10000:20000/udp
+# ufw allow in 3478/udp
+# ufw allow in 5349/tcp
+# ufw enable
+```
+
+Then I did something stupid. More about that [below](#something-stupid).
+
+The next thing I should have done was...
+
+
+```plaintext
+# apt install jitsi-meet
+```
+
+It prompts for a bunch of stuff, like certificate paths. It prompts whether you want to support
+dial-in participates, by making an account on their hosted Jitsu-as-a-service. I said no.
+It prints the following banner in case I change my mind:
+
+```plaintext
+
+       ;dOocd;
+     .dNMM0dKO.
+     lNMMMKd0K,
+    .xMMMMNxkNc
+     dMMMMMkxXc
+     cNMMMNl..
+     .kMMMX;             Interested in adding telephony to your Jitsi meetings?
+      ;XMMMO'
+       lNMMWO'           Sign up on https://jaas.8x8.vc/components?host=loiter.interfluidity.com
+        lNMMM0,                        and follow the guide in the dev console.
+         lXMMMK:.
+          ;KMMMNKd.  'oo,
+           'xNMMMMXkkkkOKOl'
+             :0WMMMMMMNOkk0Kk,
+              .cdOWMMMMMWXOkOl
+                 .;dKWMMMMMXc.
+                    .,:cll:'
+
+```
+
+Then it just works!
+
+### Something stupid
+
+Well it should have worked. I did something stupid. I manually installed `nginx` (because reading the docs
+via-nginx was optional and I knew I wanted it and it said it'd be installed if nginx was), and then I set up
+my usual config for host `loiter.interfluidity.com` right in `/etc/nginx/nginx.conf`.
+
+That occluded the Jitsi installer's very elaborate config in `/etc/nginx/sites-available/loiter.interfluidity.com.conf`,
+then [symlinked into](https://maximorlov.com/tips/sites-available-vs-sites-enabled-in-nginx/) `/etc/nginx/sites-enabled`.
+
+### It works!
+
+After removing my occluding configuration from `/etc/nginx/nginx.conf` and
+
+```plaintext
+# systemctl restart nginx
+```
+
+I could go to `https://loiter.interfluidity.com/` and see the default Jitsu webapp.
+
+You can see that default app at [https://meet.jit.si/](https://meet.jit.si/). I'll soon disable that at the base of my site, and
+in general try to add a bit of authentication to my installation!
+
+## Using the iframe API to embed conferences in HTML
+
+Once I got the default page working, it was easy to [make an HTML page that would embed a "conference room"](/html/jitsi-frame.html?roomName=Welcome+Room&description=Welcome+to+an+embedded+teleconference!).
+
+<hr>
+
+## Appendix: Relevant config files, etc
+
+### Config files
+
+- /etc/prosody/conf.avail/jitsi.example.com.cfg.lua
+- /etc/prosody/prosody.cfg.lua
+- /etc/jitsi/jicofo/config
+- /etc/jitsi/jicofo/jicofo.conf
+- /etc/jitsi/jicofo/logging.properties
+- /etc/jitsi/meet/loiter.interfluidity.com-config.js
+- /etc/jitsi/videobridge/config
+- /etc/jitsi/videobridge/jvb.conf
+- /etc/jitsi/videobridge/logging.properties
+- /etc/jitsi/videobridge/sip-communicator.properties
+- /etc/nginx/nginx.conf
+
+### Log files
+
+- /var/log/jitsi/jvb.log
+- /var/log/jitsi/jicofo.log
+- /var/log/prosody/prosody.log
+
+### Unit Files
+
+- coturn.service (`/lib/systemd/system/coturn.service`)
+- jicofo.service (`/etc/init.d/jicofo; generated`)
+- jitsi-videobridge2.service (`/lib/systemd/system/jitsi-videobridge2.service`)
+- prosody.service (`/lib/systemd/system/prosody.service`)
+
+<()
+// Too much of my cognitive capacity is already entagled with products by Adobe and Wolfram Research.
+// It is a bad feeling to have to continually buy subscriptions or licenses in order to exercise ones own creative talents. I won't go cold turkey
+// from the model. I still sometimes learn and pay for proprietary productivity software. But my barriers to entanglement are growing.
