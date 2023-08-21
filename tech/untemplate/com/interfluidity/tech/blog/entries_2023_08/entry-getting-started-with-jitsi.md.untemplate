@@ -76,7 +76,7 @@ clients and a distinct protocol called `colibri v2` with the videobridge compone
 * `jitsi-videobridge` is &mdash; I think! &mdash; the component that actually serves audiovideo data to clients.
 * `coturn` is relatively straightforward. It helps clients behind NAT (network address translation, ie using fake IP addresses)
 find and reach their outward-facing IP addresses ([STUN protocol](https://en.wikipedia.org/wiki/STUN)),
-and if necessary proxies audiovisual data to circumvent nettlesome layers of NAT and firewalls (TURN protocol(https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT)).
+and if necessary proxies audiovisual data to circumvent nettlesome layers of NAT and firewalls ([TURN protocol](https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT)).
 `coturn` makes it possible for the significant share of the internet that can't reach the network without translation or proxying
 to participate in teleconferences.
 
