@@ -57,8 +57,11 @@ On my setup, I have
 * [coturn](https://github.com/coturn/coturn)
 
 Then I configure and serve (via [nginx](https://nginx.org/)) `jitsi-meet`, which is a client-side application that hits these services.
-You can see a diagram of those services [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker)
+You can see a diagram of those services [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker). Let's steal that:
 
+<div style="text-align: center;">
+  <img src="##./docker-jitsi-meet-afafdf87fea30a2fa6412baa4a3f8248.png">
+</div>
 
 As I understand (or perhaps misunderstand)
 
