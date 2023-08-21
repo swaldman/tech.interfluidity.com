@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<!-- see https://community.jitsi.org/t/how-to-use-iframe-api/114443/3 -->
+<html>
+  <head>
+    <style>
+      html {
+        overflow: auto;
+	font-family: sans-serif;
+      }
+      body {
+        background-image: url("../image/graph-paper-tile-small-lighter.png");
+        background-color: white;
+      }	
+      iframe {
+        margin: 0;
+        padding: 0;
+	width:  100%;
+        height: 100%;
+        border: none;
+      }
+      #cards {
+        width: 100%;
+	height: 100%;
+	text-align: center;
+      }
+      #cards #jitsi-session {
+        width:  800px;
+	height: 800px;
+	text-align: center;
+      }
+      #cards #description {
+        width: 100%;
+	height: 100%;
+      }
+    </style>
+    <script src='https://loiter.interfluidity.com/external_api.js'></script>
+    <script>
+      function setCards( showJitsi ) {
+        const jselem     = document.getElementById("jitsi-session")
+        const descelem   = document.getElementById("description")
+        const cardToggle = document.getElementById("card-toggle")
+	if (!showJitsi) {
+	  document.getElementById("jitsi-session").style.display = "none"
+	  document.getElementById("description").style.display   = "block"
+	  cardToggle.innerHTML = "Show jitsi session"
+	}
+	else {
+	  document.getElementById("jitsi-session").style.display = "block"
+	  document.getElementById("description").style.display   = "none"
+	  cardToggle.innerHTML = "Show description (hide jitsi session)"
+	}
+      }
+      function toggleCards() {
+        const showJitsi = (document.getElementById("jitsi-session").style.display == "none")
+	setCards( showJitsi )
+      }
+      function initPage() {
+        const urlParams = new URLSearchParams(window.location.search)
+	const roomName = urlParams.get('roomName')
+	var title = null
+	const checkTitle = urlParams.get('title')
+	if ( checkTitle != null ){
+	  title = checkTitle	  
+	}
+	else {
+	  title = roomName
+	}
+	var description = null
+	const checkDescription = urlParams.get('description')
+	if (checkDescription != null) {
+	   description = checkDescription
+	}
+	else {
+	   description = "jitsi session: " + title
+	}
+	document.getElementById("html-title").innerHTML = title
+	document.getElementById("main-title").innerHTML = title
+	document.getElementById("description").innerHTML = description
+	setCards( false )
+	const domain = 'loiter.interfluidity.com'  // change domain to match your Jitsi server
+    	const options = {
+          roomName: roomName,
+          parentNode: document.getElementById('jitsi-session'),
+        }
+        const api = new JitsiMeetExternalAPI(domain, options)
+      }
+    </script>
+    <title id="html-title">Unknown</title>
+  </head>
+  <body onLoad="initPage()">
+    <h1 id="main-title">Unknown</h1>
+    <a id="card-toggle" href="javascript:void(0)" onClick="toggleCards()">Show jitsi session</a>
+    <div id="cards">
+      <div id="jitsi-session">
+      </div>
+      <div id="description">
+      </div>
+    </div>
+  </body>
+</html>
