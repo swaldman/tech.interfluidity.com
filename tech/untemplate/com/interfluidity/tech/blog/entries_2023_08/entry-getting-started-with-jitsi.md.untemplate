@@ -31,8 +31,8 @@ a dangerous architecture, under which again and again firms and people I used to
 "[enshittification](https://pluralistic.net/2023/01/21/potemkin-ai/)".
 
 Plus, I want to be able to play with the technology I use. I don't want to tether my own skills and habits to some company's propriety
-plug-ins and APIs if I can help it. I want to use open, freely available tools to play with how my teleconferences work and
-any experiments or extras I might wish to bring into them.
+plug-ins and APIs if I can help it. I want to use open, freely available tools to experiment with how my teleconferences work and
+integrate any extras I might wish to bring to them.
 
 There are a few self-hostable, open source teleconferencing platforms, such as [Jitsi](https://jitsi.org/) and [Edumeet](https://edumeet.org/).
 Then there are lower level libraries like [Mediasoup](https://mediasoup.org/) and [Janus](https://janus.conf.meetecho.com/).
