@@ -286,6 +286,10 @@ Once I got the default page working, it was easy to [make an HTML page that woul
 - jitsi-videobridge2.service (`/lib/systemd/system/jitsi-videobridge2.service`)
 - prosody.service (`/lib/systemd/system/prosody.service`)
 
+---
+
+**Update 2023-08-22:** Following the instructions [here](https://jitsi.github.io/handbook/docs/devops-guide/secure-domain), enabling simple authentication worked without a hitch.
+
 <()
 // Too much of my cognitive capacity is already entagled with products by Adobe and Wolfram Research.
 // It is a bad feeling to have to continually buy subscriptions or licenses in order to exercise ones own creative talents. I won't go cold turkey
