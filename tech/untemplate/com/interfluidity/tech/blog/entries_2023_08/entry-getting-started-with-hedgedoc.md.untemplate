@@ -1,0 +1,503 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Getting started with HedgeDoc",
+>   "PubDate"   -> "2023-08-23T13:15:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+## Motivation
+
+I'm really trying to put together a synchronous collaboration environment, self-hosting as much as possible,
+using third-party platforms as little as possible. My first step was [getting Jitsi up and running](##getting-started-with-jitsi).
+
+But conversations want notes. They sometimes become collaborations that should generate documents.
+
+I have, with various interlocutors,
+used Zoom's chat session as a kind of weirdly structured notes environment. Zoom does support one essential feature, "Save Chat",
+so that the notes you've shared disguised as remarks can be retained. Jitsi does have a chat feature, but it's a bit unwieldy and
+lacks that essential save feature. Jitsi chat is really not pervertable to a notes application.
+
+I've been looking for something better, and today I found [HedgeDoc](https://hedgedoc.org/), which looks perfect, and
+pretty amazing! Give it a look, really.
+
+So I decided to install it on my new collaboration server, the same Digitial Ocean droplet on which I [just installed Jitsi](##getting-started-with-jitsi).
+
+(I don't think HedgeDoc will be super resource intensive, though I am a bit worried that adding bells and whistles might
+slow down the videoconferencing core on what already is virtualized and underpowered hardware.)
+
+## Trepidation
+
+HedgeDoc is a [node.js](https://nodejs.org/en) application. In general, I find node applications intimidating.
+Their builds seem sprawling with little JSON and YML and lock files I don't understand. They use JSON for human-edited config files,
+but JSON is persnicketty and allows no comments. Life is full of persnicketty config files, but when they are not JSON, they
+tend to be lavish with hints in comments and suggestions you can comment out or comment in. Some people [argue](https://groups.google.com/g/nodejs/c/NmL7jdeuw0M/m/yTqI05DRQrIJ)
+(ht [Bill Mill](https://hachyderm.io/@llimllib/110936243164836553)) that the cleanliness that results from a hard separation between configuration data and documentation is a feature not a bug. I myself am
+a bug, though, and prefer informative clutter to sterile helplessness.
+
+Anyway, maybe some day I will become a Node-knower and have opinions about [yarn](https://yarnpkg.com/) vs
+[npm](https://www.npmjs.com/) and stuff. But that day has not yet come. In the meantime, I just run mysterious incantations
+from the [installation docs](https://docs.hedgedoc.org/setup/getting-started/) and marvel at just how many dependencies seem to be flowing in.
+
+## Installation
+
+I went for HedgeDoc's [Manual Installation](https://docs.hedgedoc.org/setup/manual-setup/). My first step was to download `node` itself.
+The version that came in with `apt install nodejs` was too old, so I found some
+instructions on [how to](https://computingforgeeks.com/how-to-install-node-js-on-ubuntu-debian/) (easily, lazily) get `node.js v16` onto my Ubuntu 22.04 server.
+
+I took that slowly, downloading the script to a file before executing it to at least _glance_ at what I'd be running as root.
+
+I'm not a big fan of `curl -sL https://whoknowswhat.com/script.sh | bash -` style
+installs. But any half competent malicious script-kiddy could have gotten past my cursory inspection. Of course I end up treating most of the dependecies I download as pure black boxes.
+I hope that `deb.nodesource.com` is trustworthy!
+
+I was also going to need a Postgres database. That was just `apt install postgresql`.
+
+Once Postgres was installed I made a user `hedgedoc`, and could perform most of the build as that not-so-terribly powerful persona.
+`hedgedoc` was going to be the user under whose aegis the service would be run, so I needed it to have access to a database under Postgres.
+So, something like...
+
+```plaintext
+# su postgres
+$ createuser hedgedoc
+$ psql
+postgres=# CREATE DATABASE hedgedoc;
+postgres=# ALTER DATABASE hedgedoc OWNER TO hedgedoc;
+postgres=# <ctrl-D to exit psql>
+$ <ctrl-D to exit user postgres>
+# su hedgedoc
+$ psql
+hedgedoc=> ALTER USER hedgedoc WITH PASSWORD 'not-actually-this';
+```
+
+That last bit actually came later, as I was [trying to figure out why the app couldn't connect to the database](#hitch-1-postgress-password).
+Even though under postgres' default config passwordless `psql` was fine, the node app did need a password to connect over `localhost`.
+
+Anyway, in real life, setting up the password came later, but we might as well get it over with now.
+
+OK. I love `postgres`. That was the easy stuff. Now the hard part. The node app.
+
+The instructions ask us to set up some node dependencies with `npm` in order to get `yarn` to work. (They are frenemies I guess.)
+
+```plaintext
+# npm install -g node-gyp
+# npm install -g npm install -g corepack
+# corepack enable
+```
+
+Then, as user `hedgedoc`, we clone the application repository and check out tag 1.9.9, the latest release. Then,
+[following the instructions](https://docs.hedgedoc.org/setup/manual-setup/), we run a setup script.
+
+```plaintext
+$ git clone https://github.com/hedgedoc/hedgedoc.git
+$ git checkout 1.9.9
+$ cd hedgedoc
+$ bin/setup
+```
+
+Stuff happens.
+
+When the script is done, we have a file called `config.json` (just a copy of repository file `config.json.example`).
+
+I then did my best to configure the application. This was... hard. The [configuration is very elaborate](https://docs.hedgedoc.org/configuration/).
+I had to iterate through some snags to get it right. Plus, the example file is divided into three separate configs, one each for `test`, `development`, and `production`.
+I only edited `production`, but the existence of multiple configurations became the source of later confusion. (See [below](#hitch-3-registering-users-hangs).)
+
+Anyway, with a first-draft config in hand, we can complete the build instructions:
+
+```plaintext
+$ yarn install --immutable
+$ yarn build
+```
+Hooray!
+
+## Consternation
+
+HedgeDoc was built. The next step was getting it to work. This was an interative process with a few hitches.
+
+### Hitch 1: Postgress Password
+
+First, following the instructions, I run (as `hedgedoc`)
+
+```plaintext
+$ NODE_ENV=production yarn start
+```
+
+I get a lot of messages indicating that the app is failing to connect to the database. My database config at this point looked like
+
+```json
+{
+    "production": {
+        "db": {
+            "username": "hedgedoc",
+            "password": "",
+            "database": "hedgedoc",
+            "host": "127.0.0.1",
+            "port": "5432",
+            "dialect": "postgres"
+        }
+    }
+}    
+```
+
+Since I could authenticate to `psql` locally as hedgedoc without a password under the default authentication policy (`see /etc/postgresql/14/main/pg_hba.conf`),
+I wondered if passwordless would be okay. Nope.
+
+So I gave `hedgedoc` a password (`ALTER USER hedgedoc WITH PASSWORD 'not-actually-this';`, see above), and retried `NODE_ENV=production yarn start`. It started
+up beautifully.
+
+### Hitch 2: Proxy through `nginx`
+
+This wasn't a hitch really. It was planned and expected. But at this point, I still couldn't see hedgedoc, which was getting served on localhost only at port 3000.
+The HedgeDoc docs [very helpfully include](https://docs.hedgedoc.org/guides/reverse-proxy/#nginx) a sample `nginx.conf` for proxying the service.
+
+Before I could do much with this, I had to decide at what URL I wanted the app to be served. I decided I'd make a separate virtual host for it, `notes.interfluidity.com`.
+
+So, I updated my DNS for interfluidity with a `CNAME` record pointing back to `loiter.interfluidity.com`, then used `certbot` / Let's Encrypt to get certificates for the
+new name (briefly stopping `nginx` so I could authenticate with certbot's internal web service):
+
+```plaintext
+# systemctl stop nginx
+# certbot certonly -d notes.interfluidity.com
+# systemctl start nginx
+```
+
+Now I could copy the `nginx` proxy setup from the docs to `/etc/nginx/sites-available/notes.interfluidity.com.conf`, and edit it to fill in the new certificate locations.
+Initially this failed, because the reference config contained references to other ssl config I didn't have.
+
+```plaintext
+    include options-ssl-nginx.conf;
+    ssl_dhparam ssl-dhparams.pem;
+```
+I replace the first line with SSH config I have from elsewhere, and just omit (as I usually do, [is this bad?](https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters))
+the `ssl_dhaparam` directive.
+
+I also needed to add a stanza to redirect traffic from port 80 (regular `http`) to `https` at port 443.
+
+Ultimately, `/etc/nginx/sites-available/notes.interfluidity.com.conf` looks [like this](#nginxconf).
+
+### Hitch 3: Registering users hangs
+
+This one befuddled me for a while. I don't want my HedgeDoc installation to be an open utility for anyone one the internet.
+So I have it configured to not permit web registation of new users. In `config.json`, at this point, I had
+
+```json
+{
+    "test": {
+        "db": {
+            "dialect": "sqlite",
+            "storage": ":memory:"
+        },
+        "linkifyHeaderStyle": "gfm"
+    },
+    "development": {
+        "loglevel": "debug",
+        "db": {
+            "dialect": "sqlite",
+            "storage": "./db.hedgedoc.sqlite"
+        },
+        "domain": "localhost",
+        "urlAddPort": true
+    },
+    "production": {
+        ...
+        "email": true,
+        "allowEmailRegister": false,
+        "allowAnonymous": false,
+        "allowAnonymousEdits": true,
+	...
+    }
+}    
+```
+
+Googling around, absent web registration of e-mails or using a third-party to authenticate, the way to set up new users is a
+utility bundled in the HedgeDoc distribution, `bin/manage_user`.
+
+```plaintext
+$ bin/manage_users 
+You did not specify either --add or --del or --reset!
+
+Command-line utility to create users for email-signin.
+
+Usage: bin/manage_users [--pass password] (--add | --del) user-email
+	Options:
+		--add 	Add user with the specified user-email
+		--del 	Delete user with specified user-email
+		--reset Reset user password with specified user-email
+		--pass	Use password from cmdline rather than prompting
+```
+
+But when I try
+
+```plaintext
+$ bin/manage_users --pass NotGonnaTellYou --add swaldman@mchange.com
+```
+
+I find that the script... just hangs.
+
+I have to `<ctrl-c>` to kill it. It provides no messages or information.
+
+Reviewing the script, its first few lines are
+
+```javascript
+#!/usr/bin/env node                                                                                                                                                                      
+
+// First configure the logger, so it does not spam the console                                                                                                                           
+const logger = require('../lib/logger')
+logger.transports.forEach((transport) => transport.level = 'warning')
+```
+
+The trick to making `bin/manage_users`  informative was just commenting out the lines about the logger, so that it DOES spam the console.
+
+```javascript
+#!/usr/bin/env node                                                                                                                                                                      
+
+// First configure the logger, so it does not spam the console                                                                                                                           
+//const logger = require('../lib/logger')
+//logger.transports.forEach((transport) => transport.level = 'warning')
+```
+
+Messages then result, which renders our problem easy to diagnose. The script tries and fails to hit an `sqlite` database, because
+it was using the `development` rather than `production` config. (See the early `config.json` fragment above.)
+
+To solve this, it's just...
+
+```plaintext
+$ NODE_ENV=production bin/manage_users --pass sWVEMdgQ8NxFp3rW --add swaldman@mchange.com 
+```
+
+With the script's logger still commented out to encourage verbosity, this yields...
+
+```plaintext
+023-08-23T00:42:46.127Z warn: 	Neither 'domain' nor 'CMD_DOMAIN' is configured. This can cause issues with various components.
+Hint: Make sure 'protocolUseSSL' and 'urlAddPort' or 'CMD_PROTOCOL_USESSL' and 'CMD_URL_ADDPORT' are configured properly.
+2023-08-23T00:42:46.130Z warn: 	Session secret not set. Using random generated one. Please set `sessionSecret` in your config.json file. All users will be logged out.
+2023-08-23T00:42:46.137Z error: 	uncaughtException: Dialect needs to be explicitly supplied as of v4.0.0
+```
+
+I configure
+
+```plaintext
+{
+    ...
+    "production": {
+        "domain": "notes.interfluidity.com",
+	...,
+        "sessionSecret": "Not-Gonna-Tell-You-64-Chars-Long-Though-I-Don't-Think-That's-Obligatory",
+	...
+    }
+}
+```
+
+Then
+
+```plaintext
+$ NODE_ENV=production bin/manage_users --pass sWVEMdgQ8NxFp3rW --add swaldman@mchange.com 
+```
+
+succeeds.
+
+```plaintext
+2023-08-23T00:42:59.833Z debug: 	dmp worker process started
+Using password from commandline...
+Created user with email swaldman@mchange.com
+```
+
+But I should have paid more attention to that hint!
+
+```plaintext
+Hint: Make sure 'protocolUseSSL' and 'urlAddPort' or 'CMD_PROTOCOL_USESSL' and 'CMD_URL_ADDPORT' are configured properly.
+```
+
+### Hitch 4: Login form won't submit
+
+When I run it from the command line, the web application is now served at `notes.interfluidity.com`. I've succeeded at registering myself as a user.
+I hit the sign-in button, and a login form appears. but when I hit `submit`, nothing at all happens.
+
+To get any information at all about this, I needed to go to the Javascript console of my browser.
+
+There, only there, I could see log messages about the problem, noting security policy
+violations. The form was only allowed to hit the app that served it, the app that served it was `https://notes.interfluidity.com/`. But the form was trying
+to hit `http://notes.interfluidity.com/`.
+
+Spot the difference? It's `https` vs `http`.
+
+The solution was to add a [config parameter](https://docs.hedgedoc.org/configuration/)...
+
+```plaintext
+{
+    ...
+    "production": {
+	...,
+        "protocolUseSSL": true,
+	...
+    }
+}
+```
+
+Now I can login!
+
+## Consummation
+
+At this point, everything basically works. After the problems [introduced](#hitch-3-registering-users-hangs) by accidentally hitting the `development` config, I decide to
+clean away the unused configurations (`debug`, `development`) from `config.json`. The final (well, current) version is [below](#final-config-json).
+
+I want HedgeDoc to be a permanent, `systemd` managed service, so I copy and modify the [unit file example the documentation helpfully supplies](https://docs.hedgedoc.org/setup/manual-setup/#systemd-unit-example).
+I have to uncomment the `After=postgresql.service` line, modify the `WorkingDirectory` to point to the location of my HedgeDoc build (which is not in `opt`), and comment out `ProtectHome=true` (because
+my HedgeDoc build is in fact in user `hedgedoc`'s home directory).
+
+Then it's just the usual, a symlink to the unit file from `/etc/systemd/system`, and then...
+
+```plaintext
+# systemctl enable hedgedoc
+# systemctl start hedgedoc
+```
+
+(It took a couple of rounds of editing the unit file to get the startup to succeed. Mostly I had to
+[figure out](https://askubuntu.com/questions/1419541/trying-to-set-up-a-systemd-service-keep-getting-changing-to-the-requested-work) to comment out `ProtectHome=true`.)
+
+HedgeDoc offers a lot of integrations. One feature which I like is you can export your markdown documents into GitHub gists.
+I followed [these instructions](https://docs.hedgedoc.org/guides/auth/github/), and gist export worked with no trouble.
+
+That's it! Everything seems golden!
+
+## Security considerations
+
+HedgeDoc's documentation is admirably security conscious, and its defaults are unusually tight. I made a few choices that involved weakening those defaults:
+
+* I've configured `csp.allowFraming` to `true`. I intend for my "collaboration server" to take the form of a palette of multiple apps embedded on a webpage in `iframe`s.
+  Each frame would be maximizable, or you could view work with multiple frames at once. So I really want HedgeDoc to work from an iframe.
+   
+  * The [docs](https://docs.hedgedoc.org/configuration/) "**strongly recommend
+    disabling** this option, as it increases the attack surface of XSS attacks." (Their emphasis!)
+    If users do choose to enable framing, the docs [recommend](https://docs.hedgedoc.org/faq/) serving over `https` and setting a `cookiePolicy` of `none`,
+    which we do. So identification is by SSL session information, and there is no cookie to steal. I feel pretty okay with this, but what am I missing?
+  
+* As discussed above, I don't set [`ssl_dhparam`](https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters))
+  in my SSH config. I've never encountered this before, but now I wonder whether I shouldn't get in the habit
+  of setting this up across the sites I maintain. How much does it matter?
+  
+* I often build services beneath the home directory of the user I create to run them. They are not run on machines on which users are likely to store sensitive personal information
+  in home directories, but given the existence of the `systemd` `ProtectHome` restriction, perhaps it's a bad habit that I should revise?
+
+I also remain concerned about the promiscuity of the `node` dependency ecosystem, and the possibility of supply chain attacks. I'm concerned about that across ecosystems: The JVM world
+in which I typically develop carries some of the same risks.
+
+But the problem is [arguably worse in the node ecosystem](https://timotijhof.net/posts/2019/protect-yourself-from-npm/). I'm
+not running in `docker` containers or `chroot` or anything like that.
+
+The Digital Ocean droplet I am running on is pretty low-stakes in terms of the information it stores, but it wouldn't
+be great if some third party gave themselves access and could join a botnet or spy on videoconferences or read all the meeting notes.
+
+Running `npm -g install` as root, which I did do,
+feels partcularly ill-advised and dirty. I think I'll try to avoid that in the future.
+
+---
+
+## Appendix
+
+### final config.json
+
+```plaintext
+{
+    "production": {
+        "domain": "notes.interfluidity.com",
+        "protocolUseSSL": true,
+        "email": true,
+        "allowEmailRegister": false,
+        "host": "localhost",
+        "allowAnonymous": false,
+        "allowAnonymousEdits": true,
+        "allowFreeUrl": true,
+        "loglevel": "info",
+        "hsts": {
+            "enable": true,
+            "maxAgeSeconds": 31536000,
+            "includeSubdomains": true,
+            "preload": true
+        },
+        "csp": {
+            "enable": true,
+            "directives": {
+            },
+            "upgradeInsecureRequests": "auto",
+            "addDefaults": true,
+            "addDisqus": false,
+            "addGoogleAnalytics": false,
+            "allowFraming": true
+        },
+        "cookiePolicy": "none",
+        "db": {
+            "username": "hedgedoc",
+            "password": "Not-Gonna-Tell-You",
+            "database": "hedgedoc",
+            "host": "127.0.0.1",
+            "port": "5432",
+            "dialect": "postgres"
+        },
+        "sessionSecret": "Not-Gonna-Tell-You",
+        "github": {
+            "clientID": "Not-Gonna-Tell-You",
+            "clientSecret": "Not-Gonna-Tell-You"
+        }
+    }
+}
+```
+
+### nginx.conf
+
+```plaintext
+# modified from https://docs.hedgedoc.org/guides/reverse-proxy/
+
+map $http_upgrade $connection_upgrade {
+        default upgrade;
+        ''      close;
+}
+server {
+    listen 80;
+    listen [::]:80;
+    server_name notes.interfluidity.com;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+server {
+        server_name notes.interfluidity.com;
+
+        location / {
+                proxy_pass http://127.0.0.1:3000;
+                proxy_set_header Host $host; 
+                proxy_set_header X-Real-IP $remote_addr; 
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+        location /socket.io/ {
+                proxy_pass http://127.0.0.1:3000;
+                proxy_set_header Host $host; 
+                proxy_set_header X-Real-IP $remote_addr; 
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
+        }
+
+    listen [::]:443 ssl http2;
+    listen 443 ssl http2;
+    ssl_certificate /etc/letsencrypt/live/notes.interfluidity.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/notes.interfluidity.com/privkey.pem;
+
+    # Mozilla Guideline v5.4, nginx 1.17.7, OpenSSL 1.1.1d, intermediate configuration
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
+    ssl_prefer_server_ciphers off;
+
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:10m;  # about 40000 sessions
+    ssl_session_tickets off;
+}
+```
+

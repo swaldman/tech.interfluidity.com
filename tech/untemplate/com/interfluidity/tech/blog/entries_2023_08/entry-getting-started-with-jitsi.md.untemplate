@@ -1,7 +1,7 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "Getting started with Jitsi",
 >   "PubDate"   -> "2023-08-21T16:00:00-04:00",
->   // "Anchor"    -> "first-post"
+>   "Anchor"    -> "getting-started-with-jitsi"
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
@@ -289,6 +289,15 @@ Once I got the default page working, it was easy to [make an HTML page that woul
 ---
 
 **Update 2023-08-22:** Following the instructions [here](https://jitsi.github.io/handbook/docs/devops-guide/secure-domain), enabling simple authentication worked without a hitch.
+Registering a user is a command-line operation:
+
+```plaintext
+# prosodyctl register <username> loiter.interfluidity.com <password>
+```
+
+`loiter.interfluidity.com` is the authenticated domain in `/etc/prosody/prosody.cfg.lua`.
+
+I think it's possible to set up web registration, but for my purposes I don't want to. Only meeting hosts must authenticate. Anyone who knows the URL can join a conference.
 
 <()
 // Too much of my cognitive capacity is already entagled with products by Adobe and Wolfram Research.
