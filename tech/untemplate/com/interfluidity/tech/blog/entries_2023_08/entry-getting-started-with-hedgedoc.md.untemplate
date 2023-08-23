@@ -17,7 +17,7 @@ But conversations want notes. They sometimes become collaborations that should g
 
 I have, with various interlocutors,
 used Zoom's chat session as a kind of weirdly structured notes environment. Zoom does support one essential feature, "Save Chat",
-so that the notes you've shared disguised as remarks can be retained. Jitsi does have a chat feature, but it's a bit unwieldy and
+so that the notes you've shared, disguised as remarks, can be retained. Jitsi does offer chat, but it's a bit unwieldy and
 lacks that essential save feature. Jitsi chat is really not pervertable to a notes application.
 
 I've been looking for something better, and today I found [HedgeDoc](https://hedgedoc.org/), which looks perfect, and
