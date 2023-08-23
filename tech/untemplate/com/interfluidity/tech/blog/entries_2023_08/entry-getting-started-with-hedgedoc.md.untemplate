@@ -21,9 +21,9 @@ so that the notes you've shared, disguised as remarks, can be retained. Jitsi do
 lacks that essential save feature. Jitsi chat is really not pervertable to a notes application.
 
 I've been looking for something better, and today I found [HedgeDoc](https://hedgedoc.org/), which looks perfect, and
-pretty amazing! Give it a look, really.
+pretty amazing! Give it a look. Really.
 
-So I decided to install it on my new collaboration server, the same Digitial Ocean droplet on which I [just installed Jitsi](##getting-started-with-jitsi).
+So, I decided to install HedgeDoc on my new collaboration server, the same Digitial Ocean droplet on which I [just installed Jitsi](##getting-started-with-jitsi).
 
 (I don't think HedgeDoc will be super resource intensive, though I am a bit worried that adding bells and whistles might
 slow down the videoconferencing core on what already is virtualized and underpowered hardware.)
