@@ -410,7 +410,7 @@ feels partcularly ill-advised and dirty. I think I'll try to avoid that in the f
         "host": "localhost",
         "allowAnonymous": false,
         "allowAnonymousEdits": true,
-        "allowFreeUrl": true,
+        "allowFreeURL": true,
         "loglevel": "info",
         "hsts": {
             "enable": true,
