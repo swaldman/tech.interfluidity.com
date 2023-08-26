@@ -57,7 +57,7 @@ On my setup, I have
 * [coturn](https://github.com/coturn/coturn)
 
 Then I configure and serve (via [nginx](https://nginx.org/)) `jitsi-meet`, which is a client-side application that hits these services.
-You can see a diagram of those services [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker). Let's steal that, straight from `jitsi.org`:
+You can see a diagram [here](https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker). Let's steal that, straight from `jitsi.org`:
 
 <div style="text-align: center;">
   <img src="##./docker-jitsi-meet-afafdf87fea30a2fa6412baa4a3f8248.png">
@@ -80,7 +80,7 @@ and if necessary proxies audiovisual data to circumvent nettlesome layers of NAT
 `coturn` makes it possible for the significant share of the internet that can't reach the network without translation or proxying
 to participate in teleconferences.
 
-There is so much I don't understand about all this. Are `jicofo`/`prosidy` are only involved in establishing and terminating
+There is so much I don't understand about all this. Are `jicofo`/`prosody` only involved in establishing and terminating
 sessions, or do they have a role throughout a "MUC"? Via `nginx`, clients seem to have access both to audiovisual data (as [BOSH](https://en.wikipedia.org/wiki/BOSH_(protocol))),
 and to XMPP via `prosody`, and to the `videobridge` service via directly. Who hits `jicofo` when?
 
