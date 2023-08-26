@@ -231,8 +231,8 @@ Then it just works!
 
 ### Something stupid
 
-Well it should have worked. I did something stupid. I manually installed `nginx` (because reading the docs
-via-nginx was optional and I knew I wanted it and it said it'd be installed if nginx was), and then I set up
+Well it should have worked. I did something stupid. I manually installed `nginx` (because reading the docs I saw that serving
+via nginx was optional, I knew I wanted it, and the docs said it'd be installed if nginx was), and then I set up
 my usual config for host `loiter.interfluidity.com` right in `/etc/nginx/nginx.conf`.
 
 That occluded the Jitsi installer's very elaborate config in `/etc/nginx/sites-available/loiter.interfluidity.com.conf`,
