@@ -90,10 +90,8 @@ Try viewing the relevant help to see the list of available sub-commands and opti
   scala-cli --help
 ```
 
-The error message is unhelpfully mistaken. `run` in fact is a valid `scala-cli` subcommand. `--server`
+The error message is unhelpfully mistaken. `run` in fact is a valid `scala-cli` subcommand. But `--server`
 is not a valid command-line option to the base `scala-cli` command.
-
-As of...
 
 ```plaintext
 $ scala-cli --version
