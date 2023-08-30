@@ -1,0 +1,104 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Suppressing bloop for scala-cli managed services",
+>   "PubDate"   -> "2023-08-30T15:45:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I am a huge fan of [scala-cli](https://scala-cli.virtuslab.org/).
+
+Among its many virtues, it reproduces the ergonomics of an interpreted language for compiled,
+super typesafe, Scala. (Java too!)
+
+Recently, I've
+[written custom services](##resilient-RSS-feed-unifier)
+that I execute using `scala-cli run`, and then deploy directly as
+[systemd units](https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files).
+
+Here's a snippet of [how I used to](https://github.com/swaldman/unify-rss/blob/2f4e58b2a68c5d0313548306450883b603805739/unify-rss.service) do this:
+
+```plaintext
+...
+
+[Service]
+Type=simple
+User=unify-rss
+Group=unify-rss
+WorkingDirectory=/home/unify-rss/development/gitproj/unify-rss
+ExecStart=scala-cli run main
+...
+```
+
+
+I noticed, however, where I expected one long-running java process for a service's dedicated user, I ended up with
+two! In addition to my own application, a service called `bloop.Bloop` was running as well.
+
+JVMs are not exactly lightweight, and I don't want double the fun when running a service.
+
+[bloop](https://scalacenter.github.io/bloop/) is a Scala build service that many different
+editors, build systems, and other tools use to efficiently, incrementally, run scala code.
+It runs as a persistent background process, which external tools tools can trigger
+with commands to build or execute the codebase, recompiling only what is necessary given
+what has changed.
+
+This is great for fast iteration during development, but unwieldy (and potentially increases a threat surface area)
+during deployment of persistent services.
+
+Fortunately, `scala-cli`, you can turn `bloop` off. `scala-cli` then falls back to the plain old Scala
+compiler to rebuild your application. It retains its core ergonomics: You can edit, then run, without
+any sort of compile / assemble / publish ceremony. The first run after a change might take a bit longer
+than it would have with `bloop`.
+
+Here is a snippet (slightly simpified) of [my current systemd unit](https://github.com/swaldman/unify-rss/blob/fdda4547655e52036d55eff765e642251f9d4222/unify-rss.service).
+
+```plaintext
+[Service]
+Type=simple
+User=unify-rss
+Group=unify-rss
+WorkingDirectory=/home/unify-rss/development/gitproj/unify-rss
+ExecStart=scala-cli run --server=false main
+...
+```
+
+Note the `--server=false` argument to `scala-cli run`.
+
+Executing the service works just the same as before, rebuilding if necessary. But now no `bloop` service runs, taking up precious server-side memory.
+
+My application is small enough that the additional build time is not an issue. The only visible difference when running `scala-cli`
+is that, when `bloop` is enabled and something has changed, I see a message like
+
+```plaintext
+Compiling project (Scala 3.3.0, JVM)
+Compiled project (Scala 3.3.0, JVM)
+```
+With the `--server=false` flag gone (it defaults to true), that message disappears.
+
+But changes still recompile, and everything works great.
+
+---
+
+**Note:** the `--server=false` argument has to come _after_ the `run` subcommand. Otherwise...
+
+```plaintext
+$ scala-cli --server=false run main
+[error]  run is not a scala-cli sub-command and it is not a valid path to an input file or directory.
+Try viewing the relevant help to see the list of available sub-commands and options.
+  scala-cli --help
+```
+
+The error message is unhelpfully mistaken. `run` in fact is a valid `scala-cli` subcommand. `--server`
+is not a valid command-line option to the base `scala-cli` command.
+
+As of...
+
+```plaintext
+$ scala-cli --version
+Scala CLI version: 1.0.4
+Scala version (default): 3.3.0
+```
+
+
