@@ -93,7 +93,7 @@ Try viewing the relevant help to see the list of available sub-commands and opti
 ```
 
 The error message is unhelpfully mistaken. `run` in fact is a valid `scala-cli` subcommand. But `--server`
-is not a valid command-line option to the base `scala-cli` command.
+is not a valid command-line option to the base `scala-cli` command, it is a valid command-line option to `scala-cli run`.
 
 ```plaintext
 $ scala-cli --version
