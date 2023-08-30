@@ -55,6 +55,8 @@ than it would have with `bloop`.
 Here is a snippet (slightly simpified) of [my current systemd unit](https://github.com/swaldman/unify-rss/blob/fdda4547655e52036d55eff765e642251f9d4222/unify-rss.service).
 
 ```plaintext
+...
+
 [Service]
 Type=simple
 User=unify-rss
