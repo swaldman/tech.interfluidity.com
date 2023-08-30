@@ -39,7 +39,7 @@ two! In addition to my own application, a service called `bloop.Bloop` was runni
 JVMs are not exactly lightweight, and I don't want double the fun when running a service.
 
 [bloop](https://scalacenter.github.io/bloop/) is a Scala build service that many different
-editors, build systems, and other tools use to efficiently, incrementally, run scala code.
+editors, build systems, and other tools use to efficiently, incrementally, compile and run scala code.
 It runs as a persistent background process, which external tools tools can trigger
 with commands to build or execute the codebase, recompiling only what is necessary given
 what has changed.
