@@ -66,7 +66,7 @@ ExecStart=scala-cli run --server=false main
 
 Note the `--server=false` argument to `scala-cli run`.
 
-Executing the service works just the same as before, rebuilding if necessary. But now no `bloop` service runs, taking up precious server-side memory.
+Executing the service works just the same as before, rebuilding if necessary. But now no `bloop` service squanders precious server-side memory.
 
 My application is small enough that the additional build time is not an issue. The only visible difference when running `scala-cli`
 is that, when `bloop` is enabled and something has changed, I see a message like
