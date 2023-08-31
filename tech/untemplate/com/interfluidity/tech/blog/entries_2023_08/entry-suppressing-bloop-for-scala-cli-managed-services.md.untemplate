@@ -52,7 +52,7 @@ compiler to rebuild your application. It retains its core ergonomics: You can ed
 any sort of compile / assemble / publish ceremony. The first run after a change might take a bit longer
 than it would have with `bloop`.
 
-Here is a snippet (slightly simpified) of [my current systemd unit](https://github.com/swaldman/unify-rss/blob/fdda4547655e52036d55eff765e642251f9d4222/unify-rss.service).
+Here is a snippet (slightly simplified) of [my current systemd unit](https://github.com/swaldman/unify-rss/blob/fdda4547655e52036d55eff765e642251f9d4222/unify-rss.service).
 
 ```plaintext
 ...
