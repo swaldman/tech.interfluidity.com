@@ -1,14 +1,12 @@
+import $meta._
 
 import mill._
 import mill.scalalib._
 
-// huge thanks to @lolgab onn the Scala discord!
-import $file.buildCompilationSettings
-
-import $ivy.`com.mchange::untemplate-mill:0.0.4`
+import $ivy.`com.mchange::untemplate-mill:0.1.0`
 import untemplate.mill._
 
-val UnstaticVersion = "0.0.7-SNAPSHOT"
+val UnstaticVersion = "0.1.0-SNAPSHOT"
 
 object Dependency {
   val Unstatic = ivy"com.mchange::unstatic:${UnstaticVersion}"
@@ -16,10 +14,10 @@ object Dependency {
 }
 
 object tech extends UntemplateModule {
-  override def scalaVersion = "3.2.1"
+  override def scalaVersion = "3.2.2"
 
   // supports Scala 3.2.1
-  override def ammoniteVersion = "2.5.6"
+  //override def ammoniteVersion = "2.5.6"
 
   // we'll build an index!
   override def untemplateIndexNameFullyQualified : Option[String] = Some("com.interfluidity.tech.IndexedUntemplates")
