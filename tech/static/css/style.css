@@ -43,7 +43,7 @@ body {
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
     font-size: 80%;
-    background-color: #eeeeff;
+    background-color: #eeeeee;
     padding: 1px;
 }
 code strong, code b {
@@ -310,6 +310,12 @@ h3 {
     font-variation-settings: "wght" 600;
     */
     padding-left: 1rem;
+}
+.monospace-bold {
+    font-family: 'FiraCode-SemiBold', monospace;
+}
+.monospace-regular {
+    font-family: 'FiraCode-Regular', monospace;
 }
 @media only screen and (max-width: 700px) {
     .main-title {
