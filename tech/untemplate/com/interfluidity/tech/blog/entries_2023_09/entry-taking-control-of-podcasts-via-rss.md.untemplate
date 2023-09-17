@@ -12,7 +12,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 **TL; DR: I did it, and like it!**
 
-But it was not so straightforward that anyone can just ditch their podcast app for their RSS reader and have a good experience.
+But it was not so straightforward that anyone can just ditch their podcast app for an RSS reader and have a good experience.
 
 <a href="##./IMG_9358.jpeg" style="float: left; padding-right: 1.5rem;"><img src="##./IMG_9358-296.jpeg" alt="screenshot of final merged RSS feed in a podcast app." width="296"></a>
 
