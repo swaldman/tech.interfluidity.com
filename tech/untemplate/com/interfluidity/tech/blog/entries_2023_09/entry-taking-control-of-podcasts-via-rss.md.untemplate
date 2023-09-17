@@ -179,7 +179,7 @@ A couple of quick miscellaneous tips:
   of your feeds. But here this becomes a problem. To prevent the history of high frequency feeds from drowning out eveything
   in my Inoreader podcasts folder I segregate high-frequency feeds into a "Podcasts HF" folder. When I merge feeds, I draw on the OPML from this folder as
   well as from my main podcasts folder. NPR's actual feed always includes only the single most recent episode,
-  so it doesn't overwhelm my merged feed, which loads its feeds to merge from NPR, not Inoreader folder.
+  so it doesn't overwhelm my merged feed, which loads the feed to merge from NPR, not Inoreader folder.
 
 You can subscribe to my subscriptions if you want, the URL is [`https://www.interfluidity.com/unify-rss/subscribed-podcasts.rss`](https://www.interfluidity.com/unify-rss/subscribed-podcasts.rss).
 
