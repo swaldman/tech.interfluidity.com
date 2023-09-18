@@ -43,8 +43,11 @@ body {
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
     font-size: 80%;
-    background-color: #eeeeee;
+    background-color: #eeeeff;
     padding: 1px;
+}
+a code {
+    background-color: #eeeeee;
 }
 code strong, code b {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
