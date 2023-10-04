@@ -50,7 +50,7 @@ instructions on [how to](https://computingforgeeks.com/how-to-install-node-js-on
 I took that slowly, downloading the script to a file before executing it to at least _glance_ at what I'd be running as root.
 
 I'm not a big fan of `curl -sL https://whoknowswhat.com/script.sh | bash -` style
-installs. But any half competent malicious script-kiddy could have gotten past my cursory inspection. Of course I end up treating most of the dependecies I download as pure black boxes.
+installs. But any half competent malicious script-kiddie could have gotten past my cursory inspection. Of course I end up treating most of the dependecies I download as pure black boxes.
 I hope that `deb.nodesource.com` is trustworthy!
 
 I was also going to need a Postgres database. That was just `apt install postgresql`.
