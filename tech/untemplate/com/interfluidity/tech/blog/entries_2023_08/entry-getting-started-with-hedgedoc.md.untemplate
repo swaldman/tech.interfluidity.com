@@ -265,7 +265,7 @@ it was using the `development` rather than `production` config. (See the early `
 To solve this, it's just...
 
 ```plaintext
-$ NODE_ENV=production bin/manage_users --pass sWVEMdgQ8NxFp3rW --add swaldman@mchange.com 
+$ NODE_ENV=production bin/manage_users --pass NotGonnaTellYou --add swaldman@mchange.com 
 ```
 
 With the script's logger still commented out to encourage verbosity, this yields...
@@ -294,7 +294,7 @@ I configure
 Then
 
 ```plaintext
-$ NODE_ENV=production bin/manage_users --pass sWVEMdgQ8NxFp3rW --add swaldman@mchange.com 
+$ NODE_ENV=production bin/manage_users --pass NotGonnaTellYou --add swaldman@mchange.com 
 ```
 
 succeeds.
