@@ -1,0 +1,145 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Referring to Scala collections",
+>   "PubDate"   -> "2023-10-07T17:45:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+**TL; DR:** Prefer
+
+```scala
+import scala.collection.{immutable,mutable}
+```
+---
+
+Over the eons, I developed a habit of using the following import
+
+```scala
+import scala.collection.*
+```
+
+to set up my use of Scala collections.
+
+Then I can refer to collections in a very clear longhand.
+For example:
+
+```scala
+val alphamap = immutable.Map( "A" -> "Apple", "B" -> "Baby", "C" -> "Candy" )
+```
+
+or, much less frequently:
+
+```scala
+val scratchpad = mutable.Map( "Title" -> "Untitled" )
+```
+
+I _like_ referring explicitly to collections as `mutable.Thing` or `immutable.Thing`. Yes it's more
+typing, but it's very clear.
+
+But recently the practice has caused some hassles, and I've realized it's not great.
+
+Consider this little [scala-cli](https://scala-cli.virtuslab.org/) application:
+
+```scala
+//> using scala 3.3.1
+
+trait Hat:
+  def tickets : Set[String]
+
+object HatApp:
+  import scala.collection.*
+  import scala.util.Random
+
+  val hat = new Hat:
+    def tickets : Set[String] = Set("Alice", "Bob", "Carol")
+
+  @main  
+  def winner = println( Random.shuffle(hat.tickets.toList).head )
+```
+
+Try running it, and oops!
+
+```plaintext
+Compiling project (Scala 3.3.1, JVM)
+[error] ./unqualified-collections.scala:11:9
+[error] error overriding method tickets in trait Hat of type => Set[String];
+[error]   method tickets of type => collection.Set[String] has incompatible type
+[error]     def tickets : Set[String] = Set("Alice", "Bob", "Carol")
+[error]         ^
+Error compiling project (Scala 3.3.1, JVM)
+```
+
+The issue is that `Set` is defined in four places:
+* unqualified in `scala.Predef`
+* as `scala.collection.Set`
+* as `scala.collection.immutable.Set`
+* as `scala.collection.mutable.Set`.
+
+The convenient, simple, unqualified `Set` is, very sensibly, just a type alias for `scala.collection.immutable.Set`.
+
+However, after I've imported `scala.collection.*`, unqualified `Set` now refers to `scala.collection.Set`, the
+base trait for _both_ mutable and immutable sets, rather than the immutable trait it originally referred to.
+
+A `scala.collection.Set` is not a subtype of `scala.collection.immutable.Set` or,
+equivalently, the predef's unqualified `Set`.
+
+So even though my definition of a `Hat` looks trivially conformant, it is not.
+
+It's easy to fix this just by using the longhand syntax I prefer
+
+```scala
+  val hat = new Hat:
+    def tickets : immutable.Set[String] = immutable.Set("Alice", "Bob", "Carol")
+```
+
+But it's a bit surprising that a contract that was defined in terms of
+unqualified `Set` has to be implemented in terms of `immutable.Set`. If a trait was defined in terms of unqualified `Set`,
+it's more straightforward to just implement it in terms of that.
+
+So lately I've taken to changing how I make collections available for myself.
+I still prefer to be able to refer to them in explicit, clear, longhand. But instead
+of
+
+```scala
+import scala.collection.*
+```
+
+I now prefer
+
+```scala
+import scala.collection.{immutable,mutable}
+```
+
+This way, I can refer to collections explicitly as `immutable.Whatever` or `mutable.Whatever`,
+but when I refer to unqualified collection names, I haven't shadowed the predef definitions
+with rarely desired ambidextrous trait definitions under `scala.collection`.
+
+So now I have
+
+```scala
+//> using scala 3.3.1
+
+trait Hat:
+  def tickets : Set[String]
+
+object HatApp:
+  import scala.collection.{immutable,mutable}
+  import scala.util.Random
+
+  val hat = new Hat:
+    def tickets : Set[String] = Set("Alice", "Bob", "Carol")
+
+  @main  
+  def winner = println( Random.shuffle(hat.tickets.toList).head )
+```
+and everything works as expected.
+
+The import is superfluous, gratuitous, unnecessary in this case. Since the only collection I touch is the
+unqualified `Set`, I could just have omitted any import.
+
+But collections are very common to use. In real applications, one very often
+wants to set up ones files for clear, easy access to them. I think this is a
+good syntax to use, that lets on both write out clear collection names and avoid surprising ambiguities.
