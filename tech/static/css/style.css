@@ -41,7 +41,7 @@ body {
     font-variation-settings: "wght" 200;
 }
 code {
-    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
     font-size: 80%;
     background-color: #eeeeff;
     padding: 1px;
@@ -50,7 +50,7 @@ a code {
     background-color: #eeeeee;
 }
 code strong, code b {
-    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-family: 'FiraCode-Medium', "Lucida Console", "Courier New", monospace;
 }
 strong, b {
     font-variation-settings: "wght" 800;
