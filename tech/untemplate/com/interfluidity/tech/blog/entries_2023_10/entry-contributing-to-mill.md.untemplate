@@ -13,7 +13,7 @@ I've done some pretty big projects [intimately based](https://www.sbt-ethereum.i
 it's very well suited to static-site generators, and because I've had better success getting `mill` builds to call into Scala 3 code,
 as some of my [site-generation tools](https://github.com/swaldman/untemplate-doc#readme) require. I've contributed to both projects.
 
-There are a few hints I want to give myself for when I contribute to mill.
+There are a few hints I want to give myself for when I contribute to `mill`.
 
 ## Build and run
 
