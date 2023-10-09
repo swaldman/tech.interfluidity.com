@@ -1,0 +1,49 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Contributing to mill",
+>   "PubDate"   -> "2023-10-09T19:30:00-04:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I'm a big fan of Scala build tools, both [`sbt`](https://www.scala-sbt.org/) and [`mill`](https://mill-build.com/mill/Intro_to_Mill.html).
+I've done some pretty big projects [intimately based](https://www.sbt-ethereum.io/) on `sbt`. Recently I spend a lot of time in `mill` because
+it's very well suited to static-site generators, and because I've had better success getting `mill` builds to call into Scala 3 code,
+as some of my [site-generation tools](https://github.com/swaldman/untemplate-doc#readme) require. I've contributed to both projects.
+
+There are a few hints I want to give myself for when I contribute to mill.
+
+## Build and run
+
+The trick is just
+
+```plaintext
+$ ./mill -i installLocal
+```
+
+in the [mill repository](https://github.com/com-lihaoyi/mill). If the build succeeds, the a `mill-release` executable appears in the `target/`
+directory of the repository. One can test and play with that.
+
+## scalafmt
+
+`mill` wants code contributions to pass a `scalafmt` check before merging. You build `mill` with `mill`
+of course, and `mill` [makes this check easy](https://mill-build.com/mill/Scala_Module_Config.html#_reformatting_your_code).
+
+To check formatting...
+
+```plaintext
+$ mill mill.scalalib.scalafmt.ScalafmtModule/checkFormatAll __.sources
+```
+
+To have `mill` go ahead and reformat your code...
+
+```plaintext
+$ mill mill.scalalib.scalafmt.ScalafmtModule/reformatAll __.sources
+```
+
+## ???
+
+I'll probably update this entry in place over time, if I find more hints I want
+to keep.
