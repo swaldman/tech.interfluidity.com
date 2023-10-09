@@ -43,6 +43,8 @@ To have `mill` go ahead and reformat your code...
 $ mill mill.scalalib.scalafmt.ScalafmtModule/reformatAll __.sources
 ```
 
+I have now twice, embarrassingly, forgotten to do this.
+
 ## ???
 
 I'll probably update this entry in place over time, if I find more hints I want
