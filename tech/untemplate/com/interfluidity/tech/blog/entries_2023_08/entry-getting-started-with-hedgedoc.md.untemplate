@@ -394,6 +394,34 @@ be great if some third party gave themselves access and could join a botnet or s
 Running `npm -g install` as root, which I did do,
 feels partcularly ill-advised and dirty. I think I'll try to avoid that in the future.
 
+## Update 2023-10-20
+
+I use my HedgeDoc's instance as a notes platform for weekly meetings, and I want
+the notes to be created in advance, so that people can suggest agenda items in
+advance. I want to automate this.
+
+HedgeDoc does offer [an API](https://docs.hedgedoc.org/dev/api/) by which one can
+automate creation of new notes. So, the first thing I did was get comfortable using
+that by [writing a script](https://github.com/swaldman/scalascripts-misc/blob/main/bin/hedgedoc-new-note)
+to create a new note.
+
+However, I hit another snag. I want the notes to be freely editable upon creation
+(so that the people my automaton notifies about the new notes can add their agenda items).
+As far as I can tell, HedgeDoc's API does not offer any means of setting note permissions.
+
+Fortunately, in HedgeDoc's [config file](https://docs.hedgedoc.org/configuration/),
+there is a `defaultPermission` key. Until now, I've not been using it, so the
+default `defaultPermission` defaulted to `editable`.
+
+I've just inserted this key explicitly in the config file, with the value `freely`.
+It seems to work! New notes I make (via the API or in the app) are now freely editable
+by default, as I want.
+
+It would be better if there were an API to reset permissions. I'd love to automate
+setting notes to `locked` after my meetings.
+
+
+
 ---
 
 ## Appendix
