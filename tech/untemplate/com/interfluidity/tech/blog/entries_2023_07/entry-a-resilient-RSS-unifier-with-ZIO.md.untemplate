@@ -180,4 +180,7 @@ the server side. Instead of periodically updating feeds in the app, now we just 
 to rerun a static-file generating version of the app every half hour. It's a less sexy app somehow,
 this way, but a bit simpler and conserves memory.
 
+We still do the retries described above, when feeds fail to load. But we let `systemd` take care of
+the periodic regeneratios.
+
 See the current [`README`](https://github.com/swaldman/unify-rss/blob/main/README.md) for more information.
