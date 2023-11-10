@@ -170,3 +170,14 @@ resilient as a permanent service.
 
 _Note: I recently went through [Daniel Ciocîrlan's ZIO 2 video course](https://rockthejvm.com/p/zio),
 which was very, very helpful for this project. Highly recommended!_
+
+---
+
+**Update 2023-11-10:** I've added to this app functionality to generate feeds as static files,
+rather than to serve them from memory as a (resilient!) daemon. That saves some memory and overhead on
+the server side. Instead of periodically updating feeds in the app, now we just define a
+[`systemd` timer](https://github.com/swaldman/unify-rss/blob/interfluidity/unify-rss.timer)
+to rerun a static-file generating version of the app every half hour. It's a less sexy app somehow,
+this way, but a bit simpler and conserves memory.
+
+See the current [`README`](https://github.com/swaldman/unify-rss/blob/main/README.md) for more information.
