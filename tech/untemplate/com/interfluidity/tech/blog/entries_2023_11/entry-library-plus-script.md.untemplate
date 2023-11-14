@@ -1,0 +1,139 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "(Library + Script) vs (Application + Config File)",
+>   "PubDate"   -> "2023-11-14T12:35:00-05:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+**TL; DR:**
+
+For Scala apps, instead of installing applications and writing separate config files, why not do config like this?
+
+<()
+(exampleScript)>
+```scala
+#!/usr/bin/env -S scala-cli shebang
+
+//> using dep "com.example::cool-app:1.0.0"
+
+val config = coolapp.Config(
+  name = "Fonzie",                    // the name of your installation
+  apparel = coolapp.Apparel.Leather,  // see elements defined in coolapp.Apparel
+  gesture = coolapp.Gesture.ThumbsUp, // see elements defined in coolapp.Gesture
+  reference = "Very dated, old man.", // a string to help users identify your character
+  port = 8765                         // the port on which the app will run
+)
+
+coolapp.start( config )
+```
+<()
+  writer.write( exampleScript() )
+()>
+
+---
+
+Once upon a time, I spent a very great deal of time supporting and integrating multiple config formats
+into my work. I used to describe [c3p0](https://www.mchange.com/projects/c3p0/) as a configuration project
+attached to a connection pool.
+
+Lately, though, I find I am skipping any support of config files. I mostly write Scala, and Scala case classes
+strike me as a pretty good configuration format.
+
+* Since you can intitialize case classes with named arguments, `key = value`, they can be made literate and intuitive.
+
+* They support rich comments, because the Scala language supports comments.
+
+* With simple string or integer values, they are as simple as most config formats.
+
+Case-class config is extremely flexible,
+because your values are specified in a general purpose programming language, and can include variables or functions.
+And you get compile-time feedback for misconfigurations.
+
+When I first became enamored with case-classes-as-config, I [wrote](https://github.com/swaldman/audiofluidity) a special
+purpose bootstrap app that would compile a file containing a case-class-instance-as-config, then use Java reflection
+to load it from a container.
+
+```scala
+val podcast : Podcast =
+    Podcast(
+      mainUrl                = "https://superpodcast.audiofluidity.com/",
+      title                  = "Superpodcast",
+      description            = """｜<p>Superpodcast is the best podcast you've ever heard.</p>
+                                  ｜
+                                  ｜<p>In fact, you will never hear it.</p>""".stripMargin,
+      guidPrefix             = "com.audiofluidity.superpodcast-",
+      shortOpaqueName        = "superpodcast",
+      mainCoverImageFileName = "some-cover-art.jpg",
+      editorEmail            = "asshole@audiofluidity.com",
+      defaultAuthorEmail     = "asshole@audiofluidity.com",
+      itunesCategories       = immutable.Seq( ItunesCategory.Comedy ),
+      mbAdmin                = Some(Admin(name="Asshole", email="asshole@audiofluidity.com")),
+      mbLanguage             = Some(LanguageCode.EnglishUnitedStates),
+      mbPublisher            = Some("Does Not Exist, LLC"),
+      episodes               = episodes
+    )
+```
+
+In more recent projects, I've just used either [`scala-cli`](https://scala-cli.virtuslab.org/) or [`mill`](https://mill-build.com/mill/Intro_to_Mill.html)
+as a runner. Sometimes I've just left the definition of a stub case-class instance in the `src` directory for users to fill in, as in
+[`fossilphant`](https://github.com/swaldman/fossilphant/blob/main/fossilphant/src/config.scala). Other times I've defined abstract main classes,
+asking users to extend them by overriding a method that supplies config as a case class instance, as in
+[`unify-rss`](https://github.com/swaldman/unify-rss/blob/2f6305568f8b53e63fa5c16d663db44b0b565288/main/com/mchange/unifyrss/AbstractDaemonMain.scala).
+
+```scala
+package com.mchange.unifyrss
+
+import scala.collection.*
+
+import zio.*
+
+abstract class AbstractDaemonMain extends ZIOAppDefault:
+
+  def appConfig : AppConfig
+
+  override def run =
+    for
+      mergedFeedRefs   <- initMergedFeedRefs( appConfig )
+      _                <- periodicallyResilientlyUpdateAllMergedFeedRefs( appConfig, mergedFeedRefs )
+      _                <- ZIO.logInfo(s"Starting up unify-rss server on port ${appConfig.servicePort}")
+      exitCode         <- server( appConfig, mergedFeedRefs )
+    yield exitCode
+```
+
+So far, I've just instantiated these with concrete `object`s [in Scala source files](https://github.com/swaldman/unify-rss/blob/24cc87b4e6dc6c5a574497c3004fbd00d41f91d8/main/InterfluidityMain.scala).
+
+But it strikes me that a natural refinement would be to design libraries with entry points that accept a case-class-config object as an argument,
+and expect users to deploy them as e.g. `scala-cli` scripts. Just something like:
+
+<( exampleScript() )>
+
+There is a bit of ceremony, and a bit that might intimidate people not accustomed to Scala syntax and tools.
+But "standard" config file formats get complicated and intimidating too. Here users get quick feedback if
+they don't pick a valid value without developers having to write special validation logic. They are still
+just deploying a text file, as they would with ordinary config.
+
+If your priority is 100% user experience, then using a standard (or [new and improved](https://kdl.dev/),
+ht [Bill Mill](https://notes.billmill.org/link_blog/2023/11/KDL_-_a_config_language.html)) config file format, then hand-writing informative,
+fail-fast validation logic is going to be a better way to go.
+
+But your priority should not always be user experience! Not all software development should take the form of a
+"product" developed at a high cost that will then be amortized over sales or adoption by a very large number
+of users.
+
+Software is a form of collaboration, and often that collaboration will be more productive and evolve
+more quickly when "users" are understood to be reasonably capable and informed, so developers don't 
+expand the scope of their work and their maintenance burden in order to render the application accessible
+to the most intimidated potential users.
+
+Obviously it depends what you are doing! But if there is going to be a config file at all, you are already
+collaborating with a pretty restricted set of people who are okay with setting up and editing an inevitably arcane text file.
+
+For many applications and collaborations, maintainability at moderate cost in time and money and speed of evolution,
+are important. For these applications, when written in an expressive, strongly-typed language like Scala,
+defining config as a data structure in a script that then executes an app defined as an entry point to a library
+strike me as a pretty good way to go.
+
+
