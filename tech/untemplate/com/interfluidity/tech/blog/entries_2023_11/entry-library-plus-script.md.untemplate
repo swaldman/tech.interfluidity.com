@@ -133,7 +133,7 @@ collaborating with a pretty restricted set of people who are okay with setting u
 
 For many applications and collaborations, maintainability at moderate cost in time and money and speed of evolution,
 are important. For these applications, when written in an expressive, strongly-typed language like Scala,
-defining config as a data structure in a script that then executes an app defined as an entry point to a library
+defining config as a data structure in a script, that then executes an app defined as an entry point to a library,
 strike me as a pretty good way to go.
 
 
