@@ -78,7 +78,7 @@ val podcast : Podcast =
 ```
 
 In more recent projects, I've just used either [`scala-cli`](https://scala-cli.virtuslab.org/) or [`mill`](https://mill-build.com/mill/Intro_to_Mill.html)
-as a runner. Sometimes I've just left the definition of a stub case-class instance in the `src` directory for users to fill in, as in
+as a runner. Sometimes I've left the definition of a stub case-class instance in the `src` directory for users to fill in, as in
 [`fossilphant`](https://github.com/swaldman/fossilphant/blob/main/fossilphant/src/config.scala). Other times I've defined abstract main classes,
 asking users to extend them by overriding a method that supplies config as a case class instance, as in
 [`unify-rss`](https://github.com/swaldman/unify-rss/blob/2f6305568f8b53e63fa5c16d663db44b0b565288/main/com/mchange/unifyrss/AbstractDaemonMain.scala).
