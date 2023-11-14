@@ -112,7 +112,7 @@ and expect users to deploy them as e.g. `scala-cli` scripts. Just something like
 
 There is a bit of ceremony, and a bit that might intimidate people not accustomed to Scala syntax and tools.
 But "standard" config file formats get complicated and intimidating too. Here users get quick feedback if
-they don't pick a valid value without developers having to write special validation logic. They are still
+they don't pick a valid value without developers having to write special validation logic. Users are still
 just deploying a text file, as they would with ordinary config.
 
 If your priority is 100% user experience, then using a standard (or [new and improved](https://kdl.dev/),
