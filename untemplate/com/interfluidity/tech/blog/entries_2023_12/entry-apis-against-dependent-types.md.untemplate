@@ -1,0 +1,104 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "APIs against dependent types in Scala",
+>   "PubDate"   -> "2023-12-06T16:00:00-05:00",
+>   // "Anchor"    -> "first-post"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+Scala supports instance-dependent types, which is very cool! So I can define...
+
+```scala
+class Human( name : String ):
+  case class Tooth( num : Int ):
+    override def toString(): String = s"${name}'s #${num} tooth"
+    
+  val teeth = Set.from( (1 to 32).map( Tooth.apply ) )
+  def brush( myTeeth : Set[Tooth] ) : Unit = println(s"fluoride goodness for ${name}")
+  
+val me = new Human("Steve")
+val you = new Human("Awesome")
+
+me.brush( me.teeth )
+//me.brush( you.teeth ) // gross! doesn't compile. (as it should not!)
+```
+
+My teeth and your teeth are different types, even though they are of the same class.
+The identity of the _enclosing instance_ is a part of the type.
+
+And we see here how that can be useful! Often inner classes represent internal
+structures that should mostly be managed by their enclosing instance. It's good
+that the compiler pushes back against code in which you might brush my teeth or
+pump my heart!
+
+But sometimes inner instances are not so internal, or even if they are, an
+external thing might have business interacting with it. The virtual human
+we are modeling might have need of a dentist or a cadiologist.
+
+Scala's type system doesn't prevent external things from accessing inner class
+instances, it just demands you do it via a correct type.
+
+I know of two ways to define external APIs against instance-dependent types.
+First, Scala supports _projection types_, like `Human#Teeth`. Where an ordinary
+dot-separated path would have required me to identify some particular instance,
+`Human#Teeth` matches the tooth of _any_ human.
+
+A second way to hit instance-dependent types from an external API is to require
+the caller to identify the instance in the call, and then let the type of a
+later argument to the same call include the identified instance.
+I think it's kind of wild that Scala supports this. It's an example where the
+type of arguments to a statically declared function is effectively determined at runtime.
+You don't even need separate argument lists, although I think I prefer them.
+
+```scala
+class Dentist:
+  def checkByProjection( tooth : Human#Tooth ) : Unit = println( s"Found ${tooth} (by projection)" )
+  def checkByIdentifying( human : Human)( tooth : human.Tooth ) : Unit = println( s"Found ${tooth} (by identification)" )
+
+val d  = new Dentist
+
+// API by projection
+d.checkByProjection( me.teeth.head )
+d.checkByProjection( you.teeth.head )
+
+// API by identification
+d.checkByIdentifying( me )( me.teeth.head )
+d.checkByIdentifying( you )( you.teeth.head )
+
+// d.checkByIdentifying( me )( you.teeth.head ) // does not compile, as it should not
+// d.checkByIdentifying( you )( me.teeth.head ) // does not compile, as it should not
+```
+
+I've used projection types a lot, over the eons. I know some people think that any
+need for external APIs against inner types is code smell or something, but I've found
+a variety of places where they seem to make sense, and the "do it right" workarounds
+(e.g. define some instance-independent abstract base type for the inner things,
+and write external APIs against that) just create busy work and maintenance complexity.
+
+Nevertheless, in some corner cases, projection types
+[aren't completely supported](https://github.com/lampepfl/dotty/issues/18655),
+and my sense is that much of the Scala community considers them icky (like
+brushing someone else's teeth).
+
+Sometimes you need to write APIs against inner types by identification anyway,
+because you need to to stuff about the enclosing instance (which inner instances
+don't disclose unless they declare an explicit reference).
+
+But sometimes you don't need to be told the identity of the outer instance (because
+it's not relevant to what you are doing, or because the inner instance discloses a reference explicitly).
+
+Are projection types icky and it best to just standardize on requiring explicit identification of
+enclosing instances?
+
+Or are projection types a cool trick we should delight in using?
+
+Enquiring minds want to know!
+
+---
+
+(This blog doesn't support comments yet, but you can reply to this post on Mastodon.)
+
+
+
