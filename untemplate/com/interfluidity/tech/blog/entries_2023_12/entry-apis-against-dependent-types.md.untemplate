@@ -72,7 +72,7 @@ d.checkByIdentifying( you )( you.teeth.head )
 ```
 
 I've used projection types a lot, over the eons. I know some people think that any
-need for external APIs against inner types is code smell or something, but I've found
+need for external APIs against inner types is code smell or something. But I've found
 a variety of places where they seem to make sense, and the "do it right" workarounds
 (e.g. define some instance-independent abstract base type for the inner things,
 and write external APIs against that) just create busy work and maintenance complexity.
