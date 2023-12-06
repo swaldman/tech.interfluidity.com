@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./mill -w tech.runBackground serve --verbose
+./mill -w runBackground serve --verbose
 
 
 

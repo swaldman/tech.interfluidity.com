@@ -14,7 +14,7 @@ import java.time.ZoneId
 
 import untemplate.Untemplate.AnyUntemplate
 
-object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("tech/static") ):
+object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
   // edit this to where your site will actually be served!
   override val serverUrl : Abs    = Abs("https://tech.interfluidity.com/")
