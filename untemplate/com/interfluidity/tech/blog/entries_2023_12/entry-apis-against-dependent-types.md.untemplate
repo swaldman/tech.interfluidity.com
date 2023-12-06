@@ -83,7 +83,7 @@ and my sense is that much of the Scala community considers them icky (like
 brushing someone else's teeth).
 
 Sometimes you need to write APIs against inner types by identification anyway,
-because you need to to stuff about the enclosing instance (which inner instances
+because you need to know stuff about the enclosing instance (which inner instances
 don't disclose unless they declare an explicit reference).
 
 But sometimes you don't need to be told the identity of the outer instance (because
