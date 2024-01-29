@@ -13,6 +13,7 @@ val cssLoc = site.location("css")
 val jsLoc = site.location("js")
 val mainLoc = site.location("/index.html")
 val archiveLoc = TechSite.MainBlog.Archive.location
+val subscribeLoc = TechSite.MainBlog.Subscribe.location
 
 val title =
   val mbTitle =
@@ -45,7 +46,7 @@ end title
       </div>
       <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
       <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
-      <div class="see-also">&rarr; See also <a href="<( mainLoc )>">top</a>, <a href="<( archiveLoc )>">archive</a>, <a href="https://www.interfluidity.com/">interfluidity main</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a></div>
+      <div class="see-also">&rarr; See also <a href="<( mainLoc )>">top</a>, <a href="<( archiveLoc )>">archive</a>, <a href="<( subscribeLoc )>">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
     </div>
     <div id="main">
       <div id="left-sidebar">

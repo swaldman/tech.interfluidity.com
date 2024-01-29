@@ -19,9 +19,8 @@
     src: url('../font/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
 }
 @font-face {
-    font-family: 'IbarraRealNova';
+    font-family: 'IbarraRealNovaItalic';
     src: url('../font/Ibarra_Real_Nova/IbarraRealNova-Italic-VariableFont_wght.ttf');
-    font-style: italic;
 }
 @font-face {
     font-family: 'Caroni';
@@ -44,7 +43,7 @@ code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
     font-size: 80%;
     background-color: #eeeeff;
-    padding: 1px;
+    padding: 2px;
 }
 pre code {
     font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
@@ -58,7 +57,14 @@ code strong, code b {
 strong, b {
     font-variation-settings: "wght" 800;
 }
+i, em {
+    font-family: 'IbarraRealNovaItalic';
+    font-style: normal;
+}
 a:visited {
+    color: #9999ff;
+}
+a:visited code {
     color: #7777ff;
 }
 .main-title {
@@ -118,7 +124,7 @@ a#rss-link span.bullet {
     margin-top: 0.25rem;
     margin-left: 1rem;
     font-family: 'Caroni';
-    font-size: 12pt;
+    font-size: 14pt;
     color: var( --see-also-color );
 }
 .see-also a {
@@ -154,6 +160,11 @@ a#rss-link span.bullet {
     padding-left: 1rem;
     border: 1px solid black;
 }
+#content .subscribe-space {
+    background-color: rgba(255, 255, 255, 0.625);
+    padding: 1rem;
+    border: 1px solid black;
+}
 h1, h2, h3 {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
 }
@@ -182,6 +193,32 @@ h3 {
 #content article h2, #content article h3 {
     margin-top: 2em;
 }
+#content article div.note::before {
+    content: "☞ Note";
+    font-weight: bold;
+    font-style: italic;
+    color: green;
+    display: block;
+}
+#content article div.note {
+    padding: 1em;
+    margin: 0.5em;
+    border: 2px solid green;
+    background-color: #ccffcc;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 80%;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    line-height: 130%;
+}
+#content article div.note code {
+    background-color: yellow;
+}
+#content article div.note pre code {
+    background-color: black;
+}
 #content hr {
     margin-top: 2em;
     margin-right: 1rem;
@@ -194,7 +231,7 @@ h3 {
 }
 #content .entry-body {
     font-size: 115%;
-    line-height: 125%;
+    line-height: 135%;
     margin-right: 1rem;
     padding-right: 0;
 }
@@ -331,8 +368,60 @@ h3 {
 .monospace-regular {
     font-family: 'FiraCode-Regular', monospace;
 }
+div.subscribe-form {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: min-content min-content;
+    padding-bottom: 1.5rem;
+}
+div.subscribe-form div.sf-label {
+    font-family: 'FiraCode-Semi-Bold';
+    font-weight: normal;
+    text-align: right;
+    white-space: nowrap;
+    grid-column: 1;
+    padding-right: 0.5em;
+}
+div.subscribe-form div.sf-field input {
+    width: 100%;
+}
+div.subscribe-form div.sf-submit {
+    text-align: center;
+}
+div.subscribe-form div.sf-submit input {
+    width: 100%;
+    font-family: 'IbarraRealNova';
+    font-variation-settings: "wght" 600;
+}
+div.subscribe-form div.sf-label-email {
+    grid-row: 1;
+}
+div.subscribe-form div.sf-field-email {
+    grid-row: 1;
+    grid-column: 2;
+}
+div.subscribe-form div.sf-label-name {
+    grid-row: 2;
+}
+div.subscribe-form div.sf-field-name {
+    grid-row: 2;
+    grid-column: 2;
+}
+div.subscribe-form div.sf-note-name {
+    grid-row: 2;
+    grid-column: 3;
+}
+div.subscribe-form div.sf-label-submit {
+    grid-row: 3;
+    font-size: 150%;
+}
+div.subscribe-form div.sf-submit {
+    grid-row: 3;
+    grid-column: 2;
+}
+
 @media only screen and (max-width: 700px) {
     .main-title {
 	font-size: 18pt;
-    }    
+    }
 }

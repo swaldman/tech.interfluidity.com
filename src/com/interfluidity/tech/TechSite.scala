@@ -64,8 +64,18 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
       val endpointBinding = ZTEndpointBinding.publicReadOnlyHtml( location, task, None, immutable.Set("archive") )
     end Archive
 
-    override def endpointBindings : immutable.Seq[ZTEndpointBinding] = super.endpointBindings :+ Archive.endpointBinding
-      
+    object Subscribe:
+      val location = site.location("/subscribe.html")
+
+      val task = zio.ZIO.attempt {
+         val contentsHtml = blog.subscribe_page_html().text
+         layout_main_html( MainLayoutInput( location, contentsHtml, Nil ) ).text
+      }
+      val endpointBinding = publicReadOnlyHtml( location, task, None, immutable.Set("subscribe"), resolveHashSpecials = true, memoize = true )
+    end Subscribe
+
+    override def endpointBindings : immutable.Seq[ZTEndpointBinding] = super.endpointBindings :+ Archive.endpointBinding :+ Subscribe.endpointBinding
+
   end MainBlog
 
   // avoid conflicts, but early items in the lists take precedence over later items

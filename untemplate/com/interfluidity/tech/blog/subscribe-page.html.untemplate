@@ -1,0 +1,37 @@
+<div class="subscribe-space">
+
+  <h1>Subscribe by e-mail</h1>
+
+  <p><b>Subscribe to this blog (</b><code><a href="##/index.html">tech.interfluidity.com</a></code><b>)</b></p>
+
+  <form id="interfluidity-tech-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="GET">
+    <input type="hidden" name="subscribableName" value="interfluidity-tech">
+    <( subscribe_form_html("tech","&#x1F913;") )>
+  </form>
+
+  <hr>
+
+  <h3>Other interfluiditous writing</h3>
+
+  <p><b>Subscribe to </b><code><a href="https://drafts.interfluidity.com/">drafts.interfluidity.com</a></code><b></b></p>
+
+  <form id="interfluidity-drafts-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="GET">
+    <input type="hidden" name="subscribableName" value="interfluidity-drafts">
+    <( subscribe_form_html("drafts","&#x1F60E;") )>
+  </form>
+
+  <p><b>Subscribe to Mastodon six-packs</b></p>
+
+  <p>(receive one e-mail with every six new Mastodon posts)</p>
+
+  <form id="interfluidity-masto-sixpack--form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="GET">
+    <input type="hidden" name="subscribableName" value="interfluidity-masto-sixpack">
+    <( subscribe_form_html("six packs","&#x1F974;") )>
+  </form>
+
+  <hr style="width: 30%">
+
+  <p><b>Old-school, subscribe to  </b><a href="https://www.interfluidity.com/"><code>www.interfluidity.com</code></a></p>
+
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;try <a href="https://www.interfluidity.com/e-mail">here</a>!</p>
+</div>
