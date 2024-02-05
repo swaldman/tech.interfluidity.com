@@ -1,6 +1,6 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "Style-by-mail in feedletter",
->   "PubDate"   -> "2024-02-04T19:00:00-05:00",
+>   "PubDate"   -> "2024-02-04T19:25:00-05:00",
 >   "Anchor"    -> "style-feedletter-by-mail"
 > )
 
