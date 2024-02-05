@@ -1,0 +1,43 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Style-by-mail in feedletter",
+>   "PubDate"   -> "2024-02-04T19:00:00-05:00",
+>   "Anchor"    -> "style-feedletter-by-mail"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+If, my most patient dear reader, you followed the _feedletter_ tutorial in the [previous post](##feedletter-tutorial),
+you saw that we [styled _feedletter_ newsletters](##feedletter-tutorial#15-tweak-the-newsletter-styles) by starting up
+a development webserver, which would serve up HTML for an example newsletter.
+
+This is still the best to get started styling your newsletters, because you can iteratively edit your [_untemplate_](https://github.com/swaldman/untemplate-doc#readme),
+then just hit refresh in your web browser to very quickly play with your style and layout.
+
+However, there are differences between how web browsers and e-mail clients render HTML.
+Getting things to look great in your browser, both at wide and mobile-like narrow widths, is not enough to
+guarantee that things will look good as emails, on desktop or mobile e-mail clients.
+
+So, _feedletter v0.0.8_ now supports styling by e-mail.
+
+Instead of firing up a webserver to preview your newsletter,
+if you give `feedletter-style` commands `--from` and `--to` arguments, an example e-mail will be sent.
+So you can now accurately preview and tweak exactly how newsletters will look in the mail clients they are actually
+sent to.
+
+To put that more specifically, just replace a command like...
+
+```plaintext
+$ ./feedletter-style compose-single --subscribable-name lgm --port 45612
+```
+
+with
+
+```plaintext
+$ ./feedletter-style compose-single --subscribable-name lgm --from feedletter@mchange.com --to swaldman@mchange.com
+```
+
+No development webserver will be spun up. Instead, a sample e-mail will be sent.
+
+

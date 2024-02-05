@@ -3,7 +3,7 @@ import $meta._
 import mill._
 import mill.scalalib._
 
-import $ivy.`com.mchange::untemplate-mill:0.1.2-SNAPSHOT`
+import $ivy.`com.mchange::untemplate-mill:0.1.2`
 import untemplate.mill._
 
 val UnstaticVersion = "0.2.1-SNAPSHOT"
@@ -14,7 +14,7 @@ object Dependency {
 }
 
 object tech extends RootModule with UntemplateModule {
-  override def scalaVersion = "3.2.2"
+  override def scalaVersion = "3.3.1"
 
   // supports Scala 3.2.1
   //override def ammoniteVersion = "2.5.6"

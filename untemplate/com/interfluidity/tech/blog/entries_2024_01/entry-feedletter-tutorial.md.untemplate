@@ -1,7 +1,7 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "Feedletter tutorial",
 >   "PubDate"   -> "2024-01-29T10:30:00-05:00",
->   // "Anchor"    -> "first-post"
+>   "Anchor"    -> "feedletter-tutorial"
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
@@ -831,6 +831,14 @@ The feedletter services has a simple API that, for now, uses (abuses) the HTTP G
     </form>
 ```
 
+<div class="note"
+
+As of _feedletter v0.0.8_, you can use `method="POST"` in subscribe forms.
+
+Using `method="GET"` (and therefore also simulating form submission by pasting a URL) remain supported as well.
+
+</div>
+
 (You can see live examples of _feedletter_ subscription forms on the [subscribe page](##/subscribe.html) of this site!)
 
 We will fake hitting the form above just by pasting the following URL into our browser:
@@ -992,6 +1000,8 @@ Great. Now let's see how our newsletter looks, with its HTML served on `http://p
 Not so good!
 
 <img alt="Screenshot of web-served lgm newsletter via ./feedletter-style compose-single, with a badly formatted image" src="##./scotus-disqualify-bad.png" style="width: 100%;">
+
+(**Update:** As of _feedletter v0.0.8_ you can also [style newsletters by e-mail](##style-feedletter-by-mail), in addition to hitting a development webserver with a browser.)
 
 <div class="note">
 
