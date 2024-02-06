@@ -1,0 +1,71 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "What does private mean at package level in Scala 3?",
+>   "PubDate"   -> "2024-02-06T17:50:00-05:00",
+>   //"Anchor"    -> "replace-me"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+**TL; DR:**
+* `private` declarations at a top-level scope of a package in Scala 3 are equivalent to a `private[pkg]` in other contexts.
+* They are accessible to everything within the package and its subpackages, but nothing else.
+
+---
+
+In Scala 2, to place a declaration at the "package" level, one would define a "package object":
+
+```scala
+package top
+
+package object pkg {
+  private val Hush = 0
+  val Loud = Int.MaxValue
+}
+```
+
+Given this
+
+* one might refer to `Loud` from anywhere with fully-qualified name `top.pkg.Loud` 
+* `import top.pkg._` would pick it up
+* inside the package `top.pkg` one coul refer to it simply as `Loud`
+
+So far, so intuitive.
+
+In Scala 2, the semantics of `private val Loud` was also intuitive. A `package object` is just
+an `object`. A `private` member of an `object` is only visible within that `object`'s scope.
+While the Scala compiler does some magic to make nonprivate declarations more broadly visible, access to `private`
+members of the `package object` was restricted to the `object` in the ordinary way.
+
+But Scala 3 introduces "naked" top-level declarations, which I find I use constantly.
+
+So the declarations above might translate to:
+
+```scala
+package top.pkg
+
+private val Hush = 0
+val Loud = Int.MaxValue
+```
+
+There is no `object` scope! So what does private even mean in this context.
+
+I could imagine
+four possibilities:
+
+1. `private` to a virtual object scope constituted of all top-level declaraions
+2. `private` to the top-level of the current compilation unit (i.e. file)
+3. `private` to the current compilation unit (including nested scopes)
+4. `private` to the package as a whole, i.e. the same as `private[pkg]`
+
+Playing around, it looks like #4 is the winner.
+
+A `private` top-level declaration
+seems visible to any code in the package, even if defined in other files or directories.
+It is visible from anywhere in the `pkg` or subpackages of `pkg`.
+
+So now I know! And so do you!
+
+
+
