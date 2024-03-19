@@ -1,0 +1,137 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "c3p0 and loom",
+>   "PubDate"   -> "2024-03-18T22:20:00-04:00",
+>   //"Anchor"    -> "replace-me"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I write [a lot of open source software](https://github.com/swaldman), but I've only ever really had one "hit".
+That makes me pretty sad, actually. I think some of what I've written is pretty great, and it's lonesome to be the
+sole user.
+
+Nevertheless, my one "hit" was [c3p0](https://www.mchange.com/projects/c3p0/), a JDBC Connection pool that,
+in its day, was extremely popular in Java web application stacks.
+
+Its day was a long time ago, though! c3p0 was first
+released [on Sourceforge in 2001](https://sourceforge.net/projects/c3p0/files/historical/OldFiles/), and was
+very widely used from the mid aughts through the early 2010s.
+
+c3p0 is "mature" software, and I have just let it alone for years at a time. But I do continue to use it in all
+of my own database projects. Periodically I still put it (and myself) through intense bouts of maintenance.
+
+Actually, I have hated my years-long lapses (and myself) because github issues collect and I get snarky comments
+about abandonware and I feel like I am a Very Bad Maintainer.
+So the first order of business in my most recent "sprint" (isn't that what the kids call it?) was to move
+c3p0 from a very bespoke and manual [ant](https://ant.apache.org/) build to something
+sleek and modern and automatic, so that
+maybe I wouldn't put off maintenance into years-delayed batches just because it is annoying to touch.
+c3p0's new [mill build](https://mill-build.com/mill/Intro_to_Mill.html) works beautifully.
+
+The new build is much lighter, and the modern style of just publishing git repositories rather than source
+distributions and uploading releases to Sonatype is fast and easy. I think it'll really improve my maintenance promptness.
+
+c3p0's latest release, [0.10.0](https://github.com/swaldman/c3p0/blob/0.10.x/RELEASE_NOTES-c3p0-0.10.0),
+includes lots of enhancements and improvements. But a really fun thing was to integrate the very latest shiny new thing
+in Java &mdash; "Project Loom" [virtual threads](https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html) &mdash;
+into this very old, highly concurrent library.
+
+c3p0 is very old school. It was initially written in Java 1.2 or 1.3. Java's standard concurrency utilities,
+the [`java.util.concurrent`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/package-summary.html) package,
+did not yet exist. There were no standard thread pools defined as
+[`ExecutorService` implementations](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Executors.html).
+So I [rolled my own](https://github.com/swaldman/mchange-commons-java/blob/master/src/main/java/com/mchange/v2/async/ThreadPoolAsynchronousRunner.java).
+c3p0 relies entirely on the JVM's built-in primitives &mdash; monitors and `synchronized` blocks, `wait()` and `notifyAll()` &mdash;
+to manage concurrency.
+
+Over the years, people have requested that c3p0 support asynchroneity via pluggable `Executor` instances,
+rather than just its own, hand-rolled thread pool. Users mostly seemed to want this so c3p0 could share existing application thread pools,
+avoiding the resource footprint of several c3p0-dedicated threads.
+
+A couple of weeks ago, I finally got around to implementing
+[pluggable threading](https://www.mchange.com/projects/c3p0/#configuring_threading).
+Sharing application thread pools is now supported. But I was mostly motivated by 
+curiousity about how well this very old library would work with newfangled loom virtual threads.
+
+Great, it turns out!
+
+* I was concerned, since c3p0 relies so much on monitors and `synchronized` blocks, that virtual threads would be
+  "pinned". Virtual threads are scheduled to, and deschedule from, "carrier" operating-system threads, but they cannot
+  be descheduled while they hold a monitor. If a thread blocks while holding a monitor, it is described as "pinned",
+  and that's a bad thing.
+
+  But c3p0 is very careful not to perform potentially blocking operations while holding a monitor. Running
+  tests with
+  
+  ```plaintext
+  -Djdk.tracePinnedThreads=full
+  ```
+
+  produced no stack traces of pinned threads, even under heavy load. This was gratifying.
+
+* Using virtual threads rather than a thread pool can reduce contention for monitors. The thread pool itself is a site
+  of contention, as information about which threads are pooled and which are available to run tasks constitute shared,
+  mutable state. Replacing a thread pool with simply firing and forgetting a virtual thread for each asynchrnous
+  task left nothing to contend for. [`c3p0-loom`](https://github.com/swaldman/c3p0-loom) includes two implementations of
+  [`TaskRunnerFactory`](https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/TaskRunnerFactory.html):
+
+  * [`com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory`](https://github.com/swaldman/c3p0-loom/blob/main/src/com/mchange/v2/c3p0/loom/UninstrumentedVirtualThreadPerTaskTaskRunnerFactory.java)
+  * [`com.mchange.v2.c3p0.loom.VirtualThreadPerTaskExecutorTaskRunnerFactory`](https://github.com/swaldman/c3p0-loom/blob/main/src/com/mchange/v2/c3p0/loom/VirtualThreadPerTaskExecutorTaskRunnerFactory.java)
+
+  `com.mchange.v2.c3p0.loom.VirtualThreadPerTaskExecutorTaskRunnerFactory` tracks the number of simultaneously active threads
+  (which you can observe via JMX), which involve synchronizing on a monitor so some contention is still possible.
+  
+  But with `com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory`, nothing at all is tracked and no monitors
+  are acquired. Some analog of contention might result from managing shared state within the loom virtual-threading
+  runtime, but all overt contention for thread-pool monitors is eliminated.
+
+In practice, the thread pool is not c3p0's main site of monitor contention, however.
+
+c3p0's [resource pool](https://github.com/swaldman/c3p0/blob/0.10.x/src/com/mchange/v2/resourcepool/BasicResourcePool.java) is its main
+site of monitor contention. For most applications, the contention overhead is negligible, when amortized over `Connection` operations.
+But in rare cases, when very large numbers of threads are hitting the pool, contention can become an issue. For now, the only way to
+address contention at the resource pool is to construct multiple `DataSource` instances and balance the load across them.
+
+In any case, c3p0 and loom work very well together!
+
+I still recommend that applications start by using c3p0's default, hand-rolled
+thread pool. It implements deadlock detection and recovery, and logs verbose debugging information about what happened. This makes it very
+easy to diagnose what kinds of operations have been hanging and consuming threads when something goes wrong.
+
+Under loom, applications that might otherwise have logged flamboyant thread-pool problems will proceed gracefully for some time.
+No matter what operations hang, new (virtual) threads will always be available for the next request, and the memory
+footprint of the frozen "fibers" (rather than full threads) should be modest.
+
+But if `Connection` acquisition, `Connection` destruction, or `Statement` destruction tasks do hang, eventually the pool will become
+exhausted and your application will hang or fail, despite the almost inexhaustible virtual threads.
+
+I'd start by using c3p0's default, battle-tested thread pool to detect these kinds of issues, and log them with its signature, much-hated
+`APPARENT DEADLOCK` messages if they occur. Those very ugly `APPARENT DEADLOCK` messages make it very easy to figure out just what is
+going wrong.
+
+But once your application is stable, then you might absolutely consider setting
+
+```plaintext
+c3p0.taskRunnerFactoryClassName=com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory
+```
+
+to reduce monitor contention and eliminate the overhead of a dedicated c3p0 thread pool.
+
+---
+
+**Note:**
+
+The latest version of c3p0 (as of this writing) is `0.10.0`. Ordinarily, you'd hit that at Maven Central as
+
+* `com.mchange:c3p0:0.10.0`
+
+But c3p0 is built under older Java version, to support old applications. (c3p0-0.10.0 supports JVMs as old as Java 7.)
+
+Loom support has to be built under Java 21+, so it is built separately. Just hit
+
+* `com.mchange:c3p0-loom:0.10.0`
+
+at Maven Central. That will bring in the loom implementations, and the rest of c3p0 as a transitive dependency.
+
