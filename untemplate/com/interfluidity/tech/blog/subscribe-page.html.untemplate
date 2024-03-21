@@ -20,18 +20,23 @@
     <( subscribe_form_html("drafts","&#x1F60E;") )>
   </form>
 
-  <p><b>Subscribe to Mastodon six-packs</b></p>
-
-  <p>(receive one e-mail with every six new Mastodon posts)</p>
+  <p><b>Subscribe to Mastodon six-packs</b><br>
+  (receive one e-mail with every six new Mastodon posts)</p>
 
   <form id="interfluidity-masto-sixpack--form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
     <input type="hidden" name="subscribableName" value="interfluidity-masto-sixpack">
     <( subscribe_form_html("six packs","&#x1F974;") )>
   </form>
 
-  <hr style="width: 30%">
-
   <p><b>Old-school, subscribe to  </b><a href="https://www.interfluidity.com/"><code>www.interfluidity.com</code></a></p>
 
   <p>&nbsp;&nbsp;&nbsp;&nbsp;try <a href="https://www.interfluidity.com/e-mail">here</a>!</p>
+  
+  <p><b>Subscribe to everything, weekly</b><br>
+  (receive all interfluidity blog and microblog posts in one weekly digest)</p>
+
+  <form id="interfluidity-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="GET">
+    <input type="hidden" name="subscribableName" value="interfluidity-weekly">
+    <( subscribe_form_html("weekly","&#x1F62E;") )>
+  </form>
 </div>
