@@ -14,7 +14,7 @@ hit [scala-cli](https://scala-cli.virtuslab.org/) scripts.
 I've built for myself a
 [little framework](https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file) that is
 incredibly in need of documentation, but that lets me define scripts very flexibly and can provide great step-by-step
-information about what happens and anything that goes wrong in brightly colored HTML e-mails.
+information about what happens and anything that goes wrong in brightly colored HTML e-mails. I love it.
 
 Much of what I do is back things up to a cloud service using [rclone](https://rclone.org/).
 
