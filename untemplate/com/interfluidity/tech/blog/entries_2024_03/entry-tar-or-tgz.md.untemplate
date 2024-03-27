@@ -1,0 +1,36 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "tar or tgz?",
+>   "PubDate"   -> "2024-03-27T10:55:00-04:00",
+>   //"Anchor"    -> "replace-me"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+A thing I've done over the last while is automate a lot of my sysadmin, using `systemd` timers to
+hit [scala-cli](https://scala-cli.virtuslab.org/) scripts.
+
+I've built for myself a
+[little framework](https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file) that's
+incredibly in need of documentation, but that lets me define scripts very flexibly and provides great step-by-step
+information about anything that goes wrong in brightly colored HTML e-mails.
+
+Much of what I do is back things up to a cloud service using [rclone](https://rclone.org/).
+
+Last night I wrote a [script](https://github.com/swaldman/mchange-sysadmin-scripts/blob/main/taskbin/backup-directory-as-tar)
+just to back up some directory. I ran into what I consider an age-old dilemma.
+
+Sometime early in my geekish career, I picked up the nugget that its best to keep important backups as straight `tar`
+files rather than `tgz` (or `tbz` or whatever), because if some bit gets corrupted, most of a straight
+`tar` will remain recoverable, while the compressed archive will just be toast.
+
+Is that right? Is it a real concern? I don't think I've ever experienced a corrupted archive, `tar` or `tgz`, but of
+course backup is a form of insurance, the whole point is to be resilient to tail risks.
+
+Still, searching the interwebs, I don't see a lot of people recommending uncompressed archives.
+Space is more of a bottleneck to me than CPU or compress/decompress time, so if the resilience advantage
+isn't significant, I'd compress.
+
+What do you think?
+
