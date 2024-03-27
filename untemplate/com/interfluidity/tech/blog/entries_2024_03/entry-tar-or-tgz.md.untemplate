@@ -12,7 +12,7 @@ A thing I've done over the last while is automate a lot of my sysadmin, using `s
 hit [scala-cli](https://scala-cli.virtuslab.org/) scripts.
 
 I've built for myself a
-[little framework](https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file) that's
+[little framework](https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file) that is
 incredibly in need of documentation, but that lets me define scripts very flexibly and can provide great step-by-step
 information about what happens and anything that goes wrong in brightly colored HTML e-mails.
 
