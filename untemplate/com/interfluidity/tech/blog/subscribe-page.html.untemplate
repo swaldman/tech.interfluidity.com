@@ -32,10 +32,26 @@
 
   <p>&nbsp;&nbsp;&nbsp;&nbsp;try <a href="https://www.interfluidity.com/e-mail">here</a>!</p>
   
+  <p><b>Subscribe to longform, weekly</b><br>
+  (receive all longform interfluidity posts in one weekly digest)</p>
+
+  <form id="interfluidity-longform-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+    <input type="hidden" name="subscribableName" value="interfluidity-longform-weekly">
+    <( subscribe_form_html("longform weekly","&#x1F60A;") )>
+  </form>
+
+  <p><b>Subscribe to microblogs, weekly</b><br>
+  (receive all interfluidity microblog posts in one weekly digest)</p>
+
+  <form id="interfluidity-microblogs-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+    <input type="hidden" name="subscribableName" value="interfluidity-microblogs-weekly">
+    <( subscribe_form_html("microblogs weekly","&#x1F633;") )>
+  </form>
+
   <p><b>Subscribe to everything, weekly</b><br>
   (receive all interfluidity blog and microblog posts in one weekly digest)</p>
 
-  <form id="interfluidity-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="GET">
+  <form id="interfluidity-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
     <input type="hidden" name="subscribableName" value="interfluidity-weekly">
     <( subscribe_form_html("weekly","&#x1F62E;") )>
   </form>
