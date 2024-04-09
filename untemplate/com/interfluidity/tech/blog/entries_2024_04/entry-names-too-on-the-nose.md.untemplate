@@ -1,0 +1,47 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "Names too on the nose",
+>   "PubDate"   -> "2024-04-09T01:15:00-04:00",
+>   //"Anchor"    -> "replace-me"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+This will be an odd post for a tech blog. But here is a list of names "too on the nose":
+
+* **Bernie Madoff** &mdash; He _made off_ with the money.
+* **Terra Rodgers** &mdash; a [director for superhot rock energy](https://www.theguardian.com/environment/2024/apr/02/geothermal-energy-electricity), that is
+  a form of geothermal energy, a kind of _terrestrial_ energy.
+
+More names coming soon!
+
+I've kind of wanted to maintain a list like this for a long time. I sometimes think we're inhabiting a work
+of fiction, given how contrivedly _a propos_ certain names often are. I encounter these names, and I
+want to make a note of them.
+
+I'll do that here!
+
+(I think I might once have encountered a Twitter thread in this vein. My apologies to whomever I am ripping off!)
+
+Please get in touch with any suggestions!
+
+---
+
+Anyway, I'm finally putting together this list here, on my "tech blog", because it's a good way to experiment with
+an idea that Chris Krycho [describes](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/) as "sprouts".
+
+Often "posts" ought not be thought of as finished pieces, but as beginnings &mdash; seeds, even &mdash; of ongoing, evolving work.
+(Thanks to [Erlend Sogge Heggen](https://mastodon.social/@erlend@writing.exchange) for pointing me to this piece!)
+
+I've begun by adding support to the [`<atom:updated>` tag](https://www.ietf.org/rfc/rfc4287.txt) in my site generator's RSS.
+
+When I make meaningful changes, I can update this value, and my feed will re-sort the updated post to the top, and prefix
+"Updated:" to the title. I can optionally mark posts to create a new GUID for each update, which may cause tools (like
+my own [feedletter](##feedletter-tutorial)) to treat them as new posts.
+
+(For now, I am leaving that turned off for this post, and just re-sorting updates to the top of the feed. In the future,
+who knows?)
+
+There's lots, lots more to explore in this vein. Do read [Chris Krycho's post](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/).
+But this, I hope, is a start.
