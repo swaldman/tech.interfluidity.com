@@ -6,7 +6,7 @@ import mill.scalalib._
 import $ivy.`com.mchange::untemplate-mill:0.1.2`
 import untemplate.mill._
 
-val UnstaticVersion = "0.2.1-SNAPSHOT"
+val UnstaticVersion = "0.3.0-SNAPSHOT"
 
 object Dependency {
   val Unstatic = ivy"com.mchange::unstatic:${UnstaticVersion}"
@@ -14,10 +14,7 @@ object Dependency {
 }
 
 object tech extends RootModule with UntemplateModule {
-  override def scalaVersion = "3.3.1"
-
-  // supports Scala 3.2.1
-  //override def ammoniteVersion = "2.5.6"
+  override def scalaVersion = "3.3.3"
 
   // we'll build an index!
   override def untemplateIndexNameFullyQualified : Option[String] = Some("com.interfluidity.tech.IndexedUntemplates")
