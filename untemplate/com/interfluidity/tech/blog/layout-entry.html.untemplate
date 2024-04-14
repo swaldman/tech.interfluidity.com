@@ -75,11 +75,20 @@ input.presentation match {
 <()
   if input.presentation == input.blog.Entry.Presentation.Rss then {
 ()>
+  <hr>
   by <( authorsString )> on <( dayStr )> @
 <()
   }
 ()>
             <a href="<( permalink.relative )>"><( hourStr )></a>
+<()            
+  if input.info.updated.nonEmpty then
+  {
+()>
+           <div class="updated-note">Last major update at <( DayFormatter.format(input.info.updated.get) )> @ <( HourFormatter.format(input.info.updated.get) )></div>
+<()
+  }
+()>  
           </div>
         </div>
       </article>

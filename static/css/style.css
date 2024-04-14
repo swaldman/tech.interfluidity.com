@@ -124,7 +124,7 @@ a#rss-link span.bullet {
     margin-top: 0.25rem;
     margin-left: 1rem;
     font-family: 'Caroni';
-    font-size: 14pt;
+    font-size: 12pt;
     color: var( --see-also-color );
 }
 .see-also a {
@@ -269,6 +269,14 @@ h3 {
 #content .post-metainfo a:hover {
     color: orange;
     /* text-decoration: underline; */
+}
+#content .post-metainfo .updated-note {
+    float: left;
+    font-family: 'Caroni';
+    font-size: 14pt;
+    color: orange;
+    position: relative;
+    top: -0.25em;
 }
 #content .prev-top-next {
     display: grid;
