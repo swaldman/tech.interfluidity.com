@@ -82,8 +82,7 @@ input.presentation match {
 ()>
             <a href="<( permalink.relative )>"><( hourStr )></a>
 <()            
-  if input.info.updated.nonEmpty then
-  {
+  if input.info.updated.nonEmpty then {
 ()>
            <div class="updated-note">Last major update at <( DayFormatter.format(input.info.updated.get) )> @ <( HourFormatter.format(input.info.updated.get) )></div>
 <()
