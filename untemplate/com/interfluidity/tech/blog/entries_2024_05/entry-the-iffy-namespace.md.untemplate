@@ -1,6 +1,6 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "The 'iffy' XML namespace",
->   "PubDate"   -> "2024-05-13T03:45:00-04:00",
+>   "PubDate"   -> "2024-05-13T04:10:00-04:00",
 >   "Permalink" -> "/xml/iffy/index.html",
 >   //"Anchor"    -> "iffy-xml-namespace"
 > )
