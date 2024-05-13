@@ -1,0 +1,74 @@
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "The 'iffy' XML namespace",
+>   "PubDate"   -> "2024-05-13T03:45:00-04:00",
+>   "Permalink" -> "/xml/iffy/index.html",
+>   //"Anchor"    -> "iffy-xml-namespace"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I want to do a lot of things with RSS that require
+extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-specification#extendingRss)).
+
+The URL `http://tech.interfluidity.com/xml/iffy/` will mark an XML namespace in which some of these extensions will be defined.
+
+The conventional prefix associated with this namespace will be `iffy`.
+
+**The current version of this namespace is `v0.0.1-SNAPSHOT`.**
+
+(`-SNAPSHOT` signifies that the version preceding that suffix has not yet been finalized. Much more to come!)
+
+---
+
+**Element &mdash; `iffy:provenance`**
+
+<div style="padding-left: 1em; border-left: 3px solid orange;">
+
+**When an item level element**
+
+If present in an item, the item contains a sequence of one or more [`atom:link`](https://www.ietf.org/rfc/rfc4287.txt) elements,
+each of whose
+* `rel` attribute is MUST BE `via`
+* `href` attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn
+* `type` attribute SHOULD BE `application/rss+xml`
+
+If the item from which the current item was sourced does not contain an `iffy:provenance`, then the current
+item should include just one `atom:link`.
+
+If the item from which the current item was sourced _does_ contains an `iffy:provenance`, then the current
+feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced
+PREPENDED.
+
+This will ensure the most immediate source will be the first `atom:link` element. The origin &mdash; or at least
+the source for which no further provenance is known &mdash; will be the last `atom:link` element.
+
+Processors may expect a channel level `atom:link` element with `rel="self"` and `type="application/rss+xml"` to
+use as the basis for provenance in source documents. See [RSS Best Practices](https://www.rssboard.org/rss-profile#namespace-elements-atom-link).
+
+**Example** (from [here](https://www.interfluidity.com/unify-rss/all-blogs.rss)):
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+
+<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>interfluidity, all blogs</title>
+    <!-- Other channel elements -->
+    <atom:link type="application/rss+xml" rel="self" href="https://www.interfluidity.com/unify-rss/all-blogs.rss"/>
+    <item>
+      <title>Industrial policy and ecosystems</title>
+      <guid isPermalink="true">https://drafts.interfluidity.com/2024/05/11/industrial-policy-and-ecosystems/index.html</guid>
+      <author>nospam@dev.null (Steve Randy Waldman)</author>
+      <link>https://drafts.interfluidity.com/2024/05/11/industrial-policy-and-ecosystems/index.html</link>
+      <!-- Other item elements -->
+      <iffy:provenance>
+        <atom:link type="application/rss+xml" rel="via" href="https://drafts.interfluidity.com/feed/index.rss"/>
+      </iffy:provenance>
+    </item>
+  </channel>
+</rss>
+```
+
+</div>
+
