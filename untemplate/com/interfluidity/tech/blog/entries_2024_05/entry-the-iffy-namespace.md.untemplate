@@ -24,7 +24,7 @@ The conventional prefix associated with this namespace will be `iffy`.
 
 **Element &mdash; `iffy:provenance`**
 
-<!-- <div style="margin-left: 0.2rem; padding-left: 1rem; border-left: 3px solid orange;"> -->
+<div style="margin-left: 0.2rem; padding-left: 1rem; border-left: 3px solid orange;">
 
 **When an item level element**
 
@@ -70,5 +70,5 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
 </rss>
 ```
 
-<!-- </div> -->
+</div>
 
