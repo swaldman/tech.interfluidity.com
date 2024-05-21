@@ -15,7 +15,7 @@ val resolved = input.sourceEntry
 val ut = resolved.entryUntemplate
 val permalink = resolved.permalink
 val entryAnchor = ut.checkAttributeKey(`Anchor`)
-val articleClasses = presentationTypeClass + entryAnchor.fold("")(anchor => "uid-" + anchor)
+val articleClasses = presentationTypeClass + entryAnchor.fold("")(anchor => " uid-" + anchor)
 val mbTitle  = info.mbTitle
 val authors = info.authors
 val authorsString =
