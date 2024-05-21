@@ -1,15 +1,13 @@
-import java.time.format.DateTimeFormatter
 import com.interfluidity.tech.TechSite
 import unstatic.PageBase
 import unstatic.ztapir.simple.Attribute.Key.*
 
-> val DayFormatter = DateTimeFormatter.ofPattern("""yyyy'-'MM'-'dd""").withZone(java.time.ZoneId.systemDefault())
-> val HourFormatter = DateTimeFormatter.ofPattern("""hh':'mm' 'a' 'zzz""").withZone(java.time.ZoneId.systemDefault())
 > val DefaultAuthor = "Steve Randy Waldman"
 
 val presentationTypeClass =
   s"presentation-${input.presentation.toString().toLowerCase}"
 
+val blog = input.blog
 val info = input.info
 val resolved = input.sourceEntry
 val ut = resolved.entryUntemplate
@@ -28,10 +26,10 @@ val authorsString =
         authors.splitAt(sz-1)
       init.mkString(", ", ", ", "") + last.head
 val pubDate = ut.checkAttributeKey(`PubDate`).getOrElse( throw new Exception("Attribute PubDate required, not found: " + resolved) )
-val dayStr  = DayFormatter.format(pubDate)
-val hourStr = HourFormatter.format(pubDate)
+val dayStr  = blog.dayOnlyFormatter.format(pubDate)
+val hourStr = blog.hourOnlyFormatter.format(pubDate)
 
-val mbNextDay = input.nextEntry.map( entryResolved => DayFormatter.format(entryResolved.entryInfo.pubDate) )
+val mbNextDay = input.nextEntry.map( entryResolved => blog.dayOnlyFormatter.format(entryResolved.entryInfo.pubDate) )
 
 val newDay = mbNextDay match
   case Some( nextDayStr ) => nextDayStr != dayStr
@@ -84,7 +82,7 @@ input.presentation match {
 <()            
   if input.info.updated.nonEmpty then {
 ()>
-           <div class="updated-note">Last major update at <( DayFormatter.format(input.info.updated.get) )> @ <( HourFormatter.format(input.info.updated.get) )></div>
+           <div class="updated-note">Last major update at <( blog.dateTimeFormatter.format(input.info.updated.get) )></div>
 <()
   }
 ()>  
