@@ -69,8 +69,11 @@ i, em {
     font-family: 'SourceSerif4Italic';
     font-style: normal;
 }
+a {
+    color: #0000EE;
+}
 a:visited {
-    color: #9999ff;
+    color: #7777ff;
 }
 a:visited code {
     color: #7777ff;
