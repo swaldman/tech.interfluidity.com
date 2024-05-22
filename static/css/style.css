@@ -23,6 +23,14 @@
     src: url('../font/Ibarra_Real_Nova/IbarraRealNova-Italic-VariableFont_wght.ttf');
 }
 @font-face {
+    font-family: 'SourceSerif4';
+    src: url('../font/Source_Serif_4/SourceSerif4-VariableFont_opsz,wght.ttf');
+}
+@font-face {
+    font-family: 'SourceSerif4Italic';
+    src: url('../font/Source_Serif_4/SourceSerif4-Italic-VariableFont_opsz,wght.ttf');
+}
+@font-face {
     font-family: 'Caroni';
     src: url("../font/caroni/Caroni-Regular.otf");
 }
@@ -36,8 +44,8 @@
 body {
     background-image: url("../image/graph-paper-tile-small-lighter.png");
     background-color: white;
-    font-family: 'IbarraRealNova', Times, serif;
-    font-variation-settings: "wght" 200;
+    font-family: 'SourceSerif4', Times, serif;
+    font-variation-settings: "wght" 350;
 }
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
@@ -55,10 +63,10 @@ code strong, code b {
     font-family: 'FiraCode-Medium', "Lucida Console", "Courier New", monospace;
 }
 strong, b {
-    font-variation-settings: "wght" 800;
+    font-variation-settings: "wght" 700;
 }
 i, em {
-    font-family: 'IbarraRealNovaItalic';
+    font-family: 'SourceSerif4Italic';
     font-style: normal;
 }
 a:visited {
@@ -399,7 +407,7 @@ div.subscribe-form div.sf-submit {
 }
 div.subscribe-form div.sf-submit input {
     width: 100%;
-    font-family: 'IbarraRealNova';
+    font-family: 'SourceSerif4';
     font-variation-settings: "wght" 600;
 }
 div.subscribe-form div.sf-label-email {
