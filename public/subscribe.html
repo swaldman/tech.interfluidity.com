@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <meta name="description" content="tech notebook @ interfluidity">
+  <meta name="keywords" content="Scala, tech, interfluidity">
+  <meta name="author" content="Steve Randy Waldman">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="feed/index.rss">
+  <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+  <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+  <script src="js/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <title>tech — interfluidity</title>
+ </head>
+ <body>
+  <div id="header">
+   <div id="rss-link-container">
+    <a id="rss-link" href="feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">•</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+   </div>
+   <div class="main-title">
+    <a href="https://tech.interfluidity.com/">tech.interfluidity.com</a>
+   </div>
+   <div class="tagline">
+    a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a>
+   </div>
+   <div class="see-also">
+    → See also <a href="index.html">top</a>, <a href="archive.html">archive</a>, <a href="subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a>
+   </div>
+  </div>
+  <div id="main">
+   <div id="left-sidebar">
+   </div>
+   <div id="content">
+    <div class="subscribe-space">
+     <h1>Subscribe by e-mail</h1>
+     <p><b>Subscribe to this blog (</b><code><a href="index.html">tech.interfluidity.com</a></code><b>)</b></p>
+     <form id="interfluidity-tech-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-tech">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        🤓
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to tech" type="submit">
+       </div>
+      </div>
+     </form>
+     <hr>
+     <h3>Other interfluiditous writing</h3>
+     <p><b>Subscribe to </b><code><a href="https://drafts.interfluidity.com/">drafts.interfluidity.com</a></code><b></b></p>
+     <form id="interfluidity-drafts-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-drafts">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        😎
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to drafts" type="submit">
+       </div>
+      </div>
+     </form>
+     <p><b>Subscribe to Mastodon six-packs</b><br>
+       (receive one e-mail with every six new Mastodon posts)</p>
+     <form id="interfluidity-masto-sixpack--form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-masto-sixpack">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        🥴
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to six packs" type="submit">
+       </div>
+      </div>
+     </form>
+     <p><b>Old-school, subscribe to </b><a href="https://www.interfluidity.com/"><code>www.interfluidity.com</code></a></p>
+     <p>&nbsp;&nbsp;&nbsp;&nbsp;try <a href="https://www.interfluidity.com/e-mail">here</a>!</p>
+     <p><b>Subscribe to longform, weekly</b><br>
+       (receive all longform interfluidity posts in one weekly digest)</p>
+     <form id="interfluidity-longform-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-longform-weekly">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        😊
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to longform weekly" type="submit">
+       </div>
+      </div>
+     </form>
+     <p><b>Subscribe to microblogs, weekly</b><br>
+       (receive all interfluidity microblog posts in one weekly digest)</p>
+     <form id="interfluidity-microblogs-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-microblogs-weekly">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        😳
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to microblogs weekly" type="submit">
+       </div>
+      </div>
+     </form>
+     <p><b>Subscribe to everything, weekly</b><br>
+       (receive all interfluidity blog and microblog posts in one weekly digest)</p>
+     <form id="interfluidity-weekly-form" action="https://feedletter.interfluidity.com/v0/subscription/create" method="POST">
+      <input type="hidden" name="subscribableName" value="interfluidity-weekly">
+      <div class="subscribe-form">
+       <div class="sf-label sf-label-email">
+        E‑mail:
+       </div>
+       <div class="sf-field sf-field-email">
+        <input type="text" name="addressPart">
+       </div>
+       <div class="sf-label sf-label-name">
+        Display Name:
+       </div>
+       <div class="sf-field sf-field-name">
+        <input type="text" name="displayNamePart" placeholder="Optional">
+       </div><!-- <div class="sf-note-name">(Optional)</div> -->
+       <div class="sf-label sf-label-submit">
+        😮
+       </div>
+       <div class="sf-submit">
+        <input name="main-submit" value="Subscribe to weekly" type="submit">
+       </div>
+      </div>
+     </form>
+    </div>
+   </div>
+   <div id="right-sidebar">
+   </div>
+  </div>
+ </body>
+</html>

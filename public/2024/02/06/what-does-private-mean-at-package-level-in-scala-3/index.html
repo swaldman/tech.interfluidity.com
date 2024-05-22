@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>What does private mean at package level in Scala 3?</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-02-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">What does private mean at package level in Scala 3?</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong></p>
+   <ul>
+    <li><code>private</code> declarations at a top-level scope of a package in Scala 3 are equivalent to a <code>private[pkg]</code> in other contexts.</li>
+    <li>They are accessible to everything within the package and its subpackages, but nothing else.</li>
+   </ul>
+   <hr>
+   <p>In Scala 2, to place a declaration at the "package" level, one would define a "package object":</p>
+   <pre><code class="language-scala">package top
+
+package object pkg {
+  private val Hush = 0
+  val Loud = Int.MaxValue
+}
+</code></pre>
+   <p>Given this</p>
+   <ul>
+    <li>one might refer to <code>Loud</code> from anywhere with fully-qualified name <code>top.pkg.Loud</code></li>
+    <li><code>import top.pkg._</code> would pick it up</li>
+    <li>inside the package <code>top.pkg</code> one coul refer to it simply as <code>Loud</code></li>
+   </ul>
+   <p>So far, so intuitive.</p>
+   <p>In Scala 2, the semantics of <code>private val Loud</code> was also intuitive. A <code>package object</code> is just an <code>object</code>. A <code>private</code> member of an <code>object</code> is only visible within that <code>object</code>'s scope. While the Scala compiler does some magic to make nonprivate declarations more broadly visible, access to <code>private</code> members of the <code>package object</code> was restricted to the <code>object</code> in the ordinary way.</p>
+   <p>But Scala 3 introduces "naked" top-level declarations, which I find I use constantly.</p>
+   <p>So the declarations above might translate to:</p>
+   <pre><code class="language-scala">package top.pkg
+
+private val Hush = 0
+val Loud = Int.MaxValue
+</code></pre>
+   <p>There is no <code>object</code> scope! So what does private even mean in this context.</p>
+   <p>I could imagine four possibilities:</p>
+   <ol>
+    <li><code>private</code> to a virtual object scope constituted of all top-level declaraions</li>
+    <li><code>private</code> to the top-level of the current compilation unit (i.e. file)</li>
+    <li><code>private</code> to the current compilation unit (including nested scopes)</li>
+    <li><code>private</code> to the package as a whole, i.e. the same as <code>private[pkg]</code></li>
+   </ol>
+   <p>Playing around, it looks like #4 is the winner.</p>
+   <p>A <code>private</code> top-level declaration seems visible to any code in the package, even if defined in other files or directories. It is visible from anywhere in the <code>pkg</code> or subpackages of <code>pkg</code>.</p>
+   <p>So now I know! And so do you!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">05:50 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../04/style-by-mail-in-feedletter/index.html">← Style-by-mail in feedletter</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../../03/18/c3p0-and-loom/index.html">c3p0 and loom →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Style-by-mail in feedletter</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-02-04 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single uid-style-feedletter-by-mail">
+ <div class="entry-header">
+  <h1><a href="index.html">Style-by-mail in feedletter</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>If, my most patient dear reader, you followed the <em>feedletter</em> tutorial in the <a href="../../../01/29/feedletter-tutorial/index.html">previous post</a>, you saw that we <a href="../../../01/29/feedletter-tutorial/index.html#15-tweak-the-newsletter-styles">styled <em>feedletter</em> newsletters</a> by starting up a development webserver, which would serve up HTML for an example newsletter.</p>
+   <p>This is still the best to get started styling your newsletters, because you can iteratively edit your <a href="https://github.com/swaldman/untemplate-doc#readme"><em>untemplate</em></a>, then just hit refresh in your web browser to very quickly play with your style and layout.</p>
+   <p>However, there are differences between how web browsers and e-mail clients render HTML. Getting things to look great in your browser, both at wide and mobile-like narrow widths, is not enough to guarantee that things will look good as emails, on desktop or mobile e-mail clients.</p>
+   <p>So, <em>feedletter v0.0.8</em> now supports styling by e-mail.</p>
+   <p>Instead of firing up a webserver to preview your newsletter, if you give <code>feedletter-style</code> commands <code>--from</code> and <code>--to</code> arguments, an example e-mail will be sent. So you can now accurately preview and tweak exactly how newsletters will look in the mail clients they are actually sent to.</p>
+   <p>To put that more specifically, just replace a command like...</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --port 45612
+</code></pre>
+   <p>with</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --from feedletter@mchange.com --to swaldman@mchange.com
+</code></pre>
+   <p>No development webserver will be spun up. Instead, a sample e-mail will be sent.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">07:25 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../../01/29/feedletter-tutorial/index.html">← Feedletter tutorial</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../06/what-does-private-mean-at-package-level-in-scala-3/index.html">What does private mean at package level in Scala 3? →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

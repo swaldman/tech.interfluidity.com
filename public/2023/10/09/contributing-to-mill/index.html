@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Contributing to mill</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2023-10-09 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">Contributing to mill</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I'm a big fan of Scala build tools, both <a href="https://www.scala-sbt.org/"><code>sbt</code></a> and <a href="https://mill-build.com/mill/Intro_to_Mill.html"><code>mill</code></a>. I've done some pretty big projects <a href="https://www.sbt-ethereum.io/">intimately based</a> on <code>sbt</code>. Recently I spend a lot of time in <code>mill</code> because it's very well suited to static-site generators, and because I've had better success getting <code>mill</code> builds to call into Scala 3 code, as some of my <a href="https://github.com/swaldman/untemplate-doc#readme">site-generation tools</a> require. I've contributed to both projects.</p>
+   <p>There are a few hints I want to give myself for when I contribute to <code>mill</code>.</p>
+   <h2><a href="#build-and-run" id="build-and-run" name="build-and-run" class="anchorlink"></a>Build and run</h2>
+   <p>The trick is just</p>
+   <pre><code class="language-plaintext">$ ./mill -i installLocal
+</code></pre>
+   <p>in the <a href="https://github.com/com-lihaoyi/mill">mill repository</a>. If the build succeeds, the a <code>mill-release</code> executable appears in the <code>target/</code> directory of the repository. One can test and play with that.</p>
+   <h2><a href="#scalafmt" id="scalafmt" name="scalafmt" class="anchorlink"></a>scalafmt</h2>
+   <p><code>mill</code> wants code contributions to pass a <code>scalafmt</code> check before merging. You build <code>mill</code> with <code>mill</code> of course, and <code>mill</code> <a href="https://mill-build.com/mill/Scala_Module_Config.html#_reformatting_your_code">makes this check easy</a>.</p>
+   <p>To check formatting...</p>
+   <pre><code class="language-plaintext">$ mill mill.scalalib.scalafmt.ScalafmtModule/checkFormatAll __.sources
+</code></pre>
+   <p>To have <code>mill</code> go ahead and reformat your code...</p>
+   <pre><code class="language-plaintext">$ mill mill.scalalib.scalafmt.ScalafmtModule/reformatAll __.sources
+</code></pre>
+   <p>I have now twice, embarrassingly, forgotten to do this.</p>
+   <h2><a href="#" class="anchorlink"></a>???</h2>
+   <p>I'll probably update this entry in place over time, if I find more hints I want to keep.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">07:30 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../07/referring-to-scala-collections/index.html">← Referring to Scala collections</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../../11/14/library--script-vs-application--config-file/index.html">(Library + Script) vs (Application + Config File) →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

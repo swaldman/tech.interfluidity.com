@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Getting started with Jitsi</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2023-08-21 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single uid-getting-started-with-jitsi">
+ <div class="entry-header">
+  <h1><a href="index.html">Getting started with Jitsi</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <h2><a href="#tldr" id="tldr" name="tldr" class="anchorlink"></a>TL;DR</h2>
+   <p><a href="https://jitsi.org/">Jitsi</a> is a complicated system! It was surprisingly easy to set up, though.</p>
+   <p>I'd feel better if I understood it better so I'd know that I can do what I want and fix whatever breaks.</p>
+   <p>Nevertheless, it works, and it's very cool to be able to <a href="/html/jitsi-frame.html?roomName=Welcome+Room&amp;description=Welcome+to+an+embedded+teleconference!">embed a teleconference in straight HTML/CSS</a>!</p>
+   <h2><a href="#introduction" id="introduction" name="introduction" class="anchorlink"></a>Introduction</h2>
+   <p>A few weeks ago there was a <a href="https://stackdiary.com/zoom-terms-now-allow-training-ai-on-user-content-with-no-opt-out/">bit of a kerfuffle</a> as Zoom updated their terms of service in ways that would apparently permit training AIs with surveillance of our interactions in Zoom teleconferences. Zoom has since <a href="https://www.theverge.com/2023/8/11/23828649/zoom-communications-like-data-train-ai-artificial-intelligence-models">clarified this, or walked it back,</a> depending upon how generously you want to interpret their original intentions.</p>
+   <p>I've been a paying Zoom subscriber for years, and I'm willing to take the more generous interpretation. But regardless of Zoom's intentions, the incident was another reminder that large, centralized tech platforms are just a dangerous architecture, under which again and again firms and people I used to admire have succumbed to temptations of "<a href="https://pluralistic.net/2023/01/21/potemkin-ai/">enshittification</a>".</p>
+   <p>Plus, I want to be able to play with the technology I use. I don't want to tether my own skills and habits to some company's propriety plug-ins and APIs if I can help it. I want to use open, freely available tools to experiment with how my teleconferences work and integrate any extras I might wish to bring to them.</p>
+   <p>There are a few self-hostable, open source teleconferencing platforms, such as <a href="https://jitsi.org/">Jitsi</a> and <a href="https://edumeet.org/">Edumeet</a>. Then there are lower level libraries like <a href="https://mediasoup.org/">Mediasoup</a> and <a href="https://janus.conf.meetecho.com/">Janus</a>.</p>
+   <p>I don't have a clue about any of this stuff. (I am very open to advice!) So I'm playing.</p>
+   <p>My first attempt has been with <a href="https://jitsi.org/">Jitsi</a>. On the one-hand, I like that it has been <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart">easy to set up</a>, and easy to embed into HTML and mess with with ordinary css and javascript. I am tentatively very happy!</p>
+   <p>On the other hand, I am very aware that it's a complicated stack full of components I am still struggling to understand. When (due to my own error!) the cookbook set-up seemed to fail, I was really at a loss about how I might debug the thing. (See below on the details of how I made my own life complicated.)</p>
+   <h2><a href="#what-little-i-understand-about-the-jitsi-stack" id="what-little-i-understand-about-the-jitsi-stack" name="what-little-i-understand-about-the-jitsi-stack" class="anchorlink"></a>What (little) I understand about the Jitsi stack</h2>
+   <p>Ultimately, Jitsi requires the collaboration of several services, which can be run on a single or multiple machines, in order to function. On my setup, I have</p>
+   <ul>
+    <li><a href="https://prosody.im/">prosody</a></li>
+    <li><a href="https://github.com/jitsi/jicofo">jicofo</a></li>
+    <li><a href="https://jitsi.org/jitsi-videobridge/">jitsi-videobridge</a></li>
+    <li><a href="https://github.com/coturn/coturn">coturn</a></li>
+   </ul>
+   <p>Then I configure and serve (via <a href="https://nginx.org/">nginx</a>) <code>jitsi-meet</code>, which is a client-side application that hits these services. You can see a diagram <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-docker">here</a>. Let's steal that, straight from <code>jitsi.org</code>:</p>
+   <div style="text-align: center;">
+    <img src="docker-jitsi-meet-afafdf87fea30a2fa6412baa4a3f8248.png">
+   </div>
+   <p>As I understand (or perhaps misunderstand)</p>
+   <ul>
+    <li><code>prosody</code> is an <a href="https://xmpp.org/">XMPP server</a>, the standard invented and used by open-source instant messaging platform <a href="https://www.jabber.org/">Jabber</a>, which was eventually embraced, then eclipsed and support discontinued, by Google. Of course <code>Jabber</code> lives on, albeit more quietly. Importantly, the XMPP protocol its developers invented was extended far beyond organizing text-based "MUCs" (multiuser conferences) into the realm of audio and videoconferencing via "<a href="https://xmpp.org/extensions/xep-0166.html">Jingle</a>". Jitsi uses prosody for establishing conferences and authentication of participants, as far as I can tell.</li>
+    <li><code>jicofo</code>, as I understand it, is a service that intermediates between clients (ie web browsers) and the XMPP server <code>prosody</code>, and via that XMPP server, the "videobridge" that actually serves audiovideo data, using the aforementioned Jingle protocol with clients and a distinct protocol called <code>colibri v2</code> with the videobridge component.</li>
+    <li><code>jitsi-videobridge</code> is — I think! — the component that actually serves audiovideo data to clients.</li>
+    <li><code>coturn</code> is relatively straightforward. It helps clients behind NAT (network address translation, ie using fake IP addresses) find and reach their outward-facing IP addresses (<a href="https://en.wikipedia.org/wiki/STUN">STUN protocol</a>), and if necessary proxies audiovisual data to circumvent nettlesome layers of NAT and firewalls (<a href="https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT">TURN protocol</a>). <code>coturn</code> makes it possible for the significant share of the internet that can't reach the network without translation or proxying to participate in teleconferences.</li>
+   </ul>
+   <p>There is so much I don't understand about all this. Are <code>jicofo</code>/<code>prosody</code> only involved in establishing and terminating sessions, or do they have a role throughout a "MUC"? Via <code>nginx</code>, clients seem to have access both to audiovisual data (as <a href="https://en.wikipedia.org/wiki/BOSH_(protocol)">BOSH</a>), and to XMPP via <code>prosody</code>, and to the <code>videobridge</code> service via directly. Who hits <code>jicofo</code> when?</p>
+   <p>I don't know. Again, if something in this complex collaboration broke, how would I figure out how to debug and fix it? That so far is my main issue with <code>Jitsi</code>.</p>
+   <p>There are two components in the Jitsi stack that I am not yet using. <a href="https://github.com/jitsi/jigasi">Jigasi</a> would be a bridge from <code>Jitsi</code> to and from standard VoIP "<a href="https://en.wikipedia.org/wiki/Session_Initiation_Protocol">Session Initiation Protocol (SIP)</a>" sessions, allowing telephone dial-in and piping of audio into external transcription services. <a href="https://github.com/jitsi/jibri">Jibri</a> is a very resource intensive service that basically runs a headless chrome browser which silently joins a conference to receive video and audio and translate it into MP4 data for recording and streaming.</p>
+   <p>It's a lot!</p>
+   <h2><a href="#an-interesting-note-about-prosody-configuration" id="an-interesting-note-about-prosody-configuration" name="an-interesting-note-about-prosody-configuration" class="anchorlink"></a>An interesting note about prosody configuration</h2>
+   <p>The host on which I've (perhaps only temporarily!) deployed <code>Jitsi</code> is called <code>loiter.interfluidity.com</code>. My prosody configuration contains lines like</p>
+   <pre><code class="language-plaintext">VirtualHost "loiter.interfluidity.com"
+  ...
+VirtualHost "auth.loiter.interfluidity.com"
+  ...
+Component "focus.loiter.interfluidity.com" "client_proxy"
+  ...  
+</code></pre>
+   <p>None of these subdomains are configured, or are required to be configured, in DNS.</p>
+   <p>The installation created a self-signed certificate for the "virtual host" <code>auth.loiter.interfluidity.com</code>, as well as for parent domain <code>loiter.interfluidity.com</code>.</p>
+   <p>I am guessing that services make secure connections internally, via <code>localhost</code>, to <code>auth.loiter.interfluidity.com</code>, using that "virtual host" name in a <code>Host:</code> header. I think this configuration scheme is intended for at least <code>auth</code> (not necessarily "component" <code>focus</code>) to be a separate host, but when we want to host it all in one place, rather than having us go to the trouble of <code>CNAME</code>-ing our server <code>auth.loiter.interfluidity.com</code>, it is configured to just pretend internally. It feels like a cell absorbing some precambrian bacteria to invent the mirochondrion.</p>
+   <h2><a href="#installation" id="installation" name="installation" class="anchorlink"></a>Installation</h2>
+   <p>I basically followed <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart">the developers' Ubuntu deployment docs</a>.</p>
+   <p>I created a <a href="https://www.digitalocean.com/">digitalocean</a> Ubuntu 22.04 (LTS) "basic" "regular" 4GB/2CPU/80GB for $24/month.</p>
+   <p>Then, simplifying just a bit...</p>
+   <pre><code class="language-plaintext"># apt update
+# apt upgrade
+# apt install emacs-nox
+# apt-add-repository universe
+# hostnamectl set-hostname loiter.interfluidity.com
+emacs /etc/hosts
+</code></pre>
+   <p>I fill in my server's IP address for <code>loiter.interfluidity.com loiter</code>.</p>
+   <p>Then I just paste in the following from <a href="https://jitsi.github.io/handbook/docs/devops-guide/devops-guide-quickstart">Jitsu's cookbook instructions</a>, which trusts prosody's developers to maintain a repository from which I can install and update via <code>apt</code>:</p>
+   <pre><code class="language-plaintext">sudo curl -sL https://prosody.im/files/prosody-debian-packages.key -o /etc/apt/keyrings/prosody-debian-packages.key
+echo "deb [signed-by=/etc/apt/keyrings/prosody-debian-packages.key] http://packages.prosody.im/debian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/prosody-debian-packages.list
+sudo apt install lua5.2
+</code></pre>
+   <p>Then I do the same for <code>jitsi.org</code> (pasting another short script):</p>
+   <pre><code class="language-plaintext">curl -sL https://download.jitsi.org/jitsi-key.gpg.key | sudo sh -c 'gpg --dearmor &gt; /usr/share/keyrings/jitsi-keyring.gpg'
+echo "deb [signed-by=/usr/share/keyrings/jitsi-keyring.gpg] https://download.jitsi.org stable/" | sudo tee /etc/apt/sources.list.d/jitsi-stable.list
+</code></pre>
+   <p>Then</p>
+   <pre><code class="language-plaintext"># apt update
+# apt upgrade
+</code></pre>
+   <p>Here I deviate a bit from the canned instructions. I know I want nginx and certbot certs...</p>
+   <pre><code class="language-plaintext"># apt install nginx
+# apt install certbot
+</code></pre>
+   <p>I manually fetch my certificates (I've already configured a DNS <code>A</code> record for <code>loiter.interfluidity.com</code>.):</p>
+   <pre><code class="language-plaintext"># certbot certonly -d loiter.interfluidity.com
+</code></pre>
+   <p>During the later installation of <code>Jitsi</code> components, I'll have to supply a path to my <code>fullchain.pem</code> and <code>privkey.pem</code> files. The installation has the option of running certbot for you, but if you do it yourself, you'll want to note these paths.</p>
+   <p>There were some differences in recommended firewall config between the written instructions and <a href="https://jitsi.org/blog/new-tutorial-installing-jitsi-meet-on-your-own-linux-server/">a video tutorial</a>. I went with the following hybrid. So far, it seems fine.</p>
+   <pre><code class="language-plaintext"># ufw allow in ssh
+# ufw allow in 80/tcp
+# ufw allow in 443/tcp
+# ufw allow in 10000:20000/udp
+# ufw allow in 3478/udp
+# ufw allow in 5349/tcp
+# ufw enable
+</code></pre>
+   <p>Then I did something stupid. More about that <a href="#something-stupid">below</a>.</p>
+   <p>The next thing I should have done was...</p>
+   <pre><code class="language-plaintext"># apt install jitsi-meet
+</code></pre>
+   <p>It prompts for a bunch of stuff, like certificate paths. It prompts whether you want to support dial-in participates, by making an account on their hosted Jitsu-as-a-service. I said no. It prints the following banner in case I change my mind:</p>
+   <pre><code class="language-plaintext">
+       ;dOocd;
+     .dNMM0dKO.
+     lNMMMKd0K,
+    .xMMMMNxkNc
+     dMMMMMkxXc
+     cNMMMNl..
+     .kMMMX;             Interested in adding telephony to your Jitsi meetings?
+      ;XMMMO'
+       lNMMWO'           Sign up on https://jaas.8x8.vc/components?host=loiter.interfluidity.com
+        lNMMM0,                        and follow the guide in the dev console.
+         lXMMMK:.
+          ;KMMMNKd.  'oo,
+           'xNMMMMXkkkkOKOl'
+             :0WMMMMMMNOkk0Kk,
+              .cdOWMMMMMWXOkOl
+                 .;dKWMMMMMXc.
+                    .,:cll:'
+
+</code></pre>
+   <p>Then it just works!</p>
+   <h3><a href="#something-stupid" id="something-stupid" name="something-stupid" class="anchorlink"></a>Something stupid</h3>
+   <p>Well it should have worked. I did something stupid. I manually installed <code>nginx</code> (because reading the docs I saw that serving via nginx was optional, I knew I wanted it, and the docs said it'd be installed if nginx was), and then I set up my usual config for host <code>loiter.interfluidity.com</code> right in <code>/etc/nginx/nginx.conf</code>.</p>
+   <p>That occluded the Jitsi installer's very elaborate config in <code>/etc/nginx/sites-available/loiter.interfluidity.com.conf</code>, then <a href="https://maximorlov.com/tips/sites-available-vs-sites-enabled-in-nginx/">symlinked into</a> <code>/etc/nginx/sites-enabled</code>.</p>
+   <h3><a href="#it-works" id="it-works" name="it-works" class="anchorlink"></a>It works!</h3>
+   <p>After removing my occluding configuration from <code>/etc/nginx/nginx.conf</code> and</p>
+   <pre><code class="language-plaintext"># systemctl restart nginx
+</code></pre>
+   <p>I could go to <code>https://loiter.interfluidity.com/</code> and see the default Jitsu webapp.</p>
+   <p>You can see that default app at <a href="https://meet.jit.si/">https://meet.jit.si/</a>. I'll soon disable that at the base of my site, and in general try to add a bit of authentication to my installation!</p>
+   <h2><a href="#using-the-iframe-api-to-embed-conferences-in-html" id="using-the-iframe-api-to-embed-conferences-in-html" name="using-the-iframe-api-to-embed-conferences-in-html" class="anchorlink"></a>Using the iframe API to embed conferences in HTML</h2>
+   <p>Once I got the default page working, it was easy to <a href="/html/jitsi-frame.html?roomName=Welcome+Room&amp;description=Welcome+to+an+embedded+teleconference!">make an HTML page that would embed a "conference room"</a>.</p>
+   <hr>
+   <h2><a href="#appendix-relevant-config-files-etc" id="appendix-relevant-config-files-etc" name="appendix-relevant-config-files-etc" class="anchorlink"></a>Appendix: Relevant config files, etc</h2>
+   <h3><a href="#config-files" id="config-files" name="config-files" class="anchorlink"></a>Config files</h3>
+   <ul>
+    <li>/etc/prosody/conf.avail/jitsi.example.com.cfg.lua</li>
+    <li>/etc/prosody/prosody.cfg.lua</li>
+    <li>/etc/jitsi/jicofo/config</li>
+    <li>/etc/jitsi/jicofo/jicofo.conf</li>
+    <li>/etc/jitsi/jicofo/logging.properties</li>
+    <li>/etc/jitsi/meet/loiter.interfluidity.com-config.js</li>
+    <li>/etc/jitsi/videobridge/config</li>
+    <li>/etc/jitsi/videobridge/jvb.conf</li>
+    <li>/etc/jitsi/videobridge/logging.properties</li>
+    <li>/etc/jitsi/videobridge/sip-communicator.properties</li>
+    <li>/etc/nginx/nginx.conf</li>
+   </ul>
+   <h3><a href="#log-files" id="log-files" name="log-files" class="anchorlink"></a>Log files</h3>
+   <ul>
+    <li>/var/log/jitsi/jvb.log</li>
+    <li>/var/log/jitsi/jicofo.log</li>
+    <li>/var/log/prosody/prosody.log</li>
+   </ul>
+   <h3><a href="#unit-files" id="unit-files" name="unit-files" class="anchorlink"></a>Unit Files</h3>
+   <ul>
+    <li>coturn.service (<code>/lib/systemd/system/coturn.service</code>)</li>
+    <li>jicofo.service (<code>/etc/init.d/jicofo; generated</code>)</li>
+    <li>jitsi-videobridge2.service (<code>/lib/systemd/system/jitsi-videobridge2.service</code>)</li>
+    <li>prosody.service (<code>/lib/systemd/system/prosody.service</code>)</li>
+   </ul>
+   <hr>
+   <p><strong>Update 2023-08-22:</strong> Following the instructions <a href="https://jitsi.github.io/handbook/docs/devops-guide/secure-domain">here</a>, enabling simple authentication worked without a hitch. Registering a user is a command-line operation:</p>
+   <pre><code class="language-plaintext"># prosodyctl register &lt;username&gt; loiter.interfluidity.com &lt;password&gt;
+</code></pre>
+   <p><code>loiter.interfluidity.com</code> is the authenticated domain in <code>/etc/prosody/prosody.cfg.lua</code>.</p>
+   <p>I think it's possible to set up web registration, but for my purposes I don't want to. Only meeting hosts must authenticate. Anyone who knows the URL can join a conference.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">04:00 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../13/building-an-authenticated-web-service-in-scala-with-tapir-and-jwt/index.html">← Building an authenticated web service in Scala with tapir and JWT</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../23/getting-started-with-hedgedoc/index.html">Getting started with HedgeDoc →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

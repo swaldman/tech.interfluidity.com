@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>tech &mdash; interfluidity</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="index.html">top</a>, <a href="archive.html">archive</a>, <a href="subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-05-13 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-iffy-xml-namespace">
+ <div class="entry-header">
+  <h1><a href="xml/iffy/index.html">The 'iffy' XML namespace</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I want to do a lot of things with RSS that require extensions of RSS (as the RSS spec <a href="https://www.rssboard.org/rss-specification#extendingRss">foresees</a>).</p>
+   <p>The URL <code>http://tech.interfluidity.com/xml/iffy/</code> will mark an XML namespace in which some of these extensions will be defined.</p>
+   <p>The conventional prefix associated with this namespace will be <code>iffy</code>.</p>
+   <p><strong>The current version of this namespace is <code>v0.0.1-SNAPSHOT</code>.</strong></p>
+   <p>(<code>-SNAPSHOT</code> signifies that the version preceding that suffix has not yet been finalized. Much more to come!)</p>
+   <hr>
+   <p><strong>Table of Contents</strong></p>
+   <ul>
+    <li><a href="#iffy-completeness"><code>iffy:completeness</code></a></li>
+    <li><a href="#iffy-original-guid"><code>iffy:original-guid</code></a></li>
+    <li><a href="#iffy-provenance"><code>iffy:provenance</code></a></li>
+    <li><a href="#iffy-when-updated"><code>iffy:when-updated</code></a></li>
+   </ul>
+   <hr>
+   <p><a id="iffy-completeness" href=""></a><strong>Element — <code>iffy:completeness</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>Solely a channel level element</strong></p>
+    <p>Contains one of the following four values:</p>
+    <ol>
+     <li><code>Ping</code></li>
+     <li><code>Metadata</code></li>
+     <li><code>Content</code></li>
+     <li><code>Media</code></li>
+    </ol>
+    <p><code>iffy:completeness</code> describes the completeness that clients should expect of RSS <a href="https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt"><code>item</code></a> elements.</p>
+    <ul>
+     <li>
+      <p><code>Ping</code> makes the least commitment. Items need not include a <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> element, or any elements at all beyond <a href="https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt">RSS' requirement</a> that at least one of <code>title</code> or <code>description</code> be present. RSS documents have completion <code>Ping</code> by default. Any or all items may meet the requirement for a higher completeness level, but no promises or commitment is made beyond the base specification.</p></li>
+     <li>
+      <p><code>Metadata</code> commits that each item MUST include a <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> element, as well as meeting the base requirements for an RSS <a href="https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt"><code>item</code></a>.</p></li>
+     <li>
+      <p><code>Content</code> commits that each item, either inside its <code>description</code> tag, or via an extension such as <code>content:encoded</code>, includes the full content of the items it includes, suitable for independent rendering by any client capable also of resolving references to linked media externally. No limitation is placed on whether the full content is placed in a <code>description</code> element, in <code>content:encoded</code>, or in some other extension.</p></li>
+     <li>
+      <p><code>Media</code> augments <code>Content</code> by <em>embedding attachments to subsidiary media</em> inside the RSS document. Subsidiary media does not include all potential links, just links which share a prefix with the current RSS document, which by default means all links subsidiary to the parent of the RSS document as specified in an <code>atom:link</code></p>
+      <p><em>More information on this soon when <code>iffy:attachment</code> is defined</em></p></li>
+    </ul>
+    <p>The four values represent nested, hierarchical levels of commitment. <code>Ping</code> commits to nothing more than the spec requires. <code>Media</code> makes every commitment promised by the prior three levels, and an additional one.</p>
+    <p>If not specified, no commitment is made, the feed should be considered <code>Ping</code>.</p>
+    <p><strong>Example:</strong></p>
+    <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    &lt;title&gt;tech — interfluidity&lt;/title&gt;
+    &lt;atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/feed/index.rss"/&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    &lt;!-- Other channel elements --&gt;
+    &lt;item&gt;
+      &lt;!-- Other item elements --&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;
+
+</code></pre>
+   </div>
+   <hr>
+   <p><a id="iffy-original-guid" href=""></a><strong>Element — <code>iffy:original-guid</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>Solely an item level element</strong></p>
+    <p>IF AND ONLY IF an item contains an <code>atom:updated</code> element AND the <code>guid</code> of this item has been modified from the original, pre-update item in order to encourage feed consumers to surface the update, THEN the <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> of the original post MUST be included in an <code>iffy:original-guid</code> element so that aware consumers can tie the update back to the original.</p>
+    <p><strong>Example:</strong></p>
+    <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    &lt;title&gt;tech — interfluidity&lt;/title&gt;
+    &lt;iffy:when-updated&gt;Resurface&lt;/iffy:when-updated&gt;
+    &lt;!-- other channel-level elements --&gt;
+    &lt;item&gt;
+      &lt;title&gt;Names too on the nose&lt;/title&gt;
+      &lt;guid isPermalink="false"&gt;
+        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html#updated-2024-04-14T05:55:00Z
+      &lt;/guid&gt;
+      &lt;link&gt;https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html&lt;/link&gt;
+      &lt;iffy:original-guid&gt;https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html&lt;/iffy:original-guid&gt;
+      &lt;atom:updated&gt;2024-04-14T05:55:00Z&lt;/atom:updated&gt;
+      &lt;!-- other item-level elements --&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   </div>
+   <hr>
+   <p><a id="iffy-provenance" href=""></a><strong>Element — <code>iffy:provenance</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>When an item level element</strong></p>
+    <p>If present in an item, the item contains a sequence of one or more <a href="https://www.ietf.org/rfc/rfc4287.txt"><code>atom:link</code></a> elements, each of whose</p>
+    <ul>
+     <li><code>rel</code> attribute is MUST BE <code>via</code></li>
+     <li><code>href</code> attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn</li>
+     <li><code>type</code> attribute SHOULD BE <code>application/rss+xml</code></li>
+    </ul>
+    <p>If the item from which the current item was sourced does not contain an <code>iffy:provenance</code>, then the current item should include just one <code>atom:link</code>.</p>
+    <p>If the item from which the current item was sourced <em>does</em> contains an <code>iffy:provenance</code>, then the current feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced PREPENDED.</p>
+    <p>This will ensure the most immediate source will be the first <code>atom:link</code> element. The origin — or at least the source for which no further provenance is known — will be the last <code>atom:link</code> element.</p>
+    <p>Processors may expect a channel level <code>atom:link</code> element with <code>rel="self"</code> and <code>type="application/rss+xml"</code> to use as the basis for provenance in source documents. See <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Best Practices</a>.</p>
+    <p><strong>Example</strong> (from <a href="https://www.interfluidity.com/unify-rss/all-blogs.rss">here</a>):</p>
+    <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/"&gt;
+  &lt;channel&gt;
+    &lt;title&gt;interfluidity, all blogs&lt;/title&gt;
+    &lt;!-- Other channel elements --&gt;
+    &lt;atom:link type="application/rss+xml" rel="self" href="https://www.interfluidity.com/unify-rss/all-blogs.rss"/&gt;
+    &lt;item&gt;
+      &lt;title&gt;Industrial policy and ecosystems&lt;/title&gt;
+      &lt;guid isPermalink="true"&gt;https://drafts.interfluidity.com/2024/05/11/industrial-policy-and-ecosystems/index.html&lt;/guid&gt;
+      &lt;author&gt;nospam@dev.null (Steve Randy Waldman)&lt;/author&gt;
+      &lt;link&gt;https://drafts.interfluidity.com/2024/05/11/industrial-policy-and-ecosystems/index.html&lt;/link&gt;
+      &lt;!-- Other item elements --&gt;
+      &lt;iffy:provenance&gt;
+        &lt;atom:link type="application/rss+xml" rel="via" href="https://drafts.interfluidity.com/feed/index.rss"/&gt;
+      &lt;/iffy:provenance&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   </div>
+   <hr>
+   <p><a id="iffy-when-updated" href=""></a><strong>Element — <code>iffy:when-updated</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>May be both a channel and item level element. Item-level specification overrides channel-level specification.</strong></p>
+    <p>Contains one of the following three values:</p>
+    <ol>
+     <li><code>Ignore</code></li>
+     <li><code>Resurface</code></li>
+     <li><code>Reannounce</code></li>
+    </ol>
+    <p><code>iffy:when-updated</code> suggests how feed consumers should handle items containing <code>atom:updated</code> elements.</p>
+    <ul>
+     <li><code>Ignore</code> suggests that feed consumers simply ignore the notification. Feed consumers should update any cache of the item contents (as they should do in the absence of an <code>atom:updated</code> tag.</li>
+     <li><code>Resurface</code> suggests that consumers that present multiple items in reverse-chronological order should present the new item, sorted at its update time rather than its initial publication date. Consumers that "announce" items one at a time (such a e-mail newsletter gateways, Mastodon / Twitter / SMS notifiers) should not re-notify the item.</li>
+     <li><code>Reannounce</code>, like <code>Resurface</code>, suggests that consumers that present multiple items in reverse-chronological order should present the new item, sorted at its update time rather than its initial publication date. However, <code>Reannounce</code> suggests consumers that "announce" items one at a time (such as e-mail newsletter gateways, Mastodon / Twitter / SMS) notifiers SHOULD re-notify the item.</li>
+    </ul>
+    <p><strong>Implementation Notes:</strong></p>
+    <ul>
+     <li>Currently, very few feed consumers handle <code>iffy:when-updated</code>.</li>
+     <li>To give effect to these values, it is recommended that, at levels <code>Resurface</code> and <code>Reannounce</code>, items be given updated <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> values, so that existing consumers perceive them as distinct items.</li>
+     <li>Naive announcement consumers, however, will then treat all <code>atom:updated</code> events as <code>Reannounce</code>, until they are explicitly modified to support this tag.</li>
+     <li>Announcing consumers are much rarer and fewer than multiple-item-presenting consumers, so hopefully this will not be too great a burden. Ideally, eventually, feed consumers will widely support this tag and there will be no need for the "hack" of switching <code>guid</code> values.</li>
+     <li><em>Implementations that modify <code>guid</code> values when updated MUST also provide the <code>iffy:original-guid</code> element!</em>
+      <ul>
+       <li><em>See <a href="#iffy-original-guid"><code>iffy:original-guid</code></a></em></li>
+      </ul></li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    &lt;title&gt;tech — interfluidity&lt;/title&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    &lt;iffy:when-updated&gt;Resurface&lt;/iffy:when-updated&gt;
+    &lt;!-- other channel-level elements --&gt;
+    &lt;item&gt;
+      &lt;title&gt;Ceci n'est pas un post&lt;/title&gt;
+      &lt;guid isPermalink="true"&gt;https://tech.interfluidity.com/2024/04/09/ceci/index.html&lt;/guid&gt;
+      &lt;link&gt;https://tech.interfluidity.com/2024/04/09/ceci/index.html&lt;/link&gt;
+      &lt;atom:updated&gt;2024-04-14T05:55:00Z&lt;/atom:updated&gt;
+      &lt;iffy:when-updated&gt;Ignore&lt;/iffy:when-updated&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   </div>
+   <hr>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="xml/iffy/index.html">04:10 AM EDT</a>
+   <div class="updated-note">
+    Last major update at 2024-05-21 @ 12:25 AM EDT
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-04-09 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-names-too-on-the-nose">
+ <div class="entry-header">
+  <h1><a href="2024/04/09/names-too-on-the-nose/index.html">Names too on the nose</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>This will be an odd post for a tech blog. But here is a list of names "too on-the-nose":</p>
+   <ul>
+    <li><strong>Kenneth Chesebro</strong> — <a href="https://en.wikipedia.org/wiki/Kenneth_Chesebro">Guy</a> from Wisconsin who came up with the alternative electors idea to try to confuse the 2020 elections so the House could throw it to Trump. He seems like a pretty cheesy bro to me.</li>
+    <li><strong>Bernie Madoff</strong> — He <em>made off</em> with the money.</li>
+    <li><strong>Terra Rodgers</strong> — a "<a href="https://www.theguardian.com/environment/2024/apr/02/geothermal-energy-electricity">director for superhot rock energy</a>", that is a form of geothermal energy, a kind of <em>terrestrial</em> energy.</li>
+    <li><strong>Yahya Sinwar</strong> — Whatever you think of the broader Israel/Palestine conflict, the operation he ordered on October 7, 2023 was <em>sin</em> and guaranteed a brutal <em>war</em>. That <em>Sinwar</em> is preceded by <em>Yahya</em> renders the name a kind of Satanic cheerleader's chant.</li>
+   </ul>
+   <p>More names coming soon!</p>
+   <p>I've kind of wanted to maintain a list like this for a long time. I sometimes think we're inhabiting a work of fiction, given how contrivedly <em>a propos</em> certain names often are. I encounter these names, and I want to make a note of them.</p>
+   <p>I'll do that here!</p>
+   <p>(I think I might once have encountered a Twitter thread in this vein. My apologies to whomever I am ripping off!)</p>
+   <p>Please get in touch with any suggestions!</p>
+   <hr>
+   <p>Anyway, I'm finally putting together this list here, on my "tech blog", because it's a good way to experiment with an idea that Chris Krycho <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">describes</a> as "sprouts".</p>
+   <p>Often "posts" ought not be thought of as finished pieces, but as beginnings — seeds, even — of ongoing, evolving work. (Thanks to <a href="https://mastodon.social/@erlend@writing.exchange">Erlend Sogge Heggen</a> for pointing me to this piece!)</p>
+   <p>I've begun by adding support to the <a href="https://www.ietf.org/rfc/rfc4287.txt"><code>&lt;atom:updated&gt;</code> tag</a> in my site generator's RSS.</p>
+   <p>When I make meaningful changes, I can update this value, and my feed will re-sort the updated post to the top, and prefix "Updated:" to the title. I can optionally mark posts to create a new GUID for each update, which may cause tools (like my own <a href="2024/01/29/feedletter-tutorial/index.html">feedletter</a>) to treat them as new posts.</p>
+   <p>(For now, I am leaving that turned off for this post, and just re-sorting updates to the top of the feed. In the future, who knows?)</p>
+   <p>There's lots, lots more to explore in this vein. Do read <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">Chris Krycho's post</a>. But this, I hope, is a start.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/04/09/names-too-on-the-nose/index.html">01:15 AM EDT</a>
+   <div class="updated-note">
+    Last major update at 2024-05-21 @ 10:55 AM EDT
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-03-27 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2024/03/27/tar-or-tgz/index.html">tar or tgz?</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>A thing I've done over the last while is automate a lot of my sysadmin, using <code>systemd</code> timers to hit <a href="https://scala-cli.virtuslab.org/">scala-cli</a> scripts.</p>
+   <p>I've built for myself a <a href="https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file">little framework</a> that is incredibly in need of documentation, but that lets me define scripts very flexibly and can provide great step-by-step information about what happens and anything that goes wrong in brightly colored HTML e-mails. I love it.</p>
+   <p>Much of what I do is back things up to a cloud service using <a href="https://rclone.org/">rclone</a>.</p>
+   <p>Last night I wrote a <a href="https://github.com/swaldman/mchange-sysadmin-scripts/blob/main/taskbin/backup-directory-as-tar">script</a> just to back up some directory. I ran into what I consider an age-old dilemma.</p>
+   <p>Sometime early in my geekish career, I picked up the nugget that its best to keep important backups as straight <code>tar</code> files rather than <code>tgz</code> (or <code>tbz</code> or whatever), because if some bit gets corrupted, most of a straight <code>tar</code> will remain recoverable, while the compressed archive will just be toast.</p>
+   <p>Is that right? Is it a real concern? I don't think I've ever experienced a corrupted archive, <code>tar</code> or <code>tgz</code>, but of course backup is a form of insurance, the whole point is to be resilient to tail risks.</p>
+   <p>Still, searching the interwebs, I don't see a lot of people recommending uncompressed archives. Space is more of a bottleneck to me than CPU or time, so if the resilience advantage isn't significant, I'd compress.</p>
+   <p>What do you think?</p>
+   <hr>
+   <p><strong>Update:</strong> Feel free to comment <a href="https://zirk.us/@interfluidity/112168423434044308">here</a></p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/03/27/tar-or-tgz/index.html">10:55 AM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-03-18 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2024/03/18/c3p0-and-loom/index.html">c3p0 and loom</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I write <a href="https://github.com/swaldman">a lot of open source software</a>, but I've only ever really had one "hit". That makes me pretty sad, actually. I think some of what I've written is pretty great, and it's lonesome to be the sole user.</p>
+   <p>Nevertheless, my one "hit" was <a href="https://www.mchange.com/projects/c3p0/">c3p0</a>, a JDBC Connection pool that, in its day, was extremely popular in Java web application stacks.</p>
+   <p>Its day was a long time ago, though! c3p0 was first released <a href="https://sourceforge.net/projects/c3p0/files/historical/OldFiles/">on Sourceforge in 2001</a>, and was very widely used from the mid aughts through the early 2010s.</p>
+   <p>c3p0 is "mature" software, and I have just let it alone for years at a time. But I do continue to use it in all of my own database projects. Periodically I still put it (and myself) through intense bouts of maintenance.</p>
+   <p>Actually, I have hated my years-long lapses (and myself) because github issues collect and I get snarky comments about abandonware and I feel like I am a Very Bad Maintainer. So the first order of business in my most recent "sprint" (isn't that what the kids call it?) was to move c3p0 from a very bespoke and manual <a href="https://ant.apache.org/">ant</a> build to something sleek and modern and automatic, so that maybe I wouldn't put off maintenance into years-delayed batches just because it is annoying to touch. c3p0's new <a href="https://mill-build.com/mill/Intro_to_Mill.html">mill build</a> works beautifully.</p>
+   <p>The new build is much lighter, and the modern style of just publishing git repositories rather than source distributions and uploading releases to Sonatype is fast and easy. I think it'll really improve my maintenance promptness.</p>
+   <p>c3p0's latest release, <a href="https://github.com/swaldman/c3p0/blob/0.10.x/RELEASE_NOTES-c3p0-0.10.0">0.10.0</a>, includes lots of enhancements and improvements. But a really fun thing was to integrate the very latest shiny new thing in Java — "Project Loom" <a href="https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html">virtual threads</a> — into this very old, highly concurrent library.</p>
+   <p>c3p0 is very old school. It was initially written in Java 1.2 or 1.3. Java's standard concurrency utilities, the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/package-summary.html"><code>java.util.concurrent</code></a> package, did not yet exist. There were no standard thread pools defined as <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Executors.html"><code>ExecutorService</code> implementations</a>. So I <a href="https://github.com/swaldman/mchange-commons-java/blob/master/src/main/java/com/mchange/v2/async/ThreadPoolAsynchronousRunner.java">rolled my own</a>. c3p0 relies entirely on the JVM's built-in primitives — monitors and <code>synchronized</code> blocks, <code>wait()</code> and <code>notifyAll()</code> — to manage concurrency.</p>
+   <p>Over the years, people have requested that c3p0 support asynchroneity via pluggable <code>Executor</code> instances, rather than just its own, hand-rolled thread pool. Users mostly seemed to want this so c3p0 could share existing application thread pools, avoiding the resource footprint of several c3p0-dedicated threads.</p>
+   <p>A couple of weeks ago, I finally got around to implementing <a href="https://www.mchange.com/projects/c3p0/#configuring_threading">pluggable threading</a>. Sharing application thread pools is now supported. But I was mostly motivated by curiousity about how well this very old library would work with newfangled loom virtual threads.</p>
+   <p>Great, it turns out!</p>
+   <ul>
+    <li>
+     <p>I was concerned, since c3p0 relies so much on monitors and <code>synchronized</code> blocks, that virtual threads would be "pinned". Virtual threads are scheduled to, and deschedule from, "carrier" operating-system threads, but they cannot be descheduled while they hold a monitor. If a thread blocks while holding a monitor, it is described as "pinned", and that's a bad thing.</p>
+     <p>But c3p0 is very careful not to perform potentially blocking operations while holding a monitor. Running tests with</p>
+     <pre><code class="language-plaintext">-Djdk.tracePinnedThreads=full
+</code></pre>
+     <p>produced no stack traces of pinned threads, even under heavy load. This was gratifying.</p></li>
+    <li>
+     <p>Using virtual threads rather than a thread pool can reduce contention for monitors. The thread pool itself is a site of contention, as information about which threads are pooled and which are available to run tasks constitute shared, mutable state. Replacing a thread pool with simply firing and forgetting a virtual thread for each asynchrnous task left nothing to contend for. <a href="https://github.com/swaldman/c3p0-loom"><code>c3p0-loom</code></a> includes two implementations of <a href="https://www.mchange.com/projects/c3p0/apidocs/com/mchange/v2/c3p0/TaskRunnerFactory.html"><code>TaskRunnerFactory</code></a>:</p>
+     <ul>
+      <li><a href="https://github.com/swaldman/c3p0-loom/blob/main/src/com/mchange/v2/c3p0/loom/UninstrumentedVirtualThreadPerTaskTaskRunnerFactory.java"><code>com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory</code></a></li>
+      <li><a href="https://github.com/swaldman/c3p0-loom/blob/main/src/com/mchange/v2/c3p0/loom/VirtualThreadPerTaskExecutorTaskRunnerFactory.java"><code>com.mchange.v2.c3p0.loom.VirtualThreadPerTaskExecutorTaskRunnerFactory</code></a></li>
+     </ul>
+     <p><code>com.mchange.v2.c3p0.loom.VirtualThreadPerTaskExecutorTaskRunnerFactory</code> tracks the number of simultaneously active threads (which you can observe via JMX), which involve synchronizing on a monitor so some contention is still possible.</p>
+     <p>But with <code>com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory</code>, nothing at all is tracked and no monitors are acquired. Some analog of contention might result from managing shared state within the loom virtual-threading runtime, but all overt contention for thread-pool monitors is eliminated.</p></li>
+   </ul>
+   <p>In practice, the thread pool is not c3p0's main site of monitor contention, however.</p>
+   <p>c3p0's <a href="https://github.com/swaldman/c3p0/blob/0.10.x/src/com/mchange/v2/resourcepool/BasicResourcePool.java">resource pool</a> is its main site of monitor contention. For most applications, the contention overhead is negligible, when amortized over <code>Connection</code> operations. But in rare cases, when very large numbers of threads are hitting the pool, contention can become an issue. For now, the only way to address contention at the resource pool is to construct multiple <code>DataSource</code> instances and balance the load across them.</p>
+   <p>In any case, c3p0 and loom work very well together!</p>
+   <p>I still recommend that applications start by using c3p0's default, hand-rolled thread pool. It implements deadlock detection and recovery, and logs verbose debugging information about what happened. This makes it very easy to diagnose what kinds of operations have been hanging and consuming threads when something goes wrong.</p>
+   <p>Under loom, applications that might otherwise have logged flamboyant thread-pool problems will proceed gracefully for some time. No matter what operations hang, new (virtual) threads will always be available for the next request, and the memory footprint of the frozen "fibers" (rather than full threads) should be modest.</p>
+   <p>But if <code>Connection</code> acquisition, <code>Connection</code> destruction, or <code>Statement</code> destruction tasks do hang, eventually the pool will become exhausted and your application will hang or fail, despite the almost inexhaustible virtual threads.</p>
+   <p>I'd start by using c3p0's default, battle-tested thread pool to detect these kinds of issues, and log them with its signature, much-hated <code>APPARENT DEADLOCK</code> messages if they occur. Those very ugly <code>APPARENT DEADLOCK</code> messages make it very easy to figure out just what is going wrong.</p>
+   <p>But once your application is stable, then you might absolutely consider setting</p>
+   <pre><code class="language-plaintext">c3p0.taskRunnerFactoryClassName=com.mchange.v2.c3p0.loom.UninstrumentedVirtualThreadPerTaskTaskRunnerFactory
+</code></pre>
+   <p>to reduce monitor contention and eliminate the overhead of a dedicated c3p0 thread pool.</p>
+   <hr>
+   <p><strong>Note:</strong></p>
+   <p>The latest version of c3p0 (as of this writing) is <code>0.10.0</code>. Ordinarily, you'd hit that at Maven Central as</p>
+   <ul>
+    <li><code>com.mchange:c3p0:0.10.0</code></li>
+   </ul>
+   <p>But c3p0 is built under older Java version, to support old applications. (c3p0-0.10.0 supports JVMs as old as Java 7.)</p>
+   <p>Loom support has to be built under Java 21+, so it is built separately. Just hit</p>
+   <ul>
+    <li><code>com.mchange:c3p0-loom:0.10.0</code></li>
+   </ul>
+   <p>at Maven Central. That will bring in the loom implementations, and the rest of c3p0 as a transitive dependency.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/03/18/c3p0-and-loom/index.html">10:20 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-02-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2024/02/06/what-does-private-mean-at-package-level-in-scala-3/index.html">What does private mean at package level in Scala 3?</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong></p>
+   <ul>
+    <li><code>private</code> declarations at a top-level scope of a package in Scala 3 are equivalent to a <code>private[pkg]</code> in other contexts.</li>
+    <li>They are accessible to everything within the package and its subpackages, but nothing else.</li>
+   </ul>
+   <hr>
+   <p>In Scala 2, to place a declaration at the "package" level, one would define a "package object":</p>
+   <pre><code class="language-scala">package top
+
+package object pkg {
+  private val Hush = 0
+  val Loud = Int.MaxValue
+}
+</code></pre>
+   <p>Given this</p>
+   <ul>
+    <li>one might refer to <code>Loud</code> from anywhere with fully-qualified name <code>top.pkg.Loud</code></li>
+    <li><code>import top.pkg._</code> would pick it up</li>
+    <li>inside the package <code>top.pkg</code> one coul refer to it simply as <code>Loud</code></li>
+   </ul>
+   <p>So far, so intuitive.</p>
+   <p>In Scala 2, the semantics of <code>private val Loud</code> was also intuitive. A <code>package object</code> is just an <code>object</code>. A <code>private</code> member of an <code>object</code> is only visible within that <code>object</code>'s scope. While the Scala compiler does some magic to make nonprivate declarations more broadly visible, access to <code>private</code> members of the <code>package object</code> was restricted to the <code>object</code> in the ordinary way.</p>
+   <p>But Scala 3 introduces "naked" top-level declarations, which I find I use constantly.</p>
+   <p>So the declarations above might translate to:</p>
+   <pre><code class="language-scala">package top.pkg
+
+private val Hush = 0
+val Loud = Int.MaxValue
+</code></pre>
+   <p>There is no <code>object</code> scope! So what does private even mean in this context.</p>
+   <p>I could imagine four possibilities:</p>
+   <ol>
+    <li><code>private</code> to a virtual object scope constituted of all top-level declaraions</li>
+    <li><code>private</code> to the top-level of the current compilation unit (i.e. file)</li>
+    <li><code>private</code> to the current compilation unit (including nested scopes)</li>
+    <li><code>private</code> to the package as a whole, i.e. the same as <code>private[pkg]</code></li>
+   </ol>
+   <p>Playing around, it looks like #4 is the winner.</p>
+   <p>A <code>private</code> top-level declaration seems visible to any code in the package, even if defined in other files or directories. It is visible from anywhere in the <code>pkg</code> or subpackages of <code>pkg</code>.</p>
+   <p>So now I know! And so do you!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/02/06/what-does-private-mean-at-package-level-in-scala-3/index.html">05:50 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-02-04 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-style-feedletter-by-mail">
+ <div class="entry-header">
+  <h1><a href="2024/02/04/style-by-mail-in-feedletter/index.html">Style-by-mail in feedletter</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>If, my most patient dear reader, you followed the <em>feedletter</em> tutorial in the <a href="2024/01/29/feedletter-tutorial/index.html">previous post</a>, you saw that we <a href="2024/01/29/feedletter-tutorial/index.html#15-tweak-the-newsletter-styles">styled <em>feedletter</em> newsletters</a> by starting up a development webserver, which would serve up HTML for an example newsletter.</p>
+   <p>This is still the best to get started styling your newsletters, because you can iteratively edit your <a href="https://github.com/swaldman/untemplate-doc#readme"><em>untemplate</em></a>, then just hit refresh in your web browser to very quickly play with your style and layout.</p>
+   <p>However, there are differences between how web browsers and e-mail clients render HTML. Getting things to look great in your browser, both at wide and mobile-like narrow widths, is not enough to guarantee that things will look good as emails, on desktop or mobile e-mail clients.</p>
+   <p>So, <em>feedletter v0.0.8</em> now supports styling by e-mail.</p>
+   <p>Instead of firing up a webserver to preview your newsletter, if you give <code>feedletter-style</code> commands <code>--from</code> and <code>--to</code> arguments, an example e-mail will be sent. So you can now accurately preview and tweak exactly how newsletters will look in the mail clients they are actually sent to.</p>
+   <p>To put that more specifically, just replace a command like...</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --port 45612
+</code></pre>
+   <p>with</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --from feedletter@mchange.com --to swaldman@mchange.com
+</code></pre>
+   <p>No development webserver will be spun up. Instead, a sample e-mail will be sent.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/02/04/style-by-mail-in-feedletter/index.html">07:25 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2024-01-29 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-feedletter-tutorial">
+ <div class="entry-header">
+  <h1><a href="2024/01/29/feedletter-tutorial/index.html">Feedletter tutorial</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I've been working for some time on a service to turn RSS feeds into e-mail newsletters, which I've called <a href="https://github.com/swaldman/feedletter"><em>feedletter</em></a>.</p>
+   <p>The service watches any number of RSS feeds, can host a variety of subscription types for each feed, including one e-mail per article, daily or weekly digests, compendia of every <em>n</em> posts, etc. It can also notify other services, like Mastodon, of new posts. It lets you define, for each feed, a notion of when an item is stable and finalized, and takes great care never to e-mail or notify the same item more than once.</p>
+   <div class="note">
+    <p>Great minds think alike! After weeks of working on this, I discovered a <a href="">similar project with the very same name</a>.</p>
+   </div>
+   <p>Here I want to go through the process of setting up a <em>feedletter</em> instance, configuring it, tweaking or customizing the newsletter style, and running it.</p>
+   <p>You can host <em>feedletter</em> on any Linux/UNIX-ish server. For completeness, I'm going to set up a server from scratch, from a fresh Digital Ocean droplet. But of course you can run <em>feedletter</em> along side other services on an existing machine, and skip a lot of these steps. <em>feedletter</em>'s main prerequisite is <a href="https://www.postgresql.org/"><em>postgres</em></a>, but we'll make use of <em>nginx</em>, <em>certbot</em>, <em>systemd</em> etc. as we go along.</p>
+   <p>Much of the code and config we develop will be <a href="https://github.com/swaldman/tutorial-feedletter-local">memorialized in this github repo</a>.</p>
+   <p>Let's go!</p>
+   <h2><a href="#table-of-contents" id="table-of-contents" name="table-of-contents" class="anchorlink"></a>Table of contents</h2>
+   <ol>
+    <li><a href="#1-set-up-a-server-with-a-dns-name">Set up a server with a DNS name</a></li>
+    <li><a href="#2-download-dependencies">Download dependencies</a></li>
+    <li><a href="#3-create-user-feedletter">Create user feedletter</a></li>
+    <li><a href="#4-install-feedletter">Install feedletter</a></li>
+    <li><a href="#5-prepare-the-postgres-database">Prepare the postgres database</a></li>
+    <li><a href="#6-set-up-feedletter-secretsproperties">Set up <code>feedletter-secrets.properties</code></a></li>
+    <li><a href="#7-get-an-https-certificate">Get an https certificate</a></li>
+    <li><a href="#8-configure-nginx-to-forward-to-the-api">Configure <code>nginx</code> to forward to the API</a></li>
+    <li><a href="#9-initialize-the-feedletter-database">Initialize the <em>feedletter</em> database</a></li>
+    <li><a href="#10-perform-in-database-configuration">Perform in-database configuration</a></li>
+    <li><a href="#11-add-feeds-to-watch">Add feeds to watch</a></li>
+    <li><a href="#12-define-subscribables-to-feeds">Define "subscribables" to feeds</a></li>
+    <li><a href="#13-enable-feedletter-as-a-systemd-daemon">Enable <em>feedletter</em> as a <code>systemd</code> daemon</a></li>
+    <li><a href="#14-let-users-subscribe-to-your-subscribables">Let users subscribe to your subscribables!</a></li>
+    <li><a href="#15-tweak-the-newsletter-styles">Tweak the newsletter styles</a></li>
+    <li><a href="#16-advanced-customize-the-content">Advanced: Customize the content</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+   </ol>
+   <h2><a href="#1-set-up-a-server-with-a-dns-name" id="1-set-up-a-server-with-a-dns-name" name="1-set-up-a-server-with-a-dns-name" class="anchorlink"></a>1. Set up a server with a DNS name</h2>
+   <p>We launch a "droplet" from <a href="https://www.digitalocean.com/">Digital Ocean</a>. You can use whatever Linux flavor you like. We'll pick the latest Ubuntu.</p><img alt="Screenshot of Digital Ocean droplet setup" src="2024/01/29/feedletter-tutorial/droplet-setup.png" style="width: 100%;">
+   <p>And we go ahead and give it a name.</p><img alt="Screenshot of FastMail DNS setup" src="2024/01/29/feedletter-tutorial/dns-setup.png" style="width: 100%;">
+   <h2><a href="#2-download-dependencies" id="2-download-dependencies" name="2-download-dependencies" class="anchorlink"></a>2. Download dependencies</h2>
+   <p>We login as root to our new droplet (however we've configured that), and download a bunch of stuff we'll need:</p>
+   <pre><code class="language-plaintext"># apt install postgresql
+# apt install openjdk-17-jre-headless
+# apt install nginx
+# apt install certbot
+# apt install emacs
+</code></pre>
+   <p>While we're at it, let's upgrade everything on the server and restart.</p>
+   <pre><code class="language-plaintext"># apt upgrade
+# shutdown -r now
+</code></pre>
+   <h2><a href="#3-create-user-feedletter" id="3-create-user-feedletter" name="3-create-user-feedletter" class="anchorlink"></a>3. Create user feedletter</h2>
+   <p>We'll create a passwordless user:</p>
+   <pre><code class="language-plaintext"># adduser --disabled-password feedletter
+info: Adding user `feedletter' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `feedletter' (1000) ...
+info: Adding new user `feedletter' (1000) with group `feedletter (1000)' ...
+info: Creating home directory `/home/feedletter' ...
+info: Copying files from `/etc/skel' ...
+Changing the user information for feedletter
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] Y
+info: Adding new user `feedletter' to supplemental / extra groups `users' ...
+info: Adding user `feedletter' to group `users' ...
+
+</code></pre>
+   <h2><a href="#4-install-feedletter" id="4-install-feedletter" name="4-install-feedletter" class="anchorlink"></a>4. Install feedletter</h2>
+   <p>We'll become user <code>feedletter</code>, and download a <a href="https://github.com/swaldman/feedletter-install">local installation</a> of the <em>feedletter</em> app:</p>
+   <pre><code class="language-plaintext"># su - feedletter
+feedletter@feedletter-play:~$ git clone https://github.com/swaldman/feedletter-install.git feedletter-local
+Cloning into 'feedletter-local'...
+remote: Enumerating objects: 46, done.
+remote: Counting objects: 100% (46/46), done.
+remote: Compressing objects: 100% (28/28), done.
+remote: Total 46 (delta 19), reused 38 (delta 11), pack-reused 0
+Receiving objects: 100% (46/46), 8.75 KiB | 2.19 MiB/s, done.
+Resolving deltas: 100% (19/19), done.
+</code></pre>
+   <div class="note">
+    <p>The first time you run <em>feedletter</em>, it will take a couple of minutes to download its dependencies and compile stuff.</p>
+   </div>
+   <p>Although we can't meaningfully use it yet, let's give the feedletter applicaton a test run:</p>
+   <pre><code class="language-plaintext">$ cd feedletter-local/
+$ ./feedletter
+...
+...
+Missing expected command (add-feed or alter-feed or daemon or db-dump or db-init or db-migrate or define-email-subscribable or define-mastodon-subscribable or drop-feed-and-subscribables or drop-subscribable or edit-subscribable or export-subscribers or list-config or list-feeds or list-items-excluded or list-subscribables or list-subscribers or list-untemplates or send-test-email or set-config or set-extra-params or set-untemplates or subscribe)!
+
+Usage:
+    feedletter [--secrets &lt;propsfile&gt;] add-feed
+    feedletter [--secrets &lt;propsfile&gt;] alter-feed
+    feedletter [--secrets &lt;propsfile&gt;] daemon
+    feedletter [--secrets &lt;propsfile&gt;] db-dump
+    feedletter [--secrets &lt;propsfile&gt;] db-init
+    feedletter [--secrets &lt;propsfile&gt;] db-migrate
+    feedletter [--secrets &lt;propsfile&gt;] define-email-subscribable
+    feedletter [--secrets &lt;propsfile&gt;] define-mastodon-subscribable
+    feedletter [--secrets &lt;propsfile&gt;] drop-feed-and-subscribables
+    feedletter [--secrets &lt;propsfile&gt;] drop-subscribable
+    feedletter [--secrets &lt;propsfile&gt;] edit-subscribable
+    feedletter [--secrets &lt;propsfile&gt;] export-subscribers
+    feedletter [--secrets &lt;propsfile&gt;] list-config
+    feedletter [--secrets &lt;propsfile&gt;] list-feeds
+    feedletter [--secrets &lt;propsfile&gt;] list-items-excluded
+    feedletter [--secrets &lt;propsfile&gt;] list-subscribables
+    feedletter [--secrets &lt;propsfile&gt;] list-subscribers
+    feedletter [--secrets &lt;propsfile&gt;] list-untemplates
+    feedletter [--secrets &lt;propsfile&gt;] send-test-email
+    feedletter [--secrets &lt;propsfile&gt;] set-config
+    feedletter [--secrets &lt;propsfile&gt;] set-extra-params
+    feedletter [--secrets &lt;propsfile&gt;] set-untemplates
+    feedletter [--secrets &lt;propsfile&gt;] subscribe
+
+Manage e-mail subscriptions to and notifications from RSS feeds.
+
+Options and flags:
+    --help
+        Display this help text.
+    --secrets &lt;propsfile&gt;
+        Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
+
+Environment Variables:
+    FEEDLETTER_SECRETS=&lt;path&gt;
+        Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
+
+Subcommands:
+    add-feed
+        Add a new feed from which mail or notifications may be generated.
+    alter-feed
+        Alter the timings of an already-defined feed.
+    daemon
+        Run daemon that watches feeds and sends notifications.
+    db-dump
+        Dump a backup of the database into a configured directory.
+    db-init
+        Initialize the database schema.
+    db-migrate
+        Migrate to the latest version of the database schema.
+    define-email-subscribable
+        Define a new email subscribable, a mailing lost to which users can subscribe.
+    define-mastodon-subscribable
+        Define a Mastodon subscribable, a source from which Mastodon feeds can receive automatic posts..
+    drop-feed-and-subscribables
+        Removes a feed, along with any subscribables defined upon it, from the service.
+    drop-subscribable
+        Removes a subscribable from the service.
+    edit-subscribable
+        Edit an already-defined subscribable.
+    export-subscribers
+        Dump subscriber information for a subscribable in CSV format.
+    list-config
+        List all configuration parameters.
+    list-feeds
+        List all feeds the application is watching.
+    list-items-excluded
+        List items excluded from generating notifications.
+    list-subscribables
+        List all subscribables.
+    list-subscribers
+        List all subscribers to a subscribable.
+    list-untemplates
+        List available untemplates.
+    send-test-email
+        Send a brief email to test your SMTP configuration.
+    set-config
+        Set configuration parameters.
+    set-extra-params
+        Add, update, or remove extra params you may define to affect rendering of notifications and messages.
+    set-untemplates
+        Update the untemplates used to render subscriptions.
+    subscribe
+        Subscribe to a subscribable.
+1 targets failed
+runMain subprocess failed
+</code></pre>
+   <p>All good!</p>
+   <h2><a href="#5-prepare-the-postgres-database" id="5-prepare-the-postgres-database" name="5-prepare-the-postgres-database" class="anchorlink"></a>5. Prepare the postgres database</h2>
+   <p>We'll <code>exit</code> back to root, become user postgres, and create a <code>feedletter</code> database that user <code>feedletter</code> can command:</p>
+   <pre><code class="language-plaintext">$ exit
+# su - postgres
+$ createdb feedletter
+$ createuser feedletter
+$ psql
+psql (15.5 (Ubuntu 15.5-0ubuntu0.23.10.1))
+Type "help" for help.
+
+postgres=# ALTER DATABASE feedletter OWNER TO feedletter;
+ALTER DATABASE
+postgres=# ALTER USER feedletter WITH PASSWORD 'not-actually-this';
+ALTER ROLE
+postgres=# \q
+</code></pre>
+   <h2><a href="#6-set-up-feedletter-secretsproperties" id="6-set-up-feedletter-secretsproperties" name="6-set-up-feedletter-secretsproperties" class="anchorlink"></a>6. Set up <code>feedletter-secrets.properties</code></h2>
+   <p><em>feedletter</em> expects passwords and some other configuration information in a "secrets" file, in Java properties file format. You can place this anywhere you want (<em>feedletter</em> will look for a command-line argument or an environment variable), but by default it looks for <code>/etc/feedletter/feedletter-secrets.properties</code> or <code>/usr/etc/feedletter/feedletter-secrets.properties</code>.</p>
+   <p>The file must belong to the user who will run <em>feedletter</em>, and it must have restrictive permission, readable and optionally writable by the user only.</p>
+   <p>The contents of the file will be something like this:</p>
+   <pre><code class="language-plaintext">feedletter.secret.salt=Arbitrary secret string
+mail.smtp.user=not-actually-this
+mail.smtp.password=not-actually-this
+mail.smtp.host=not-actually-this
+mail.smtp.port=465
+#mail.smtp.port=587
+mail.smtp.debug=false
+c3p0.jdbcUrl=jdbc:postgresql://localhost:5432/feedletter
+c3p0.user=feedletter
+c3p0.password=not-actually-this
+c3p0.testConnectionOnCheckout=true
+</code></pre>
+   <p>You’ll want to fill in your real SMTP authentication configuration. For information about this configuration, see <a href="https://github.com/swaldman/mailutil"><code>mailutil</code></a>.</p>
+   <p>You can configure database access via any and all <a href="https://www.mchange.com/projects/c3p0/">c3p0 configuration properties</a>.</p>
+   <p>So, let's do it! We exit from our last stint as user <code>postgres</code> first, then...</p>
+   <pre><code class="language-plaintext">$ exit
+# mkdir /etc/feedletter/
+# emacs /etc/feedletter/feedletter-secrets.properties
+</code></pre>
+   <p>Here we pause to edit the file, see the template above...</p>
+   <pre><code class="language-plaintext"># chown -R feedletter:feedletter /etc/feedletter
+# chmod go-wrx /etc/feedletter/feedletter-secrets.properties
+# ls -l /etc/feedletter/
+total 8
+-rw------- 1 feedletter feedletter 370 Jan 25 18:59 feedletter-secrets.properties
+-rw-r--r-- 1 feedletter feedletter 372 Jan 25 18:57 feedletter-secrets.properties~
+</code></pre>
+   <p>Oops! <em>emacs</em> created a backup file with open permissions. Let's get rid of it so those secrets don't leak.</p>
+   <pre><code class="language-plaintext"># rm /etc/feedletter/feedletter-secrets.properties~
+</code></pre>
+   <h2><a href="#7-get-an-https-certificate" id="7-get-an-https-certificate" name="7-get-an-https-certificate" class="anchorlink"></a>7. Get an https certificate</h2>
+   <p>We gave our server the name <code>play.feedletter.org</code>.</p>
+   <p><em>feedletter</em> offers a web API to manage subscriptions. We'll want that to use <code>https</code> rather than <code>http</code> for privacy's sake.</p>
+   <p>Let's acquire a free <code>Let's Encrypt</code> certificate. I prefer to pause <code>nginx</code> to acquire and renew certificates, and use <code>certbot</code>'s standalone server to verify control of the domain, rather than have <code>certbot</code> mess around with my <code>nginx</code> config.</p>
+   <p>So...</p>
+   <pre><code class="language-plaintext"># systemctl stop nginx
+# certbot certonly -d play.feedletter.org
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+How would you like to authenticate with the ACME CA?
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1: Spin up a temporary webserver (standalone)
+2: Place files in webroot directory (webroot)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Select the appropriate number [1-2] then [enter] (press 'c' to cancel): 1 
+Requesting a certificate for play.feedletter.org
+
+Successfully received certificate.
+Certificate is saved at: /etc/letsencrypt/live/play.feedletter.org/fullchain.pem
+Key is saved at:         /etc/letsencrypt/live/play.feedletter.org/privkey.pem
+This certificate expires on 2024-04-24.
+These files will be updated when the certificate renews.
+Certbot has set up a scheduled task to automatically renew this certificate in the background.
+We were unable to subscribe you the EFF mailing list because your e-mail address appears to be invalid. You can try again later by visiting https://act.eff.org.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+If you like Certbot, please consider supporting our work by:
+ * Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+ * Donating to EFF:                    https://eff.org/donate-le
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# systemctl start nginx
+</code></pre>
+   <h2><a href="#8-configure-nginx-to-forward-to-the-api" id="8-configure-nginx-to-forward-to-the-api" name="8-configure-nginx-to-forward-to-the-api" class="anchorlink"></a>8. Configure <code>nginx</code> to forward to the API</h2>
+   <p>By default, <em>feedletter</em>'s API is bound to localhost on port 8024. If you need to, you can customize the web API port or interface, run <code>./feedletter set-config --help</code> to see how. We'll stick with that default.</p>
+   <p>As root, we create and edit a file <code>/etc/nginx/conf.d/play.feedletter.org.conf</code>:</p>
+   <pre><code class="language-plaintext"># emacs /etc/nginx/conf.d/play.feedletter.org.conf
+</code></pre>
+   <p>It should look like this:</p>
+   <pre><code class="language-plaintext">    # play.feedletter.org
+    server {
+        listen 80;
+        listen [::]:80;
+        server_name play.feedletter.org;
+        return 301 https://play.feedletter.org$request_uri;
+    }
+    server {
+        listen       443 ssl http2;
+        listen       [::]:443 ssl http2;
+        server_name  play.feedletter.org;
+        ssl_certificate /etc/letsencrypt/live/play.feedletter.org/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/play.feedletter.org/privkey.pem;
+        ssl_session_cache shared:SSL:1m;
+        ssl_session_timeout  10m;
+
+        # Load configuration files for the default server block.
+        include /etc/nginx/default.d/*.conf;
+
+        location / {
+            proxy_pass http://127.0.0.1:8024/;
+            proxy_set_header  X-Real-IP $remote_addr;
+            proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header  Host $http_host;
+        }
+    }
+</code></pre>
+   <p>Then we restart nginx:</p>
+   <pre><code class="language-plaintext">root@feedletter-tutorial:/etc/nginx# systemctl restart nginx
+</code></pre>
+   <h2><a href="#9-initialize-the-feedletter-database" id="9-initialize-the-feedletter-database" name="9-initialize-the-feedletter-database" class="anchorlink"></a>9. Initialize the <em>feedletter</em> database</h2>
+   <p>If we've set up the database and secrets file property, it should be as easy as</p>
+   <pre><code class="language-plaintext"># su - feedletter
+$ cd feedletter-local
+$ ./feedletter db-init
+</code></pre>
+   <h2><a href="#10-perform-in-database-configuration" id="10-perform-in-database-configuration" name="10-perform-in-database-configuration" class="anchorlink"></a>10. Perform in-database configuration</h2>
+   <p>Some of <em>feedletter</em>'s config sits in the secrets file, but much lives in the application's database itself.</p>
+   <p>We can see <em>feedletter</em>'s current (default) configuration simply by running</p>
+   <pre><code class="language-plaintext">$ ./feedletter list-config
++-----------------------+-------------------------------------------------------+
+¦ Configuration Key     ¦ Value                                                 ¦
++-----------------------+-------------------------------------------------------+
+¦ ConfirmHours          ¦ 48                                                    ¦
+¦ DumpDbDir             ¦ throws com.mchange.feedletter.db.ConfigurationMissing ¦
+¦ MailBatchDelaySeconds ¦ 600                                                   ¦
+¦ MailBatchSize         ¦ 100                                                   ¦
+¦ MailMaxRetries        ¦ 5                                                     ¦
+¦ MastodonMaxRetries    ¦ 10                                                    ¦
+¦ TimeZone              ¦ Etc/UTC                                               ¦
+¦ WebApiBasePath        ¦ /                                                     ¦
+¦ WebApiHostName        ¦ localhost                                             ¦
+¦ WebApiPort            ¦ None                                                  ¦
+¦ WebApiProtocol        ¦ http                                                  ¦
+¦ WebDaemonInterface    ¦ 127.0.0.1                                             ¦
+¦ WebDaemonPort         ¦ 8024                                                  ¦
++-----------------------+-------------------------------------------------------+
+</code></pre>
+   <p>The <code>WebApi*</code> keys are used to construct URLs that point back to the application (for creating, confirming, and removing subscriptions).</p>
+   <ul>
+    <li>We won't want these to be <code>localhost</code> URLs, so we'll modify <code>WebApiHostName</code></li>
+    <li>We'll want <code>WebApiProtocol</code> to be <code>https</code> rather than <code>http</code></li>
+    <li>I'd prefer the timezone (used to format dates, and to decide the boundries of days and weeks for daily and weekly roundups) be <code>America/New_York</code></li>
+   </ul>
+   <p>Let's checkout the <code>set-config</code> command:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-config --help
+[49/49] runMain 
+Usage: feedletter set-config [--confirm-hours &lt;hours&gt;] [--dump-db-dir &lt;directory&gt;] [--mail-batch-size &lt;size&gt;] [--mail-batch-delay-seconds &lt;seconds&gt;] [--mail-max-retries &lt;times&gt;] [--time-zone &lt;zone&gt;] [--web-daemon-interface &lt;interface&gt;] [--web-daemon-port &lt;port&gt;] [--web-api-protocol &lt;http|https&gt;] [--web-api-host-name &lt;hostname&gt;] [--web-api-base-path &lt;path&gt;] [--web-api-port &lt;port&gt;]
+
+Set configuration parameters.
+
+Options and flags:
+    --help
+        Display this help text.
+    --confirm-hours &lt;hours&gt;
+        Number of hours to await a user confiration before automatically unsubscribing.
+    --dump-db-dir &lt;directory&gt;
+        Directory in which to create dump files prior to db migrations.
+    --mail-batch-size &lt;size&gt;
+        Number of e-mails to send in each 'batch' (to avoid overwhelming the SMTP server).
+    --mail-batch-delay-seconds &lt;seconds&gt;
+        Time between batches of e-mails are to be sent.
+    --mail-max-retries &lt;times&gt;
+        Number of times e-mail sends (defined as successful submission to an SMTP service) will be attempted before giving up.
+    --time-zone &lt;zone&gt;
+        ID of the time zone which subscriptions based on time periods should use.
+    --web-daemon-interface &lt;interface&gt;
+        The local interface to which the web-api daemon should bind.
+    --web-daemon-port &lt;port&gt;
+        The local port to which the web-api daemon should bind.
+    --web-api-protocol &lt;http|https&gt;
+        The protocol (http or https) by which the web api is served.
+    --web-api-host-name &lt;hostname&gt;
+        The host from which the web api is served.
+    --web-api-base-path &lt;path&gt;
+        The URL base location upon which the web api is served (usually just '/').
+    --web-api-port &lt;port&gt;
+        The port from which the web api is served (usually blank, protocol determined).
+1 targets failed
+runMain subprocess failed
+</code></pre>
+   <p>So, we can do all of this configuring in a single simple command:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-config --web-api-protocol https --web-api-host-name play.feedletter.org --time-zone America/New_York
+[49/49] runMain 
++-----------------------+-------------------------------------------------------+
+¦ Configuration Key     ¦ Value                                                 ¦
++-----------------------+-------------------------------------------------------+
+¦ ConfirmHours          ¦ 48                                                    ¦
+¦ DumpDbDir             ¦ throws com.mchange.feedletter.db.ConfigurationMissing ¦
+¦ MailBatchDelaySeconds ¦ 600                                                   ¦
+¦ MailBatchSize         ¦ 100                                                   ¦
+¦ MailMaxRetries        ¦ 5                                                     ¦
+¦ MastodonMaxRetries    ¦ 10                                                    ¦
+¦ TimeZone              ¦ America/New_York                                      ¦
+¦ WebApiBasePath        ¦ /                                                     ¦
+¦ WebApiHostName        ¦ play.feedletter.org                                   ¦
+¦ WebApiPort            ¦ None                                                  ¦
+¦ WebApiProtocol        ¦ https                                                 ¦
+¦ WebDaemonInterface    ¦ 127.0.0.1                                             ¦
+¦ WebDaemonPort         ¦ 8024                                                  ¦
++-----------------------+-------------------------------------------------------+
+</code></pre>
+   <h2><a href="#11-add-feeds-to-watch" id="11-add-feeds-to-watch" name="11-add-feeds-to-watch" class="anchorlink"></a>11. Add feeds to watch</h2>
+   <p>Let's check out the <code>add-feed</code> command:</p>
+   <pre><code class="language-plaintext">$ ./feedletter add-feed --help
+[49/49] runMain 
+Usage:
+    feedletter add-feed --ping &lt;feed-url&gt;
+    feedletter add-feed [--min-delay-minutes &lt;minutes&gt;] [--await-stabilization-minutes &lt;minutes&gt;] [--max-delay-minutes &lt;minutes&gt;] [--recheck-every-minutes &lt;minutes&gt;] &lt;feed-url&gt;
+
+Add a new feed from which mail or notifications may be generated.
+
+Options and flags:
+    --help
+        Display this help text.
+    --ping
+        Check feed as often as possible, notify as soon as possible, regardless of (in)stability.
+    --min-delay-minutes &lt;minutes&gt;
+        Minimum wait (in miunutes) before a newly encountered item can be notified.
+    --await-stabilization-minutes &lt;minutes&gt;
+        Period (in minutes) over which an item should not have changed before it is considered stable and can be notified.
+    --max-delay-minutes &lt;minutes&gt;
+        Notwithstanding other settings, maximum period past which an item should be notified, regardless of its stability.
+    --recheck-every-minutes &lt;minutes&gt;
+        Delay between refreshes of feeds, and redetermining items' availability for notification.
+</code></pre>
+   <p>When we add feeds, we also define how "finalization" of feed items will be defined. Items will never be notified or considered final prior to <code>min-delay-minutes</code>. Even after this period has passed, they will not be considered final unless they have been stable (the item has been unchanged) for at least <code>await-stabilization-minutes</code>, or until <code>max-delay-minutes</code> has passed. (<code>max-delay-minutes</code> is a failsafe, in case feed items never stabilize due to a changing timestamp or such.)</p>
+   <p>Feeds will be polled every <code>recheck-every-minutes</code> minutes.</p>
+   <p>If <code>--ping</code> (and only <code>--ping</code>) is set, <code>feedletter</code> will poll at its maximum frequency and notify immediately, irrespective of the item's (in)stability.</p>
+   <p>All of the (non-ping) values have defaults. Let's have our application watch the blog <em>Lawyers, Guns, and Money</em>, whose feed is at <a href="https://www.lawyersgunsmoneyblog.com/feed"><code>https://www.lawyersgunsmoneyblog.com/feed</code></a>:</p>
+   <pre><code class="language-plaintext">$ ./feedletter add-feed  https://www.lawyersgunsmoneyblog.com/feed
+[49/49] runMain 
++---------+-------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+¦ Feed ID ¦ Feed URL                                  ¦ Min Delay Mins ¦ Await Stabilization Mins ¦ Max Delay Mins ¦ Recheck Every Mins ¦ Added                       ¦ Last Assigned               ¦
++---------+-------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+¦ 1       ¦ https://www.lawyersgunsmoneyblog.com/feed ¦ 30             ¦ 15                       ¦ 180            ¦ 10                 ¦ 2024-01-27T17:03:47.452533Z ¦ 2024-01-27T17:03:47.452533Z ¦
++---------+-------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+</code></pre>
+   <p>So, by default, this feed will wait at least 30 minutes before notifying, and require a post to have been stable for at least 15 minutes. After 180 minutes, it will be considered final no matter what. It will be checked every approximately 10 minutes.</p>
+   <p>If you don't like these values, you can change them any time with the <code>./feedletter alter-feed</code> command.</p>
+   <div class="note">
+    I am not republishing these blogs without permission. That would be icky. I'm using these feeds for demonstration purposes. I'll be their only e-mail subscriber. 
+    <p>By the time you read this tutorial, <code>play.feedletter.org</code> will have been sadly retired.</p>
+   </div>
+   <p>Let's add another feed to watch, Atrios' <i>Eschaton</i> blog, whose feed URL is <a href="https://www.eschatonblog.com/feeds/posts/default?alt=rss"><code>https://www.eschatonblog.com/feeds/posts/default?alt=rss</code></a>. I'm just going to stick with the default timings for now:</p>
+   <pre><code class="language-plaintext">$ ./feedletter add-feed https://www.eschatonblog.com/feeds/posts/default?alt=rss
+
+[49/49] runMain 
++---------+----------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+¦ Feed ID ¦ Feed URL                                                 ¦ Min Delay Mins ¦ Await Stabilization Mins ¦ Max Delay Mins ¦ Recheck Every Mins ¦ Added                       ¦ Last Assigned               ¦
++---------+----------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+¦ 1       ¦ https://www.lawyersgunsmoneyblog.com/feed                ¦ 30             ¦ 15                       ¦ 180            ¦ 10                 ¦ 2024-01-27T17:03:47.452533Z ¦ 2024-01-27T17:03:47.452533Z ¦
+¦ 2       ¦ https://www.eschatonblog.com/feeds/posts/default?alt=rss ¦ 30             ¦ 15                       ¦ 180            ¦ 10                 ¦ 2024-01-27T17:04:55.092686Z ¦ 2024-01-27T17:04:55.092686Z ¦
++---------+----------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
+</code></pre>
+   <h2><a href="#12-define-subscribables-to-feeds" id="12-define-subscribables-to-feeds" name="12-define-subscribables-to-feeds" class="anchorlink"></a>12. Define "subscribables" to feeds</h2>
+   <p>Once the application is watching feeds, we can define various kinds of "subscribables" to them.</p>
+   <p>A subscribable is a subscription type. We use the made-up word to distinguish <em>a thing you can subscribe to</em> (a "subscribable") from an individual's subscription.</p>
+   <p>E-mail subscribables are by default one-post-per-newsletter, but they can also be defined as daily digests, weekly compendia, or bundles of every <em>n</em> posts, for an <em>n</em> you choose.</p>
+   <p>Let's take a look at the <code>./feedletter define-email-subscribable</code> command:</p>
+   <pre><code class="language-plaintext">$ ./feedletter define-email-subscribable --help
+[49/49] runMain 
+Usage: feedletter define-email-subscribable --feed-id &lt;feed-id&gt; --name &lt;name&gt; --from &lt;e-mail address&gt; [--reply-to &lt;e-mail address&gt;] [--compose-untemplate &lt;fully-qualified-name&gt;] [--confirm-untemplate &lt;fully-qualified-name&gt;] [--removal-notification-untemplate &lt;fully-qualified-name&gt;] [--status-change-untemplate &lt;fully-qualified-name&gt;] [--each | --daily [--time-zone &lt;id&gt;] | --weekly [--time-zone &lt;id&gt;] | --num-items-per-letter &lt;num&gt;] [--extra-param &lt;key:value&gt;]...
+
+Define a new email subscribable, a mailing lost to which users can subscribe.
+
+Options and flags:
+    --help
+        Display this help text.
+    --feed-id &lt;feed-id&gt;
+        The ID of the RSS feed to be watched.
+    --name &lt;name&gt;
+        A name for the new subscribable.
+    --from &lt;e-mail address&gt;
+        The email address from which emails should be sent.
+    --reply-to &lt;e-mail address&gt;
+        E-mail address to which recipients should reply (if different from the 'from' address).
+    --compose-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will render notifications.
+    --confirm-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will ask for e-mail confirmations.
+    --removal-notification-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that be mailed to users upon unsubscription.
+    --status-change-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will render results of GET request to the API.
+    --each
+        E-mail each item.
+    --daily
+        E-mail a compilation, once a day.
+    --time-zone &lt;id&gt;
+        ID of a time zone for determining the beginning and end of the period.
+    --weekly
+        E-mail a compilation, once a week.
+    --num-items-per-letter &lt;num&gt;
+        E-mail every fixed number of posts.
+    --extra-param &lt;key:value&gt;
+        An extra parameter your notification renderers might use.
+1 targets failed
+runMain subprocess failed
+</code></pre>
+   <p>The only <em>required</em> elements are <code>--feed-id &lt;id&gt;</code>, <code>--name &lt;a name you choose name&gt;</code>, and <code>--from &lt;e-mail address&gt;</code>. If you set only these, <code>feedletter</code> will use its default style (you'll not have set any custom "untemplates"), it will have no "reply to" address distinct from the "from" address you've given, and it will be of type <code>--each</code>, that is one e-mail per post.</p>
+   <p>If you set the flag <code>--daily</code> you'll send daily digests. If you set the flag <code>--weekly</code>, then weekly compendia. If you set <code>--num-items-per-letter &lt;num&gt;</code>, you'll send an e-mail every <em>num</em> posts.</p>
+   <p>More rarely, you can set any number of <code>--extra-param</code> items. These can be passed through to custom <a href="https://github.com/swaldman/untemplate-doc#readme">untemplates</a>, to configure your own styles and themes as you see fit.</p>
+   <p><em>Lawyers, Guns, and Money</em> tends to post long-ish essays, so the default <code>--each</code> type is probably appropriate.</p>
+   <p>Let's recall (scroll up!) that when we added that feed, it was given ID 1. So let's create a subscribable:</p>
+   <pre><code class="language-plaintext">$ ./feedletter define-email-subscribable --name lgm --feed-id 1 --from feedletter@feedletter.org
+[49/49] runMain 
+
+-*-*-*-
+
+Subscribable Name:    lgm
+Feed ID:              1
+Subscription Manager: {
+    "composeUntemplateName": "com.mchange.feedletter.default.email.composeUniversal_html",
+    "statusChangeUntemplateName": "com.mchange.feedletter.default.email.statusChange_html",
+    "confirmUntemplateName": "com.mchange.feedletter.default.email.confirm_html",
+    "from": {
+        "addressPart": "feedletter@feedletter.org",
+        "type": "Email",
+        "version": 1
+    },
+    "removalNotificationUntemplateName": "com.mchange.feedletter.default.email.removalNotification_html",
+    "extraParams": {},
+    "type": "Email.Each",
+    "version": 1
+}
+An email subscribable to feed with ID '1' named 'lgm' has been created.
+</code></pre>
+   <p>We can create more than one subscribable to a single feed! Let's also make a daily roundup option for <em>Lawyers, Guns, and Money</em>:</p>
+   <pre><code class="language-plaintext">$ ./feedletter define-email-subscribable --name lgm-daily --feed-id 1 --from feedletter@feedletter.org --daily
+[49/49] runMain 
+
+-*-*-*-
+
+Subscribable Name:    lgm-daily
+Feed ID:              1
+Subscription Manager: {
+    "composeUntemplateName": "com.mchange.feedletter.default.email.composeUniversal_html",
+    "statusChangeUntemplateName": "com.mchange.feedletter.default.email.statusChange_html",
+    "confirmUntemplateName": "com.mchange.feedletter.default.email.confirm_html",
+    "from": {
+        "addressPart": "feedletter@feedletter.org",
+        "type": "Email",
+        "version": 1
+    },
+    "removalNotificationUntemplateName": "com.mchange.feedletter.default.email.removalNotification_html",
+    "extraParams": {},
+    "type": "Email.Daily",
+    "version": 1
+}
+An email subscribable to feed with ID '1' named 'lgm-daily' has been created.
+</code></pre>
+   <p>Atrios' <i>Eschaton</i> blog publishes frequent, sometimes very short posts. Let's create a subscribable that sends out groups of three. Recall from above that its feed ID was 2. So...</p>
+   <pre><code class="language-plaintext">$ ./feedletter define-email-subscribable --name atrios-three --feed-id 2 --from feedletter@feedletter.org --num-items-per-letter 3
+[49/49] runMain 
+
+-*-*-*-
+
+Subscribable Name:    atrios-three
+Feed ID:              2
+Subscription Manager: {
+    "composeUntemplateName": "com.mchange.feedletter.default.email.composeUniversal_html",
+    "statusChangeUntemplateName": "com.mchange.feedletter.default.email.statusChange_html",
+    "numItemsPerLetter": 3,
+    "confirmUntemplateName": "com.mchange.feedletter.default.email.confirm_html",
+    "from": {
+        "addressPart": "feedletter@feedletter.org",
+        "type": "Email",
+        "version": 1
+    },
+    "removalNotificationUntemplateName": "com.mchange.feedletter.default.email.removalNotification_html",
+    "extraParams": {},
+    "type": "Email.Fixed",
+    "version": 1
+}
+An email subscribable to feed with ID '2' named 'atrios-three' has been created.
+</code></pre>
+   <h2><a href="#13-enable-feedletter-as-a-systemd-daemon" id="13-enable-feedletter-as-a-systemd-daemon" name="13-enable-feedletter-as-a-systemd-daemon" class="anchorlink"></a>13. Enable <em>feedletter</em> as a <code>systemd</code> daemon.</h2>
+   <p>Let’s define a <code>feedletter.service</code> file right here in our installation directory, just because it seems convenient. We edit <code>/home/feedletter/feedletter-local/feedletter.service</code>:</p>
+   <pre><code class="language-plaintext">[Unit]
+Description=Feedletter RSS-To-Mail-Etc Service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/home/feedletter/feedletter-local/feedletter.pid
+User=feedletter
+Group=feedletter
+WorkingDirectory=/home/feedletter/feedletter-local
+
+ExecStart=/home/feedletter/feedletter-local/feedletter daemon --fork
+
+TimeoutStopSec=90
+Restart=on-failure
+RestartSec=10s
+StandardError=journal
+StandardOutput=journal
+StandardInput=null
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+   <p>Now we setup the symlinks that would make this a permanent <code>systemd</code> service. First we <code>exit</code> to get back to root, then…</p>
+   <pre><code class="language-plaintext">$ exit
+logout
+# cd /etc/systemd/system/
+# ln -s /home/feedletter/feedletter-local/feedletter.service 
+# systemctl enable feedletter
+Created symlink /etc/systemd/system/multi-user.target.wants/feedletter.service → /home/feedletter/feedletter-local/feedletter.service.
+</code></pre>
+   <p>Now let's actually start our new service, and check its logs:</p>
+   <pre><code class="language-plaintext"># systemctl start feedletter
+# journalctl -u feedletter --follow
+Jan 27 17:11:53 feedletter-play systemd[1]: Starting feedletter.service - Feedletter RSS-To-Mail-Etc Service...
+Jan 27 17:11:59 feedletter-play systemd[1]: feedletter.service: Can't open PID file /home/feedletter/feedletter-local/feedletter.pid (yet?) after start: No such file or directory
+Jan 27 17:12:02 feedletter-play feedletter[37405]: Jan 27, 2024 5:12:02 PM com.mchange.v2.log.MLog
+Jan 27 17:12:02 feedletter-play feedletter[37405]: INFO: MLog clients using java 1.4+ standard logging.
+Jan 27 17:12:06 feedletter-play systemd[1]: Started feedletter.service - Feedletter RSS-To-Mail-Etc Service.
+Jan 27 17:12:07 feedletter-play feedletter[37405]: 2024-01-27@17:12:07 [INFO] [com.mchange.feedletter.Daemon] Spawning daemon fibers.
+Jan 27 17:12:07 feedletter-play feedletter[37405]: 2024-01-27@17:12:07 [INFO] [com.mchange.feedletter.Daemon] Starting web API service on interface '127.0.0.1', port 8024.
+</code></pre>
+   <p>It all looks good!</p>
+   <div class="note">
+    <p>Occasionally I've had problems at first seeing log entries using <code>journalctl</code>. I'd see messages like</p>
+    <pre><code class="language-plaintext">No journal files were found.
+-- No entries --
+</code></pre>
+    <p>The <a href="https://unix.stackexchange.com/questions/288243/why-does-journalctl-say-no-entries">fix</a> is to run</p>
+    <pre><code class="language-plaintext"># systemctl restart systemd-journald.service
+</code></pre>
+    <p>and then to restart the feedletter service.</p>
+   </div>
+   <h2><a href="#14-let-users-subscribe-to-your-subscribables" id="14-let-users-subscribe-to-your-subscribables" name="14-let-users-subscribe-to-your-subscribables" class="anchorlink"></a>14. Let users subscribe to your subscribables!</h2>
+   <p>The feedletter services has a simple API that, for now, uses (abuses) the HTTP GET method. Here’s an example of an HTML form that would allow subscription to our new newsletter:</p>
+   <pre><code class="language-html">    &lt;form id="subscribe-form" action="https://play.feedletter.org/v0/subscription/create" method="GET"&gt;
+      &lt;input type="hidden" name="subscribableName" value="lgm"&gt;
+      E-mail: &lt;input type="text" name="addressPart"&gt;&lt;br&gt;
+      Display Name: &lt;input type="text" name="displayNamePart"&gt; (Optional)&lt;br&gt;
+      &lt;input name="main-submit" value="Subscribe!" type="submit"&gt;
+    &lt;/form&gt;
+</code></pre>
+   <div class="note">
+    <p>As of <em>feedletter v0.0.8</em>, you can use <code>method="POST"</code> in subscribe forms.</p>
+    <p>Using <code>method="GET"</code> (and therefore also simulating form submission by pasting a URL) remain supported as well.</p>
+   </div>
+   <p>(You can see live examples of <em>feedletter</em> subscription forms on the <a href="subscribe.html">subscribe page</a> of this site!)</p>
+   <p>We will fake hitting the form above just by pasting the following URL into our browser:</p>
+   <pre><code class="language-plaintext">https://play.feedletter.org/v0/subscription/create?subscribableName=lgm&amp;addressPart=swaldman@mchange.com&amp;displayNamePart=Steve
+</code></pre>
+   <p>We are immediately informed of our success: <img alt="Screenshot of 'Subscription Created' page" src="2024/01/29/feedletter-tutorial/subscription-created.png" style="width: 100%;"> And, you've got mail!</p><img alt="Screenshot of e-mail requesting subscription confirmation" src="2024/01/29/feedletter-tutorial/please-confirm.png" style="width: 100%;">
+   <p>We hit the confirm link and we're done:</p><img alt="Screenshot of 'Subscription confirmed!' page" src="2024/01/29/feedletter-tutorial/confirmed.png" style="width: 100%;">
+   <p>We've made two more subscribables we'll want to test, whose let's-fake-a-form URLs will be</p>
+   <pre><code class="language-plaintext">https://play.feedletter.org/v0/subscription/create?subscribableName=lgm-daily&amp;addressPart=swaldman@mchange.com&amp;displayNamePart=Steve
+https://play.feedletter.org/v0/subscription/create?subscribableName=atrios-three&amp;addressPart=swaldman@mchange.com&amp;displayNamePart=Steve
+</code></pre>
+   <p>We go through the same (faked) submit then confirm steps for each of these.</p>
+   <p>And now we're subscribed! We just have to wait for the mail to roll in.</p>
+   <h2><a href="#15-tweak-the-newsletter-styles" id="15-tweak-the-newsletter-styles" name="15-tweak-the-newsletter-styles" class="anchorlink"></a>15. Tweak the newsletter styles</h2>
+   <p>But what will this mail actually look like? We can sneak a peek.</p>
+   <p>We will want to have two terminal windows open, logged into our feedletter host. In one terminal, we will run a single-page webserver that simulates the HTML e-mails we will receive.</p>
+   <p>In the second terminal, we can edit an <a href="https://github.com/swaldman/untemplate-doc#readme">untemplate</a>, until we have the look we want. Then we can update our subscribable to use our perfected untemplate to generate its mails.</p>
+   <p>Let's get the simulation server running. It's easy to run, but we won't be able to see what it's serving if we don't open up a port on our server to serve it through. We'll use port 45612. Making that available on Ubuntu is just</p>
+   <pre><code class="language-plaintext"># ufw allow 45612
+Rules updated
+Rules updated (v6)
+</code></pre>
+   <p>Now we just become user <code>feedletter</code> again, and check out the <code>feedletter-style</code> command.</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style --help
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Usage:
+    feedletter-style [--secrets &lt;propsfile&gt;] compose-multiple
+    feedletter-style [--secrets &lt;propsfile&gt;] compose-single
+    feedletter-style [--secrets &lt;propsfile&gt;] confirm
+    feedletter-style [--secrets &lt;propsfile&gt;] removal-notification
+    feedletter-style [--secrets &lt;propsfile&gt;] status-change
+
+Iteratively edit and review the untemplates through which your posts will be notified.
+
+Options and flags:
+    --help
+        Display this help text.
+    --secrets &lt;propsfile&gt;
+        Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
+
+Environment Variables:
+    FEEDLETTER_SECRETS=&lt;path&gt;
+        Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
+
+Subcommands:
+    compose-multiple
+        Style a template that composes a multiple items.
+    compose-single
+        Style a template that composes a single item.
+    confirm
+        Style a template that asks users to confirm a subscription.
+    removal-notification
+        Style a template that notifies users that they have subscribed.
+    status-change
+        Style a template that informs users of a subscription status change.
+</code></pre>
+   <p>You can style the infrastructure — confirmation and removal e-mails, web pages that inform users that their subscription status has changed.</p>
+   <p>But mostly you'll want to style the compose untemplates. For subscribables that mail just one e-mail at a time, you'll want <code>compose-single</code>. For subscribables that will pull together multple posts into a single mail, you'll want <code>compose-multiple</code>.</p>
+   <div class="note">
+    <p>The <code>./feedletter-style</code> command never terminates. You have to type <code>&lt;ctrl-c&gt;</code> to quit out.</p>
+    <p>This is because it's designed to be terminated and restarted each time you change underlying templates or css. A <a href="https://mill-build.com/"><code>mill</code></a> process runs perpetually, watching for chages and restarting whatever command you last tried.</p>
+   </div>
+   <p>Let's try <code>compose-single</code>. Our subscribable <code>lgm</code> sends just one post per-email. Let's try to style it.</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --help
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Usage: feedletter-style compose-single --subscribable-name &lt;name&gt; [--untemplate-name &lt;fully-qualified-name&gt;] [--first | --random | --guid &lt;string&gt;] [--e-mail &lt;address&gt; [--display-name &lt;name&gt;] | --sms &lt;number&gt; | --masto-instance-name &lt;name&gt; --masto-instance-url &lt;url&gt;] [--within-type-id &lt;string&gt;] [--interface &lt;interface&gt;] [--port &lt;num&gt;]
+
+Style a template that composes a single item.
+
+Options and flags:
+    --help
+        Display this help text.
+    --subscribable-name &lt;name&gt;
+        The name of an already defined subscribable that will use this template.
+    --untemplate-name &lt;fully-qualified-name&gt;
+        Fully name of an untemplate to style.
+    --first
+        Display first item in feed.
+    --random
+        Choose random item from feed to display
+    --guid &lt;string&gt;
+        Choose guid of item to display.
+    --e-mail &lt;address&gt;
+        The e-mail address to subscribe.
+    --display-name &lt;name&gt;
+        A display name to wrap around the e-mail address.
+    --sms &lt;number&gt;
+        The number to which messages should be sent.
+    --masto-instance-name &lt;name&gt;
+        A private name for this Mastodon instance.
+    --masto-instance-url &lt;url&gt;
+        The URL of the Mastodon instance
+    --within-type-id &lt;string&gt;
+        A subscription-type specific sample within-type-id for the notification.
+    --interface &lt;interface&gt;
+        The interface on which to bind an HTTP server, which will serve the rendered untemplate.
+    --port &lt;num&gt;
+        The port on which to run a HTTP server, which will serve the rendered untemplate.
+</code></pre>
+   <p>There's a lot here, but note that the only <em>required</em> option is <code>--subscribable-name</code>. We've opened port 45612, so we'll also want to hit the <code>--port</code> option. Let's try running the <code>./feedletter-style compose-single</code> command for subscribable <code>lgm</code>:</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+</code></pre>
+   <p>Great. Now let's see how our newsletter looks, with its HTML served on <code>http://play.feedletter.org:45612/</code>. Not so good!</p><img alt="Screenshot of web-served lgm newsletter via ./feedletter-style compose-single, with a badly formatted image" src="2024/01/29/feedletter-tutorial/scotus-disqualify-bad.png" style="width: 100%;">
+   <p>(<strong>Update:</strong> As of <em>feedletter v0.0.8</em> you can also <a href="2024/02/04/style-by-mail-in-feedletter/index.html">style newsletters by e-mail</a>, in addition to hitting a development webserver with a browser.)</p>
+   <div class="note">
+    <p>By default, we just pulled the first item (and most recent, since blogs are usually reverse-chronological) from the feed. We can also pull a random item off the feed to view with <code>--random</code>, or a particular item identified by its <code>&lt;guid&gt;</code> element in the feed with <code>--guid &lt;guid&gt;</code>.</p>
+   </div>
+   <p>Let's see how we can restyle this post to make it a bit better.</p>
+   <p>We have been using the built-in default untemplate to compose our items. We cannot modify that.</p>
+   <p>But our feedletter installation directory contains a copy of this untemplate that we can deploy and tweak.</p>
+   <p>To do so, we'll have to create a folder for this file under <code>untemplate</code>. We’ll call it <code>tutorial</code>. Then...</p>
+   <pre><code class="language-plaintext">$ mkdir untemplate/tutorial/
+$ cp sample/defaultCompose.html.untemplate untemplate/tutorial/lgmCompose.html.untemplate
+</code></pre>
+   <p><code>feedletter</code> now has access to this untemplate, under a name you can find by calling <code>./feedletter list-untemplates</code>:</p>
+   <pre><code class="language-plaintext">$ ./feedletter list-untemplates
+[42/49] compile 
+[info] compiling 2 Scala sources to /home/feedletter/feedletter-local/out/compile.dest/classes ...
+[info] done compiling
+[49/49] runMain 
++---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+¦ Untemplate, Fully Qualified Name                              ¦ Input Type                                                                                          ¦
++---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+¦ com.mchange.feedletter.default.email.composeUniversal_html    ¦ com.mchange.feedletter.style.ComposeInfo.Universal                                                  ¦
+¦ com.mchange.feedletter.default.email.confirm_html             ¦ com.mchange.feedletter.style.ConfirmInfo                                                            ¦
+¦ com.mchange.feedletter.default.email.item_html                ¦ scala.Tuple2[com.mchange.feedletter.style.ComposeInfo.Universal,com.mchange.feedletter.ItemContent] ¦
+¦ com.mchange.feedletter.default.email.removalNotification_html ¦ com.mchange.feedletter.style.RemovalNotificationInfo                                                ¦
+¦ com.mchange.feedletter.default.email.statusChange_html        ¦ com.mchange.feedletter.style.StatusChangeInfo                                                       ¦
+¦ com.mchange.feedletter.default.email.style_css                ¦ scala.collection.immutable.Map[java.lang.String,scala.Any]                                          ¦
+¦ tutorial.lgmCompose_html                                      ¦ com.mchange.feedletter.style.ComposeInfo.Universal                                                  ¦
++---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
+</code></pre>
+   <p>Now we can ask <code>feedletter-style</code> to show us what this post would look like using our "new" untemplate to render it:</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --untemplate-name tutorial.lgmCompose_html --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+</code></pre>
+   <p>Initially it looks exactly the same, because it is just a copy of the default untemplate!</p>
+   <p>But now we can just modify that file, <code>untemplate/tutorial/lgmCompose.html.untemplate</code>, hit reload, and play!</p>
+   <p>This is why we needed a second terminal window. We edit the template in one terminal while <code>./feedletter-style</code> is running in the other. After each edit and save, we hit reload to see our changes. (We may have to wait 10-15 secs!)</p>
+   <div class="note">
+    <p>Occasionally the autoreload glitches out, in which case you should manually &lt;ctrl-c&gt; and rerun your <code>./feedletter-style</code> command.</p>
+    <p>If you see error messages when you rerun, you may have hit compilation errors (an <a href="https://github.com/swaldman/untemplate-doc#readme">untemplate is transformed into a Scala source code</a>, which is then compiled), which you will have to resolve. You can <a href="mailto:swaldman@mchange.com">ask for help</a>!)</p>
+   </div>
+   <p>Our new untemplate has a section that looks like this:</p>
+   <pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      &lt;( style_css() )&gt;
+      /* add extra CSS styling here! */
+    &lt;/style&gt;
+</code></pre>
+   <p>Let's go ahead and add some CSS! We'll edit it to...</p>
+   <pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      &lt;( style_css() )&gt;
+      /* add extra CSS styling here! */
+      img {
+        width: 100%;
+        height: auto;
+      }
+    &lt;/style&gt;
+</code></pre>
+   <p>We save, and hit reload on our browser still pointed at <code>http://play.feedletter.org:45612/</code>, and see...</p><img alt="Screenshot of web-served lgm newsletter with a better laid-out image." src="2024/01/29/feedletter-tutorial/scotus-disqualify-good.png" style="width: 100%;">
+   <p>Much better!</p>
+   <p>If we are very picky, we see that at the end of our post, there is a line that doesn't logically belong <em>in</em> the post, and should be italicized or something.</p><img alt="Screenshot of web-served lgm newsletter with a better laid-out image." src="2024/01/29/feedletter-tutorial/scotus-disqualify-good-but-bad-endline.png" style="width: 100%;">
+   <p>If we view the source, we'll find it's the last <code>&lt;p&gt;</code> element in <code>&lt;div class="item-contents"&gt;</code>. So we modify our styling as follows:</p>
+   <pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;style&gt;
+      &lt;( style_css() )&gt;
+      /* add extra CSS styling here! */
+      img {
+        width: 100%;
+        height: auto;
+      }
+      div.item-contents p:last-of-type {
+        font-style: italic;
+      }
+    &lt;/style&gt;
+</code></pre>
+   <p>Looks better!</p><img alt="Screenshot of web-served lgm newsletter with a better laid-out image." src="2024/01/29/feedletter-tutorial/scotus-disqualify-good-good-endline.png" style="width: 100%;">
+   <p>We can keep editing all we like. We add the <code>--random</code> flag and run our <code>./feedletter-style</code> command over and over to make sure that posts in general render well.</p>
+   <p>When we are happy, we want to tell our subscription to use the new untemplate.</p>
+   <p>Remember, the name of the untemplate we've been editing was <code>tutorial.lgmCompose_html</code>.</p>
+   <p>Let's check that command out:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --help
+[49/49] runMain 
+Usage: feedletter set-untemplates --subscribable-name &lt;name&gt; [--compose-untemplate &lt;fully-qualified-name&gt;] [--confirm-untemplate &lt;fully-qualified-name&gt;] [--removal-notification-untemplate &lt;fully-qualified-name&gt;] [--status-change-untemplate &lt;fully-qualified-name&gt;]
+
+Update the untemplates used to render subscriptions.
+
+Options and flags:
+    --help
+        Display this help text.
+    --subscribable-name &lt;name&gt;
+        The name of an already-defined subscribable.
+    --compose-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will render notifications.
+    --confirm-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will ask for e-mail confirmations.
+    --removal-notification-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that be mailed to users upon unsubscription.
+    --status-change-untemplate &lt;fully-qualified-name&gt;
+        Fully qualified name of untemplate that will render results of GET request to the API.
+1 targets failed
+runMain subprocess failed
+</code></pre>
+   <p>Okay. So we run...</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm --compose-untemplate tutorial.lgmCompose_html
+[49/49] runMain 
+Updated Subscription Manager: {
+    "composeUntemplateName": "tutorial.lgmCompose_html",
+    "statusChangeUntemplateName": "com.mchange.feedletter.default.email.statusChange_html",
+    "confirmUntemplateName": "com.mchange.feedletter.default.email.confirm_html",
+    "from": {
+        "addressPart": "feedletter@feedletter.org",
+        "type": "Email",
+        "version": 1
+    },
+    "removalNotificationUntemplateName": "com.mchange.feedletter.default.email.removalNotification_html",
+    "extraParams": {},
+    "type": "Email.Each",
+    "version": 1
+}
+</code></pre>
+   <p>And we are done! We have restyled our newsletter.</p>
+   <p>We could (and should!) do the same with our other subscriptions (using <code>./feedletter-style compose-multiple</code>). We could also do much more elaborate things then just mess with the stylesheet. Our compose untemplate was really the definition of a pretty arbitrary Scala function that accepted a <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Single</code></a> object and produced a String (embedded in an <code>untemplate.Result</code>).</p>
+   <p>Learn more about untemplates <a href="https://github.com/swaldman/untemplate-doc#readme">here</a>.</p>
+   <p>The default compose untemplate actually accepts a <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Universal</code></a>, a parent type of both <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Single</code></a> and <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Multiple</code></a>. So we can fix up the glitches we know about already in our <code>lgm-daily</code> subscribable just by setting for it the same compose untemplate:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm-daily --compose-untemplate tutorial.lgmCompose_html
+[49/49] runMain 
+Updated Subscription Manager: {
+    "composeUntemplateName": "tutorial.lgmCompose_html",
+    "statusChangeUntemplateName": "com.mchange.feedletter.default.email.statusChange_html",
+    "confirmUntemplateName": "com.mchange.feedletter.default.email.confirm_html",
+    "from": {
+        "addressPart": "feedletter@feedletter.org",
+        "type": "Email",
+        "version": 1
+    },
+    "removalNotificationUntemplateName": "com.mchange.feedletter.default.email.removalNotification_html",
+    "extraParams": {},
+    "type": "Email.Daily",
+    "version": 1
+}
+</code></pre>
+   <p>If we take a look at that with <code>compose-multiple</code>..</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-multiple --subscribable-name lgm-daily --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+</code></pre>
+   <p>We'll find that it looks pretty good!</p>
+   <h2><a href="#16-advanced-customize-the-content" id="16-advanced-customize-the-content" name="16-advanced-customize-the-content" class="anchorlink"></a>16. Advanced: Customize the content</h2>
+   <p><em>feedletter</em> supports a variety of <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/Customizer.scala">customizers</a>, including</p>
+   <ul>
+    <li>subject customizers</li>
+    <li>contents customizers</li>
+    <li>"MastoAnnouncement" customizers"</li>
+    <li>template params customizers (see <a href="#templating-note">templating note</a> below)</li>
+   </ul>
+   <p>For each subscribable, you can define just one of each kind of customizer, but customers can perform any number of steps internally.</p>
+   <p>For an example, we'll build a content customizer. Both of our feeds frequently embed YouTube videos as <code>iframe</code> HTML elements in their blog posts. Unfortunately, mail clients generally do not render this form of embedded content, leaving awkward empty-spaces in and sometimes mangling the formatting of our newsletters.</p>
+   <p>So let's build a content customizer that replaces these with well-behaved <code>div</code> elements containing links to the resources that would have been in the <code>iframe</code>. We'll include a <code>class="embedded"</code> attribute on the <code>div</code> elements, so that we will be able to style them however we want.</p>
+   <p>Writing customizers in writing Scala code. We'll use the excellent <a href="https://jsoup.org/">jsoup</a> library to manipulate HTML. We'll give ourselves space to work by creating a <code>tutorial</code> package in our installation's <code>src</code> directory, and then exiting a file called <code>core.scala</code> inside that.</p>
+   <pre><code class="language-plaintext">$ mkdir src/tutorial
+$ emacs src/tutorial/core.scala
+</code></pre>
+   <p>First, we write a function that takes post HTML, and transforms the <code>iframe</code> elements into the <code>div</code> elements we're after. Then we embed that in the form of a <code>Customizer.Contents</code>, which is a function that accepts some metainformation and the original contents of a feed as <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/ItemContent.scala"><code>ItemContents</code></a> objects, and then outputs transformed contents.</p>
+   <p>Here is what all that looks like:</p>
+   <pre><code class="language-scala">package tutorial
+
+import org.jsoup.Jsoup
+import org.jsoup.nodes.{Document,Element}
+
+import scala.jdk.CollectionConverters.*
+
+import com.mchange.feedletter.*
+import com.mchange.feedletter.style.Customizer
+
+private def createDivEmbedded( link : String ) : Element =
+  val div = new Element("div").attr("class","embedded")
+  val a = new Element("a").attr("href",link)
+  val linkText =
+    if link.toLowerCase.contains("youtube.com/") then
+      "Embedded YouTube video"
+    else
+      "Embedded item"
+  a.append(linkText)
+  div.appendChild(a)
+  div
+
+def iframeToDivEmbedded( html : String ) : String =
+  val doc = Jsoup.parseBodyFragment( html )
+  val iframes = doc.select("iframe").asScala
+  iframes.foreach: ifr =&gt;
+    val src = ifr.attribute("src").getValue()
+    ifr.replaceWith( createDivEmbedded(src) )
+  doc.body().html()
+
+val IframelessCustomizer : Customizer.Contents =
+  ( subscribableName : SubscribableName, subscriptionManager : SubscriptionManager, withinTypeId : String, feedUrl : FeedUrl, contents : Seq[ItemContent] ) =&gt;
+    contents.map: ic =&gt;
+      ic.article match
+        case Some( html ) =&gt; ic.withArticle( iframeToDivEmbedded( html ) )
+        case None =&gt; ic
+</code></pre>
+   <p>Once we have <code>IframelessCustomizer</code> defined, to "install" it, we just register it as the <code>Customizer.Contents</code> for each of our feeds in our installation's <code>PreMain</code> object.</p>
+   <p>We modify the default <code>src/PreMain.scala</code>, just inserting three <code>Customizer.Contents.register(...)</code> lines (and the <code>import</code> that brings in the name <code>Customizer</code>).</p>
+   <pre><code class="language-scala">import com.mchange.feedletter.{UserUntemplates,Main}
+import com.mchange.feedletter.style.{AllUntemplates,StyleMain}
+
+import com.mchange.feedletter.style.Customizer
+
+object PreMain:
+  def main( args : Array[String] ) : Unit =
+    AllUntemplates.add( UserUntemplates )
+    Customizer.Contents.register("lgm", tutorial.IframelessCustomizer)
+    Customizer.Contents.register("lgm-daily", tutorial.IframelessCustomizer)
+    Customizer.Contents.register("atrios-three", tutorial.IframelessCustomizer)
+    val styleExec =
+      sys.env.get("FEEDLETTER_STYLE") match
+        case Some( s ) =&gt; s.toBoolean
+        case None      =&gt; false
+    if styleExec then StyleMain.main(args) else Main.main(args)
+</code></pre>
+   <p>Once the customizers are registered, they will be called whenever the application generates content for the named subscribable.</p>
+   <p>We can verify that our customizer does as we expect by using <code>./feedletter-style</code> to preview newsletter output. (See <a href="#15-tweak-the-newsletter-styles">above</a>).</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-multiple --subscribable-name atrios-three --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+</code></pre>
+   <p>We can find one of Atrios' "Rock on." posts, which used to render blank in mail clients, but now render like...</p><img alt="Screenshot of a transformed-to-div iframe" src="2024/01/29/feedletter-tutorial/rock-on.png" style="width: 100%;">
+   <p>Of course we can style that <code>div</code> and link however we like.</p>
+   <div class="note">
+    <p><a name="templating-note" href=""></a>Re: "TemplateParams" customizers</p>
+    <p>Confusingly, <em>feedletter</em> newsletters are rendered with two kinds of templating.</p>
+    <ul>
+     <li>"<a href="https://github.com/swaldman/untemplate-doc#readme">untemplates</a>" render newsletter HTML.</li>
+     <li>but that HTML can itself be a template, by including case-insensitive constructs like <code>%PercentDelimitedKey%</code> which get filled in just prior to notification.</li>
+    </ul>
+    <p>The role of the second round of templating is to add subscriber-specific customizations, which might commonly include a particular subscriber's name and e-mail, as well as an unsubscribe link specific to that subscriber.</p>
+    <p>Each notification is rendered by an untemplate just once, but any <code>%Key%</code> left in that rendering can be filled in differently for each subscriber.</p>
+    <p>Template-params customizers let you add key-value pairs to the built-in set of available substitutions for these last-minute, per-subscriber customizations.</p>
+   </div>
+   <h2><a href="#conclusion" id="conclusion" name="conclusion" class="anchorlink"></a>Conclusion</h2>
+   <p>This was a lot!</p>
+   <p>It probably seems intimidating.</p>
+   <p>But if you know how to self-host <em>systemd</em> daemon processes, much of the above should have been familiar. Setting up a feedletter server should take one to two hours of your time.</p>
+   <p>Defining new feeds and subscribables, once the server is set up, becomes just a 5 minute operation.</p>
+   <p>One feedletter instance can host as many feeds and subscribables as you like.</p>
+   <p>Restyling your subscribables, or writing customizers and bespoke untemplates for them, can take longer. Developing custom front-ends is time-consuming detail work.</p>
+   <p>I'd love it if you gave <em>feedletter</em> a try!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/01/29/feedletter-tutorial/index.html">10:30 AM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2023-12-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2023/12/06/apis-against-dependent-types-in-scala/index.html">APIs against dependent types in Scala</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>Scala supports instance-dependent types, which is very cool! So I can define...</p>
+   <pre><code class="language-scala">class Human( name : String ):
+  case class Tooth( num : Int ):
+    override def toString(): String = s"${name}'s #${num} tooth"
+    
+  val teeth = Set.from( (1 to 32).map( Tooth.apply ) )
+  def brush( myTeeth : Set[Tooth] ) : Unit = println(s"fluoride goodness for ${name}")
+  
+val me = new Human("Steve")
+val you = new Human("Awesome")
+
+me.brush( me.teeth )
+//me.brush( you.teeth ) // gross! doesn't compile. (as it should not!)
+</code></pre>
+   <p>My teeth and your teeth are different types, even though they are of the same class. The identity of the <em>enclosing instance</em> is a part of the type.</p>
+   <p>And we see here how that can be useful! Often inner classes represent internal structures that should mostly be managed by their enclosing instance. It's good that the compiler pushes back against code in which you might brush my teeth or pump my heart!</p>
+   <p>But sometimes inner instances are not so internal, or even if they are, an external thing might have business interacting with it. The virtual human we are modeling might have need of a dentist or a cadiologist.</p>
+   <p>Scala's type system doesn't prevent external things from accessing inner class instances, it just demands you do it via a correct type.</p>
+   <p>I know of two ways to define external APIs against instance-dependent types. First, Scala supports <em>projection types</em>, like <code>Human#Teeth</code>. Where an ordinary dot-separated path would have required me to identify some particular instance, <code>Human#Teeth</code> matches the tooth of <em>any</em> human.</p>
+   <p>A second way to hit instance-dependent types from an external API is to require the caller to identify the instance in the call, and then let the type of a later argument to the same call include the identified instance. I think it's kind of wild that Scala supports this. It's an example where the type of arguments to a statically declared function is effectively determined at runtime. You don't even need separate argument lists, although I think I prefer them.</p>
+   <pre><code class="language-scala">class Dentist:
+  def checkByProjection( tooth : Human#Tooth ) : Unit = println( s"Found ${tooth} (by projection)" )
+  def checkByIdentifying( human : Human)( tooth : human.Tooth ) : Unit = println( s"Found ${tooth} (by identification)" )
+
+val d  = new Dentist
+
+// API by projection
+d.checkByProjection( me.teeth.head )
+d.checkByProjection( you.teeth.head )
+
+// API by identification
+d.checkByIdentifying( me )( me.teeth.head )
+d.checkByIdentifying( you )( you.teeth.head )
+
+// d.checkByIdentifying( me )( you.teeth.head ) // does not compile, as it should not
+// d.checkByIdentifying( you )( me.teeth.head ) // does not compile, as it should not
+</code></pre>
+   <p>I've used projection types a lot, over the eons. I know some people think that any need for external APIs against inner types is code smell or something. But I've found a variety of places where they seem to make sense, and the "do it right" workarounds (e.g. define some instance-independent abstract base type for the inner things, and write external APIs against that) just create busy work and maintenance complexity.</p>
+   <p>Nevertheless, in some corner cases, projection types <a href="https://github.com/lampepfl/dotty/issues/18655">aren't completely supported</a>, and my sense is that much of the Scala community considers them icky (like brushing someone else's teeth).</p>
+   <p>Sometimes you need to write APIs against inner types by identification anyway, because you need to know stuff about the enclosing instance (which inner instances don't disclose unless they declare an explicit reference).</p>
+   <p>But sometimes you don't need to be told the identity of the outer instance (because it's not relevant to what you are doing, or because the inner instance discloses a reference explicitly).</p>
+   <p>Are projection types icky and it best to just standardize on requiring explicit identification of enclosing instances?</p>
+   <p>Or are projection types a cool trick we should delight in using?</p>
+   <p>Enquiring minds want to know!</p>
+   <hr>
+   <p>(This blog doesn't support comments yet, but you can reply to <a href="https://zirk.us/@interfluidity/111535483316429524">this post</a> on Mastodon.)</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2023/12/06/apis-against-dependent-types-in-scala/index.html">04:00 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2023-11-14 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2023/11/14/library--script-vs-application--config-file/index.html">(Library + Script) vs (Application + Config File)</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong></p>
+   <p>For Scala apps, instead of installing applications and writing separate config files, why not do config like this?</p>
+   <pre><code class="language-scala">#!/usr/bin/env -S scala-cli shebang
+
+//&gt; using dep "com.example::cool-app:1.0.0"
+
+val config = coolapp.Config(
+  name = "Fonzie",                    // the name of your installation
+  apparel = coolapp.Apparel.Leather,  // see elements defined in coolapp.Apparel
+  gesture = coolapp.Gesture.ThumbsUp, // see elements defined in coolapp.Gesture
+  reference = "Very dated, old man.", // a string to help users identify your character
+  port = 8765                         // the port on which the app will run
+)
+
+coolapp.start( config )
+</code></pre>
+   <hr>
+   <p>Once upon a time, I spent a very great deal of time supporting and integrating multiple config formats into my work. I used to describe <a href="https://www.mchange.com/projects/c3p0/">c3p0</a> as a configuration project attached to a connection pool.</p>
+   <p>Lately, though, I find I am skipping any support of config files. I mostly write Scala, and Scala case classes strike me as a pretty good configuration format.</p>
+   <ul>
+    <li>
+     <p>Since you can intitialize case classes with named arguments, <code>key = value</code>, they can be made literate and intuitive.</p></li>
+    <li>
+     <p>They support rich comments, because the Scala language supports comments.</p></li>
+    <li>
+     <p>With simple string or integer values, they are as simple as most config formats.</p></li>
+   </ul>
+   <p>Case-class config is extremely flexible, because your values are specified in a general purpose programming language, and can include variables or functions. And you get compile-time feedback for misconfigurations.</p>
+   <p>When I first became enamored with case-classes-as-config, I <a href="https://github.com/swaldman/audiofluidity">wrote</a> a special purpose bootstrap app that would compile a file containing a case-class-instance-as-config, then use Java reflection to load it from a container.</p>
+   <pre><code class="language-scala">val podcast : Podcast =
+    Podcast(
+      mainUrl                = "https://superpodcast.audiofluidity.com/",
+      title                  = "Superpodcast",
+      description            = """｜&lt;p&gt;Superpodcast is the best podcast you've ever heard.&lt;/p&gt;
+                                  ｜
+                                  ｜&lt;p&gt;In fact, you will never hear it.&lt;/p&gt;""".stripMargin,
+      guidPrefix             = "com.audiofluidity.superpodcast-",
+      shortOpaqueName        = "superpodcast",
+      mainCoverImageFileName = "some-cover-art.jpg",
+      editorEmail            = "asshole@audiofluidity.com",
+      defaultAuthorEmail     = "asshole@audiofluidity.com",
+      itunesCategories       = immutable.Seq( ItunesCategory.Comedy ),
+      mbAdmin                = Some(Admin(name="Asshole", email="asshole@audiofluidity.com")),
+      mbLanguage             = Some(LanguageCode.EnglishUnitedStates),
+      mbPublisher            = Some("Does Not Exist, LLC"),
+      episodes               = episodes
+    )
+</code></pre>
+   <p>In more recent projects, I've just used either <a href="https://scala-cli.virtuslab.org/"><code>scala-cli</code></a> or <a href="https://mill-build.com/mill/Intro_to_Mill.html"><code>mill</code></a> as a runner. Sometimes I've left the definition of a stub case-class instance in the <code>src</code> directory for users to fill in, as in <a href="https://github.com/swaldman/fossilphant/blob/main/fossilphant/src/config.scala"><code>fossilphant</code></a>. Other times I've defined abstract main classes, asking users to extend them by overriding a method that supplies config as a case class instance, as in <a href="https://github.com/swaldman/unify-rss/blob/2f6305568f8b53e63fa5c16d663db44b0b565288/main/com/mchange/unifyrss/AbstractDaemonMain.scala"><code>unify-rss</code></a>.</p>
+   <pre><code class="language-scala">package com.mchange.unifyrss
+
+import scala.collection.*
+
+import zio.*
+
+abstract class AbstractDaemonMain extends ZIOAppDefault:
+
+  def appConfig : AppConfig
+
+  override def run =
+    for
+      mergedFeedRefs   &lt;- initMergedFeedRefs( appConfig )
+      _                &lt;- periodicallyResilientlyUpdateAllMergedFeedRefs( appConfig, mergedFeedRefs )
+      _                &lt;- ZIO.logInfo(s"Starting up unify-rss server on port ${appConfig.servicePort}")
+      exitCode         &lt;- server( appConfig, mergedFeedRefs )
+    yield exitCode
+</code></pre>
+   <p>So far, I've just instantiated these with concrete <code>object</code>s <a href="https://github.com/swaldman/unify-rss/blob/24cc87b4e6dc6c5a574497c3004fbd00d41f91d8/main/InterfluidityMain.scala">in Scala source files</a>.</p>
+   <p>But it strikes me that a natural refinement would be to design libraries with entry points that accept a case-class-config object as an argument, and expect users to deploy them as e.g. <code>scala-cli</code> scripts. Just something like:</p>
+   <pre><code class="language-scala">#!/usr/bin/env -S scala-cli shebang
+
+//&gt; using dep "com.example::cool-app:1.0.0"
+
+val config = coolapp.Config(
+  name = "Fonzie",                    // the name of your installation
+  apparel = coolapp.Apparel.Leather,  // see elements defined in coolapp.Apparel
+  gesture = coolapp.Gesture.ThumbsUp, // see elements defined in coolapp.Gesture
+  reference = "Very dated, old man.", // a string to help users identify your character
+  port = 8765                         // the port on which the app will run
+)
+
+coolapp.start( config )
+</code></pre>
+   <p>There is a bit of ceremony, and a bit that might intimidate people not accustomed to Scala syntax and tools. But "standard" config file formats get complicated and intimidating too. Here users get quick feedback if they don't pick a valid value without developers having to write special validation logic. Users are still just deploying a text file, as they would with ordinary config.</p>
+   <p>If your priority is 100% user experience, then using a standard (or <a href="https://kdl.dev/">new and improved</a>, ht <a href="https://notes.billmill.org/link_blog/2023/11/KDL_-_a_config_language.html">Bill Mill</a>) config file format, then hand-writing informative, fail-fast validation logic is going to be a better way to go.</p>
+   <p>But your priority should not always be user experience! Not all software development should take the form of a "product" developed at a high cost that will then be amortized over sales to or adoption by a very large number of users.</p>
+   <p>Software is a form of collaboration, and often that collaboration will be more productive and evolve more quickly when "users" are understood to be reasonably capable and informed, so developers don't expand the scope of their work and their maintenance burden in order to render the application accessible to the most intimidated potential users.</p>
+   <p>Obviously it depends what you are doing! But if there is going to be a config file at all, you are already collaborating with a pretty restricted set of people who are okay with setting up and editing an inevitably arcane text file.</p>
+   <p>For many applications and collaborations, maintainability at moderate cost in time and money and speed of evolution, are important. For these applications, when written in an expressive, strongly-typed language like Scala, defining config as a data structure in a script, that then executes an app defined as an entry point to a library, strike me as a pretty good way to go.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2023/11/14/library--script-vs-application--config-file/index.html">12:35 PM EST</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
+ 2023-10-09 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2023/10/09/contributing-to-mill/index.html">Contributing to mill</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I'm a big fan of Scala build tools, both <a href="https://www.scala-sbt.org/"><code>sbt</code></a> and <a href="https://mill-build.com/mill/Intro_to_Mill.html"><code>mill</code></a>. I've done some pretty big projects <a href="https://www.sbt-ethereum.io/">intimately based</a> on <code>sbt</code>. Recently I spend a lot of time in <code>mill</code> because it's very well suited to static-site generators, and because I've had better success getting <code>mill</code> builds to call into Scala 3 code, as some of my <a href="https://github.com/swaldman/untemplate-doc#readme">site-generation tools</a> require. I've contributed to both projects.</p>
+   <p>There are a few hints I want to give myself for when I contribute to <code>mill</code>.</p>
+   <h2><a href="#build-and-run" id="build-and-run" name="build-and-run" class="anchorlink"></a>Build and run</h2>
+   <p>The trick is just</p>
+   <pre><code class="language-plaintext">$ ./mill -i installLocal
+</code></pre>
+   <p>in the <a href="https://github.com/com-lihaoyi/mill">mill repository</a>. If the build succeeds, the a <code>mill-release</code> executable appears in the <code>target/</code> directory of the repository. One can test and play with that.</p>
+   <h2><a href="#scalafmt" id="scalafmt" name="scalafmt" class="anchorlink"></a>scalafmt</h2>
+   <p><code>mill</code> wants code contributions to pass a <code>scalafmt</code> check before merging. You build <code>mill</code> with <code>mill</code> of course, and <code>mill</code> <a href="https://mill-build.com/mill/Scala_Module_Config.html#_reformatting_your_code">makes this check easy</a>.</p>
+   <p>To check formatting...</p>
+   <pre><code class="language-plaintext">$ mill mill.scalalib.scalafmt.ScalafmtModule/checkFormatAll __.sources
+</code></pre>
+   <p>To have <code>mill</code> go ahead and reformat your code...</p>
+   <pre><code class="language-plaintext">$ mill mill.scalalib.scalafmt.ScalafmtModule/reformatAll __.sources
+</code></pre>
+   <p>I have now twice, embarrassingly, forgotten to do this.</p>
+   <h2><a href="#" class="anchorlink"></a>???</h2>
+   <p>I'll probably update this entry in place over time, if I find more hints I want to keep.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2023/10/09/contributing-to-mill/index.html">07:30 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>pdfcat as a Scala script</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2023-05-20 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">pdfcat as a Scala script</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I am really enjoying scripting in Scala with <a href="https://scala-cli.virtuslab.org/"><code>scala-cli</code></a>.</p>
+   <p>Scala has long supported scripting in theory, but for your scripts to run, all the dependencies had to be preinstalled in your <code>CLASSPATH</code>. That rendered the feature not so useful. Under <code>scala-cli</code>, however, dependencies are delightfully automanaged for your script. This has rendered JVM scripting practical and convenient for me.</p>
+   <p>I find that psychologically this is a BFD. It dissolves the boundary between app and library. Usually, I want to get something done, I look for an app. If I want to merge a bunch of PDFs together, I might fire up <i>Adobe Acrobat</i>, curse myself, and mess around until I figure out how you do that.</p>
+   <p>However, the Java <a href="https://pdfbox.apache.org/">PDFBox</a> library exists. (<a href="https://itextpdf.com/">itextpdf</a> too!) With easy scripting, the library can substitute for the app. A glance at a <a href="https://www.tutorialspoint.com/pdfbox/pdfbox_merging_multiple_pdf_documents.htm">tutorial</a> on how to merge PDFs with PDFBox and we were <a href="https://github.com/swaldman/scalascripts-misc/blob/main/bin/pdfcat">off to the races</a>.</p>
+   <p>The meaningful code is trivial:</p>
+   <pre><code class="language-scala">val files = args.map(fn =&gt; new File(fn))
+val merger = new PDFMergerUtility();
+merger.setDestinationFileName(args.last)
+files.init.foreach( merger.addSource )
+merger.mergeDocuments()
+</code></pre>
+   <p>The <a href="https://github.com/swaldman/scalascripts-misc/blob/main/bin/pdfcat">full script</a> is longer than this, of course, but the rest is sanity-checking the command line and aborting if it isn't right.</p>
+   <p>In fact, I often find command-line parsing outweighs functional code when I write scripts. Of course that's all optional — you can skip a nice command line if you really mean to script a one-off. But it is great to retain the capacity to solve probems you've already solved instantly on a nice command line. And it's great practice with the Scala ecosystem's rich set of command-line parsing libraries.</p>
+   <p>A few days ago I needed to quickly serve a directory by HTTP from my laptop. There's some Python command I've used for that in the past. I'd have to look it up, and figure out how to get it to bind to the laptop's public interface rather than localhost. It was quick instead to script up Li Haoyi's <a href="https://github.com/com-lihaoyi/cask"><code>cask</code></a> library, and build a nice command line with <a href="https://ben.kirw.in/decline/"><code>decline</code></a>. Check out <a href="https://github.com/swaldman/scalascripts-misc/blob/main/bin/http-serve"><code>http-serve</code></a>.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">05:00 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../a-notebook/index.html">← A notebook</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../../07/19/scripting-mastodon-in-scala/index.html">Scripting Mastodon in Scala →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

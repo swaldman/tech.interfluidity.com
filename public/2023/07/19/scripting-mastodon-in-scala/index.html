@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>Scripting Mastodon in Scala</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2023-07-19 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">Scripting Mastodon in Scala</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I want to learn more about how to work with "fediverse" tech — <a href="https://joinmastodon.org/">Mastodon</a>, <a href="https://activitypub.rocks/">ActivityPub</a>, <a href="https://webfinger.net/">WebFinger</a>, etc.</p>
+   <pre><code class="language-text">$ mastopost --text "Hi. This is some stupid shit I wanna say."
+</code></pre>
+   <p>One thing I soon hope to do is set up my own microblog that mirrors its posts to Mastodon, rather than posting directly to Mastodon, reflective of a kind of <a href="https://www.inkandswitch.com/local-first/">local-first</a>, steward-your-own-stuff ethos.</p>
+   <p>An instant-gratification way to learn to do something is to write a useful script that does it. So, yesterday I wrote <a href="https://github.com/swaldman/scalascripts-misc/blob/769dd058844965e2de02f3ad2a50f6fcd3764d01/bin/mastopost">my first version of a tool</a> called <code>mastopost</code>. This version successfully posted text, but did not implement support for media attachments.</p>
+   <h3><a href="#basic-status-posting" id="basic-status-posting" name="basic-status-posting" class="anchorlink"></a>Basic status posting</h3>
+   <p>With the help of <a href="https://roytang.net/2021/11/mastodon-api-python/">a post by Roy Tang</a>, using Li Haoyi's wonderful libraries <a href="https://github.com/com-lihaoyi/requests-scala">requests-scala</a> and <a href="https://com-lihaoyi.github.io/PPrint/">pprint</a>, this was super simple. The relevant Mastodon API docs are <a href="https://docs.joinmastodon.org/methods/statuses/#create">here</a>.</p>
+   <p>The heart of the script was initially just:</p>
+   <pre><code class="language-scala">import java.net.URLEncoder
+
+// images not yet supported
+case class Config( text : String, url : String, accessToken : String, images : List[String], verbose : Boolean)
+
+def pathJoin( a : String, b : String ) : String =
+  val normA = if a.last == '/' then a.init else a
+  val normB = if b.head == '/' then b.tail else b
+  s"${normA}/${normB}"
+
+// the return value will become the exit code of our script
+def post( config : Config ) : Int =
+  val statusEndpoint      = pathJoin( config.url, "api/v1/statuses/" )
+  val headers             = Map (
+    "Authorization" -&gt; s"Bearer ${config.accessToken}",
+    "Content-Type"  -&gt;  "application/x-www-form-urlencoded",
+  )
+  val formData = s"""status=${URLEncoder.encode(config.text, "UTF-8")}"""
+  requests.post( statusEndpoint, data=formData, headers=headers )
+  0 // if it didn't fail with Exception, send a good exit code!
+</code></pre>
+   <p>This works fine!</p>
+   <p>You do have to create an access token. Go to the "Preferences" page of your logged-in Mastodon instance, then select "Development", then press the "New Application" button and fill out the form. When you are done, you will have an access code that will work!</p>
+   <p>Eventually my <code>post(...)</code> method grew, only because I wanted to be able to verbosely inspect responses, including bad responses.</p>
+   <pre><code class="language-scala">// the return value will become the exit code of our script
+def post( config : Config ) : Int =
+  val statusEndpoint      = pathJoin( config.url, "api/v1/statuses/" )
+  val headers             = Map (
+    "Authorization" -&gt; s"Bearer ${config.accessToken}",
+    "Content-Type"  -&gt;  "application/x-www-form-urlencoded",
+  )
+  val formData = s"""status=${URLEncoder.encode(config.text, "UTF-8")}"""
+
+  // we catch failures resulting from bad status codes, rather than just
+  // fail with exception, so we can print more informative errors
+  val response =
+    try requests.post( statusEndpoint, data=formData, headers=headers )
+    catch
+      case rfe : requests.RequestFailedException =&gt; rfe.response
+      
+  if config.verbose then System.err.println( pprint( response ) )
+  if response.statusCode == 200 then
+    if config.verbose then System.err.println("Post succeeded.")
+    0 // good exit code
+  else
+    val rt = response.text()
+    val rtPart = if rt.isEmpty then "no response text." else s"response text: ${response.text()}"
+    System.err.println(s"Attempt to post failed! Status code ${response.statusCode}, ${rtPart}")
+    9 // arbitrary bad exit code
+</code></pre>
+   <h3><a href="#a-beautiful-command-line" id="a-beautiful-command-line" name="a-beautiful-command-line" class="anchorlink"></a>A beautiful command line</h3>
+   <p>The rest of this <a href="https://github.com/swaldman/scalascripts-misc/blob/769dd058844965e2de02f3ad2a50f6fcd3764d01/bin/mastopost">first version</a> of the script is just command-line parsing.</p>
+   <p>I really enjoy Ben Kirwin's library <a href="https://ben.kirw.in/decline/usage.html">decline</a>. It lets me write extremely tight code to validate and parse the command line, and gives me beautiful usage messages like this:</p>
+   <pre><code class="language-text">Usage: mastopost --text &lt;string&gt; [--url &lt;string&gt;] [--access-token &lt;string&gt;] [--image &lt;string&gt;]... [--verbose]
+
+Posts toots to Mastodon.
+
+Options and flags:
+    --help
+        Display this help text.
+    --text &lt;string&gt;, -t &lt;string&gt;
+        The text of your toot.
+    --url &lt;string&gt;, -u &lt;string&gt;
+        The URL of the instance to which you wish to post.
+    --access-token &lt;string&gt;, -a &lt;string&gt;
+        The access token to authenticate under.
+    --image &lt;string&gt;
+        The file or URL of images to attach.
+    --verbose
+        Print more information to the console.
+
+Environment Variables:
+    MASTO_INSTANCE_URL=&lt;string&gt;
+        The URL of the instance to which you wish to post.
+    MASTO_ACCESS_TOKEN=&lt;string&gt;
+        The access token to authenticate under.
+</code></pre>
+   <p>The command-line parsing code is reproduced below.</p>
+   <pre><code class="language-scala">
+import com.monovore.decline.*
+import cats.implicits.*        // for mapN
+
+case class Config( text : String, url : String, accessToken : String, images : List[String], verbose : Boolean)
+
+val urlHelp = "The URL of the instance to which you wish to post."
+val accessTokenHelp = "The access token to authenticate under."
+
+val text    = Opts.option[String] ("text",         short="t", help="The text of your toot.")
+val url     = Opts.option[String] ("url",          short="u", help=urlHelp)                  orElse Opts.env[String]("MASTO_INSTANCE_URL", help=urlHelp)
+val token   = Opts.option[String] ("access-token", short="a", help=accessTokenHelp)          orElse Opts.env[String]("MASTO_ACCESS_TOKEN", help=accessTokenHelp)
+
+val images  = Opts.options[String]("image", help = "The file or URL of images to attach.").orEmpty
+val verbose = Opts.flag("verbose", help="Print more information to the console.").orFalse
+val allOpts = (text, url, token, images, verbose).mapN( (t, u, at, i, v) =&gt; Config(t,u,at,i,v) ) // a bit annoying
+
+// Insert the mastodon post code from above here...
+
+val command = Command(name="mastopost", header="Posts toots to Mastodon.")( allOpts )
+
+command.parse(args.toIndexedSeq, sys.env) match
+  case Left(help) =&gt;
+    println(help)
+    System.exit(1)
+  case Right( config ) =&gt;
+    val exitCode = post( config )
+    System.exit(exitCode)
+
+</code></pre>
+   <p>The <code>command.parse(...)</code> line yields an <code>Either</code>, which gives me my <code>Config</code> object if everything's cool, or the usage text to print if it is not.</p>
+   <p>Note how nicely <code>decline</code> supports values that can be supplied either as command-line options or as enviroment variables. It enforces that instance URL and access token must be supplied, but accepts them from either source.</p>
+   <p><strong>Be careful though! <code>decline</code> won't find environment variables unless you explicitly supply the environment you want (as a <code>Map[String,String]</code>) in the call to <code>command.parse(...)</code>.</strong> Usually you will just supply <code>sys.env</code>. This tripped me up for a few minutes.</p>
+   <h3><a href="#supporting-media-attachments" id="supporting-media-attachments" name="supporting-media-attachments" class="anchorlink"></a>Supporting media attachments</h3>
+   <p>To support media attachments, you</p>
+   <ol>
+    <li>Hit a <a href="https://docs.joinmastodon.org/methods/media/#v2">separate API endpoint</a> to upload your media (up to four)</li>
+    <li>Parse out the <code>id</code> from the JSON response(s) of the media upload(s)</li>
+    <li>Include a <code>media_ids</code> field in your status post, containing an array of the <code>id</code>, treated as strings, not numbers</li>
+   </ol>
+   <p>As I write, <a href="https://github.com/swaldman/scalascripts-misc/blob/dc1ec717284cc4ea5ef2fa84d18d75dfe5fff531/bin/mastopost">this</a> is the current version of my script.</p>
+   <p>Uploading media turned out to be very easy. Uploads are supposed to be in <code>multipart/form-data</code> format, which <code>requests-scala</code> supports painlessly. The image is uploaded as of the fourth statement below. Again, the method is long only because I wanted to support detailed tracing of bad outcomes when the <code>--verbose</code> flag is set.</p>
+   <p>We have to decode a JSON response, which we do with Li Haoyi's <code>ujson</code> library. (See <a href="https://com-lihaoyi.github.io/upickle/">upickle</a> for docs.)</p>
+   <p>Note that a success in Mastodon's API for uploading media can be the usual good HTTP response code <code>200</code>, or also <code>202</code> for media that may take longer to process. That's why our test for success is</p>
+   <blockquote>
+    <p><code>response.statusCode / 100 == 2</code></p>
+   </blockquote>
+   <p>rather than</p>
+   <blockquote>
+    <p><code>response.statusCode == 200</code>.</p>
+   </blockquote>
+   <pre><code class="language-scala">def postMedia( config : Config, mediaSource : InputStream, filename : String ) : String = // returns the ID of the new media object
+  val mediaEndpoint = pathJoin( config.url, "api/v2/media" )
+  val multipart = requests.MultiPart( requests.MultiItem("file", data=mediaSource, filename=filename) )
+  val headers = Map (
+    "Authorization" -&gt; s"Bearer ${config.accessToken}",
+  )
+  val response =
+    try requests.post( mediaEndpoint, data=multipart, headers=headers )
+    catch
+      case rfe : requests.RequestFailedException =&gt; rfe.response
+  if response.statusCode / 100 == 2 then    
+    if config.verbose then
+      System.err.println(s"Media upload succeeded:")
+      System.err.println(pprint(response))
+      System.err.println()
+    var jsonOut = ujson.read(response.text())
+    jsonOut.obj("id").str // the id comes back as a JSON *String*, not a number
+  else
+    val rt = response.text()
+    val rtPart = if rt.isEmpty then "no response text." else s"response text: ${response.text()}"
+    val msg = s"Upload of media '${filename}' failed! Status code ${response.statusCode}, ${rtPart}"
+    System.err.println(msg)
+    if config.verbose then System.err.println(pprint(response))
+    throw new Exception(msg)
+</code></pre>
+   <p>I wrote this in terms of <code>InputStream</code> rather than files, because I wanted to support URLs as media sources. It annoys me to have to manually download images, then reupload, when I want to attach an image from the internet as a status.</p>
+   <p>Once we have this method, we just have to turn our media filenames and/or URLs into <code>InputStream</code>s with some filename, hit the method, then post our status as we did before, except with a new array field called <code>media_ids</code>.</p>
+   <p>I had a hard time making this work, though, hitting the status with a form-data-encoded request as we did before. However I tried to encode <code>media_ids</code>, I couldn't get media to attach, even after reviewing Mastodon's <a href="https://docs.joinmastodon.org/client/intro/#form-data">documentation of its conventions for form data</a>.</p>
+   <p>Thanks to <a href="https://chrisjones.io/articles/using-php-and-curl-to-post-media-to-the-mastodon-api/">Chris Jones</a>, who also had a hard time getting form-data-encoded requests to attach media, I learned that you can hit these endpoints with JSON rather than form data. <code>media_ids</code> worked just fine with a JSON-ifed version of <code>post(...)</code>:</p>
+   <pre><code class="language-scala">// the return value will become the exit code of our script
+def post( config : Config ) : Int =
+  val mediaIds            = prepareMedia( config )
+  val statusEndpoint      = pathJoin( config.url, "api/v1/statuses/" )
+  val headers             = Map (
+    "Authorization" -&gt; s"Bearer ${config.accessToken}",
+    "Content-Type"  -&gt;  "application/json",
+  )
+
+  val jsonData =
+    val obj = ujson.Obj(
+      "status" -&gt; ujson.Str(config.text),
+      "media_ids" -&gt; ujson.Arr( mediaIds.map( ujson.Str.apply )* ),
+    )
+    ujson.write(obj)
+
+  // we catch failures resulting from bad status codes, rather than just
+  // fail with exception, so we can print more informative errors
+  val response =
+    try requests.post( statusEndpoint, data=jsonData, headers=headers )
+    catch
+      case rfe : requests.RequestFailedException =&gt; rfe.response
+      
+  if config.verbose then System.err.println( pprint( response ) )
+  if response.statusCode == 200 then
+    if config.verbose then System.err.println("Post succeeded.")
+    0 // good exit code
+  else
+    val rt = response.text()
+    val rtPart = if rt.isEmpty then "no response text." else s"response text: ${response.text()}"
+    System.err.println(s"Attempt to post failed! Status code ${response.statusCode}, ${rtPart}")
+    9 // arbitrary bad exit code
+</code></pre>
+   <p>There's a bit of busy-work getting from arguments to <code>InputStream</code> plus <code>filename</code> (which I bundle together as <code>MediaStream</code> in the script), but it's straightforward if slightly more verbose than I had hoped.</p>
+   <p>Anyway, please check out <a href="https://github.com/swaldman/scalascripts-misc/blob/main/bin/mastopost">the latest evolving version of the script</a> for more details.</p>
+   <h3><a href="#miscellaneous" id="miscellaneous" name="miscellaneous" class="anchorlink"></a>Miscellaneous</h3>
+   <p>Since the initial version, I've modified the <code>image</code> command-line argument to be <code>media</code> instead, since in theory you might want to upload videos and stuff.</p>
+   <p>Right now <code>--text</code> is a required argument to the script, but it's legal to have media-only posts. Sometime soon, I'll try to modify the script to support that.</p>
+   <p>For now, I'm going to keep <code>MASTO_INSTANCE_URL</code> and <code>MASTO_ACCESS_TOKEN</code> set in my environment, and posting will just be</p>
+   <pre><code class="language-text">$ mastopost --text "Hi. This is some stupid shit I wanna say."
+</code></pre>
+   <p>along with some optional stupid <code>--media</code>.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">07:00 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../../05/20/pdfcat-as-a-scala-script/index.html">← pdfcat as a Scala script</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../29/building-a-resilient-rss-feed-unifier-with-zio/index.html">Building a resilient RSS feed unifier with ZIO →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

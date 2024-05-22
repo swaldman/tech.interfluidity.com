@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <title>tar or tgz?</title>
+  </head>
+  <body>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-03-27 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">tar or tgz?</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>A thing I've done over the last while is automate a lot of my sysadmin, using <code>systemd</code> timers to hit <a href="https://scala-cli.virtuslab.org/">scala-cli</a> scripts.</p>
+   <p>I've built for myself a <a href="https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file">little framework</a> that is incredibly in need of documentation, but that lets me define scripts very flexibly and can provide great step-by-step information about what happens and anything that goes wrong in brightly colored HTML e-mails. I love it.</p>
+   <p>Much of what I do is back things up to a cloud service using <a href="https://rclone.org/">rclone</a>.</p>
+   <p>Last night I wrote a <a href="https://github.com/swaldman/mchange-sysadmin-scripts/blob/main/taskbin/backup-directory-as-tar">script</a> just to back up some directory. I ran into what I consider an age-old dilemma.</p>
+   <p>Sometime early in my geekish career, I picked up the nugget that its best to keep important backups as straight <code>tar</code> files rather than <code>tgz</code> (or <code>tbz</code> or whatever), because if some bit gets corrupted, most of a straight <code>tar</code> will remain recoverable, while the compressed archive will just be toast.</p>
+   <p>Is that right? Is it a real concern? I don't think I've ever experienced a corrupted archive, <code>tar</code> or <code>tgz</code>, but of course backup is a form of insurance, the whole point is to be resilient to tail risks.</p>
+   <p>Still, searching the interwebs, I don't see a lot of people recommending uncompressed archives. Space is more of a bottleneck to me than CPU or time, so if the resilience advantage isn't significant, I'd compress.</p>
+   <p>What do you think?</p>
+   <hr>
+   <p><strong>Update:</strong> Feel free to comment <a href="https://zirk.us/@interfluidity/112168423434044308">here</a></p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">10:55 AM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../18/c3p0-and-loom/index.html">← c3p0 and loom</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+   <a href="../../../04/09/names-too-on-the-nose/index.html">Names too on the nose →</a>
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

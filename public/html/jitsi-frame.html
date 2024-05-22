@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<!-- see https://community.jitsi.org/t/how-to-use-iframe-api/114443/3 -->
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;      
+      }
+      html {
+        overflow: auto;
+	font-family: sans-serif;
+	text-align: center;
+      }
+      body {
+        background-image: url("../image/graph-paper-tile-small-lighter.png");
+        background-color: white;
+      }
+      #description {
+        margin-bottom: 1rem;
+      }
+      #jitsi-session {
+	margin-left: auto;
+	margin-right: auto;
+	width: 90vw;
+	height: 80vh;
+	/* border: red solid 2px; */
+      }
+      iframe {
+        padding: 0;
+        border: none;
+	border-radius: 25px;
+      }
+    </style>
+    <script src='https://loiter.interfluidity.com/external_api.js'></script>
+    <script>
+      function initPage() {
+        const urlParams = new URLSearchParams(window.location.search)
+	const roomName = urlParams.get('roomName')
+	var title = null
+	const checkTitle = urlParams.get('title')
+	if ( checkTitle != null ){
+	  title = checkTitle	  
+	}
+	else {
+	  title = roomName
+	}
+	var description = null
+	const checkDescription = urlParams.get('description')
+	if (checkDescription != null) {
+	   description = checkDescription
+	}
+	else {
+	   description = "jitsi session: " + title
+	}
+	document.getElementById("html-title").innerHTML = title
+	document.getElementById("main-title").innerHTML = title
+	document.getElementById("description").innerHTML = description
+	const domain = 'loiter.interfluidity.com'
+    	const options = {
+          roomName: roomName,
+          parentNode: document.getElementById('jitsi-session'),
+        }
+        const api = new JitsiMeetExternalAPI(domain, options)
+      }
+    </script>
+    <title id="html-title">Unknown</title>
+  </head>
+  <body onLoad="initPage()">
+    <h1 id="main-title">Unknown</h1>
+    <div id="description"></div>
+    <div id="jitsi-session"></div>
+  </body>
+</html>

@@ -1,0 +1,452 @@
+@font-face {
+    font-family: 'FiraCode-Light';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Light.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-Regular';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Medium.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-Medium';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-Medium.ttf');
+}
+@font-face {
+    font-family: 'FiraCode-SemiBold';
+    src: url('../font/Fira_Code_v6.2/ttf/FiraCode-SemiBold.ttf');
+}
+@font-face {
+    font-family: 'IbarraRealNova';
+    src: url('../font/Ibarra_Real_Nova/IbarraRealNova-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'IbarraRealNovaItalic';
+    src: url('../font/Ibarra_Real_Nova/IbarraRealNova-Italic-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'SourceSerif4';
+    src: url('../font/Source_Serif_4/SourceSerif4-VariableFont_opsz,wght.ttf');
+}
+@font-face {
+    font-family: 'SourceSerif4Italic';
+    src: url('../font/Source_Serif_4/SourceSerif4-Italic-VariableFont_opsz,wght.ttf');
+}
+@font-face {
+    font-family: 'Caroni';
+    src: url("../font/caroni/Caroni-Regular.otf");
+}
+:root {
+    --see-also-color: rgba(20, 20, 20, 0.5); /* rgb(93,117,222); */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+body {
+    background-image: url("../image/graph-paper-tile-small-lighter.png");
+    background-color: white;
+    font-family: 'SourceSerif4', Times, serif;
+    font-variation-settings: "wght" 350;
+}
+code {
+    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-size: 80%;
+    background-color: #eeeeff;
+    padding: 2px;
+}
+pre code {
+    font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
+}
+a code {
+    background-color: #eeeeee;
+}
+code strong, code b {
+    font-family: 'FiraCode-Medium', "Lucida Console", "Courier New", monospace;
+}
+strong, b {
+    font-variation-settings: "wght" 700;
+}
+i, em {
+    font-family: 'SourceSerif4Italic';
+    font-style: normal;
+}
+a {
+    color: #0000EE;
+}
+a:visited {
+    color: #7777ff;
+}
+a:visited code {
+    color: #7777ff;
+}
+.main-title {
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-size: 24pt;
+    letter-spacing: -1px;
+}
+.main-title a {
+    color: black;
+    text-decoration: none;
+}
+.main-title a:visited {
+    color: black;
+    text-decoration: none;
+}
+.main-title a:hover {
+    color: black;
+    text-decoration: underline;
+}
+.tagline {
+    font-family: 'FiraCode-Light', "Lucida Console", "Courier New", monospace;
+    font-size: 14pt;
+    letter-spacing: 3px;
+}
+.tagline a {
+    color: black;
+    text-decoration: none;
+}
+.tagline a:visited {
+    color: black;
+}
+.tagline a:hover {
+    color: black;
+    text-decoration: underline;
+}
+#rss-link-container {
+    float: right;
+}
+a#rss-link {
+    color: black;
+    text-decoration: none;
+    font-family: 'FiraCode-Light';
+    font-weight: normal;
+}
+a#rss-link span {
+    color: #FF8800;
+}
+a#rss-link span.bullet {
+    color: black;
+}
+#header {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+.see-also {
+    margin-top: 0.25rem;
+    margin-left: 1rem;
+    font-family: 'Caroni';
+    font-size: 12pt;
+    color: var( --see-also-color );
+}
+.see-also a {
+    color: var( --see-also-color );
+    text-decoration: none;
+}
+.see-also a:visited {
+    color: var( --see-also-color );
+    text-decoration: none;
+}
+.see-also a:hover {
+    color: var( --see-also-color );
+    text-decoration: underline;
+}
+
+#left-sidebar {
+    /* border: 2px solid blue; */
+}
+#right-sidebar {
+    /* border: 2px solid yellow; */
+}
+#main {
+    display: grid;
+    grid-template-columns: minmax(min-content, 100px) minmax(300px, auto) minmax(min-content, 100px);
+    grid-template-rows:    1fr;
+}
+#content {
+    /* border: 2px solid green; */
+}
+#content article {
+    background-color: rgba(255, 255, 255, 0.625);
+    padding-top: 1rem;
+    padding-left: 1rem;
+    border: 1px solid black;
+}
+#content .subscribe-space {
+    background-color: rgba(255, 255, 255, 0.625);
+    padding: 1rem;
+    border: 1px solid black;
+    max-width: 600px;
+}
+h1, h2, h3 {
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+}
+h1 {
+    font-size: 14pt;
+}
+h2 {
+    font-size: 13pt;
+}
+h3 {
+    font-size: 12pt;
+}
+#content article h1 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+#content article h1 a {
+    text-decoration: none;
+    color: black;
+}
+#content article h1 a:hover {
+    text-decoration: underline;
+}
+#content article h2, #content article h3 {
+    margin-top: 2em;
+}
+#content article div.note::before {
+    content: "☞ Note";
+    font-weight: bold;
+    font-style: italic;
+    color: green;
+    display: block;
+}
+#content article div.note {
+    padding: 1em;
+    margin: 0.5em;
+    border: 2px solid green;
+    background-color: #ccffcc;
+    font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 80%;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    line-height: 130%;
+}
+#content article div.note code {
+    background-color: yellow;
+}
+#content article div.note pre code {
+    background-color: black;
+}
+#content hr {
+    margin-top: 2em;
+    margin-right: 1rem;
+    border-top: 2px solid black;
+}
+#content hr.below-title {
+    border-top: 1px solid black;
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+}
+#content .entry-body {
+    font-size: 115%;
+    line-height: 135%;
+    margin-right: 1rem;
+    padding-right: 0;
+}
+#content .day-stamp {
+    position: relative;
+    left: -1.5em;
+    font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
+    font-size: 12pt;
+    margin-bottom: 0.25em;
+}
+#content .day-stamp .arrow {
+    font-size: 150%;
+}
+#content .post-metainfo {
+    width: 100%;
+    text-align: right;
+    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-size: 70%;
+    margin-top: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+#content .post-metainfo a {
+    color: #00FF00;
+    text-decoration: none;
+    background-color: black;
+    padding: 5px;
+    border-radius: 3px;
+}
+#content .post-metainfo a:visited {
+    color: #00FF00;
+    text-decoration: none;
+}
+#content .post-metainfo a:hover {
+    color: orange;
+    /* text-decoration: underline; */
+}
+#content .post-metainfo .updated-note {
+    float: left;
+    font-family: 'Caroni';
+    font-size: 14pt;
+    color: orange;
+    position: relative;
+    top: -0.25em;
+}
+#content .prev-top-next {
+    display: grid;
+    grid-template-columns: 3fr 1fr 3fr;
+    grid-template-rows:    1fr;
+    width 100%;
+    font-family: 'FiraCode-Medium', "Lucida Console", "Courier New", monospace;
+    font-size: 12pt;
+}
+#content .prev-top-next a {
+    color: var( --see-also-color );
+    text-decoration: none;
+}
+#content .prev-top-next a:visited {
+    color: var( --see-also-color );
+}
+#content .prev-top-next a:hover {
+    color: black;
+}
+#content .prev-top-next .prev {
+    text-align: left;
+    color: var( --see-also-color ); /* annoying but necessary to style ellipses.. */
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+#content .prev-top-next .top {
+    text-align: center;
+}
+#content .prev-top-next .next {
+    text-align: right;
+    color: var( --see-also-color ); /* annoying but necessary to style ellipses.. */
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+#content .after-article {
+    margin-top: 0.25rem;
+}
+#content .entry-separator {
+    height: 2em;
+}
+#content pre code {
+    margin-left: 1rem;
+    margin-right: 2rem;
+    border-radius: 10px;
+    font-size: 90%;
+}
+.archive h1 {
+    font-family: 'FiraCode-SemiBold';
+    letter-spacing: -1px;
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+.archive .archive-table {
+    position: relative;
+    left: 2.5rem;
+}
+.archive .archive-table td {
+    vertical-align: bottom;
+}
+.archive .archive-table td.timestamp {
+    font-family: 'FiraCode-Regular';
+    font-size: 80%;
+}
+.archive .archive-table td.timestamp a {
+    color: var( --see-also-color );
+    text-decoration: none;
+}
+.archive .archive-table td.timestamp a:visited {
+    color: var( --see-also-color );
+}
+.archive .archive-table td.timestamp a:hover {
+    color: black;
+}
+.archive .archive-table td.entry-link a {
+    color: black;
+    text-decoration: none;
+}
+.archive .archive-table td.entry-link a:visited {
+    color: black;
+}
+.archive .archive-table td.entry-link a:hover {
+    text-decoration: underline;
+}
+.archive .archive-table td.entry-link {
+    font-family: 'FiraCode-Regular';
+    /*
+    font-family: 'IbarraRealNova';
+    font-size: 125%;
+    font-variation-settings: "wght" 600;
+    */
+    padding-left: 1rem;
+}
+.monospace-bold {
+    font-family: 'FiraCode-SemiBold', monospace;
+}
+.monospace-regular {
+    font-family: 'FiraCode-Regular', monospace;
+}
+div.subscribe-form {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-template-rows: min-content min-content;
+    padding-bottom: 1.5rem;
+}
+div.subscribe-form div.sf-label {
+    font-family: 'FiraCode-Semi-Bold';
+    font-weight: normal;
+    text-align: right;
+    white-space: nowrap;
+    grid-column: 1;
+    padding-right: 0.5em;
+}
+div.subscribe-form div.sf-field input {
+    width: 100%;
+}
+div.subscribe-form div.sf-submit {
+    text-align: center;
+}
+div.subscribe-form div.sf-submit input {
+    width: 100%;
+    font-family: 'SourceSerif4';
+    font-variation-settings: "wght" 600;
+}
+div.subscribe-form div.sf-label-email {
+    grid-row: 1;
+}
+div.subscribe-form div.sf-field-email {
+    grid-row: 1;
+    grid-column: 2;
+}
+div.subscribe-form div.sf-label-name {
+    grid-row: 2;
+}
+div.subscribe-form div.sf-field-name {
+    grid-row: 2;
+    grid-column: 2;
+}
+div.subscribe-form div.sf-note-name {
+    grid-row: 2;
+    grid-column: 3;
+}
+div.subscribe-form div.sf-label-submit {
+    grid-row: 3;
+    font-size: 150%;
+}
+div.subscribe-form div.sf-submit {
+    grid-row: 3;
+    grid-column: 2;
+}
+div.iffy-element-desc {
+    margin-left: 0.2rem;
+    padding-left: 1rem;
+    border-left: 3px solid orange;
+}
+
+@media only screen and (max-width: 700px) {
+    .main-title {
+	font-size: 18pt;
+    }
+}
