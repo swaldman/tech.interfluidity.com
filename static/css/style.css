@@ -472,7 +472,7 @@ div.iffy-element-desc {
 }
 .update-history ul {
     margin-top: 8px;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
 }
 .update-history i, .update-history em {
     font-family: 'RobotoCondensedItalic', sans-serif;
@@ -483,6 +483,7 @@ div.iffy-element-desc {
     margin-bottom: 1rem;
     font-variation-settings: "wght" 300;
     font-family: 'RobotoCondensedItalic', sans-serif;
+    background-color: rgba(240, 240, 240, 0.625);
 }
 li:first-of-type > .update-timestamp {
     font-variation-settings: "wght" 500;
