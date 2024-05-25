@@ -478,6 +478,7 @@ div.iffy-element-desc {
     font-family: 'RobotoCondensedItalic', sans-serif;
 }
 .update-history .update-history-note {
+    border-top: 1pt solid black;
     font-size: 95%;
     margin-bottom: 1rem;
     font-variation-settings: "wght" 300;
