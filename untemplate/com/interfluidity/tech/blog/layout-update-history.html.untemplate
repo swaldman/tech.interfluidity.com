@@ -1,0 +1,29 @@
+val updateRecordsForDisplay = input.blog.updateRecordsForDisplay(input.asInstanceOf[input.blog.Layout.Input.Entry])
+
+val liElems =
+  updateRecordsForDisplay.map: urfd =>
+    val a = s"""<li><span class="update-timestamp"><i>${input.blog.dateTimeFormatter.format(urfd.timestamp)}</i></span> &mdash; ${urfd.description.getOrElse("No description.")}"""
+    val b = urfd.lastMinorRevisionRelative.fold("")(lmrr => s""" [<a href="${lmrr}">link</a>]""")
+    val c = urfd.supercededRevisionRelative.fold("")(srr => s""" (See revision <a href="${srr}">previous</a>.)""")
+    val d = "</li>"
+    a + b + c
+end liElems
+
+(input : MainBlog.Layout.Input.Entry)[]~()>
+<()
+  if liElems.nonEmpty then {
+()>
+<div class="update-history">
+  <h3 class="update-history-title">
+    <a id="major-updates"></a>Major revisions:
+  </h3>
+  <ul>
+    <( liElems.mkString("\n") )>
+  </ul>
+  <div class="update-history-note">Timestamps are for "major", substantative revisions. There may have been subsequent typo fixes and language
+  reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history,
+  you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>.</div>
+</div>
+<()
+  }
+()>

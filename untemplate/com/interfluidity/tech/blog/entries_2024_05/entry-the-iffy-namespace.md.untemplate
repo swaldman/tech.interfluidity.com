@@ -1,9 +1,13 @@
+> val updateHistory =
+>    UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
+>    Nil
+>
 > val UntemplateAttributes = immutable.Map[String,Any] (
->   "Title"     -> "The 'iffy' XML namespace",
->   "PubDate"   -> "2024-05-13T04:10:00-04:00",
->   "Permalink" -> "/xml/iffy/index.html",
->   "Updated"   -> "2024-05-21T00:25:00-04:00",
->   "Anchor"    -> "iffy-xml-namespace"
+>   "Title"         -> "The 'iffy' XML namespace",
+>   "PubDate"       -> "2024-05-13T04:10:00-04:00",
+>   "Permalink"     -> "/xml/iffy/index.html",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "iffy-xml-namespace"
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
@@ -25,9 +29,7 @@ The conventional prefix associated with this namespace will be `iffy`.
 **Table of Contents**
 
 * [`iffy:completeness`](#iffy-completeness)
-* [`iffy:original-guid`](#iffy-original-guid)
 * [`iffy:provenance`](#iffy-provenance)
-* [`iffy:when-updated`](#iffy-when-updated)
 
 ---
 <a id="iffy-completeness"></a>**Element &mdash; `iffy:completeness`**
@@ -86,45 +88,6 @@ If not specified, no commitment is made, the feed should be considered `Ping`.
 </div>
 
 ---
-<a id="iffy-original-guid"></a>**Element &mdash; `iffy:original-guid`**
-
-<div class="iffy-element-desc">
-
-**Solely an item level element**
-
-IF AND ONLY IF an item contains an `atom:updated` element AND the `guid` of this item has been modified
-from the original, pre-update item in order to encourage feed consumers to surface the update, THEN
-the [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) of the original
-post MUST be included in an `iffy:original-guid` element so that aware consumers can tie the update back
-to the original.
-
-**Example:**
-
-```xml
-<?xml version='1.0' encoding='UTF-8'?>
-
-<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>tech — interfluidity</title>
-    <iffy:when-updated>Resurface</iffy:when-updated>
-    <!-- other channel-level elements -->
-    <item>
-      <title>Names too on the nose</title>
-      <guid isPermalink="false">
-        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html#updated-2024-04-14T05:55:00Z
-      </guid>
-      <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</link>
-      <iffy:original-guid>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</iffy:original-guid>
-      <atom:updated>2024-04-14T05:55:00Z</atom:updated>
-      <!-- other item-level elements -->
-    </item>
-  </channel>
-</rss>
-```
-
-</div>
-
----
 
 <a id="iffy-provenance"></a>**Element &mdash; `iffy:provenance`**
 
@@ -169,69 +132,6 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
       <iffy:provenance>
         <atom:link type="application/rss+xml" rel="via" href="https://drafts.interfluidity.com/feed/index.rss"/>
       </iffy:provenance>
-    </item>
-  </channel>
-</rss>
-```
-
-</div>
-
----
-
-<a id="iffy-when-updated"></a>**Element &mdash; `iffy:when-updated`**
-
-<div class="iffy-element-desc">
-
-**May be both a channel and item level element. Item-level specification overrides channel-level specification.**
-
-Contains one of the following three values:
-1. `Ignore`
-2. `Resurface`
-3. `Reannounce`
-
-`iffy:when-updated` suggests how feed consumers should handle items containing `atom:updated` elements.
-
-* `Ignore` suggests that feed consumers simply ignore the notification. Feed consumers should update any
-  cache of the item contents (as they should do in the absence of an `atom:updated` tag.
-* `Resurface` suggests that consumers that present multiple items in reverse-chronological order
-  should present the new item, sorted at its update time rather than its initial publication date.
-  Consumers that "announce" items one at a time (such a e-mail newsletter gateways,
-  Mastodon / Twitter / SMS notifiers) should not re-notify the item.
-* `Reannounce`, like `Resurface`, suggests that consumers that present multiple items in reverse-chronological order
-  should present the new item, sorted at its update time rather than its initial publication date.
-  However, `Reannounce` suggests consumers that "announce" items one at a time (such as e-mail newsletter gateways,
-  Mastodon / Twitter / SMS) notifiers SHOULD re-notify the item.
-
-**Implementation Notes:**
-* Currently, very few feed consumers handle `iffy:when-updated`.
-* To give effect to
-  these values, it is recommended that, at levels `Resurface` and `Reannounce`, items be given updated [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt)
-  values, so that existing consumers perceive them as distinct items.
-* Naive announcement consumers, however,
-  will then treat all `atom:updated` events as `Reannounce`, until they are explicitly modified to support this
-  tag.
-*  Announcing consumers are much rarer and fewer than multiple-item-presenting consumers, so hopefully this
-   will not be too great a burden. Ideally, eventually, feed consumers will widely support this tag and there will
-   be no need for the "hack" of switching `guid` values.
-* _Implementations that modify `guid` values when updated MUST also provide the `iffy:original-guid` element!_
-  - _See [`iffy:original-guid`](#iffy-original-guid)_
-
-**Example:**
-```xml
-<?xml version='1.0' encoding='UTF-8'?>
-
-<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-  <channel>
-    <title>tech — interfluidity</title>
-    <iffy:completeness>Content</iffy:completeness>
-    <iffy:when-updated>Resurface</iffy:when-updated>
-    <!-- other channel-level elements -->
-    <item>
-      <title>Ceci n'est pas un post</title>
-      <guid isPermalink="true">https://tech.interfluidity.com/2024/04/09/ceci/index.html</guid>
-      <link>https://tech.interfluidity.com/2024/04/09/ceci/index.html</link>
-      <atom:updated>2024-04-14T05:55:00Z</atom:updated>
-      <iffy:when-updated>Ignore</iffy:when-updated>
     </item>
   </channel>
 </rss>

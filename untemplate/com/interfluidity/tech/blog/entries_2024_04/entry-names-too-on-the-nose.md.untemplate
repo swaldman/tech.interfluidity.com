@@ -1,8 +1,10 @@
+> val updateHistory = UpdateRecord("2024-05-21T10:55:00-04:00", Some("Add Yahya Sinwar."), None) :: Nil
+>
 > val UntemplateAttributes = immutable.Map[String,Any] (
->   "Title"     -> "Names too on the nose",
->   "PubDate"   -> "2024-04-09T01:15:00-04:00",
->   "Updated"   -> "2024-05-21T10:55:00-04:00",
->   "Anchor"    -> "names-too-on-the-nose",
+>   "Title"         -> "Names too on the nose",
+>   "PubDate"       -> "2024-04-09T01:15:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "names-too-on-the-nose",
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)

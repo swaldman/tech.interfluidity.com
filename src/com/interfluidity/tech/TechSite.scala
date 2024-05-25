@@ -43,6 +43,8 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override def defaultAuthors : immutable.Seq[String] = List("Steve Randy Waldman")
 
+    override val revisionBinder : Option[RevisionBinder] = Some( RevisionBinder.GitByCommit(TechSite, JPath.of("."), siteRooted => Rel("public/").embedRoot(siteRooted)) )
+
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
     // overriding a def, but it's just a constant, so we override with val

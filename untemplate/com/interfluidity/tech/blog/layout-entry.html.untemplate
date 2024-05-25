@@ -7,6 +7,7 @@ import unstatic.ztapir.simple.Attribute.Key.*
 val presentationTypeClass =
   s"presentation-${input.presentation.toString().toLowerCase}"
 
+val site = input.site
 val blog = input.blog
 val info = input.info
 val resolved = input.sourceEntry
@@ -41,6 +42,8 @@ val prevTitle = input.previousEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("pr
 val mbNextPermalinkLoc = input.nextEntry.map( _.permalink )
 val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
 
+val mbPriorRevisionLoc = resolved.entryInfo.mbPriorRevisionSiteRooted.map( site.location )
+
 given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.Layout.Input.Entry)[]~(.daystamp)>
@@ -65,6 +68,26 @@ input.presentation match {
   }
 ()>
         </div>
+<()
+  info.updateHistory.headOption.foreach { ur =>
+()>
+   <div class="update-prepend">
+     &#x27A3;
+     <em>
+       This post was meaningfully revised at <( blog.dateTimeFormatter.format(ur.timestamp) )>.
+<()
+    mbPriorRevisionLoc.foreach { priorRevisionLoc =>
+()>
+       The previous revision is <a href="<( priorRevisionLoc.relative )>">here</a>.
+<()
+    }
+()>
+     </em>
+     <hr>
+   </div>
+<()
+  }
+()>
         <div class="entry-body">
           <( input.articleContentHtml )>
         </div>
@@ -79,13 +102,13 @@ input.presentation match {
   }
 ()>
             <a href="<( permalink.relative )>"><( hourStr )></a>
-<()            
-  if input.info.updated.nonEmpty then {
+<()
+  input.info.updateHistory.headOption.foreach { ur =>
 ()>
-           <div class="updated-note">Last major update at <( blog.dateTimeFormatter.format(input.info.updated.get) )></div>
+           <div class="updated-note"><a href="<( permalink.relative )>#major-updates">Last major update at <( blog.dateTimeFormatter.format(ur.timestamp) )></a></div>
 <()
   }
-()>  
+()>
           </div>
         </div>
       </article>
@@ -93,6 +116,7 @@ input.presentation match {
 <()
 if input.presentation == input.blog.Entry.Presentation.Single then {
 ()>
+        <( layout_update_history_html( input ) )>
         <div class="prev-top-next">
           <div class="prev">
 <()

@@ -22,7 +22,7 @@ object tech extends RootModule with UntemplateModule {
   override def untemplateSelectCustomizer: untemplate.Customizer.Selector = { key =>
     var out = untemplate.Customizer.empty
 
-    out = out.copy(extraImports=Seq("com.interfluidity.tech.*","com.interfluidity.tech.TechSite.MainBlog","unstatic.*"))
+    out = out.copy(extraImports=Seq("com.interfluidity.tech.*","com.interfluidity.tech.TechSite.MainBlog","unstatic.*","unstatic.ztapir.simple.UpdateRecord"))
 
     // to customize, examine key and modify the customer
     // with out = out.copy=...
