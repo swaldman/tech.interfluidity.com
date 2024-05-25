@@ -23,6 +23,14 @@
     src: url('../font/Ibarra_Real_Nova/IbarraRealNova-Italic-VariableFont_wght.ttf');
 }
 @font-face {
+    font-family: 'RobotoCondensed';
+    src: url('../font/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf');
+}
+@font-face {
+    font-family: 'RobotoCondensedItalic';
+    src: url('../font/Roboto_Condensed/RobotoCondensed-Italic-VariableFont_wght.ttf');
+}
+@font-face {
     font-family: 'SourceSerif4';
     src: url('../font/Source_Serif_4/SourceSerif4-VariableFont_opsz,wght.ttf');
 }
@@ -200,7 +208,9 @@ h3 {
     color: black;
 }
 #content article h1 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    /* color: #00aaaa; */
+    background-color: yellow;
 }
 #content article h2, #content article h3 {
     margin-top: 2em;
@@ -231,10 +241,18 @@ h3 {
 #content article div.note pre code {
     background-color: black;
 }
+#content .update-prepend {
+    font-size: 80%;
+}
 #content hr {
-    margin-top: 2em;
+    margin-top: 2rem;
     margin-right: 1rem;
     border-top: 2px solid black;
+}
+#content .update-prepend hr {
+    margin-top: 0.4rem;
+    margin-right: 1rem;
+    border-top: 1px solid black;
 }
 #content hr.below-title {
     border-top: 1px solid black;
@@ -283,11 +301,14 @@ h3 {
 }
 #content .post-metainfo .updated-note {
     float: left;
+    position: relative;
+    top: -0.25em;
+}
+#content .post-metainfo .updated-note a {
     font-family: 'Caroni';
     font-size: 14pt;
     color: orange;
-    position: relative;
-    top: -0.25em;
+    background-color: transparent;
 }
 #content .prev-top-next {
     display: grid;
@@ -444,6 +465,34 @@ div.iffy-element-desc {
     padding-left: 1rem;
     border-left: 3px solid orange;
 }
+.update-history {
+    font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
+    font-size: 11pt;
+    margin-left: 1rem;
+}
+.update-history ul {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+.update-history i, .update-history em {
+    font-family: 'RobotoCondensedItalic', sans-serif;
+}
+.update-history .update-history-note {
+    font-size: 95%;
+    margin-bottom: 1rem;
+    font-variation-settings: "wght" 300;
+    font-family: 'RobotoCondensedItalic', sans-serif;
+}
+li:first-of-type > .update-timestamp {
+    font-variation-settings: "wght" 500;
+}
+
+h3.update-history-title {
+    font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
+    font-variation-settings: "wght" 500;
+    margin-bottom: 4px;
+}
+
 
 @media only screen and (max-width: 700px) {
     .main-title {
