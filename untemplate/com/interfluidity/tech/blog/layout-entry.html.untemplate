@@ -116,7 +116,6 @@ input.presentation match {
 <()
 if input.presentation == input.blog.Entry.Presentation.Single then {
 ()>
-        <( layout_update_history_html( input ) )>
         <div class="prev-top-next">
           <div class="prev">
 <()
@@ -140,6 +139,7 @@ if input.presentation == input.blog.Entry.Presentation.Single then {
 ()>
            </div>
         </div>
+        <( layout_update_history_html( input ) )>
 <()
 } // if
 ()>

@@ -4,14 +4,13 @@ val liElems =
   updateRecordsForDisplay.map: urfd =>
     val ts = urfd.lastMinorRevisionRelative.fold(input.blog.dateTimeFormatter.format(urfd.timestamp))(lmrr => s""" <a href="${lmrr}">${input.blog.dateTimeFormatter.format(urfd.timestamp)}</a>""") 
     val a = s"""<li><span class="update-timestamp"><i>${ts}</i></span> &mdash; ${urfd.description.getOrElse("No description.")}"""
-    val b = urfd.supercededRevisionRelative.fold("")(srr => s""" (See revision <a href="${srr}">previous</a>.)""")
-    val c = "</li>"
-    a + b + c
+    val b = "</li>"
+    a + b
 end liElems
 
 (input : MainBlog.Layout.Input.Entry)[]~()>
 <()
-  if liElems.nonEmpty then {
+  if liElems.size > 1 then { // we don't want to display initial-publication only update histories
 ()>
 <div class="update-history">
   <h3 class="update-history-title">
