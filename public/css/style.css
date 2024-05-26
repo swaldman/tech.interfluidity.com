@@ -474,9 +474,15 @@ div.iffy-element-desc {
     font-size: 11pt;
     margin-left: 1rem;
 }
+.update-history a {
+    text-decoration: none;
+}
 .update-history ul {
     margin-top: 8px;
     margin-bottom: 12px;
+}
+.update-history ul li {
+    padding-bottom: 4px;
 }
 .update-history i, .update-history em {
     font-family: 'RobotoCondensedItalic', sans-serif;
@@ -489,7 +495,8 @@ div.iffy-element-desc {
     font-family: 'RobotoCondensedItalic', sans-serif;
     background-color: rgba(240, 240, 240, 0.625);
 }
-li:first-of-type > .update-timestamp {
+/* li:first-of-type > .update-timestamp { */
+.update-timestamp {
     font-variation-settings: "wght" 500;
 }
 
