@@ -13,9 +13,22 @@
     <link rel="stylesheet" href="../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
     <script src="../../js/highlight/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
     <title>The 'iffy' XML namespace</title>
   </head>
   <body>
+    <div id="top-banner"></div>
     <div id="header">
       <div id="rss-link-container">
         <a id="rss-link" href="../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
@@ -150,7 +163,7 @@
    <li><span class="update-timestamp"><i>2024-05-24 @ 12:25 AM EDT</i></span> — Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates. (See revision <a href="index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html">previous</a>.)</li>
   </ul>
   <div class="update-history-note">
-   Timestamps are for "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>.
+   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>.
   </div>
  </div>
  <div class="prev-top-next">

@@ -20,7 +20,7 @@ end liElems
   <ul>
     <( liElems.mkString("\n") )>
   </ul>
-  <div class="update-history-note">Timestamps are for "major", substantative revisions. There may have been subsequent typo fixes and language
+  <div class="update-history-note">Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language
   reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history,
   you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>.</div>
 </div>

@@ -55,6 +55,10 @@ body {
     font-family: 'SourceSerif4', Times, serif;
     font-variation-settings: "wght" 350;
 }
+body.old-draft {
+    background-image: url("../image/graph-paper-tile-small-lighter-gray.png");
+    padding-top: 20px;
+}
 code {
     font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
     font-size: 80%;
@@ -493,6 +497,20 @@ h3.update-history-title {
     font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
     font-variation-settings: "wght" 500;
     margin-bottom: 4px;
+}
+
+.old-draft #top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: yellow;
+    text-align: center;
+    font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
+    font-variation-settings: "wght" 500;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid black;
 }
 
 
