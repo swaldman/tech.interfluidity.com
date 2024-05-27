@@ -45,6 +45,8 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override val revisionBinder : Option[RevisionBinder] = Some( RevisionBinder.GitByCommit(TechSite, JPath.of("."), siteRooted => Rel("public/").embedRoot(siteRooted)) )
 
+    override val diffBinder : Option[DiffBinder] = Some( DiffBinder.JavaDiffUtils(TechSite) )
+
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
     // overriding a def, but it's just a constant, so we override with val

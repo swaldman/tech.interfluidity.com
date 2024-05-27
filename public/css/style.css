@@ -301,7 +301,7 @@ h3 {
 }
 #content .post-metainfo a:hover {
     color: orange;
-    /* text-decoration: underline; */
+    text-decoration: underline;
 }
 #content .post-metainfo .updated-note {
     float: left;
@@ -476,6 +476,9 @@ div.iffy-element-desc {
 }
 .update-history a {
     text-decoration: none;
+}
+.update-history a:hover {
+    text-decoration: underline;
 }
 .update-history ul {
     margin-top: 8px;

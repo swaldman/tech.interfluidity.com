@@ -2,10 +2,11 @@ val updateRecordsForDisplay = input.blog.updateRecordsForDisplay(input.asInstanc
 
 val liElems =
   updateRecordsForDisplay.map: urfd =>
-    val ts = urfd.lastMinorRevisionRelative.fold(input.blog.dateTimeFormatter.format(urfd.timestamp))(lmrr => s""" <a href="${lmrr}">${input.blog.dateTimeFormatter.format(urfd.timestamp)}</a>""") 
+    val ts = urfd.finalMinorRevisionRelative.fold(input.blog.dateTimeFormatter.format(urfd.timestamp))(fmrr => s""" <a href="${fmrr}">${input.blog.dateTimeFormatter.format(urfd.timestamp)}</a>""") 
     val a = s"""<li><span class="update-timestamp"><i>${ts}</i></span> &mdash; ${urfd.description.getOrElse("No description.")}"""
-    val b = "</li>"
-    a + b
+    val b = urfd.diffRelative.fold("")(dr => s""" (<a href="${dr}">diff</a>)""")
+    val c = "</li>"
+    a + b + c
 end liElems
 
 (input : MainBlog.Layout.Input.Entry)[]~()>
