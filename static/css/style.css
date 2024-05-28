@@ -528,7 +528,7 @@ h3.update-history-title {
     .main-title {
 	font-size: 18pt;
     }
-    .updated-note {
+    #content .post-metainfo .updated-note a {
 	font-size: 10pt;
     }
 }
