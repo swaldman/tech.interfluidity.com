@@ -530,6 +530,6 @@ h3.update-history-title {
     }
     #content .post-metainfo .updated-note a {
 	font-size: 10pt;
-	font-stretch: condensed;
+	font-stretch: extra-condensed;
     }
 }
