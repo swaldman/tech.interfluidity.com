@@ -528,4 +528,7 @@ h3.update-history-title {
     .main-title {
 	font-size: 18pt;
     }
+    .updated-note {
+	font-size: 10pt;
+    }
 }
