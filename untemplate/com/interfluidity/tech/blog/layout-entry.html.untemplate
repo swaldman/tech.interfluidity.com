@@ -42,7 +42,7 @@ val prevTitle = input.previousEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("pr
 val mbNextPermalinkLoc = input.nextEntry.map( _.permalink )
 val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
 
-val mbPriorRevisionLoc = resolved.entryInfo.mbPriorRevisionSiteRooted.map( site.location )
+val mbPriorRevisionLoc = blog.priorRevisionSiteRooted(info.asInstanceOf[blog.Entry.Info]).map( site.location ) // compiler fails to track blog == MainBlog
 
 given PageBase = PageBase.fromPage(input.renderLocation)
 
