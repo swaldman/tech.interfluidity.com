@@ -44,6 +44,8 @@ val nextTitle = input.nextEntry.flatMap( _.entryInfo.mbTitle ).getOrElse("next")
 
 val mbPriorRevisionLoc = blog.priorRevisionSiteRooted(info.asInstanceOf[blog.Entry.Info]).map( site.location ) // compiler fails to track blog == MainBlog
 
+val mbSproutRssLoc = if info.sprout then Some( site.location( info.sproutFeedSiteRooted ) ) else None
+
 given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.Layout.Input.Entry)[]~(.daystamp)>
@@ -69,16 +71,27 @@ input.presentation match {
 ()>
         </div>
 <()
-  info.updateHistory.headOption.foreach { ur =>
+  if info.updateHistory.nonEmpty || mbSproutRssLoc.nonEmpty then {
 ()>
    <div class="update-prepend">
-     &#x27A3;
      <em>
-       This post was meaningfully revised at <( blog.dateTimeFormatter.format(ur.timestamp) )>.
 <()
-    mbPriorRevisionLoc.foreach { priorRevisionLoc =>
+    info.updateHistory.headOption.foreach { ur =>
+()>
+       &#x27A3;&nbsp;&nbsp;This post was meaningfully revised at <( blog.dateTimeFormatter.format(ur.timestamp) )>.
+<()
+      mbPriorRevisionLoc.foreach { priorRevisionLoc =>
 ()>
        The previous revision is <a href="<( priorRevisionLoc.relative )>">here</a>.
+<()
+      }
+()>
+<()
+    }
+    mbSproutRssLoc.foreach { sproutRssLoc =>
+()>
+  <br>&#x27A3;&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="<( sproutRssLoc.relative )>">here</a>.
+  <link rel="alternate" type="application/rss+xml" title="Update to <( info.mbTitle.getOrElse("this post") )>" href="<( sproutRssLoc.absolutePath )>">
 <()
     }
 ()>
