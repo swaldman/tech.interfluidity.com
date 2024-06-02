@@ -50,7 +50,7 @@
   <hr class="below-title">
  </div>
  <div class="update-prepend">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-05-25 @ 11:00 PM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html">here</a>. <br>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-01 @ 09:35 PM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">here</a>. <br>
    ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="xml/iffy/index-sprout.rss">here</a>. 
    <link rel="alternate" type="application/rss+xml" title="Update to The 'iffy' XML namespace" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"></em>
   <hr>
@@ -66,7 +66,13 @@
    <p><strong>Table of Contents</strong></p>
    <ul>
     <li><a href="#iffy-completeness"><code>iffy:completeness</code></a></li>
+    <li><a href="#iffy-diff"><code>iffy:diff</code></a></li>
+    <li><a href="#iffy-initial"><code>iffy:initial</code></a></li>
     <li><a href="#iffy-provenance"><code>iffy:provenance</code></a></li>
+    <li><a href="#iffy-revision"><code>iffy:revision</code></a></li>
+    <li><a href="#iffy-timestamp"><code>iffy:timestamp</code></a></li>
+    <li><a href="#iffy-update"><code>iffy:update</code></a></li>
+    <li><a href="#iffy-update-history"><code>iffy:update-history</code></a></li>
    </ul>
    <hr>
    <p><a id="iffy-completeness" href=""></a><strong>Element — <code>iffy:completeness</code></strong></p>
@@ -111,6 +117,28 @@
 </code></pre>
    </div>
    <hr>
+   <p><a id="iffy-diff" href=""></a><strong>Element — <code>iffy:diff</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>When a subelement of <a href="#iffy-update-history"><code>iffy:update</code></a></strong></p>
+    <p>MUST contain a URL, URI, or <a href="https://datatracker.ietf.org/doc/html/rfc3987">IRI</a> of a human-reviewable a <a href="https://en.wikipedia.org/wiki/Diff"><em>diff</em></a> of the current updated and <em>the final minor revision</em> of the update prior (or of the initially published post, if the current update is the first declared update).</p>
+    <p><strong>Example</strong>:</p>
+    <pre><code class="language-xml">&lt;iffy:diff&gt;https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html&lt;/iffy:diff&gt;
+</code></pre>
+    <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
+   </div>
+   <hr>
+   <p><a id="iffy-initial" href=""></a><strong>Element — <code>iffy:initial</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>When a subelement of <a href="#iffy-update-history"><code>iffy:update-history</code></a></strong></p>
+    <p>MAY contain a sequence of <a href="https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator"><code>dc:creator</code></a> elements, defining the initial authorship of an item, if authorship has changed. Since the containing <code>item</code> should always reflect current authorship (that of the most recent revision), but no <a href="#iffy-update"><code>iffy:update</code></a> element is defined for the initially published version, this container is required for completeness.</p>
+    <p><strong>Example</strong>:</p>
+    <pre><code class="language-xml">&lt;iffy:initial&gt;
+  &lt;!-- Perhaps more recent updates, and the current item, include more authors --&gt;
+  &lt;dc:creator&gt;First Author, Esq.&lt;/dc:creator&gt;
+&lt;/iffy:initial&gt;
+</code></pre>
+   </div>
+   <hr>
    <p><a id="iffy-provenance" href=""></a><strong>Element — <code>iffy:provenance</code></strong></p>
    <div class="iffy-element-desc">
     <p><strong>When an item level element</strong></p>
@@ -147,13 +175,94 @@
 </code></pre>
    </div>
    <hr>
+   <p><a id="iffy-revision" href=""></a><strong>Element — <code>iffy:revision</code></strong></p>
+   <div class="iffy-element-desc">
+    <p>MUST contain a URL, URI, or <a href="https://datatracker.ietf.org/doc/html/rfc3987">IRI</a> of a either a fixed past revision or the current (potentially evolving) revision of an item.</p>
+    <p><strong>Example</strong>:</p>
+    <pre><code class="language-xml">&lt;iffy:revision&gt;https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html&lt;/iffy:revision&gt;
+</code></pre>
+    <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
+   </div>
+   <hr>
+   <p><a id="iffy-timestamp" href=""></a><strong>Element — <code>iffy:timestamp</code></strong></p>
+   <div class="iffy-element-desc">
+    <p>MUST contain an <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC3339</a> date-time construction.</p>
+    <p>Formatting and constraints are identical to those described for <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-3.3">atom date constructs</a>.</p>
+    <p><strong>Example</strong>:</p>
+    <pre><code class="language-xml">&lt;iffy:timestamp&gt;2003-12-13T18:30:02Z&lt;/iffy:timestamp&gt;
+&lt;iffy:timestamp&gt;2003-12-13T18:30:02+01:00&lt;/iffy:timestamp&gt;
+</code></pre>
+    <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
+   </div>
+   <hr>
+   <p><a id="iffy-update" href=""></a><strong>Element — <code>iffy:update</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>When a sub-element of <a href="#iffy-update-history"><code>iffy:update-history</code></a></strong></p>
+    <p>MUST contain one <a href="#iffy-timestamp"><code>iffy:timestamp</code></a> element.</p>
+    <p>MAY also contain one each of</p>
+    <ul>
+     <li><a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.13"><code>atom:summary</code></a></li>
+     <li><a href="#iffy-diff"><code>iffy:diff</code></a></li>
+     <li><a href="#iffy-revision"><code>iffy:revision</code></a></li>
+    </ul>
+    <p>MAY, but usually will not, contain any number of <a href="https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator"><code>dc:creator</code></a> elements, reflecting <em>authorship specific to this revision</em>. By default, an update's authors are the same as the authorship of the containing item, which always reflects the curren revisions authors. If authorship is evolving over time, it SHOULD be specified for every update except the most recent one. Initial authorship may be specified in an <a href="#iffy-initial"><code>iffy:initial</code></a> element.</p>
+    <p><strong><em>Typo fixes, small rephrasings, and other tweaks are not expected to be recorded as distinct updates. That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded.</em></strong> Applications that want a more forensic history might consider including and exposing every published change in version control.</p>
+    <p>See <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
+   </div>
+   <hr>
+   <p><a id="iffy-update-history" href=""></a><strong>Element — <code>iffy:update-history</code></strong></p>
+   <div class="iffy-element-desc">
+    <p><strong>When an item level element</strong></p>
+    <p>SHOULD contain a sequence of <a href="#iffy-update"><code>iffy:update</code></a> elements, in reverse chronological order, describing the histories of <em>major revisions</em> to an item.</p>
+    <p>MAY contain one <a href="#iffy-initial"><code>iffy:initial</code></a> element.</p>
+    <p>Items containing an <code>iffy:update-history</code> SHOULD also include an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15"><code>atom:updated</code></a> tag corresponding to the most recent update.</p>
+    <p><strong><em>Typo fixes, small rephrasings, and other minor tweaks need not be recorded as distinct updates. That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded.</em></strong> Applications that want a more forensic history might consider including and exposing every published change in version control.</p>
+    <p><a id="iffy-update-history-example" href=""></a><strong>Example</strong>:</p>
+    <pre><code class="language-xml">&lt;item&gt;
+  &lt;iffy:update-history&gt;
+    &lt;iffy:update&gt;
+      &lt;iffy:timestamp&gt;2024-06-02T03:00:00Z&lt;/iffy:timestamp&gt;
+      &lt;atom:summary&gt;&lt;![CDATA[Add tags related to updates and revisions.]]&gt;&lt;/atom:summary&gt;
+      &lt;iffy:revision&gt;
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+      &lt;/iffy:revision&gt;
+      &lt;iffy:diff&gt;
+        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html
+      &lt;/iffy:diff&gt;
+    &lt;/iffy:update&gt;
+    &lt;iffy:update&gt;
+      &lt;iffy:timestamp&gt;2024-05-26T03:00:00Z&lt;/iffy:timestamp&gt;
+      &lt;atom:summary&gt;&lt;![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]&gt;&lt;/atom:summary&gt;
+      &lt;iffy:revision&gt;
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html
+      &lt;/iffy:revision&gt;
+      &lt;iffy:diff&gt;
+        https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+      &lt;/iffy:diff&gt;
+    &lt;/iffy:update&gt;
+    &lt;iffy:update&gt;
+      &lt;iffy:timestamp&gt;2024-05-24T04:25:00Z&lt;/iffy:timestamp&gt;
+      &lt;atom:summary&gt;
+        &lt;![CDATA[Drop tags &lt;code&gt;iffy:when-updated&lt;/code&gt; and &lt;code&gt;iffy:original-guid&lt;/code&gt;, bad appraoch to updates.]]&gt;
+      &lt;/atom:summary&gt;
+      &lt;iffy:revision&gt;
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html
+      &lt;/iffy:revision&gt;
+      &lt;iffy:diff&gt;
+        https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html
+      &lt;/iffy:diff&gt;
+    &lt;/iffy:update&gt;
+  &lt;/iffy:update-history&gt;
+&lt;/item&gt;
+</code></pre>
+   </div>
   </div>
  </div>
  <div class="entry-footer">
   <div class="post-metainfo">
    <a href="xml/iffy/index.html">04:10 AM EDT</a>
    <div class="updated-note">
-    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-05-25 @ 11:00 PM EDT</a>
+    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-06-01 @ 09:35 PM EDT</a>
    </div>
   </div>
  </div>

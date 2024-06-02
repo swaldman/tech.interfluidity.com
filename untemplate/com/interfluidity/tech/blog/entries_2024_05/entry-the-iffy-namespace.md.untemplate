@@ -1,4 +1,5 @@
 > val updateHistory =
+>    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
 >    UpdateRecord("2024-05-25T23:00:00-04:00",Some("Add JS/CSS so that prior revisions are visually distinct from current."),Some("13de0232319ceab2f830591c318089d18cbec78d")) ::
 >    UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
 >    Nil
@@ -31,7 +32,13 @@ The conventional prefix associated with this namespace will be `iffy`.
 **Table of Contents**
 
 * [`iffy:completeness`](#iffy-completeness)
+* [`iffy:diff`](#iffy-diff)
+* [`iffy:initial`](#iffy-initial)
 * [`iffy:provenance`](#iffy-provenance)
+* [`iffy:revision`](#iffy-revision)
+* [`iffy:timestamp`](#iffy-timestamp)
+* [`iffy:update`](#iffy-update)
+* [`iffy:update-history`](#iffy-update-history)
 
 ---
 <a id="iffy-completeness"></a>**Element &mdash; `iffy:completeness`**
@@ -91,6 +98,51 @@ If not specified, no commitment is made, the feed should be considered `Ping`.
 
 ---
 
+<a id="iffy-diff"></a>**Element &mdash; `iffy:diff`**
+
+<div class="iffy-element-desc">
+
+**When a subelement of [`iffy:update`](#iffy-update-history)**
+
+MUST contain a URL, URI, or [IRI](https://datatracker.ietf.org/doc/html/rfc3987)
+of a human-reviewable a [_diff_](https://en.wikipedia.org/wiki/Diff) of the current
+updated and _the final minor revision_ of the update prior (or of the initially published post,
+if the current update is the first declared update).
+
+**Example**:
+```xml
+<iffy:diff>https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html</iffy:diff>
+```
+
+See also [`iffy:update-history` example](#iffy-update-history).
+
+</div>
+
+---
+
+<a id="iffy-initial"></a>**Element &mdash; `iffy:initial`**
+
+<div class="iffy-element-desc">
+
+**When a subelement of [`iffy:update-history`](#iffy-update-history)**
+
+MAY contain a sequence of [`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
+elements, defining the initial authorship of an item, if authorship has changed. Since the containing `item` should always reflect
+current authorship (that of the most recent revision), but no [`iffy:update`](#iffy-update) element is defined
+for the initially published version, this container is required for completeness.
+
+**Example**:
+```xml
+<iffy:initial>
+  <!-- Perhaps more recent updates, and the current item, include more authors -->
+  <dc:creator>First Author, Esq.</dc:creator>
+</iffy:initial>
+```
+
+</div>
+
+---
+
 <a id="iffy-provenance"></a>**Element &mdash; `iffy:provenance`**
 
 <div class="iffy-element-desc">
@@ -142,3 +194,138 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
 </div>
 
 ---
+
+<a id="iffy-revision"></a>**Element &mdash; `iffy:revision`**
+
+<div class="iffy-element-desc">
+
+MUST contain a URL, URI, or [IRI](https://datatracker.ietf.org/doc/html/rfc3987)
+of a either a fixed past revision or the current (potentially evolving) revision
+of an item.
+
+**Example**:
+```xml
+<iffy:revision>https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html</iffy:revision>
+```
+
+See also [`iffy:update-history` example](#iffy-update-history).
+
+</div>
+
+---
+
+<a id="iffy-timestamp"></a>**Element &mdash; `iffy:timestamp`**
+
+<div class="iffy-element-desc">
+
+MUST contain an [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) date-time
+construction.
+
+Formatting and constraints are identical to those described for
+[atom date constructs](https://datatracker.ietf.org/doc/html/rfc4287#section-3.3).
+
+**Example**:
+```xml
+<iffy:timestamp>2003-12-13T18:30:02Z</iffy:timestamp>
+<iffy:timestamp>2003-12-13T18:30:02+01:00</iffy:timestamp>
+```
+
+See also [`iffy:update-history` example](#iffy-update-history).
+
+</div>
+
+---
+
+<a id="iffy-update"></a>**Element &mdash; `iffy:update`**
+
+<div class="iffy-element-desc">
+
+**When a sub-element of [`iffy:update-history`](#iffy-update-history)**
+
+MUST contain one [`iffy:timestamp`](#iffy-timestamp) element.
+
+MAY also contain one each of
+* [`atom:summary`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.13)
+* [`iffy:diff`](#iffy-diff)
+* [`iffy:revision`](#iffy-revision)
+
+MAY, but usually will not, contain any number of
+[`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
+elements, reflecting _authorship specific to this revision_. By default, an
+update's authors are the same as the authorship of the containing item,
+which always reflects the curren revisions authors.
+If authorship is evolving over time, it SHOULD be specified for every update
+except the most recent one.
+Initial authorship may be specified in an [`iffy:initial`](#iffy-initial) element.
+
+**_Typo fixes, small rephrasings, and other tweaks are not expected to be recorded as distinct updates.
+That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded._**
+Applications that want a more forensic history might consider including and exposing every published
+change in version control.
+
+See [`iffy:update-history` example](#iffy-update-history).
+
+</div>
+
+---
+
+<a id="iffy-update-history"></a>**Element &mdash; `iffy:update-history`**
+
+<div class="iffy-element-desc">
+
+**When an item level element**
+
+SHOULD contain a sequence of [`iffy:update`](#iffy-update) elements, in reverse chronological order, describing
+the histories of _major revisions_ to an item.
+
+MAY contain one [`iffy:initial`](#iffy-initial) element.
+
+Items containing an `iffy:update-history` SHOULD also include an [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15)
+tag corresponding to the most recent update.
+
+**_Typo fixes, small rephrasings, and other minor tweaks need not be recorded as distinct updates.
+That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded._**
+Applications that want a more forensic history might consider including and exposing every published
+change in version control.
+
+<a id="iffy-update-history-example"></a>**Example**:
+```xml
+<item>
+  <iffy:update-history>
+    <iffy:update>
+      <iffy:timestamp>2024-06-02T03:00:00Z</iffy:timestamp>
+      <atom:summary><![CDATA[Add tags related to updates and revisions.]]></atom:summary>
+      <iffy:revision>
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+      </iffy:revision>
+      <iffy:diff>
+        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html
+      </iffy:diff>
+    </iffy:update>
+    <iffy:update>
+      <iffy:timestamp>2024-05-26T03:00:00Z</iffy:timestamp>
+      <atom:summary><![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]></atom:summary>
+      <iffy:revision>
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html
+      </iffy:revision>
+      <iffy:diff>
+        https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+      </iffy:diff>
+    </iffy:update>
+    <iffy:update>
+      <iffy:timestamp>2024-05-24T04:25:00Z</iffy:timestamp>
+      <atom:summary>
+        <![CDATA[Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates.]]>
+      </atom:summary>
+      <iffy:revision>
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html
+      </iffy:revision>
+      <iffy:diff>
+        https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html
+      </iffy:diff>
+    </iffy:update>
+  </iffy:update-history>
+</item>
+```
+
+</div>

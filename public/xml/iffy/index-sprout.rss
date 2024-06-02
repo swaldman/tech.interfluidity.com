@@ -6,11 +6,35 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 1 Jun 2024 18:02:36 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 1 Jun 2024 21:34:25 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
     <iffy:completeness>Metadata</iffy:completeness>
+    <item>
+      <pubDate>Sat, 1 Jun 2024 21:35:00 -0400</pubDate>
+      <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-06-01-21-35-00</guid>
+      <author>nospam@dev.null (Steve Randy Waldman)</author>
+      <description>
+        <![CDATA[Update — 2024-06-01 @ 09:35 PM EDT
+
+Add initial take on tags related to updates and revisions.]]>
+      </description>
+      <link>https://tech.interfluidity.com/xml/iffy/index.html#sprout-2024-05-13-04-10-00</link>
+      <title>[Latest Update] The 'iffy' XML namespace</title>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-06-01 @ 09:35 PM EDT</b></p>
+
+<p>Add initial take on tags related to updates and revisions.</p>
+
+<ul>
+
+<li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html">Diff from prior revision</a></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+</ul>]]>
+      </content:encoded>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+    </item>
     <item>
       <pubDate>Sat, 25 May 2024 23:00:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-05-25-23-00-00</guid>
@@ -20,16 +44,16 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
 
 Add JS/CSS so that prior revisions are visually distinct from current.]]>
       </description>
-      <link>https://tech.interfluidity.com/xml/iffy/index.html#sprout-2024-05-13-04-10-00</link>
-      <title>[Latest Update] The 'iffy' XML namespace</title>
+      <link>https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html</link>
+      <title>[Update] The 'iffy' XML namespace</title>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-05-25 @ 11:00 PM EDT</b></p>
 
 <p>Add JS/CSS so that prior revisions are visually distinct from current.</p>
 
 <ul>
-
-<li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-current.html">Diff from prior revision</a></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">This revision</a></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">Diff from prior revision</a></li>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
