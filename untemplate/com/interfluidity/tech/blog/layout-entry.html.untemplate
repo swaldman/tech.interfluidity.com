@@ -73,7 +73,7 @@ input.presentation match {
 <()
   if info.updateHistory.nonEmpty || mbSproutRssLoc.nonEmpty then {
 ()>
-   <div class="update-prepend">
+   <div class="update-prepend rss-description-exclude">
      <em>
 <()
     info.updateHistory.headOption.foreach { ur =>

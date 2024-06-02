@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 1 Jun 2024 21:34:25 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 1 Jun 2024 23:27:56 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
@@ -14,7 +14,6 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <item>
       <pubDate>Sat, 1 Jun 2024 21:35:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-06-01-21-35-00</guid>
-      <author>nospam@dev.null (Steve Randy Waldman)</author>
       <description>
         <![CDATA[Update — 2024-06-01 @ 09:35 PM EDT
 
@@ -22,6 +21,7 @@ Add initial take on tags related to updates and revisions.]]>
       </description>
       <link>https://tech.interfluidity.com/xml/iffy/index.html#sprout-2024-05-13-04-10-00</link>
       <title>[Latest Update] The 'iffy' XML namespace</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-06-01 @ 09:35 PM EDT</b></p>
 
@@ -33,12 +33,10 @@ Add initial take on tags related to updates and revisions.]]>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
-      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
     </item>
     <item>
       <pubDate>Sat, 25 May 2024 23:00:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-05-25-23-00-00</guid>
-      <author>nospam@dev.null (Steve Randy Waldman)</author>
       <description>
         <![CDATA[Update — 2024-05-25 @ 11:00 PM EDT
 
@@ -46,6 +44,7 @@ Add JS/CSS so that prior revisions are visually distinct from current.]]>
       </description>
       <link>https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html</link>
       <title>[Update] The 'iffy' XML namespace</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-05-25 @ 11:00 PM EDT</b></p>
 
@@ -57,12 +56,10 @@ Add JS/CSS so that prior revisions are visually distinct from current.]]>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
-      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
     </item>
     <item>
       <pubDate>Fri, 24 May 2024 00:25:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-05-24-00-25-00</guid>
-      <author>nospam@dev.null (Steve Randy Waldman)</author>
       <description>
         <![CDATA[Update — 2024-05-24 @ 12:25 AM EDT
 
@@ -70,6 +67,7 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
       </description>
       <link>https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html</link>
       <title>[Update] The 'iffy' XML namespace</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-05-24 @ 12:25 AM EDT</b></p>
 
@@ -81,15 +79,14 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
-      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
     </item>
     <item>
       <pubDate>Mon, 13 May 2024 04:10:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/xml/iffy/index-sprout-2024-05-13-04-10-00</guid>
-      <author>nospam@dev.null (Steve Randy Waldman)</author>
       <description><![CDATA[Update — 2024-05-13 @ 04:10 AM EDT Initial publication.]]></description>
       <link>https://tech.interfluidity.com/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html</link>
       <title>[Seed] The 'iffy' XML namespace</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-05-13 @ 04:10 AM EDT</b></p>
 
@@ -101,7 +98,6 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
-      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
     </item>
   </channel>
 </rss>
