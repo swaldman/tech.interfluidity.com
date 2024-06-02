@@ -269,6 +269,7 @@ change in version control.
 <a id="iffy-update-history-example"></a>**Example**:
 ```xml
 <item>
+  <!-- Other item elements -->
   <iffy:update-history>
     <iffy:update>
       <atom:updated>2024-06-02T04:20:00Z</atom:updated>
