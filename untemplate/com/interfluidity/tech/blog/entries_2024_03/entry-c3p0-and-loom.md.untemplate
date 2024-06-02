@@ -1,7 +1,7 @@
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "c3p0 and loom",
 >   "PubDate"   -> "2024-03-18T22:20:00-04:00",
->   //"Anchor"    -> "replace-me"
+>   "Anchor"    -> "c3p0-and-loom"
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)

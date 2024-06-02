@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 2 Jun 2024 01:13:01 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 2 Jun 2024 03:13:45 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
@@ -28,9 +28,8 @@ Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> fo
 <p>Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work.</p>
 
 <ul>
-<li><em>No link specifically to this revision is avaiable.</em></li>
-<li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-current.html">Diff from prior revision</a></li>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-current.html">Diff from prior revision</a></li>
 </ul>]]>
       </content:encoded>
     </item>

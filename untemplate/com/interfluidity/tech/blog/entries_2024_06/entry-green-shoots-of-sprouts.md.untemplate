@@ -1,0 +1,135 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("Add update from Joe Crawford about potential mechanisms for on-the-nosedness."), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Green shoots of sprouts",
+>   "PubDate"       -> "2024-06-02T03:15:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "green-shoots-of-sprouts",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+[Erlend Sogge Heggen](https://mastodon.social/@erlend@writing.exchange) pointed me to a
+[post by Chris Krycho on "sprouts"](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/).
+
+Krycho points out that most of our online infrastructure is organized around feeds of posts, which are
+"published" or "announced" as finished work.
+But creative work naturally develops in drafts and increments.
+It might be best to publish at first only the barest outline of a thing, and then collaborate
+in the open to flesh it out and bring it forward. What we want to announce, then, are not new posts,
+but a beginning and then new milestones. If we can, we'd want to retain the full history of the process.
+
+I've gone a fair distance towards implementing one version of this vision recently. My blogging
+infrastructure is my own static-site generation library [unstatic](https://github.com/swaldman/unstatic/),
+which is built on top of "[untemplates](https://github.com/swaldman/untemplate-doc#readme)". Untemplates
+are just thin wrappers around Scala functions.
+
+Like lots of static-site generators, I write in files that are mostly markdown, with some metadata in a special header.
+But in the untemplate header, I literally write Scala code.
+
+Here's a very simple example, from a recent post,
+"[c3p0 and loom](##c3p0-and-loom)":
+
+```plaintext
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"     -> "c3p0 and loom",
+>   "PubDate"   -> "2024-03-18T22:20:00-04:00",
+>   "Anchor"    -> "c3p0-and-loom"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+\(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I write [a lot of open source software](https://github.com/swaldman), but I've only ever really had one "hit".
+That makes me pretty sad, actually. I think some of what I've written is pretty great, and it's lonesome to be the
+sole user...
+```
+
+For most posts, I just copy and modify this header, and then write markdown text below. But if I want to do anything
+more fancy, well, I have the full Scala programming language to work with.
+
+In order to realize a vision of "sprouts", I first implemented update histories as a simple `List` of
+`UpdateRecord` objects.
+
+The [post prior to this one](##iffy-xml-namespace) has already become a particularly sprouty sprout. The post documents
+experiments with extensions
+to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning
+of that post, for now:
+
+```plaintext
+> val updateHistory =
+>    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
+>    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
+>    UpdateRecord("2024-05-25T23:00:00-04:00",Some("Add JS/CSS so that prior revisions are visually distinct from current."),Some("13de0232319ceab2f830591c318089d18cbec78d")) ::
+>    UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "The 'iffy' XML namespace",
+>   "PubDate"       -> "2024-05-13T04:10:00-04:00",
+>   "Permalink"     -> "/xml/iffy/index.html",
+>   "UpdateHistory" -> updateHistory,
+>   "Sprout"        -> true,
+>   "Anchor"        -> "iffy-xml-namespace"
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+\(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I want to do a lot of things with RSS that require
+extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-specification#extendingRss))...
+```
+
+Each `UpdateRecord` marks a discretionary choice, to declare a "significant" or "material" update. Most updates are not! There are typically several minor revisions,
+typo fixes, and tweaks, between these noted updates.
+
+When I decide a revision is serious, I provide a timestamp, and, optionally, a description
+and a "revision spec". The description is self-explanatory. The revision spec is arbitrary. When I define a site, I optionally provide an
+[`RevisionBinder`](https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/RevisionBinder.scala)
+that is able to convert a revision spec and a path into the contents of a resource within the referenced revision.
+
+There might be many different implementations
+of `RevisionBinder`, each with its own kind of revision specification. The one that exists for now just pulls resources from git commits.
+
+The revision specs shown are just git commits, referenced in full-length hex. With each "major" update, I provide the hex for the commit _prior_ to my update,
+the one it is superceding. That usually _will not_ be the same commit as the "major" update prior, because most "major" updates are followed
+by a series of minor tweaks.
+
+So, as I work on an evolving document, I note significant updates by adding records to a list, and I include the list I build in `UntemplateAttributes`,
+the standard `Map` in which I also define `Title`, `PubDate`, `Author`, etc. (The example posts omit `Author`, because this site has a default author &mdash; me!
+&mdash; if that field is left unset.)
+
+The update history converts pretty directly into a user readable history. Let's [take a look](##iffy-xml-namespace#update-history)!
+
+(If you want to see the template that lays out the update history, you can find it [here](https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-update-history.html.untemplate).)
+
+To realize the "sprout" vision, we need more than this. We need some means by which people can follow the evolutions of the document. Ideally,
+when a "major update" is published, subscribers to the blog should see something about that in their feeds. The RSS feeds we generate include
+`<atom:updated>` tags, but as Krycho points out, very few feed readers do anything with that.
+
+You'll note that in addition to the `UpdateHistory`, we've added to `UntemplateAttributes` a key called `Sprout`.
+When the site generator encounters a mapping of `Sprout` to `true` on an untemplate, it generates an additional RSS feed that will track the update history of just this post.
+For our example post, you can find that feed [here](https://tech.interfluidity.com/xml/iffy/index-sprout.rss)
+
+The [template that lays out blog entries](https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-entry.html.untemplate)
+looks for an update history, and if it is there, checks for prior revisions references, diffs, and the `sprouts` flag. It prepends to the post a brief note
+with links, to the prior revision if it's available, to the update history, and to the post-specific RSS feed. Go ahead, check out the beginning of
+our [example post](##iffy-xml-namespace).
+
+Going forward, I think I will add the capability of generating "synthetic" posts when there are new major updates. They'd just be formulaic
+announcements of the updates. They might never appear on the blog front page. But they would be included in the RSS feed. I'd add metadata to the RSS
+items for these posts, indicating that they are synthetic and describing them, so that tools like [`feedletter`](##feedletter-tutorial)
+can make intelligent choices about whether and how subscribers should receive notificatios about these posts.
+
+But that is all still to come!
+
+For now, we have update histories with links to prior revisions and diffs, and dedicated RSS feeds by which
+dedicated collaborators can stay abreast of our burgeoning sprouts.
+
+
