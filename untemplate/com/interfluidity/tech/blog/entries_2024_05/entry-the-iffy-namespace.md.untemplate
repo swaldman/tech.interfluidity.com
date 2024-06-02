@@ -1,4 +1,5 @@
 > val updateHistory =
+>    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
 >    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
 >    UpdateRecord("2024-05-25T23:00:00-04:00",Some("Add JS/CSS so that prior revisions are visually distinct from current."),Some("13de0232319ceab2f830591c318089d18cbec78d")) ::
 >    UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
@@ -36,7 +37,6 @@ The conventional prefix associated with this namespace will be `iffy`.
 * [`iffy:initial`](#iffy-initial)
 * [`iffy:provenance`](#iffy-provenance)
 * [`iffy:revision`](#iffy-revision)
-* [`iffy:timestamp`](#iffy-timestamp)
 * [`iffy:update`](#iffy-update)
 * [`iffy:update-history`](#iffy-update-history)
 
@@ -214,35 +214,13 @@ See also [`iffy:update-history` example](#iffy-update-history).
 
 ---
 
-<a id="iffy-timestamp"></a>**Element &mdash; `iffy:timestamp`**
-
-<div class="iffy-element-desc">
-
-MUST contain an [RFC3339](https://datatracker.ietf.org/doc/html/rfc3339) date-time
-construction.
-
-Formatting and constraints are identical to those described for
-[atom date constructs](https://datatracker.ietf.org/doc/html/rfc4287#section-3.3).
-
-**Example**:
-```xml
-<iffy:timestamp>2003-12-13T18:30:02Z</iffy:timestamp>
-<iffy:timestamp>2003-12-13T18:30:02+01:00</iffy:timestamp>
-```
-
-See also [`iffy:update-history` example](#iffy-update-history).
-
-</div>
-
----
-
 <a id="iffy-update"></a>**Element &mdash; `iffy:update`**
 
 <div class="iffy-element-desc">
 
 **When a sub-element of [`iffy:update-history`](#iffy-update-history)**
 
-MUST contain one [`iffy:timestamp`](#iffy-timestamp) element.
+MUST contain one [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15) element.
 
 MAY also contain one each of
 * [`atom:summary`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.13)
@@ -293,17 +271,29 @@ change in version control.
 <item>
   <iffy:update-history>
     <iffy:update>
-      <iffy:timestamp>2024-06-02T03:00:00Z</iffy:timestamp>
-      <atom:summary><![CDATA[Add tags related to updates and revisions.]]></atom:summary>
+      <atom:updated>2024-06-02T04:20:00Z</atom:updated>
+      <atom:summary>
+        <![CDATA[Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work.]]>
+      </atom:summary>
+      <iffy:revision>
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
+      </iffy:revision>
+      <iffy:diff>
+        https://tech.interfluidity.com/xml/iffy/index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-current.html
+      </iffy:diff>
+    </iffy:update>
+    <iffy:update>
+      <atom:updated>2024-06-02T01:35:00Z</atom:updated>
+      <atom:summary><![CDATA[Add initial take on tags related to updates and revisions.]]></atom:summary>
       <iffy:revision>
         https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
       </iffy:revision>
       <iffy:diff>
-        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html
+        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
       </iffy:diff>
     </iffy:update>
     <iffy:update>
-      <iffy:timestamp>2024-05-26T03:00:00Z</iffy:timestamp>
+      <atom:updated>2024-05-26T03:00:00Z</atom:updated>
       <atom:summary><![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]></atom:summary>
       <iffy:revision>
         https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html
@@ -313,7 +303,7 @@ change in version control.
       </iffy:diff>
     </iffy:update>
     <iffy:update>
-      <iffy:timestamp>2024-05-24T04:25:00Z</iffy:timestamp>
+      <atom:updated>2024-05-24T04:25:00Z</atom:updated>
       <atom:summary>
         <![CDATA[Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates.]]>
       </atom:summary>

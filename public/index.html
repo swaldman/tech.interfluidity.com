@@ -50,7 +50,7 @@
   <hr class="below-title">
  </div>
  <div class="update-prepend rss-description-exclude">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-01 @ 09:35 PM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">here</a>. (See <a href="xml/iffy/index.html#update-history">update history</a>.) <br>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-02 @ 12:25 AM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html">here</a>. (See <a href="xml/iffy/index.html#update-history">update history</a>.) <br>
    ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="xml/iffy/index-sprout.rss">here</a>. 
    <link rel="alternate" type="application/rss+xml" title="Update to The 'iffy' XML namespace" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"></em>
   <hr>
@@ -70,7 +70,6 @@
     <li><a href="#iffy-initial"><code>iffy:initial</code></a></li>
     <li><a href="#iffy-provenance"><code>iffy:provenance</code></a></li>
     <li><a href="#iffy-revision"><code>iffy:revision</code></a></li>
-    <li><a href="#iffy-timestamp"><code>iffy:timestamp</code></a></li>
     <li><a href="#iffy-update"><code>iffy:update</code></a></li>
     <li><a href="#iffy-update-history"><code>iffy:update-history</code></a></li>
    </ul>
@@ -184,21 +183,10 @@
     <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
    </div>
    <hr>
-   <p><a id="iffy-timestamp" href=""></a><strong>Element — <code>iffy:timestamp</code></strong></p>
-   <div class="iffy-element-desc">
-    <p>MUST contain an <a href="https://datatracker.ietf.org/doc/html/rfc3339">RFC3339</a> date-time construction.</p>
-    <p>Formatting and constraints are identical to those described for <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-3.3">atom date constructs</a>.</p>
-    <p><strong>Example</strong>:</p>
-    <pre><code class="language-xml">&lt;iffy:timestamp&gt;2003-12-13T18:30:02Z&lt;/iffy:timestamp&gt;
-&lt;iffy:timestamp&gt;2003-12-13T18:30:02+01:00&lt;/iffy:timestamp&gt;
-</code></pre>
-    <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
-   </div>
-   <hr>
    <p><a id="iffy-update" href=""></a><strong>Element — <code>iffy:update</code></strong></p>
    <div class="iffy-element-desc">
     <p><strong>When a sub-element of <a href="#iffy-update-history"><code>iffy:update-history</code></a></strong></p>
-    <p>MUST contain one <a href="#iffy-timestamp"><code>iffy:timestamp</code></a> element.</p>
+    <p>MUST contain one <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15"><code>atom:updated</code></a> element.</p>
     <p>MAY also contain one each of</p>
     <ul>
      <li><a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.13"><code>atom:summary</code></a></li>
@@ -221,17 +209,29 @@
     <pre><code class="language-xml">&lt;item&gt;
   &lt;iffy:update-history&gt;
     &lt;iffy:update&gt;
-      &lt;iffy:timestamp&gt;2024-06-02T03:00:00Z&lt;/iffy:timestamp&gt;
-      &lt;atom:summary&gt;&lt;![CDATA[Add tags related to updates and revisions.]]&gt;&lt;/atom:summary&gt;
+      &lt;atom:updated&gt;2024-06-02T04:20:00Z&lt;/atom:updated&gt;
+      &lt;atom:summary&gt;
+        &lt;![CDATA[Drop &lt;code&gt;iffy:timestamp&lt;/code&gt;. We can just reuse &lt;code&gt;atom:updated&lt;/code&gt; for the same work.]]&gt;
+      &lt;/atom:summary&gt;
+      &lt;iffy:revision&gt;
+        https://tech.interfluidity.com/xml/iffy/index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
+      &lt;/iffy:revision&gt;
+      &lt;iffy:diff&gt;
+        https://tech.interfluidity.com/xml/iffy/index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-current.html
+      &lt;/iffy:diff&gt;
+    &lt;/iffy:update&gt;
+    &lt;iffy:update&gt;
+      &lt;atom:updated&gt;2024-06-02T01:35:00Z&lt;/atom:updated&gt;
+      &lt;atom:summary&gt;&lt;![CDATA[Add initial take on tags related to updates and revisions.]]&gt;&lt;/atom:summary&gt;
       &lt;iffy:revision&gt;
         https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
       &lt;/iffy:revision&gt;
       &lt;iffy:diff&gt;
-        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html
+        https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
       &lt;/iffy:diff&gt;
     &lt;/iffy:update&gt;
     &lt;iffy:update&gt;
-      &lt;iffy:timestamp&gt;2024-05-26T03:00:00Z&lt;/iffy:timestamp&gt;
+      &lt;atom:updated&gt;2024-05-26T03:00:00Z&lt;/atom:updated&gt;
       &lt;atom:summary&gt;&lt;![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]&gt;&lt;/atom:summary&gt;
       &lt;iffy:revision&gt;
         https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html
@@ -241,7 +241,7 @@
       &lt;/iffy:diff&gt;
     &lt;/iffy:update&gt;
     &lt;iffy:update&gt;
-      &lt;iffy:timestamp&gt;2024-05-24T04:25:00Z&lt;/iffy:timestamp&gt;
+      &lt;atom:updated&gt;2024-05-24T04:25:00Z&lt;/atom:updated&gt;
       &lt;atom:summary&gt;
         &lt;![CDATA[Drop tags &lt;code&gt;iffy:when-updated&lt;/code&gt; and &lt;code&gt;iffy:original-guid&lt;/code&gt;, bad appraoch to updates.]]&gt;
       &lt;/atom:summary&gt;
@@ -262,7 +262,7 @@
   <div class="post-metainfo">
    <a href="xml/iffy/index.html">04:10 AM EDT</a>
    <div class="updated-note">
-    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-06-01 @ 09:35 PM EDT</a>
+    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-06-02 @ 12:25 AM EDT</a>
    </div>
   </div>
  </div>
