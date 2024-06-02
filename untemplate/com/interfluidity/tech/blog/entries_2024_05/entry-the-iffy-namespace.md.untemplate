@@ -261,7 +261,7 @@ MAY contain one [`iffy:initial`](#iffy-initial) element.
 Items containing an `iffy:update-history` SHOULD also include an [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15)
 tag corresponding to the most recent update.
 
-**_Typo fixes, small rephrasings, and other minor tweaks need not be recorded as distinct updates.
+**_Typo fixes, small rephrasings, and other minor tweaks are not expected to be recorded as distinct updates.
 That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded._**
 Applications that want a more forensic history might consider including and exposing every published
 change in version control.
