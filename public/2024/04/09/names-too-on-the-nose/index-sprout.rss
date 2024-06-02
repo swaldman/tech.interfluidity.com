@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss 
+version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sprout — Names too on the nose</title>
+    <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</link>
+    <description><![CDATA[Updates to Names too on the nose]]></description>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 1 Jun 2024 23:49:42 -0400</lastBuildDate>
+    <generator>https://github.com/swaldman/unstatic</generator>
+    <docs>https://cyber.harvard.edu/rss/rss.html</docs>
+    <atom:link
+    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout.rss"/>
+    <iffy:completeness>Metadata</iffy:completeness>
+    <item>
+      <pubDate>Sat, 1 Jun 2024 23:40:00 -0400</pubDate>
+      <guid isPermalink="false">
+        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout-2024-06-01-23-40-00
+      </guid>
+      <description>
+        <![CDATA[Update — 2024-06-01 @ 11:40 PM EDT
+
+Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]>
+      </description>
+      <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html#sprout-2024-04-09-01-15-00</link>
+      <title>[Latest Update] Names too on the nose</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-06-01 @ 11:40 PM EDT</b></p>
+
+<p>Add update from Joe Crawford about potential mechanisms for on-the-nosedness.</p>
+
+<ul>
+
+<li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-diff-c6e71f4d689f2b208c3eae19e647435322fa6d04-to-current.html">Diff from prior revision</a></li>
+<li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+</ul>]]>
+      </content:encoded>
+    </item>
+    <item>
+      <pubDate>Tue, 21 May 2024 10:55:00 -0400</pubDate>
+      <guid isPermalink="false">
+        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout-2024-05-21-10-55-00
+      </guid>
+      <description><![CDATA[Update — 2024-05-21 @ 10:55 AM EDT Add Yahya Sinwar.]]></description>
+      <link>
+        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-oldcommit-c6e71f4d689f2b208c3eae19e647435322fa6d04.html
+      </link>
+      <title>[Update] Names too on the nose</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-05-21 @ 10:55 AM EDT</b></p>
+
+<p>Add Yahya Sinwar.</p>
+
+<ul>
+<li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-oldcommit-c6e71f4d689f2b208c3eae19e647435322fa6d04.html">This revision</a></li>
+
+<li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+</ul>]]>
+      </content:encoded>
+    </item>
+    <item>
+      <pubDate>Tue, 9 Apr 2024 01:15:00 -0400</pubDate>
+      <guid isPermalink="false">
+        https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout-2024-04-09-01-15-00
+      </guid>
+      <description><![CDATA[Update — 2024-04-09 @ 01:15 AM EDT Initial publication.]]></description>
+      <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html#sprout-2024-04-09-01-15-00</link>
+      <title>[Seed] Names too on the nose</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-04-09 @ 01:15 AM EDT</b></p>
+
+<p>Initial publication.</p>
+
+<ul>
+
+
+<li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+</ul>]]>
+      </content:encoded>
+    </item>
+  </channel>
+</rss>

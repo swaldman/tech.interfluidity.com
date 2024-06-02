@@ -1,10 +1,14 @@
-> val updateHistory = UpdateRecord("2024-05-21T10:55:00-04:00", Some("Add Yahya Sinwar."), None) :: Nil
+> val updateHistory =
+>   UpdateRecord("2024-06-01T23:40:00-04:00", Some("Add update from Joe Crawford about potential mechanisms for on-the-nosedness."), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   UpdateRecord("2024-05-21T10:55:00-04:00", Some("Add Yahya Sinwar."), None) ::
+>   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"         -> "Names too on the nose",
 >   "PubDate"       -> "2024-04-09T01:15:00-04:00",
 >   "UpdateHistory" -> updateHistory,
 >   "Anchor"        -> "names-too-on-the-nose",
+>   "Sprout"        -> true
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
@@ -33,6 +37,10 @@ I'll do that here!
 (I think I might once have encountered a Twitter thread in this vein. My apologies to whomever I am ripping off!)
 
 Please get in touch with any suggestions!
+
+_**Update:** [Joe Crawford](https://artlung.com/) writes to point out that the on-the-nosedness of names
+[might have mechanisms](https://www.bbc.com/worklife/article/20180404-do-our-names-push-us-toward-certain-jobs)
+other than the universe being a crude dissimulation!_
 
 ---
 

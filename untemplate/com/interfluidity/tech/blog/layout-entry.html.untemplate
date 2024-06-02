@@ -86,6 +86,7 @@ input.presentation match {
 <()
       }
 ()>
+      (See <a href="<( permalink.relative )>#update-history">update history</a>.)  
 <()
     }
     mbSproutRssLoc.foreach { sproutRssLoc =>

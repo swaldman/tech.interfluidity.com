@@ -13,7 +13,7 @@ end liElems
 <()
   if liElems.size > 1 then { // we don't want to display initial-publication only update histories
 ()>
-<div class="update-history">
+<div id="update-history" class="update-history">
   <h3 class="update-history-title">
     <a id="major-updates"></a>Major revisions:
   </h3>
