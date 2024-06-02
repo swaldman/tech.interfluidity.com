@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 1 Jun 2024 23:49:42 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 2 Jun 2024 00:00:32 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
@@ -28,9 +28,9 @@ Add initial take on tags related to updates and revisions.]]>
 <p>Add initial take on tags related to updates and revisions.</p>
 
 <ul>
-
+<li><em>No link specifically to this revision is avaiable.</em></li>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-current.html">Diff from prior revision</a></li>
-<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
     </item>
@@ -53,7 +53,7 @@ Add JS/CSS so that prior revisions are visually distinct from current.]]>
 <ul>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">This revision</a></li>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">Diff from prior revision</a></li>
-<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
     </item>
@@ -76,7 +76,7 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
 <ul>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html">This revision</a></li>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html">Diff from prior revision</a></li>
-<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
     </item>
@@ -94,8 +94,8 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
 
 <ul>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html">This revision</a></li>
-
-<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><em>No diff is available for this revision.</em></li>
+<li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
     </item>
