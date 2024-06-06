@@ -36,7 +36,7 @@ I can track these kinds of tools as I encounter them.
   A modern retake on `find` I haven't played with yet.
 
 * [`fzf`](https://junegunn.github.io/fzf/)<br>
-  An fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
+  A fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
   See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html).
 
 * [`rg`](https://github.com/BurntSushi/ripgrep)<br>
