@@ -58,7 +58,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
       layout_main_html(mainLayoutInput).text
 
     object Archive:
-      val location = site.location("/archive.html")              
+      val location = site.location("/archive.html")
       case class Input( renderLocation : SiteLocation, entryUntemplatesResolved : immutable.SortedSet[EntryResolved] )
 
       val task = zio.ZIO.attempt {

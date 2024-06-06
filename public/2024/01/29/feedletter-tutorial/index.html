@@ -54,7 +54,7 @@
    <p>I've been working for some time on a service to turn RSS feeds into e-mail newsletters, which I've called <a href="https://github.com/swaldman/feedletter"><em>feedletter</em></a>.</p>
    <p>The service watches any number of RSS feeds, can host a variety of subscription types for each feed, including one e-mail per article, daily or weekly digests, compendia of every <em>n</em> posts, etc. It can also notify other services, like Mastodon, of new posts. It lets you define, for each feed, a notion of when an item is stable and finalized, and takes great care never to e-mail or notify the same item more than once.</p>
    <div class="note">
-    <p>Great minds think alike! After weeks of working on this, I discovered a <a href="">similar project with the very same name</a>.</p>
+    <p>Great minds think alike! After weeks of working on this, I discovered a <a href="https://github.com/garamond/feedletter">similar project with the very same name</a>.</p>
    </div>
    <p>Here I want to go through the process of setting up a <em>feedletter</em> instance, configuring it, tweaking or customizing the newsletter style, and running it.</p>
    <p>You can host <em>feedletter</em> on any Linux/UNIX-ish server. For completeness, I'm going to set up a server from scratch, from a fresh Digital Ocean droplet. But of course you can run <em>feedletter</em> along side other services on an existing machine, and skip a lot of these steps. <em>feedletter</em>'s main prerequisite is <a href="https://www.postgresql.org/"><em>postgres</em></a>, but we'll make use of <em>nginx</em>, <em>certbot</em>, <em>systemd</em> etc. as we go along.</p>

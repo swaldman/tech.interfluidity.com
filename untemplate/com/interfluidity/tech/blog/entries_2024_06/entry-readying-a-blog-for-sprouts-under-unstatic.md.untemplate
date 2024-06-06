@@ -1,0 +1,190 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("XXX"), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Readying a blog for revision histories and sprouts under unstatic",
+>   "PubDate"       -> "2024-06-02T03:15:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "readying-a-blog-for-sprouts",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I've been developing support for my take on [Chris Krycho' "sprouts"](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/)
+against this blog. Much of that support is now built into [`unstatic`](https://github.com/swaldman/unstatic), my library for building
+static-site generators. But it does also require some support from within applicatons of that library, from the scala code and the
+[untemplates](https://github.com/swaldman/untemplate-doc) of the individual site generators.
+
+I'm going to upgrade my ["drafts"](https://drafts.interfluidity.com/archive.html) blog to support revisions, diffs, and sprouts.
+I'll document what it takes to do that here.
+
+### Enable revision- and diff-generation in Scala code
+
+In the object [`DraftsSite`](https://github.com/swaldman/drafts.interfluidity.com/blob/main/src/com/interfluidity/drafts/DraftsSite.scala),
+the [`unstatic.ztapir.ZTSite`](https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/ZTSite.scala)
+that defines the site to be generated, inside the
+[`unstatic.ztapir.simple.SimpleBlog`](https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/SimpleBlog.scala)
+that defines the blog,
+add a [`RevisionBinder`](https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/RevisionBinder.scala) that
+can pull old revisions of pages and generate them into the website, and a
+[`DiffBinder`](https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/DiffBinder.scala)
+that can generate diffs between current and new revisions:
+
+```scala
+ override val revisionBinder : Option[RevisionBinder] = Some( RevisionBinder.GitByCommit(DraftsSite, JPath.of("."), siteRooted => Rel("public/").embedRoot(siteRooted)) )
+ override val diffBinder     : Option[DiffBinder]     = Some( DiffBinder.JavaDiffUtils(DraftsSite) )
+```
+
+By default, `SimpleBlog` sets these values to null. We override them.
+
+The `RevisionBinder` we are using is `RevisionBinder.GitByCommit`. Its constructor accepts
+
+1. our `ZTSite`;
+2. a file path (`java.nio.file.Path`) to the git repository in which revisions are stored, just '.' for us because the git repository is the static-site generator's working directory;
+3. a function that converts a site-rooted path ([`unstatic.UrlPath.Rooted`](https://github.com/swaldman/unstatic/blob/main/src/unstatic/UrlPath.scala))
+   into the associated path within the repository relative to its root (as [`unstatic.UrlPath.Rel`](https://github.com/swaldman/unstatic/blob/main/src/unstatic/UrlPath.scala));
+4. A `RevisionBinder.RevisionPathFinder`, a function which takes a document's site-rooted path and a "revision spec" (which for this revision binder is a full-size hex git commit)
+   and determines the path the revision should take within the site.
+
+We omit the fourth argument because we use a default, which coverts a path like `/a/b/whatever.html` to `/a/b/whatever-oldcommit-c6e71f4d689f2b208c3eae19e647435322fa6d04.html`
+
+For a `DiffBinder`, we use `DiffBinder.JavaDiffUtils`, based on the [`java-diff-utils`](https://github.com/java-diff-utils/java-diff-utils) library.
+When we ask it to generate a diff for a path, we give it a reference to the `RevisionBinder.RevisionPathFinder` so it can know the filenames old versions
+get generated into. We also give it a `DiffBinder.DiffPathFinder`, which computes the pathnames of the generated diffs. Again, the `DiffBinder.DiffPathFinder` is omitted
+our code. We rely a default argument, which produces diff paths like `/a/b/whatever-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-199e44561de3fd9e731a335d8b2a655f42d9bc04.html`.
+
+Now, if we ever [provide update histories](##green-shoots-of-sprouts) to any posts, copies of any old revisions referenced will be generated into the public directory of the site,
+as well as diffs between adjacent items in the update history.
+
+### Modify the site to generate update histories at the end of posts
+
+It's a matter of taste, but we'll display update histories only on single-post permalink pages, not at the end of each post when concatenated together.
+And we won't include them as content in RSS. (Update histories [_do_ get included](##iffy-xml-namespace) as additional metadata in RSS. That's built in.)
+`SimpleBlog` conveniently distinguishes between `Single`, `Multiple`, and `Rss`; we can just check our presentation and behave appropriately.
+
+So... We'll
+
+1. Steal [`layout-update-history.html.untemplate`](https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-update-history.html.untemplate)
+   from the tech blog, and [bring it in as a layout of drafts](https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/mainblog/layout-update-history.html.untemplate).
+   (I had to import `com.interfluidity.drafts.DraftsSite.MainBlog`, and modify the link in the note
+   to point to the drafts got repository, rather than the tech rep.)
+2. Modify [`layout-entry.html.untemplate`](https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/mainblog/layout-entry.html.untemplate)
+   in drafts to bring in the new layout of update history. That turns out to be really easy, because
+   we already have logic at the end of our entry layout to restrict addition of previous and next links to single page presentations. So all we
+   have to do is add our update history layout just after the `div` for those links, but within the conditionally added region.
+   It's literally just
+   ```plaintext
+   \<( layout_update_history_html( input ) )>
+   ```
+   inserted just after that `div`, still within the conditional region.
+
+### Modify the main layout and CSS so that old revisions are visually distinct from, and link back to, current revisions
+
+At the top of the `body` element of [`layout-main.html.untemplate`](https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/layout-main.html.untemplate),
+we add an empty `div` element called `top-banner`.
+
+```html
+  </head>
+  <body>
+    <div id="top-banner"></div>
+```
+
+In current revisions, this will remain invisible and empty. But we'll add a bit of javascript to detect if we're in an old revision,
+and add some HTML with a link back to the current revision.
+If we are in an old revision, we'll also add a class called `old-draft` to the body element, so that we can do
+whatever we feel like in CSS to make the old revision visually distinct.
+
+We use a javascript regular expression and our current location to decide if we are in an old revision.
+
+```javascript
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+```
+
+We adjust [our main CSS](https://github.com/swaldman/drafts.interfluidity.com/blob/main/static/css/style.css) to keep the top-banner `div` at the top of our document, when it's relevant:
+
+```css
+body.old-draft #top-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    color: black;
+    background-color: yellow;
+    text-align: center;
+    font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
+    font-variation-settings: "wght" 500;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid black;
+}
+```
+
+Also add CSS so that, when viewing old revisions, the documents look, well, old.
+
+```css
+body.old-draft {
+    padding-top: 1em;
+    background-color: #F3F5DA;
+    color: #6E7FD9;
+    font-family: 'GabrieleD', 'Courier';
+}
+```
+
+(These choices were inspired by the TT2020 image [here](https://www.creativebloq.com/typography/free-typewriter-fonts-1131774),
+although ultimately I went for Gabriele, because the TT2020 file sizes were very large.)
+
+### Add a prologue to posts with revisions or that generate sprout RSS
+
+When a post is a revision or a sprout, we want a prologue that indicated that it is, with links to the prior revision,
+the update history, and the sprout RSS.
+
+I'm too lazy to describe what it took to add that in detail, but here's [a nice, concise commit](https://github.com/swaldman/drafts.interfluidity.com/commit/d88d72d099cbe0c542ce2cce039243fb0975e52e).
+Check out the diff.
+
+### Miscellaneous tweaks
+
+I don't want to have to import `UpdateRecord` whenever I want to add update histories to entries, so
+I added them as an extra import to my [untemplate customizer](https://github.com/swaldman/untemplate-doc?tab=readme-ov-file#customizers)
+in my mill build file, [`build.sc`](https://github.com/swaldman/drafts.interfluidity.com/blob/main/build.sc):
+
+```scala
+  override def untemplateSelectCustomizer: untemplate.Customizer.Selector = { key =>
+    var out = untemplate.Customizer.empty
+
+    if (key.inferredPackage.indexOf("mainblog")>=0 && key.inferredFunctionName.startsWith("entry_")) {
+      out = out.copy(extraImports=Seq("unstatic.*","com.interfluidity.drafts.DraftsSite.MainBlog","unstatic.ztapir.simple.UpdateRecord"))
+    }
+```
+
+The "update history note" should be small, so I add to css:
+
+```css
+.update-history-note {
+    font-size: smaller;
+    line-height: 100%;
+}
+```
+
+### Republish the site
+
+Even though nothing visible should change, let's go ahead and republish the site, so that our javascript and css
+scaffolding for old-looking updates become available.
+
+### Test and tweak
+
+Even though I don't have any actual new revisions to create, I added a fake revision history to the most recent post,
+played around in CSS with the look of the old revision until I liked it, then commented away the fake update history.
