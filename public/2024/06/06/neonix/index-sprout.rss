@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss 
+version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Sprout — Neonix</title>
+    <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html</link>
+    <description><![CDATA[Updates to Neonix]]></description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 6 Jun 2024 15:35:51 -0400</lastBuildDate>
+    <generator>https://github.com/swaldman/unstatic</generator>
+    <docs>https://cyber.harvard.edu/rss/rss.html</docs>
+    <atom:link
+    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"/>
+    <iffy:completeness>Metadata</iffy:completeness>
+    <item>
+      <pubDate>Thu, 6 Jun 2024 15:35:00 -0400</pubDate>
+      <guid isPermalink="false">https://tech.interfluidity.com/2024/06/06/neonix/index-sprout-2024-06-06-15-35-00</guid>
+      <description><![CDATA[Update — 2024-06-06 @ 03:35 PM EDT Initial publication.]]></description>
+      <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html#sprout-2024-06-06-15-35-00</link>
+      <title>[Latest Update] Neonix</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-06-06 @ 03:35 PM EDT</b></p>
+
+<p>Initial publication.</p>
+
+<ul>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><em>No diff is available for this revision.</em></li>
+</ul>]]>
+      </content:encoded>
+    </item>
+  </channel>
+</rss>

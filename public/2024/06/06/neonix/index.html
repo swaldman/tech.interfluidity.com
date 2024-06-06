@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Neonix</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-06-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single uid-readying-a-blog-for-sprouts">
+ <div class="entry-header">
+  <h1><a href="index.html">Neonix</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="update-prepend rss-description-exclude">
+  <em> ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="index-sprout.rss">here</a>. 
+   <link rel="alternate" type="application/rss+xml" title="Update to Neonix" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"></em>
+  <hr>
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I've found <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> to be an invaluable tool. At some level it's just grep, but its speed and ergonomics make it something else. I find things much more quickly. In combination with <a href="https://docs.projectile.mx/projectile/index.html">projectile</a>, it gives me a fast project-wide find, reducing one of the advantages of commercial IDEs over my humble emacs.</p>
+   <p>Today, Bill Mill <a href="https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html">points me</a> to a command line tool called <a href="https://junegunn.github.io/fzf/"><code>fzf</code></a> which looks like kind of a command-line Swiss army knife. It certainly makes sorting through very long <code>find .</code> output a breeze.</p>
+   <p>Some of Bill's scripts use a find replacement called <a href="https://github.com/sharkdp/fd"><code>fd</code></a>, which I plan to take a look at.</p>
+   <p>I think this is an interesting trend, taking venerable UNIX command-line tools and rethinking, reimplementing them with modern languages and the decades of experience since that first, revolutioary, burst of command-line creativity in the early UNIX days.</p>
+   <p>I'll let this post become a <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">"sprout"</a> from which I can track these kinds of tools as I encounter them.</p>
+   <ul>
+    <li>
+     <p><a href="https://github.com/BurntSushi/ripgrep"><code>ripgrep</code></a><br>
+       A new take on grep, super fast, seachers directories recursively, by default excluding <code>.git</code> and whatever is <code>.gitignore</code>-d.</p></li>
+    <li>
+     <p><a href="https://junegunn.github.io/fzf/"><code>fzf</code></a><br>
+       An fuzzy-matching tool for interactively sorting through large command line and command completion outputs. See <a href="https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html">Bill Mill</a></p></li>
+    <li>
+     <p><a href="https://github.com/sharkdp/fd"><code>fd</code></a><br>
+       A modern retake on <code>find</code> I haven't played with yet.</p></li>
+   </ul>
+   <p>I'll add more as I, um, <code>fd</code> them!</p>
+   <hr>
+   <p>p.s. apparently there's a <a href="https://www.insomniac.com/music/artists/neonix/">DJ called Neonix</a>! Sorry! I'm using the, um, neologism to refer to neo-UNIX.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">03:35 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../02/readying-a-blog-for-revision-histories-and-sprouts-under-unstatic/index.html">← Readying a blog for revision histories and sprouts under unstatic</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

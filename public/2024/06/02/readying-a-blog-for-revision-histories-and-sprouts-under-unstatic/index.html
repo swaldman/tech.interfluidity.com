@@ -55,7 +55,7 @@
  </div>
  <div class="entry-body">
   <div class="flexmark markdown">
-   <p>I've been developing support for my take on <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">Chris Krycho' "sprouts"</a> against this blog. Much of that support is now built into <a href="https://github.com/swaldman/unstatic"><code>unstatic</code></a>, my library for building static-site generators. But it does also require some support from within applicatons of that library, from the scala code and the <a href="https://github.com/swaldman/untemplate-doc">untemplates</a> of the individual site generators.</p>
+   <p>I've been developing support for my take on <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">Chris Krycho' "sprouts"</a> against this blog. Much of that support is now built into <a href="https://github.com/swaldman/unstatic"><code>unstatic</code></a>, my library for building static-site generators. But it does also require some support from within applications of that library, from the scala code and the <a href="https://github.com/swaldman/untemplate-doc">untemplates</a> of the individual site generators.</p>
    <p>I'm going to upgrade my <a href="https://drafts.interfluidity.com/archive.html">"drafts"</a> blog to support revisions, diffs, and sprouts. I'll document what it takes to do that here.</p>
    <h3><a href="#enable-revision--and-diff-generation-in-scala-code" id="enable-revision--and-diff-generation-in-scala-code" name="enable-revision--and-diff-generation-in-scala-code" class="anchorlink"></a>Enable revision- and diff-generation in Scala code</h3>
    <p>In the object <a href="https://github.com/swaldman/drafts.interfluidity.com/blob/main/src/com/interfluidity/drafts/DraftsSite.scala"><code>DraftsSite</code></a>, the <a href="https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/ZTSite.scala"><code>unstatic.ztapir.ZTSite</code></a> that defines the site to be generated, inside the <a href="https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/SimpleBlog.scala"><code>unstatic.ztapir.simple.SimpleBlog</code></a> that defines the blog, add a <a href="https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/RevisionBinder.scala"><code>RevisionBinder</code></a> that can pull old revisions of pages and generate them into the website, and a <a href="https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/DiffBinder.scala"><code>DiffBinder</code></a> that can generate diffs between current and new revisions:</p>
@@ -171,6 +171,7 @@
    <a href="../../../../index.html">↑↑↑</a>
   </div>
   <div class="next">
+   <a href="../../06/neonix/index.html">Neonix →</a>
   </div>
  </div>
  <div id="update-history" class="update-history">

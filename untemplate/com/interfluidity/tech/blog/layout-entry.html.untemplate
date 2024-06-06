@@ -91,7 +91,8 @@ input.presentation match {
     }
     mbSproutRssLoc.foreach { sproutRssLoc =>
 ()>
-  <br>&#x27A3;&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="<( sproutRssLoc.relative )>">here</a>.
+  <( if info.updateHistory.nonEmpty then "<br>" else "" )>  
+  &#x27A3;&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="<( sproutRssLoc.relative )>">here</a>.
   <link rel="alternate" type="application/rss+xml" title="Update to <( info.mbTitle.getOrElse("this post") )>" href="<( sproutRssLoc.absolutePath )>">
 <()
     }

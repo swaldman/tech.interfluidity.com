@@ -1,0 +1,52 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("XXX"), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Neonix",
+>   "PubDate"       -> "2024-06-06T15:35:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Sprout"        -> true,
+>   "Anchor"        -> "readying-a-blog-for-sprouts",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I've found [ripgrep](https://github.com/BurntSushi/ripgrep) to be an invaluable tool.
+At some level it's just grep, but its speed and ergonomics make it something else.
+I find things much more quickly. In combination with [projectile](https://docs.projectile.mx/projectile/index.html),
+it gives me a fast project-wide find, reducing one of the advantages of commercial IDEs over my humble emacs.
+
+Today, Bill Mill [points me](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html) to
+a command line tool called [`fzf`](https://junegunn.github.io/fzf/) which looks like kind of a command-line Swiss army knife. It certainly
+makes sorting through very long `find .` output a breeze.
+
+Some of Bill's scripts use a find replacement called [`fd`](https://github.com/sharkdp/fd), which I plan to take a look at.
+
+I think this is an interesting trend, taking venerable UNIX command-line tools and rethinking, reimplementing them
+with modern languages and the decades of experience since that first, revolutioary, burst of command-line creativity
+in the early UNIX days.
+
+I'll let this post become a ["sprout"](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/) from which
+I can track these kinds of tools as I encounter them.
+
+* [`ripgrep`](https://github.com/BurntSushi/ripgrep)<br>
+  A new take on grep, super fast, seachers directories recursively, by default excluding `.git` and whatever is `.gitignore`-d.
+
+* [`fzf`](https://junegunn.github.io/fzf/)<br>
+  An fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
+  See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html)
+
+* [`fd`](https://github.com/sharkdp/fd)<br>
+  A modern retake on `find` I haven't played with yet.
+
+I'll add more as I, um, `fd` them!
+
+---
+
+p.s. apparently there's a [DJ called Neonix](https://www.insomniac.com/music/artists/neonix/)! Sorry! I'm using the, um, neologism to refer to neo-UNIX.
+
+
+

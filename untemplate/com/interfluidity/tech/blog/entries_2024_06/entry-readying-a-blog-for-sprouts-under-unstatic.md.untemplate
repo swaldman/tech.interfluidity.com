@@ -16,7 +16,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 I've been developing support for my take on [Chris Krycho' "sprouts"](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/)
 against this blog. Much of that support is now built into [`unstatic`](https://github.com/swaldman/unstatic), my library for building
-static-site generators. But it does also require some support from within applicatons of that library, from the scala code and the
+static-site generators. But it does also require some support from within applications of that library, from the scala code and the
 [untemplates](https://github.com/swaldman/untemplate-doc) of the individual site generators.
 
 I'm going to upgrade my ["drafts"](https://drafts.interfluidity.com/archive.html) blog to support revisions, diffs, and sprouts.
