@@ -1,0 +1,15 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("XXX"), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Neonix",
+>   "PubDate"       -> "2024-06-02T03:15:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "readying-a-blog-for-sprouts",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+

@@ -1,10 +1,11 @@
 > val updateHistory =
->   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("XXX"), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   UpdateRecord("2024-06-06T13:30:00-04:00", Some("Correct bad publication date and time."), Some("f9b8a24e6219588d1f7f570dd9d448d02a5c6529")) ::
 >   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"         -> "Readying a blog for revision histories and sprouts under unstatic",
->   "PubDate"       -> "2024-06-02T03:15:00-04:00",
+>   "PubDate"       -> "2024-06-05T23:00:00-04:00",
+>   "Permalink"     -> "/2024/06/02/readying-a-blog-for-revision-histories-and-sprouts-under-unstatic/index.html",
 >   "UpdateHistory" -> updateHistory,
 >   "Anchor"        -> "readying-a-blog-for-sprouts",
 > )
