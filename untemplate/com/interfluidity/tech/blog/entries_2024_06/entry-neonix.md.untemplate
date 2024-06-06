@@ -39,8 +39,8 @@ I can track these kinds of tools as I encounter them.
   An fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
   See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html).
 
-* [`ripgrep`](https://github.com/BurntSushi/ripgrep)<br>
-  A new take on grep, super fast, seachers directories recursively, by default excluding `.git` and whatever is `.gitignore`-d.
+* [`rg`](https://github.com/BurntSushi/ripgrep)<br>
+  "ripgrep". A new take on grep, super fast, seachers directories recursively, by default excluding `.git` and whatever is `.gitignore`-d.
 
 I'll add more as I, um, `fd` them!
 
