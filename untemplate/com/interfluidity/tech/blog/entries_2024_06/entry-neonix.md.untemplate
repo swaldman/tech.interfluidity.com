@@ -1,5 +1,5 @@
 > val updateHistory =
->   //UpdateRecord("2024-06-01T23:40:00-04:00", Some("XXX"), Some("c6e71f4d689f2b208c3eae19e647435322fa6d04")) ::
+>   UpdateRecord("2024-06-06T18:30:00-04:00", Some("""Add Kartik Agaram's pointer to Bill Mill's "modern unix tools""""), Some("711778c5fa4d93cd89e9421da6b8d9fb6e71a534")) ::
 >   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -48,5 +48,11 @@ I'll add more as I, um, `fd` them!
 
 p.s. apparently there's a [DJ called Neonix](https://www.insomniac.com/music/artists/neonix/)! Sorry! I'm using the, er, neologism to refer to neo-UNIX.
 
+---
+
+**Update 2024-06-06:** Kartik Agaram's [points](https://merveilles.town/@akkartik/112571589796019251) me
+to [Bill Mill's "modern unix tools" page](https://notes.billmill.org/link_blog/2023/10/modern_unix_tools.html).
+Which itself contains a link to a ["Modern Unix" collection by Ibraheem Ahmed](https://github.com/ibraheemdev/modern-unix).
+So much to play with!
 
 

@@ -6,18 +6,42 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html</link>
     <description><![CDATA[Updates to Neonix]]></description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 6 Jun 2024 15:43:40 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 6 Jun 2024 18:24:27 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
     type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"/>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
+      <pubDate>Thu, 6 Jun 2024 18:30:00 -0400</pubDate>
+      <guid isPermalink="false">https://tech.interfluidity.com/2024/06/06/neonix/index-sprout-2024-06-06-18-30-00</guid>
+      <description>
+        <![CDATA[Update — 2024-06-06 @ 06:30 PM EDT
+
+Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]>
+      </description>
+      <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html#sprout-2024-06-06-15-35-00</link>
+      <title>[Latest Update] Neonix</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-06-06 @ 06:30 PM EDT</b></p>
+
+<p>Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"</p>
+
+<ul>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-current.html">Diff from prior revision</a></li>
+</ul>]]>
+      </content:encoded>
+    </item>
+    <item>
       <pubDate>Thu, 6 Jun 2024 15:35:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/2024/06/06/neonix/index-sprout-2024-06-06-15-35-00</guid>
       <description><![CDATA[Update — 2024-06-06 @ 03:35 PM EDT Initial publication.]]></description>
-      <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html#sprout-2024-06-06-15-35-00</link>
-      <title>[Latest Update] Neonix</title>
+      <link>
+        https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-711778c5fa4d93cd89e9421da6b8d9fb6e71a534.html
+      </link>
+      <title>[Seed] Neonix</title>
       <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-06-06 @ 03:35 PM EDT</b></p>
@@ -25,8 +49,9 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
 <p>Initial publication.</p>
 
 <ul>
-<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-711778c5fa4d93cd89e9421da6b8d9fb6e71a534.html">This revision</a></li>
 <li><em>No diff is available for this revision.</em></li>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
     </item>
