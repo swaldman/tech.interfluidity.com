@@ -17,7 +17,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 I've found [ripgrep](https://github.com/BurntSushi/ripgrep) to be an invaluable tool.
 At some level it's just grep, but its speed and ergonomics make it something else.
 I find things much more quickly. In combination with [projectile](https://docs.projectile.mx/projectile/index.html),
-it gives me a fast project-wide find, reducing one of the advantages of commercial IDEs over my humble emacs.
+it gives me a fast project-wide find, reducing one of the advantages of commercial IDEs over my humble [emacs](https://www.gnu.org/software/emacs/).
 
 Today, Bill Mill [points me](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html) to
 a command line tool called [`fzf`](https://junegunn.github.io/fzf/) which looks like kind of a command-line Swiss army knife. It certainly
@@ -37,7 +37,7 @@ I can track these kinds of tools as I encounter them.
 
 * [`fzf`](https://junegunn.github.io/fzf/)<br>
   An fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
-  See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html)
+  See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html).
 
 * [`ripgrep`](https://github.com/BurntSushi/ripgrep)<br>
   A new take on grep, super fast, seachers directories recursively, by default excluding `.git` and whatever is `.gitignore`-d.
