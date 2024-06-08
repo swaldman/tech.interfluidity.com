@@ -1,0 +1,49 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-06T18:30:00-04:00", Some("""???"""), Some("???")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Should blogs adopt the itunes:category RSS tag?",
+>   "PubDate"       -> "2024-06-08T19:50:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   //"Sprout"        -> true,
+>   //"Anchor"        -> "",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+Apple organized a [whole slew of standard categories or genres](https://podcasters.apple.com/support/1691-apple-podcasts-categories)
+for podcasts, when they defined the [`itunes` RSS namespace](https://help.apple.com/itc/podcasts_connect/#/itcb54353390) for podcasts.
+This helped discoverability of podcasts, as podcast applications and indexers can let users search or browse by genre, or
+make suggestions based on genres users seem to prefer.
+
+Apple seems to have done a pretty good job at this. It's not obvious that "podcast genres" are meaningfully distinct from
+"blog genres". We could, of course, invent some analogous kind of categorization just for blogs, but why? As Dave Winer
+[hath writ](http://scripting.com/2017/05/09/rulesForStandardsmakers.html)
+
+> **Fewer format features is better**
+>
+> If you want to add a feature to a format, first carefully study the existing format and namespaces to be sure what
+> you're doing hasn't already been done. If it has, use the original version. This is how you maximize interop.
+
+Podcasts got a huge lift from what was originally the blog-centric RSS format. Why haven't blogs adopted podcast-RSS
+best practices to get a lift right back?
+
+There's a potential issue that some applications may use the presence of `itunes` RSS tags to imply an RSS feed is
+for a podcast. But that's pretty dumb. If applications expecting podcasts import blogs without soundfiles because
+they use this heuristic, well, bad on them. They should fix that. When blogs do contain some posts with audio `<enclosure/>` elements, then
+arguably they are podcasts _inter alia_. Client applications should use intelligent criteria to decide what they want
+to consider suitably a "podcast" or "podcast episode".
+
+It strikes me as a good idea to take some of the good ideas from the `itunes` (and [`podcast`](https://github.com/Podcastindex-org/podcast-namespace))
+namespace for blogs and other RSS applications.
+
+Starting, perhaps, with `itunes:category`.
+
+Apple [defines](https://help.apple.com/itc/podcasts_connect/#/itcb54353390) as a channel-level element that
+permits multiple entries (you don't have to be just one genre), and nested entries for subcategories.
+Seems pretty good!
+
+What do you think?

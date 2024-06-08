@@ -219,6 +219,12 @@ h3 {
 #content article h2, #content article h3 {
     margin-top: 2em;
 }
+#content article blockquote {
+    font-family: 'SourceSerif4Italic';
+    margin-left: 0;
+    padding-left: 2rem;
+    border-left: 1rem solid rgba(0,255,0,0.3);
+}
 #content article div.note::before {
     content: "☞ Note";
     font-weight: bold;

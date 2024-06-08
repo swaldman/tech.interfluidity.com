@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Should blogs adopt the itunes:category RSS tag?</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-06-08 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">Should blogs adopt the itunes:category RSS tag?</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>Apple organized a <a href="https://podcasters.apple.com/support/1691-apple-podcasts-categories">whole slew of standard categories or genres</a> for podcasts, when they defined the <a href="https://help.apple.com/itc/podcasts_connect/#/itcb54353390"><code>itunes</code> RSS namespace</a> for podcasts. This helped discoverability of podcasts, as podcast applications and indexers can let users search or browse by genre, or make suggestions based on genres users seem to prefer.</p>
+   <p>Apple seems to have done a pretty good job at this. It's not obvious that "podcast genres" are meaningfully distinct from "blog genres". We could, of course, invent some analogous kind of categorization just for blogs, but why? As Dave Winer <a href="http://scripting.com/2017/05/09/rulesForStandardsmakers.html">hath writ</a></p>
+   <blockquote>
+    <p><strong>Fewer format features is better</strong></p>
+    <p>If you want to add a feature to a format, first carefully study the existing format and namespaces to be sure what you're doing hasn't already been done. If it has, use the original version. This is how you maximize interop.</p>
+   </blockquote>
+   <p>Podcasts got a huge lift from what was originally the blog-centric RSS format. Why haven't blogs adopted podcast-RSS best practices to get a lift right back?</p>
+   <p>There's a potential issue that some applications may use the presence of <code>itunes</code> RSS tags to imply an RSS feed is for a podcast. But that's pretty dumb. If applications expecting podcasts import blogs without soundfiles because they use this heuristic, well, bad on them. They should fix that. When blogs do contain some posts with audio <code>&lt;enclosure/&gt;</code> elements, then arguably they are podcasts <em>inter alia</em>. Client applications should use intelligent criteria to decide what they want to consider suitably a "podcast" or "podcast episode".</p>
+   <p>It strikes me as a good idea to take some of the good ideas from the <code>itunes</code> (and <a href="https://github.com/Podcastindex-org/podcast-namespace"><code>podcast</code></a>) namespace for blogs and other RSS applications.</p>
+   <p>Starting, perhaps, with <code>itunes:category</code>.</p>
+   <p>Apple <a href="https://help.apple.com/itc/podcasts_connect/#/itcb54353390">defines</a> as a channel-level element that permits multiple entries (you don't have to be just one genre), and nested entries for subcategories. Seems pretty good!</p>
+   <p>What do you think?</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="index.html">07:50 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../06/neonix/index.html">← Neonix</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>
