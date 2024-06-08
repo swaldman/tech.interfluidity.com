@@ -37,7 +37,7 @@ they use this heuristic, well, bad on them. They should fix that. When blogs do 
 arguably they are podcasts _inter alia_. Client applications should use intelligent criteria to decide what they want
 to consider suitably a "podcast" or "podcast episode".
 
-It strikes me as a good idea to take some of the good ideas from the `itunes` (and [`podcast`](https://github.com/Podcastindex-org/podcast-namespace))
+It strikes me as a good idea to make use of good ideas from the `itunes` (and [`podcast`](https://github.com/Podcastindex-org/podcast-namespace))
 namespace for blogs and other RSS applications.
 
 Starting, perhaps, with `itunes:category`.
