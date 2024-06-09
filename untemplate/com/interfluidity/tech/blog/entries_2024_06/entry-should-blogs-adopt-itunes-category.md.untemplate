@@ -42,7 +42,7 @@ namespace for blogs and other RSS applications.
 
 Starting, perhaps, with `itunes:category`.
 
-Apple [defines](https://help.apple.com/itc/podcasts_connect/#/itcb54353390) as a channel-level element that
+Apple [defines](https://help.apple.com/itc/podcasts_connect/#/itcb54353390) `itunes:category` as a channel-level element that
 permits multiple entries (you don't have to be just one genre), and nested entries for subcategories.
 Seems pretty good!
 
