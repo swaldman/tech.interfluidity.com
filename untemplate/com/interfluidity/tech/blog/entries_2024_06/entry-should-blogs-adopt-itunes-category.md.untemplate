@@ -21,7 +21,7 @@ make suggestions based on genres users seem to prefer.
 
 Apple seems to have done a pretty good job at this. It's not obvious that "podcast genres" are meaningfully distinct from
 "blog genres". We could, of course, invent some analogous kind of categorization just for blogs, but why? As Dave Winer
-[hath writ](http://scripting.com/2017/05/09/rulesForStandardsmakers.html)
+[hath writ](http://scripting.com/2017/05/09/rulesForStandardsmakers.html):
 
 > **Fewer format features is better**
 >
