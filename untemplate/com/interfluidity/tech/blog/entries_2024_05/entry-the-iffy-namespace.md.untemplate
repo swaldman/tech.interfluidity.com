@@ -1,4 +1,5 @@
 > val updateHistory =
+>    UpdateRecord("2024-06-11T14:10:00-04:00",Some("Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>."),Some("6c5fef82527bd419e8e9c7e7f3a6420c9925cf10")) ::
 >    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
 >    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
 >    UpdateRecord("2024-05-25T23:00:00-04:00",Some("Add JS/CSS so that prior revisions are visually distinct from current."),Some("13de0232319ceab2f830591c318089d18cbec78d")) ::
@@ -34,8 +35,11 @@ The conventional prefix associated with this namespace will be `iffy`.
 
 * [`iffy:completeness`](#iffy-completeness)
 * [`iffy:diff`](#iffy-diff)
+* [`iffy:hint-announce`](#iffy-hint-announce)
 * [`iffy:initial`](#iffy-initial)
+* [`iffy:policy`](#iffy-policy)
 * [`iffy:provenance`](#iffy-provenance)
+* [`iffy:restriction`](#iffy-restriction)
 * [`iffy:revision`](#iffy-revision)
 * [`iffy:update`](#iffy-update)
 * [`iffy:update-history`](#iffy-update-history)
@@ -120,6 +124,43 @@ See also [`iffy:update-history` example](#iffy-update-history).
 
 ---
 
+<a id="iffy-hint-announce"></a>**Element &mdash; `iffy:hint-announce`**
+
+<div class="iffy-element-desc">
+
+**When a subelement of `item`**
+
+Represents a _hint_ to RSS consumers that "push" &mdash; announce, rebroadcast, or notify &mdash; items
+whether this item should be so pushed. Consumers are free to ignore this hint or make use of it as they wish.
+
+MUST contain an [`iffy:policy`](#iffy-policy) element, whose values MUST BE one of
+
+* `Always` &mdash; the item should always be notified
+* `Never` &mdash; the item should never be notified
+* `Piggyback` &mdash; the item should be notified as part of digests or other announcements of multiple items, but should not constitute its own announcement.
+
+MAY contain an [`iffy:restriction`](#iffy-restriction) element, which represents an application-specific restriction over the consumers
+to which it is addressed. No restrictions are placed on the content of the `iffy:restriction` element. Applications can define restrictions as they see fit.
+
+An `iffy:hint-announce` element with NO `iffy:restriction` or an empty `iffy:restriction` tag should be interpreted as the intended
+default for ALL applications not addressed by an `iffy:hint-announce` with a more specific restriction.
+
+Multiple `iffy:hint-announce` elements may be placed within a single `item`, provided that only one has an omitted or empty `iffy:restriction`,
+and all `iffy:hint-announce` elements containing an `iffy:restriction` contain a unique restriction. Each `iffy:restriction` SHOULD apply to nonoverlapping
+application-specific contexts. If that is not the case, how applications prioritize or respond to conflicting `iffy-hint-announce` elements whose restrictions
+both apply must be determined by the application.
+
+**Example**:
+```xml
+<iffy:hint-announce>
+  <iffy:policy>Piggyback</iffy:policy>
+</iffy:hint-announce>
+```
+
+</div>
+
+---
+
 <a id="iffy-initial"></a>**Element &mdash; `iffy:initial`**
 
 <div class="iffy-element-desc">
@@ -138,6 +179,21 @@ for the initially published version, this container is required for completeness
   <dc:creator>First Author, Esq.</dc:creator>
 </iffy:initial>
 ```
+
+</div>
+
+---
+
+<a id="iffy-policy"></a>**Element &mdash; `iffy:policy`**
+
+<div class="iffy-element-desc">
+
+In general, represents a statement of some kind of policy with respect to its containing element,
+suggested to feed consumers for handling a feed or item.
+
+**When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)**
+
+Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 </div>
 
@@ -190,6 +246,20 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
   </channel>
 </rss>
 ```
+
+</div>
+
+---
+
+<a id="iffy-restriction"></a>**Element &mdash; `iffy:restriction`**
+
+<div class="iffy-element-desc">
+
+In general, represents an expressin of some kind of restriction over the application of its containing element.
+
+**When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)**
+
+Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 </div>
 

@@ -50,7 +50,7 @@
   <hr class="below-title">
  </div>
  <div class="update-prepend rss-description-exclude">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-11 @ 02:10 PM EDT. The previous revision is <a href="index-oldcommit-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10.html">here</a>. (See <a href="index.html#update-history">update history</a>.) <br>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-02 @ 12:25 AM EDT. The previous revision is <a href="index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html">here</a>. (See <a href="index.html#update-history">update history</a>.) <br>
     ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="index-sprout.rss">here</a>. 
    <link rel="alternate" type="application/rss+xml" title="Update to The 'iffy' XML namespace" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"></em>
   <hr>
@@ -67,11 +67,8 @@
    <ul>
     <li><a href="#iffy-completeness"><code>iffy:completeness</code></a></li>
     <li><a href="#iffy-diff"><code>iffy:diff</code></a></li>
-    <li><a href="#iffy-hint-announce"><code>iffy:hint-announce</code></a></li>
     <li><a href="#iffy-initial"><code>iffy:initial</code></a></li>
-    <li><a href="#iffy-policy"><code>iffy:policy</code></a></li>
     <li><a href="#iffy-provenance"><code>iffy:provenance</code></a></li>
-    <li><a href="#iffy-restriction"><code>iffy:restriction</code></a></li>
     <li><a href="#iffy-revision"><code>iffy:revision</code></a></li>
     <li><a href="#iffy-update"><code>iffy:update</code></a></li>
     <li><a href="#iffy-update-history"><code>iffy:update-history</code></a></li>
@@ -129,26 +126,6 @@
     <p>See also <a href="#iffy-update-history"><code>iffy:update-history</code> example</a>.</p>
    </div>
    <hr>
-   <p><a id="iffy-hint-announce" href=""></a><strong>Element — <code>iffy:hint-announce</code></strong></p>
-   <div class="iffy-element-desc">
-    <p><strong>When a subelement of <code>item</code></strong></p>
-    <p>Represents a <em>hint</em> to RSS consumers that "push" — announce, rebroadcast, or notify — items whether this item should be so pushed. Consumers are free to ignore this hint or make use of it as they wish.</p>
-    <p>MUST contain an <a href="#iffy-policy"><code>iffy:policy</code></a> element, whose values MUST BE one of</p>
-    <ul>
-     <li><code>Always</code> — the item should always be notified</li>
-     <li><code>Never</code> — the item should never be notified</li>
-     <li><code>Piggyback</code> — the item should be notified as part of digests or other announcements of multiple items, but should not constitute its own announcement.</li>
-    </ul>
-    <p>MAY contain an <a href="#iffy-restriction"><code>iffy:restriction</code></a> element, which represents an application-specific restriction over the consumers to which it is addressed. No restrictions are placed on the content of the <code>iffy:restriction</code> element. Applications can define restrictions as they see fit.</p>
-    <p>An <code>iffy:hint-announce</code> element with NO <code>iffy:restriction</code> or an empty <code>iffy:restriction</code> tag should be interpreted as the intended default for ALL applications not addressed by an <code>iffy:hint-announce</code> with a more specific restriction.</p>
-    <p>Multiple <code>iffy:hint-announce</code> elements may be placed within a single <code>item</code>, provided that only one has an omitted or empty <code>iffy:restriction</code>, and all <code>iffy:hint-announce</code> elements containing an <code>iffy:restriction</code> contain a unique restriction. Each <code>iffy:restriction</code> SHOULD apply to nonoverlapping application-specific contexts. If that is not the case, how applications prioritize or respond to conflicting <code>iffy-hint-announce</code> elements whose restrictions both apply must be determined by the application.</p>
-    <p><strong>Example</strong>:</p>
-    <pre><code class="language-xml">&lt;iffy:hint-announce&gt;
-  &lt;iffy:policy&gt;Piggyback&lt;/iffy:policy&gt;
-&lt;/iffy:hint-announce&gt;
-</code></pre>
-   </div>
-   <hr>
    <p><a id="iffy-initial" href=""></a><strong>Element — <code>iffy:initial</code></strong></p>
    <div class="iffy-element-desc">
     <p><strong>When a subelement of <a href="#iffy-update-history"><code>iffy:update-history</code></a></strong></p>
@@ -159,13 +136,6 @@
   &lt;dc:creator&gt;First Author, Esq.&lt;/dc:creator&gt;
 &lt;/iffy:initial&gt;
 </code></pre>
-   </div>
-   <hr>
-   <p><a id="iffy-policy" href=""></a><strong>Element — <code>iffy:policy</code></strong></p>
-   <div class="iffy-element-desc">
-    <p>In general, represents a statement of some kind of policy with respect to its containing element, suggested to feed consumers for handling a feed or item.</p>
-    <p><strong>When a subelement of <a href="#iffy-hint-announce"><code>iffy:hint-announce</code></a></strong></p>
-    <p>Please see <a href="#iffy-hint-announce"><code>iffy:hint-announce</code></a>.</p>
    </div>
    <hr>
    <p><a id="iffy-provenance" href=""></a><strong>Element — <code>iffy:provenance</code></strong></p>
@@ -202,13 +172,6 @@
   &lt;/channel&gt;
 &lt;/rss&gt;
 </code></pre>
-   </div>
-   <hr>
-   <p><a id="iffy-restriction" href=""></a><strong>Element — <code>iffy:restriction</code></strong></p>
-   <div class="iffy-element-desc">
-    <p>In general, represents an expressin of some kind of restriction over the application of its containing element.</p>
-    <p><strong>When a subelement of <a href="#iffy-hint-announce"><code>iffy:hint-announce</code></a></strong></p>
-    <p>Please see <a href="#iffy-hint-announce"><code>iffy:hint-announce</code></a>.</p>
    </div>
    <hr>
    <p><a id="iffy-revision" href=""></a><strong>Element — <code>iffy:revision</code></strong></p>
@@ -300,7 +263,7 @@
   <div class="post-metainfo">
    <a href="index.html">04:10 AM EDT</a>
    <div class="updated-note">
-    <a href="index.html#major-updates">Last major update at 2024-06-11 @ 02:10 PM EDT</a>
+    <a href="index.html#major-updates">Last major update at 2024-06-02 @ 12:25 AM EDT</a>
    </div>
   </div>
  </div>
@@ -320,8 +283,7 @@
  <div id="update-history" class="update-history">
   <h3 class="update-history-title"><a id="major-updates" href=""></a>Major revisions:</h3>
   <ul>
-   <li><span class="update-timestamp"><i>2024-06-11 @ 02:10 PM EDT</i></span> — Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>. (<a href="index-diff-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10-to-current.html">diff</a>)</li>
-   <li><span class="update-timestamp"><i> <a href="index-oldcommit-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10.html">2024-06-02 @ 12:25 AM EDT</a></i></span> — Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work. (<a href="index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10.html">diff</a>)</li>
+   <li><span class="update-timestamp"><i>2024-06-02 @ 12:25 AM EDT</i></span> — Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work. (<a href="index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-current.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html">2024-06-01 @ 09:35 PM EDT</a></i></span> — Add initial take on tags related to updates and revisions. (<a href="index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-199e44561de3fd9e731a335d8b2a655f42d9bc04.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">2024-05-25 @ 11:00 PM EDT</a></i></span> — Add JS/CSS so that prior revisions are visually distinct from current. (<a href="index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html">2024-05-24 @ 12:25 AM EDT</a></i></span> — Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates. (<a href="index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html">diff</a>)</li>
