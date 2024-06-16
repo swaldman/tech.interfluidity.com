@@ -6,6 +6,39 @@
     <meta name="keywords" content="Scala, tech, interfluidity">
     <meta name="author" content="Steve Randy Waldman">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="icon/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+    
     <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="feed/index.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
@@ -42,6 +75,81 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2024-06-16 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2024/06/16/html-iconography/index.html">HTML iconography</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>My web skillz are very old-school.</p>
+   <p>I only recently learned we're not supposed to use <code>&lt;tt&gt;</code> anymore. (<code>&lt;code&gt;</code> is what the kids use.) We're not supposed to use <code>&lt;a name="whatev"&gt;</code> for our in-document link targets. We should just use <code>&lt;a id="whatev"&gt;</code>.</p>
+   <p>(To be fair, it's pretty cool the targets don't have to be <code>&lt;a&gt;</code> tags any more.)</p>
+   <p>Anyway, back in my day, to add little icons that might represent your website, we just added a 16x16 pixel <code>/favicon.ico</code> file in some weird, nonstandard Microsoft image format.</p>
+   <p>Thank you <em>Internet Explorer</em>, the very first evil internet silo that kids these days have never encountered!</p>
+   <p>My ancient <a href="https://www.interfluidity.com/">"interfluidity main" site</a> has one of those old-school <code>/favicon.ico</code> files, and I'm not messing with it. But I thought I'd add fresh icons for this site and <a href="https://drafts.interfluidity.com/"><em>interfluidity drafts</em></a>, for my nouveau web. One 16x16 icon file isn't enough for the modern world. Your site might need an icon on a phone, a tablet, a watch, whatver. Android and Apple devices treat icons differently. Firefox, I discovered, chooses icons differently than other browsers.</p>
+   <p>The best resource I found to help make sense of the brave new world of website icons was <a href="https://mathiasbynens.be/notes/touch-icons">an article by Mathias Bynens</a>.</p>
+   <p>That article's last update was in 2013, so maybe it's not current? It's a decade newer than my old habits, so hey.</p>
+   <p>I used <a href="https://affinity.serif.com/en-us/photo/"><em>Affinity Photo</em></a> to take the photo I use as an avatar on social media, and label it, for this website as "tech". For prettiness as icons on mobile devices, I also needed to give it rounded corners. I wanted to select a rectangle, round the corners, then invert the selection, and delete to transparent to make rounded corners.</p>
+   <p>That'a basically what I did, but there's nowhere to set a corner radius on a straight-up rectangualar selection in <em>Affinity Photo</em>.</p>
+   <p>However, there is a rounded rectangle drawing tool, which draws on its own layer, and — very useful to know! — there is a <a href="https://forum.affinity.serif.com/index.php?/topic/45495-affinity-photo-how-to-create-rounded-corners/">Selection From Layer</a> menu item, that converts a shape drawn in a layer to a selection. Once I had my selection, invert and delete was no problem and I got my rounded corners.</p>
+   <p style="text-align: center;"><img src="2024/06/16/html-iconography/interfluidity-wave-tech-180x180.png" style="width: min-content; left-margin: auto; right-margin: auto;"></p>
+   <p>I gather one can omit rounding corners oneself, if you only care about Apple devices. Apple defines <code>apple-touch-icon</code> and <code>apple-touch-icon-precomposed</code>, and if you supply the not-precomposed version, devices should round corners and maybe drop shadow to "compose" your icon.</p>
+   <p>Most resources I looked at suggested taking control, so you know what you will get and can use the same icons crossplatform, so that's what I did. So, I rounded my own corners yee-haw!</p>
+   <p>Then I exported my image as a PNG in all of the sizes recommended by <a href="https://mathiasbynens.be/notes/touch-icons">the Bynens article</a>, stole his recommended HTML snippet, and added it — with some modification, see below! — to the <a href="https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/layout-main.html.untemplate">main layout</a> of my <a href="https://github.com/swaldman/unstatic"><code>unstatic</code></a>-based static-site generators.</p>
+   <pre><code class="language-html">    &lt;!-- icons / favicons --&gt;
+
+    &lt;!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes --&gt;
+    &lt;!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... --&gt;
+    &lt;link rel="icon" type="image/png" sizes="500x500" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-500x500.png"&gt; 
+    &lt;link rel="icon" type="image/png" sizes="32x32" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-32x32.png"&gt;     &lt;!-- swaldman added, for standard favicon size --&gt;
+    &lt;link rel="icon" type="image/png" sizes="16x16" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-16x16.png"&gt;     &lt;!-- swaldman added, for standard favicon size --&gt;
+    &lt;link rel="icon" type="image/png" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-57x57.png"&gt;                   &lt;!-- swaldman added, for small icons by default --&gt;
+
+    &lt;!-- at bigger sizes, we overlay a bit of text --&gt;
+    &lt;!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons --&gt;
+    &lt;!-- For Chrome for Android: --&gt;
+    &lt;link rel="icon" sizes="192x192" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-192x192.png"&gt;
+    &lt;!-- For iPhone 6 Plus with @3× display: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="180x180" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-180x180.png"&gt;
+    &lt;!-- For iPad with @2× display running iOS ≥ 7: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="152x152" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-152x152.png"&gt;
+    &lt;!-- For iPad with @2× display running iOS ≤ 6: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="144x144" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-144x144.png"&gt;
+    &lt;!-- For iPhone with @2× display running iOS ≥ 7: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="120x120" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-120x120.png"&gt;
+    &lt;!-- For iPhone with @2× display running iOS ≤ 6: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="114x114" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-114x114.png"&gt;
+    &lt;!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="76x76" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-76x76.png"&gt;
+    &lt;!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" sizes="72x72" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-tech-72x72.png"&gt;
+    &lt;!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: --&gt;
+    &lt;link rel="apple-touch-icon-precomposed" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-57x57.png"&gt;
+
+    &lt;!-- end icons / favicons --&gt;
+</code></pre>
+   <p>A complication emerged, in that my text-labeled icons looked busy and bad, and the text was illegible, when rendered at very small sizes. So you'll note that, for small sizes, I use <code>interfluidity-wave-blank-square</code> files rather than <code>interfluidity-wave-tech</code>. (I thought the very small icons looked better with square corners as well.)</p>
+   <p>But Firefox kept picking up the <em>largest</em> <code>&lt;link rel="icon" ... &gt;</code> and downsampling from that, rather than downloading the nearest or nearest-larger icon.</p>
+   <p>So I added the image I want used only for small icons also as a very large icon.</p>
+   <pre><code class="language-html">    &lt;link rel="icon" type="image/png" sizes="500x500" href="&lt;( iconLoc.relative )&gt;/interfluidity-wave-blank-square-500x500.png"&gt; 
+</code></pre>
+   <p>Less quirky browsers hopefully never choose this to render from, because there is always a better-sized icon to choose from. But Firefox does choose this one and downsample to render its very small icons-in-a-tab, so the trick gets rid of the ugly, illegibly scaled text in tiny icons under Firefox.</p>
+   <p>(It does seem a bit wasteful to trick Firefox into downloading 500x500 images to render at 16x16 or 32x32, but if it smartens up, it can download icons prerendered in just those tiny sizes!)</p>
+   <p>Anyway, that was what I did to add icons to this site and to <a href="https://drafts.interfluidity.com/"><em>drafts</em></a>.</p>
+   <p>Please let me know if there are much better ways!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/06/16/html-iconography/index.html">07:10 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2024-06-08 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple">
@@ -786,37 +894,6 @@ val Loud = Int.MaxValue
  <div class="entry-footer">
   <div class="post-metainfo">
    <a href="2024/02/06/what-does-private-mean-at-package-level-in-scala-3/index.html">05:50 PM EST</a>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2024-02-04 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-style-feedletter-by-mail">
- <div class="entry-header">
-  <h1><a href="2024/02/04/style-by-mail-in-feedletter/index.html">Style-by-mail in feedletter</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p>If, my most patient dear reader, you followed the <em>feedletter</em> tutorial in the <a href="2024/01/29/feedletter-tutorial/index.html">previous post</a>, you saw that we <a href="2024/01/29/feedletter-tutorial/index.html#15-tweak-the-newsletter-styles">styled <em>feedletter</em> newsletters</a> by starting up a development webserver, which would serve up HTML for an example newsletter.</p>
-   <p>This is still the best to get started styling your newsletters, because you can iteratively edit your <a href="https://github.com/swaldman/untemplate-doc#readme"><em>untemplate</em></a>, then just hit refresh in your web browser to very quickly play with your style and layout.</p>
-   <p>However, there are differences between how web browsers and e-mail clients render HTML. Getting things to look great in your browser, both at wide and mobile-like narrow widths, is not enough to guarantee that things will look good as emails, on desktop or mobile e-mail clients.</p>
-   <p>So, <em>feedletter v0.0.8</em> now supports styling by e-mail.</p>
-   <p>Instead of firing up a webserver to preview your newsletter, if you give <code>feedletter-style</code> commands <code>--from</code> and <code>--to</code> arguments, an example e-mail will be sent. So you can now accurately preview and tweak exactly how newsletters will look in the mail clients they are actually sent to.</p>
-   <p>To put that more specifically, just replace a command like...</p>
-   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --port 45612
-</code></pre>
-   <p>with</p>
-   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --from feedletter@mchange.com --to swaldman@mchange.com
-</code></pre>
-   <p>No development webserver will be spun up. Instead, a sample e-mail will be sent.</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <a href="2024/02/04/style-by-mail-in-feedletter/index.html">07:25 PM EST</a>
   </div>
  </div>
 </article>

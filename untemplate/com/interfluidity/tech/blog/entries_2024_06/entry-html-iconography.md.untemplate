@@ -1,0 +1,133 @@
+> val updateHistory =
+>   //UpdateRecord("2024-06-06T18:30:00-04:00", Some("""???"""), Some("???")) ::
+>   Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "HTML iconography",
+>   "PubDate"       -> "2024-06-16T19:10:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   //"Sprout"        -> true,
+>   //"Anchor"        -> "",
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+My web skillz are very old-school.
+
+I only recently learned we're not supposed to use `<tt>` anymore.
+(`<code>` is what the kids use.) We're not supposed to use `<a name="whatev">` for our in-document
+link targets. We should just use `<a id="whatev">`.
+
+(To be fair, it's pretty cool the targets don't have
+to be `<a>` tags any more.)
+
+Anyway, back in my day, to add little icons that might represent your website, we just added a 16x16 pixel `/favicon.ico`
+file in some weird, nonstandard Microsoft image format.
+
+Thank you _Internet Explorer_, the very first evil internet
+silo that kids these days have never encountered!
+
+My ancient ["interfluidity main" site](https://www.interfluidity.com/) has one of those old-school `/favicon.ico` files, and I'm not messing with it.
+But I thought I'd add fresh icons for this site and [_interfluidity drafts_](https://drafts.interfluidity.com/), for my nouveau web.
+One 16x16 icon file isn't enough for the modern world. Your site might need an icon on a phone, a tablet, a watch,
+whatver. Android and Apple devices treat icons differently. Firefox, I discovered, chooses icons differently than
+other browsers.
+
+The best resource I found to help make sense of the brave new world of website icons was
+[an article by Mathias Bynens](https://mathiasbynens.be/notes/touch-icons).
+
+That article's last update was in 2013,
+so maybe it's not current? It's a decade newer than my old habits, so hey.
+
+I used [_Affinity Photo_](https://affinity.serif.com/en-us/photo/) to take the photo I use as an avatar on social media, and label it, for this
+website as "tech".
+For prettiness as icons on mobile devices,
+I also needed to give it rounded corners. I wanted to select a rectangle, round the corners, then invert the selection,
+and delete to transparent to make rounded corners.
+
+That'a basically what I did, but there's nowhere to set a corner radius
+on a straight-up rectangualar selection in _Affinity Photo_.
+
+However, there is a rounded rectangle drawing tool, which draws on its own layer,
+and &mdash; very useful to know! &mdash; there is a [Selection From Layer](https://forum.affinity.serif.com/index.php?/topic/45495-affinity-photo-how-to-create-rounded-corners/)
+menu item, that converts a shape drawn in a layer to a selection. Once I had my selection, invert and delete was no problem
+and I got my rounded corners.
+
+<p style="text-align: center;"><img src="##./interfluidity-wave-tech-180x180.png" style="width: min-content; left-margin: auto; right-margin: auto;"></p>
+
+I gather one can omit rounding corners oneself, if you only care about Apple devices.
+Apple defines `apple-touch-icon` and `apple-touch-icon-precomposed`, and if you supply
+the not-precomposed version, devices should round corners and maybe drop shadow to "compose"
+your icon.
+
+Most resources I looked at suggested taking control, so you know what you will get
+and can use the same icons crossplatform, so that's what I did. So, I rounded my own corners
+yee-haw!
+
+Then I exported my image as a PNG in all of the sizes recommended by [the Bynens article](https://mathiasbynens.be/notes/touch-icons),
+stole his recommended HTML snippet, and added it &mdash; with some modification, see below! &mdash; to the [main layout](https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/layout-main.html.untemplate)
+of my [`unstatic`](https://github.com/swaldman/unstatic)-based static-site generators.
+
+```html
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="\<( iconLoc.relative )>/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="\<( iconLoc.relative )>/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="\<( iconLoc.relative )>/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="\<( iconLoc.relative )>/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="\<( iconLoc.relative )>/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="\<( iconLoc.relative )>/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="\<( iconLoc.relative )>/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="\<( iconLoc.relative )>/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+```
+
+A complication emerged, in that my text-labeled icons looked busy and bad, and the text was illegible, when rendered at very small sizes.
+So you'll note that, for small sizes, I use `interfluidity-wave-blank-square` files rather than `interfluidity-wave-tech`. (I thought the very small
+icons looked better with square corners as well.)
+
+But Firefox
+kept picking up the _largest_ `<link rel="icon" ... >` and downsampling from that, rather than downloading the nearest or nearest-larger
+icon.
+
+So I added the image I want used only for small icons also as a very large icon.
+
+```html
+    <link rel="icon" type="image/png" sizes="500x500" href="\<( iconLoc.relative )>/interfluidity-wave-blank-square-500x500.png"> 
+```
+
+Less quirky browsers hopefully never choose this to render from, because there is always a better-sized icon to choose from.
+But Firefox does choose this one and downsample to render its very small icons-in-a-tab, so the trick gets rid of the ugly,
+illegibly scaled text in tiny icons under Firefox.
+
+(It does seem a bit wasteful to trick Firefox into downloading 500x500 images to render at 16x16 or 32x32, but if it smartens up,
+it can download icons prerendered in just those tiny sizes!)
+
+Anyway, that was what I did to add icons to this site and to [_drafts_](https://drafts.interfluidity.com/).
+
+Please let me know if there are much better ways!
+
+
+
