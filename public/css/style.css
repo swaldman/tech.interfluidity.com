@@ -491,6 +491,7 @@ div.iffy-element-desc {
     font-family: 'RobotoCondensed', 'Arial', 'Helvetica', sans-serif;
     font-size: 11pt;
     margin-left: 1rem;
+    margin-top: 2.5rem;
 }
 .update-history a {
     text-decoration: none;

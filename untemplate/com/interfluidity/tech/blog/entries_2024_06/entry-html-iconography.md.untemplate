@@ -1,5 +1,5 @@
 > val updateHistory =
->   //UpdateRecord("2024-06-06T18:30:00-04:00", Some("""???"""), Some("???")) ::
+>   UpdateRecord("2024-06-17T14:35:00-04:00", Some("""Add bold update, link to Andrey Sitnik article, via Carlana Johnson"""), Some("85841ab8af7303ef4aca2910529551c68dab4867")) ::
 >   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -129,5 +129,17 @@ Anyway, that was what I did to add icons to this site and to [_drafts_](https://
 
 Please let me know if there are much better ways!
 
+---
 
+**Update (17-June-2024):**
+
+Carlana Johnson [points me](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs)
+to a great article by Andrey Sitnik,
+[_How to Favicon in 2024: Six files that fit most needs_](https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs).
+
+For now, because I'm lazy, and because my icons are not SVG-friendly, I'm leaving
+things as they are.
+
+But perhaps someday I'll make better, vector, logos and icons, rather than just repurpose my social media avatar.
+Then I will try out this carefully thought-out approach.
 
