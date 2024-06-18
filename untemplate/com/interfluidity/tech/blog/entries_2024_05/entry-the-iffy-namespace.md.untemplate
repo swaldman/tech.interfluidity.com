@@ -1,4 +1,5 @@
 > val updateHistory =
+>    UpdateRecord("2024-06-17T23:50:00-04:00",Some("Document <code>iffy:synthetic</code>."),Some("b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac")) ::
 >    UpdateRecord("2024-06-11T14:10:00-04:00",Some("Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>."),Some("6c5fef82527bd419e8e9c7e7f3a6420c9925cf10")) ::
 >    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
 >    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
@@ -41,6 +42,7 @@ The conventional prefix associated with this namespace will be `iffy`.
 * [`iffy:provenance`](#iffy-provenance)
 * [`iffy:restriction`](#iffy-restriction)
 * [`iffy:revision`](#iffy-revision)
+* [`iffy:synthetic`](#iffy-synthetic)
 * [`iffy:update`](#iffy-update)
 * [`iffy:update-history`](#iffy-update-history)
 
@@ -279,6 +281,42 @@ of an item.
 ```
 
 See also [`iffy:update-history` example](#iffy-update-history).
+
+</div>
+
+---
+
+<a id="iffy-synthetic"></a>**Element &mdash; `iffy:synthetic`**
+
+<div class="iffy-element-desc">
+
+This element, usually just empty, is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
+
+**When a subelement of `channel`**
+
+If all the items in this feed are automatically rather than human generated, however you want to defined that,
+`iffy:synthetic` can mark an entire channel as synthetic, bot-produced.
+
+Applications that include `iffy:synthetic` as a subject of channel SHOULD NOT also mark individual `item`s as `iffy:synthetic`,
+unless there is some meaningful sense in which some items are _more_ synthetic than others. It serves no purpose to mark
+every item of a feed `iffy:synthetic` when the channel is already so marked.
+
+**When a subelement of `item`**
+
+Marks items as "synthetic", that is _more_ synthetic than other, unmarked items in the feed.
+
+Exactly what that means is not defined, but it should be _relative to the other items in the feed_.
+If every item in a feed is automatically generated &mdash; suppose a weather feed, announcing conditions on the hour &mdash;
+then those items should NOT be marked `iffy:synthetic`, because they are the usual for the feed.
+The `channel` as a whole might be marked `iffy:synthetic`.
+
+When `iffy:synthetic` is a subelement of `item`, it is intended to _distinguish_ more automatic from less automatically
+produced items. It serves no purpose if it is used to mark all items.
+
+**Example**:
+```xml
+<iffy:synthetic/>
+```
 
 </div>
 
