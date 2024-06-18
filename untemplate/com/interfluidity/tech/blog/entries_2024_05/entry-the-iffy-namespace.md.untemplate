@@ -290,7 +290,7 @@ See also [`iffy:update-history` example](#iffy-update-history).
 
 <div class="iffy-element-desc">
 
-This element, usually just empty, is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
+This element, usually empty, is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
 
 **When a subelement of `channel`**
 
