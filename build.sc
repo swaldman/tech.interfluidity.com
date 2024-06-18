@@ -3,7 +3,7 @@ import $meta._
 import mill._
 import mill.scalalib._
 
-import $ivy.`com.mchange::untemplate-mill:0.1.3`
+import $ivy.`com.mchange::untemplate-mill:0.1.4-SNAPSHOT`
 import untemplate.mill._
 
 val UnstaticVersion = "0.3.2-SNAPSHOT"
