@@ -6,11 +6,12 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</link>
     <description><![CDATA[Updates to Names too on the nose]]></description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 17 Jun 2024 23:52:35 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2024 00:49:03 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
     type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout.rss"/>
+    <iffy:synthetic/>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
       <pubDate>Sat, 1 Jun 2024 23:40:00 -0400</pubDate>
