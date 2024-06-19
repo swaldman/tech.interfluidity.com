@@ -183,6 +183,25 @@ a#rss-link span.bullet {
     padding-left: 1rem;
     border: 1px solid black;
 }
+#content article.synthetic {
+    background: rgb(205,205,225);
+    background: linear-gradient(43deg, rgba(205,205,225,1) 0%, rgba(120,120,120,1) 100%, rgba(120,120,120,1) 100%);    
+    /* background-color: rgba(215, 215, 215, 0.625); */
+    font-size: smaller;
+    box-shadow: 10px 8px 5px rgba(100,100,120,0.625);
+}
+#content article.presentation-single.synthetic {
+    margin-bottom: 1rem;
+}
+#content article.synthetic .entry-header h1 {
+    font-size: 11pt;
+}
+#content article.synthetic .entry-body a {
+    color: blue;
+}
+#content article.synthetic .entry-body a:visited {
+    color: blue;
+}
 #content .subscribe-space {
     background-color: rgba(255, 255, 255, 0.625);
     padding: 1rem;
@@ -325,6 +344,15 @@ h3 {
     float: left;
     position: relative;
     top: -0.25em;
+}
+#content .post-metainfo .synthetic-note {
+    float: left;
+    position: relative;
+    top: -0.25em;
+}
+#content .post-metainfo .synthetic-note em {
+    font-family: 'FiraCode-Regular', "Lucida Console", "Courier New", monospace;
+    font-style: oblique;
 }
 #content .post-metainfo .updated-note a {
     font-family: 'Caroni';

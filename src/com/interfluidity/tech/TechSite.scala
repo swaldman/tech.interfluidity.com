@@ -13,6 +13,9 @@ import java.nio.file.Path as JPath
 import java.time.ZoneId
 
 import untemplate.Untemplate.AnyUntemplate
+import java.time.Instant
+
+import SimpleBlog.SyntheticUpdateAnnouncementSpec
 
 object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
@@ -47,6 +50,9 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override val diffBinder : Option[DiffBinder] = Some( DiffBinder.JavaDiffUtils(TechSite) )
 
+    // DON'T use Instant.MIN when we do this for real!
+    //override val syntheticUpdateAnnouncementSpec : Option[SyntheticUpdateAnnouncementSpec] = Some( SyntheticUpdateAnnouncementSpec( "Update-o-Bot", Instant.MIN ) )
+
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
     // overriding a def, but it's just a constant, so we override with val
@@ -62,7 +68,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
       case class Input( renderLocation : SiteLocation, entryUntemplatesResolved : immutable.SortedSet[EntryResolved] )
 
       val task = zio.ZIO.attempt {
-         val contentsHtml = blog.layout_archive_html( Input( location, entriesResolved ) ).text
+         val contentsHtml = blog.layout_archive_html( Input( location, entriesResolved.filterNot( _.entryUntemplate.UntemplateSynthetic ) ) ).text
          layout_main_html( MainLayoutInput( location, contentsHtml, Nil ) ).text
       }
       val endpointBinding = ZTEndpointBinding.publicReadOnlyHtml( location, task, None, immutable.Set("archive") )

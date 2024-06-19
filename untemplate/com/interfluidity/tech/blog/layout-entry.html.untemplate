@@ -14,7 +14,8 @@ val resolved = input.sourceEntry
 val ut = resolved.entryUntemplate
 val permalink = resolved.permalink
 val entryAnchor = ut.checkAttributeKey(`Anchor`)
-val articleClasses = presentationTypeClass + entryAnchor.fold("")(anchor => " uid-" + anchor)
+val synthetic = ut.UntemplateSynthetic
+val articleClasses = presentationTypeClass + entryAnchor.fold("")(anchor => " uid-" + anchor) + (if synthetic then " synthetic" else "")
 val mbTitle  = info.mbTitle
 val authors = info.authors
 val authorsString =
@@ -122,6 +123,11 @@ input.presentation match {
   input.info.updateHistory.headOption.foreach { ur =>
 ()>
            <div class="updated-note"><a href="<( permalink.relative )>#major-updates">Last major update at <( blog.dateTimeFormatter.format(ur.timestamp) )></a></div>
+<()
+  }
+  if synthetic then {
+()>
+          <div class="synthetic-note"><em>This is an automatically generated post.</em></div>
 <()
   }
 ()>
