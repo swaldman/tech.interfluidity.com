@@ -21,7 +21,9 @@ as an unfinished sketch and "blossom" over time (and with help and interaction f
 
 The approach I've taken &mdash; of course since I am an RSS fanboy &mdash; is to graft what I need on top of existing RSS infrastructure.
 Among RSS infrastructure, I include both conventional feed readers and "announcers": RSS consumers that notify
-parties about new items in ways that may be more disruptive than just another item in a well-populated feed. An example is my own [feedletter](##feedletter-tutorial),
+parties about new items in ways that may be more disruptive than just another item in a well-populated feed.
+
+An example on an announcer is my own [feedletter](##feedletter-tutorial),
 which notifies RSS items by e-mailing posts one at a time or in digests, and also by posting to Mastodon.
 
 My approach is quite manual. No software determines when an "update" has been made. "Tweaks" &mdash; which may include correcting
