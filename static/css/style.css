@@ -603,10 +603,6 @@ h3.update-history-title {
         top: initial;
         position: initial;
         margin-bottom: 1em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
         min-width: 1px;
-}    }
-
+    }
 }
