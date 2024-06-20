@@ -598,6 +598,7 @@ h3.update-history-title {
     }
     #content .post-metainfo .synthetic-note {
         text-align: left;
+        float: initial;
         position: initial;
         top: initial;
         position: initial;
