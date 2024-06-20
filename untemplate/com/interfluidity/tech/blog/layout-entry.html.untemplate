@@ -110,14 +110,8 @@ input.presentation match {
         </div>
         <div class="entry-footer">
           <div class="post-metainfo">
-<()
-  if input.presentation == input.blog.Entry.Presentation.Rss then {
-()>
-  <hr>
-  by <( authorsString )> on <( dayStr )> @
-<()
-  }
-()>
+            <( if input.presentation == input.blog.Entry.Presentation.Rss then "<hr>" else "" )>
+
 <()
   if synthetic then {
 ()>
@@ -130,7 +124,16 @@ input.presentation match {
 <()
   }
 ()>
-            <div><a href="<( permalink.relative )>" class="pubtime"><( hourStr )></a></div>
+            <div> 
+<()
+  if input.presentation == input.blog.Entry.Presentation.Rss then {
+()>
+    by <( authorsString )> on <( dayStr )> @
+<()
+  }
+()>
+              <a href="<( permalink.relative )>" class="pubtime"><( hourStr )></a>
+            </div>
           </div>
         </div>
       </article>
