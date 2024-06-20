@@ -20,7 +20,7 @@ I think I now have infrastructure sufficient to publish evolving content, that m
 as an unfinished sketch and "blossom" over time (and with help and interaction from you, dear reader).
 
 The approach I've taken &mdash; of course since I am an RSS fanboy &mdash; is to graft what I need on top of existing RSS infrastructure.
-In RSS infrastructure, I include both feed readers and "announcers": RSS consumers that notify
+Among RSS infrastructure, I include both conventional feed readers and "announcers": RSS consumers that notify
 parties about new items in ways that may be more disruptive than just an item appearing in a well-populated feed. An example is my own [feedletter](##feedletter-tutorial),
 which notifies RSS items by e-mailing posts one at a time or in digests, and also by posting to Mastodon.
 
