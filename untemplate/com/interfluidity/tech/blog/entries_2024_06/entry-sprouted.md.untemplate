@@ -68,7 +68,7 @@ For posts intended to evolve over time, that might invite the attention of parti
 The term is taken from Chris Krycho's [essay]((https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/)).
 These posts will be accompanied by their own RSS feeds ([example](https://tech.interfluidity.com/xml/iffy/index-sprout.rss)), and will track declared updates only to that particular item.
 The implementation is not great &mdash; ideally each notification would include and highlight the changes &mdash; but so far my diffs are too lame for that.
-However, subscribers will be notified via a dedicated feed to each update of evolving items they mean attentively to follow.
+However, subscribers will be notified via a dedicated feed to each update of evolving items that they mean attentively to follow.
 
 Obviously, nothing is really "finished". Everything in life is a garden!
 
