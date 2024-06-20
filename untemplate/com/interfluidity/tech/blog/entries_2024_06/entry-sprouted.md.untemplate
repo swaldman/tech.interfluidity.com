@@ -54,7 +54,7 @@ notified of these updates.
 The RSS items generated for these updates will be marked "[synthetic](##iffy-xml-namespace#iffy-synthetic)", of "[type](##iffy-xml-namespace#iffy-type)"
 `UpdateAnnouncement`, so that announcers (for the moment only my <i>feedletter</i>, but please join in!) can decide whether they wish to notify these items.
 
-They include a [hint](##iffy-xml-namespace#iffy-hint-announce)
+They include a "[hint](##iffy-xml-namespace#iffy-hint-announce)"
 for announcers to adopt a `Piggyback` policy, meaning the synthetic update notifications should be included in digests and other multi-post announcements that include at least
 one not-piggyback post, but they should not trigger announcements on their own. Announcers are free to follow this hint, or to make a different choice.
 
