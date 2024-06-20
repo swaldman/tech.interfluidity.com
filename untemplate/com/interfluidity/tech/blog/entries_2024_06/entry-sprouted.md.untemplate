@@ -28,7 +28,7 @@ which notifies RSS items by e-mailing posts one at a time or in digests, and als
 
 My approach is quite manual. No software determines when an "update" has been made. "Tweaks" &mdash; which may include correcting
 typos, reworking sentences, or even rewriting whole paragraphs without changing the intended meaning &mdash; shouldn't be notified
-as updates. Modifications, however big or small, that substantially augment or alter the content of the item usually should be notified as updates. In my view,
+as updates. Modifications, however big or small, that substantially augment or alter the content of the item usually should be notified. In my view,
 which is which is the author's judgment call. So authors manually add an item to their post's _update history_ when they wish to provoke such a
 notification.
 
