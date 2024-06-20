@@ -1,5 +1,5 @@
 > val updateHistory =
->    //UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
+>    UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
 >    Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -77,4 +77,8 @@ I can start sketching and evolving posts intented to develop over time, rather t
 posts.
 
 Thanks to Chris Krycho and Erlend Sogge Heggen for inspiring me to think about all this!
+
+---
+
+**Update:** Chris Krycho [credits](https://x.com/chriskrycho/status/1803903739419332636) [Maggie Appleton](https://x.com/Mappletons) for some of these ideas, so I will too!
 
