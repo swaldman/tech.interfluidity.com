@@ -118,19 +118,19 @@ input.presentation match {
 <()
   }
 ()>
-            <a href="<( permalink.relative )>"><( hourStr )></a>
 <()
-  input.info.updateHistory.headOption.foreach { ur =>
-()>
-           <div class="updated-note"><a href="<( permalink.relative )>#major-updates">Last major update at <( blog.dateTimeFormatter.format(ur.timestamp) )></a></div>
-<()
-  }
   if synthetic then {
 ()>
-          <div class="synthetic-note"><em>This is an automatically generated post.</em></div>
+            <div class="synthetic-note"><em>This is an automatically generated post.</em></div>
+<()
+  }
+  input.info.updateHistory.headOption.foreach { ur =>
+()>
+            <div class="updated-note"><a href="<( permalink.relative )>#major-updates">Last major update at <( blog.dateTimeFormatter.format(ur.timestamp) )></a></div>
 <()
   }
 ()>
+            <a href="<( permalink.relative )>" class="pubtime"><( hourStr )></a>
           </div>
         </div>
       </article>

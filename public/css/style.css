@@ -342,12 +342,13 @@ h3 {
     padding-right: 0.5rem;
     padding-bottom: 0.5rem;
 }
-#content .post-metainfo a {
+#content .post-metainfo a.pubtime {
     color: #00FF00;
     text-decoration: none;
     background-color: black;
     padding: 5px;
     border-radius: 3px;
+    white-space: nowrap;
 }
 #content .post-metainfo a:visited {
     color: #00FF00;
@@ -595,4 +596,13 @@ h3.update-history-title {
     #content .post-metainfo .updated-note a {
 	font-size: 8pt;
     }
+    #content .post-metainfo .synthetic-note {
+        text-align: left;
+        float: left;
+        position: initial;
+        top: initial;
+        position: initial;
+        margin-bottom: 1em;
+    }
+
 }
