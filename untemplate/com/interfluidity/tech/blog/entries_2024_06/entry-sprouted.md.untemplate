@@ -37,7 +37,7 @@ Once authors begin to define an update history, that history becomes appended to
 When authors declare a meaningful update, all they _must_ provide is a timestamp.
 An [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15) element will be included in the RSS item with that timestamp.
 
-Authors also _may_ provide a description, a superceded "revision-spec" (usually a git commit identifier),
+Authors also _may_ provide a description, a "revision-spec" (usually a git commit identifier) for the revision superceded,
 and an author list (if authorship as well as content is changing with the update). [Example](##green-shoots-of-sprouts#example-update-history).
 
 The more authors provide, the richer the update history. Update histories will
