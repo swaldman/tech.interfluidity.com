@@ -1,0 +1,78 @@
+> val updateHistory =
+>    //UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Sprouted",
+>   "PubDate"       -> "2024-06-20T15:05:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   //"Anchor"      -> ??? // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I've finally "finished" my reaction to Chris Krycho's provocation, [_Feeds are Not Fit for Gardening_](https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/).
+(ht [Erlend Sogge Heggen](https://mastodon.social/@erlend@writing.exchange)).
+
+I think I now have infrastructure sufficient to publish evolving content, that might start
+as an unfinished sketch and "blossom" over time (and with help and interaction from you, dear reader).
+
+The approach I've taken &mdash; of course since I am an RSS fanboy &mdash; is to graft what I need on top of existing RSS infrastructure.
+In RSS infrastructure, I include both feed readers and "announcers": RSS consumers that notify
+parties about new items in ways that may be more disruptive than just an item appearing in a well-populated feed. An example is my own [feedletter](##feedletter-tutorial),
+which notifies RSS items by e-mailing posts one at a time or in digests, and also by posting to Mastodon.
+
+My approach is quite manual. No software determines when an "update" has been made. "Tweaks" &mdash; which may include correcting
+typos, reworking sentences, or even rewriting whole paragraphs without changing the intended meaning &mdash; shouldn't be notified
+as updates. Modifications, however big or small, that substantially augment or alter the content of the item usually should be notified as updates. In my view,
+which is which is the author's judgment call. So authors manually add an item to their post's _update history_ when they wish to provoke such a
+notification.
+
+Once authors begin to define an update history, that history becomes appended to the end of posts. [Example](##iffy-xml-namespace#update-history).
+
+When authors declare a meaningful update, all they _must_ provide is a timestamp.
+An [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15) element will be included in the RSS item with that timestamp.
+
+Authors also _may_ provide a description, a superceded "revision-spec" (usually a git commit identifier),
+and an author list (if authorship as well as content is changing with the update). [Example](##green-shoots-of-sprouts#example-update-history).
+
+The more authors provide, the richer the update history. Update histories will
+include any description given, along with links to the prior ("superceded") revision, and a diff between the updated post and the superceded revision.
+
+
+Whenever a new update is declared, a synthetic post will be produced, whose publication date is the moment of the update, announcing the update.
+[Example](https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html).
+
+That post will have its own RSS [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) and permalink.
+So, without requiring any change to the behavior of existing feed readers, followers will be
+notified of these updates.
+
+The RSS items generated for these updates will be marked [synthetic](##iffy-xml-namespace#iffy-synthetic), of [type](##iffy-xml-namespace#iffy-type)
+`UpdateAnnouncement`, so that announcers (for the moment only mine, but please join in!) can decide whether they wish to notify these items.
+
+They include a [hint](##iffy-xml-namespace#iffy-hint-announce)
+for announcers to adopt a `Piggyback` policy, meaning the synthetic update notifications should be included in digests and other multi-post announcements that include at least
+one not-piggyback post, but they should not trigger announcements on their own. Announcers are free to follow this hint, or to make a different choice.
+
+For subscribers to notication services that accept the hint, synthetic update posts will not cause people to get spammed with "here's an update!" messages.
+That would be annoying. On the other hand, e-mail subscribers will not be notified of all updates to existing posts. One-at-a-time subscribers will see none of the update notifications.
+Digest subscribers will see update notifications only when the digest would also include at least one "organic" post. One has to navigate a trade-off between annoyance and information.
+
+For posts intended to evolve over time, that might invite the attention of particular followers or collaborators, authors can explicitly declare a post to be a "sprout".
+[Example](##green-shoots-of-sprouts#example-update-history).
+
+The term is taken from Chris Krycho's [essay]((https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/)).
+These posts will be accompanied by their own RSS feeds ([example](https://tech.interfluidity.com/xml/iffy/index-sprout.rss)), and will track declared updates only to that particular item.
+The implementation is not great &mdash; ideally each notification would include and highlight the changes &mdash; but so far my diffs are too lame for that.
+However, subscribers will be notified via a dedicated feed to each update of evolving items they mean attentively to follow.
+
+Obviously, nothing is really "finished". Everything in life is a garden!
+
+But I think that this is enough that
+I can start sketching and evolving posts intented to develop over time, rather than finished-product "atomic"
+posts.
+
+Thanks to Chris Krycho and Erlend Sogge Heggen for inspiring me to think about all this!
+

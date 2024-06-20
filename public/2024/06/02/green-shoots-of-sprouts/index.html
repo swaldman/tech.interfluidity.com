@@ -105,7 +105,7 @@ sole user...
 </code></pre>
    <p>For most posts, I just copy and modify this header, and then write markdown text below. But if I want to do anything more fancy, well, I have the full Scala programming language to work with.</p>
    <p>In order to realize a vision of "sprouts", I first implemented update histories as a simple <code>List</code> of <code>UpdateRecord</code> objects.</p>
-   <p>The <a href="../../../../xml/iffy/index.html">post prior to this one</a> has already become a particularly sprouty sprout. The post documents experiments with extensions to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning of that post, for now:</p>
+   <p>The <a href="../../../../xml/iffy/index.html">post prior to this one</a> has already become a particularly sprouty sprout. The post documents experiments with extensions to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning of that post, for now: <a id="example-update-history" href=""></a></p>
    <pre><code class="language-plaintext">&gt; val updateHistory =
 &gt;    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop &lt;code&gt;iffy:timestamp&lt;/code&gt;. We can just reuse &lt;code&gt;atom:updated&lt;/code&gt; for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
 &gt;    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::

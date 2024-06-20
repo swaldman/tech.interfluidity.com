@@ -77,7 +77,41 @@
         <div class="day-stamp">
  2024-06-20 <span class="arrow">⇒</span>
 </div>
-<article class="presentation-multiple synthetic">
+<article class="presentation-multiple">
+ <div class="entry-header">
+  <h1><a href="2024/06/20/sprouted/index.html">Sprouted</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I've finally "finished" my reaction to Chris Krycho's provocation, <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/"><em>Feeds are Not Fit for Gardening</em></a>. (ht <a href="https://mastodon.social/@erlend@writing.exchange">Erlend Sogge Heggen</a>).</p>
+   <p>I think I now have infrastructure sufficient to publish evolving content, that might start as an unfinished sketch and "blossom" over time (and with help and interaction from you, dear reader).</p>
+   <p>The approach I've taken — of course since I am an RSS fanboy — is to graft what I need on top of existing RSS infrastructure. In RSS infrastructure, I include both feed readers and "announcers": RSS consumers that notify parties about new items in ways that may be more disruptive than just an item appearing in a well-populated feed. An example is my own <a href="2024/01/29/feedletter-tutorial/index.html">feedletter</a>, which notifies RSS items by e-mailing posts one at a time or in digests, and also by posting to Mastodon.</p>
+   <p>My approach is quite manual. No software determines when an "update" has been made. "Tweaks" — which may include correcting typos, reworking sentences, or even rewriting whole paragraphs without changing the intended meaning — shouldn't be notified as updates. Modifications, however big or small, that substantially augment or alter the content of the item usually should be notified as updates. In my view, which is which is the author's judgment call. So authors manually add an item to their post's <em>update history</em> when they wish to provoke such a notification.</p>
+   <p>Once authors begin to define an update history, that history becomes appended to the end of posts. <a href="xml/iffy/index.html#update-history">Example</a>.</p>
+   <p>When authors declare a meaningful update, all they <em>must</em> provide is a timestamp. An <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15"><code>atom:updated</code></a> element will be included in the RSS item with that timestamp.</p>
+   <p>Authors also <em>may</em> provide a description, a superceded "revision-spec" (usually a git commit identifier), and an author list (if authorship as well as content is changing with the update). <a href="2024/06/02/green-shoots-of-sprouts/index.html#example-update-history">Example</a>.</p>
+   <p>The more authors provide, the richer the update history. Update histories will include any description given, along with links to the prior ("superceded") revision, and a diff between the updated post and the superceded revision.</p>
+   <p>Whenever a new update is declared, a synthetic post will be produced, whose publication date is the moment of the update, announcing the update. <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html">Example</a>.</p>
+   <p>That post will have its own RSS <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> and permalink. So, without requiring any change to the behavior of existing feed readers, followers will be notified of these updates.</p>
+   <p>The RSS items generated for these updates will be marked <a href="xml/iffy/index.html#iffy-synthetic">synthetic</a>, of <a href="xml/iffy/index.html#iffy-type">type</a> <code>UpdateAnnouncement</code>, so that announcers (for the moment only mine, but please join in!) can decide whether they wish to notify these items.</p>
+   <p>They include a <a href="xml/iffy/index.html#iffy-hint-announce">hint</a> for announcers to adopt a <code>Piggyback</code> policy, meaning the synthetic update notifications should be included in digests and other multi-post announcements that include at least one not-piggyback post, but they should not trigger announcements on their own. Announcers are free to follow this hint, or to make a different choice.</p>
+   <p>For subscribers to notication services that accept the hint, synthetic update posts will not cause people to get spammed with "here's an update!" messages. That would be annoying. On the other hand, e-mail subscribers will not be notified of all updates to existing posts. One-at-a-time subscribers will see none of the update notifications. Digest subscribers will see update notifications only when the digest would also include at least one "organic" post. One has to navigate a trade-off between annoyance and information.</p>
+   <p>For posts intended to evolve over time, that might invite the attention of particular followers or collaborators, authors can explicitly declare a post to be a "sprout". <a href="2024/06/02/green-shoots-of-sprouts/index.html#example-update-history">Example</a>.</p>
+   <p>The term is taken from Chris Krycho's <a href="(https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/)">essay</a>. These posts will be accompanied by their own RSS feeds (<a href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss">example</a>), and will track declared updates only to that particular item. The implementation is not great — ideally each notification would include and highlight the changes — but so far my diffs are too lame for that. However, subscribers will be notified via a dedicated feed to each update of evolving items they mean attentively to follow.</p>
+   <p>Obviously, nothing is really "finished". Everything in life is a garden!</p>
+   <p>But I think that this is enough that I can start sketching and evolving posts intented to develop over time, rather than finished-product "atomic" posts.</p>
+   <p>Thanks to Chris Krycho and Erlend Sogge Heggen for inspiring me to think about all this!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="2024/06/20/sprouted/index.html">03:05 PM EDT</a>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><article class="presentation-multiple synthetic">
  <div class="entry-header">
   <h1><a href="2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html">Updated: Feedletter tutorial</a></h1>
   <hr class="below-title">
@@ -441,7 +475,7 @@ sole user...
 </code></pre>
    <p>For most posts, I just copy and modify this header, and then write markdown text below. But if I want to do anything more fancy, well, I have the full Scala programming language to work with.</p>
    <p>In order to realize a vision of "sprouts", I first implemented update histories as a simple <code>List</code> of <code>UpdateRecord</code> objects.</p>
-   <p>The <a href="xml/iffy/index.html">post prior to this one</a> has already become a particularly sprouty sprout. The post documents experiments with extensions to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning of that post, for now:</p>
+   <p>The <a href="xml/iffy/index.html">post prior to this one</a> has already become a particularly sprouty sprout. The post documents experiments with extensions to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning of that post, for now: <a id="example-update-history" href=""></a></p>
    <pre><code class="language-plaintext">&gt; val updateHistory =
 &gt;    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop &lt;code&gt;iffy:timestamp&lt;/code&gt;. We can just reuse &lt;code&gt;atom:updated&lt;/code&gt; for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
 &gt;    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
@@ -857,35 +891,6 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
    <div class="updated-note">
     <a href="2024/04/09/names-too-on-the-nose/index.html#major-updates">Last major update at 2024-06-01 @ 11:40 PM EDT</a>
    </div>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2024-03-27 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple">
- <div class="entry-header">
-  <h1><a href="2024/03/27/tar-or-tgz/index.html">tar or tgz?</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p>A thing I've done over the last while is automate a lot of my sysadmin, using <code>systemd</code> timers to hit <a href="https://scala-cli.virtuslab.org/">scala-cli</a> scripts.</p>
-   <p>I've built for myself a <a href="https://github.com/swaldman/mchange-sysadmin-scala/tree/main?tab=readme-ov-file">little framework</a> that is incredibly in need of documentation, but that lets me define scripts very flexibly and can provide great step-by-step information about what happens and anything that goes wrong in brightly colored HTML e-mails. I love it.</p>
-   <p>Much of what I do is back things up to a cloud service using <a href="https://rclone.org/">rclone</a>.</p>
-   <p>Last night I wrote a <a href="https://github.com/swaldman/mchange-sysadmin-scripts/blob/main/taskbin/backup-directory-as-tar">script</a> just to back up some directory. I ran into what I consider an age-old dilemma.</p>
-   <p>Sometime early in my geekish career, I picked up the nugget that its best to keep important backups as straight <code>tar</code> files rather than <code>tgz</code> (or <code>tbz</code> or whatever), because if some bit gets corrupted, most of a straight <code>tar</code> will remain recoverable, while the compressed archive will just be toast.</p>
-   <p>Is that right? Is it a real concern? I don't think I've ever experienced a corrupted archive, <code>tar</code> or <code>tgz</code>, but of course backup is a form of insurance, the whole point is to be resilient to tail risks.</p>
-   <p>Still, searching the interwebs, I don't see a lot of people recommending uncompressed archives. Space is more of a bottleneck to me than CPU or time, so if the resilience advantage isn't significant, I'd compress.</p>
-   <p>What do you think?</p>
-   <hr>
-   <p><strong>Update:</strong> Feel free to comment <a href="https://zirk.us/@interfluidity/112168423434044308">here</a></p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <a href="2024/03/27/tar-or-tgz/index.html">10:55 AM EDT</a>
   </div>
  </div>
 </article>

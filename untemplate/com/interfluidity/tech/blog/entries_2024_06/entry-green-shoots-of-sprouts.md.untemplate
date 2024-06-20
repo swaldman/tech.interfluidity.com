@@ -59,7 +59,7 @@ In order to realize a vision of "sprouts", I first implemented update histories 
 The [post prior to this one](##iffy-xml-namespace) has already become a particularly sprouty sprout. The post documents
 experiments with extensions
 to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning
-of that post, for now:
+of that post, for now: <a id="example-update-history"></a>
 
 ```plaintext
 > val updateHistory =
