@@ -130,7 +130,7 @@ input.presentation match {
 <()
   }
 ()>
-            <a href="<( permalink.relative )>" class="pubtime"><( hourStr )></a>
+            <div><a href="<( permalink.relative )>" class="pubtime"><( hourStr )></a></div>
           </div>
         </div>
       </article>
