@@ -606,7 +606,6 @@ h3.update-history-title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: 100%;
         min-width: 1px;
 }    }
 
