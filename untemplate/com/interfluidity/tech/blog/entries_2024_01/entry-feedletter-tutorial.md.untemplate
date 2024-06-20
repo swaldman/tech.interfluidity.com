@@ -1,7 +1,16 @@
+> val updateHistory =
+>    UpdateRecord(
+>      "2024-06-20T13:10:00-04:00",
+>      Some("""Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial."""),
+>      Some("acb84c08c1bbcc83036b9cad70f6a3c5d60865c4")
+>    ) ::
+>    Nil
+>
 > val UntemplateAttributes = immutable.Map[String,Any] (
 >   "Title"     -> "Feedletter tutorial",
 >   "PubDate"   -> "2024-01-29T10:30:00-05:00",
->   "Anchor"    -> "feedletter-tutorial"
+>   "Anchor"    -> "feedletter-tutorial",
+>   "UpdateHistory" -> updateHistory,
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
@@ -1241,6 +1250,29 @@ For each subscribable, you can define just one of each kind of customizer, but c
 For an example, we'll build a content customizer. Both of our feeds frequently
 embed YouTube videos as `iframe` HTML elements in their blog posts. Unfortunately, mail clients generally do not render this form of
 embedded content, leaving awkward empty-spaces in and sometimes mangling the formatting of our newsletters.
+
+<div class="note">
+
+As of `feedletter-v0.0.13` (released June 19, 2024), the API has changed slightly from that documented in this tutorial.
+
+1. `Customizer` is no longer in the package `com.mchange.feedletter.style`, but in the base `com.mchange.feedletter` package.
+   (This is because customizers now apply more broadly than styling nowtifications. They can be used, for example, to
+   filter subscribables by author or category.)
+
+2. Individual `Customizer` types &mdash; which are just functions &mdash; no longer include a `withinTypeId : String` argument.
+   `withinTypeId` is how `feedletter` binds multiple items into a single notification (for example in a weekly digest feed).
+   The several posts that will be notified share a `withinTypeId`. However, the nature and format of these IDs are really
+   implementation details of `feedletter` and its `SubscriptionManager` classes, so we are not exposing them to customizers.
+
+Just use `com.mchange.feedletter.Customizer`, and
+
+```scala
+( subscribableName : SubscribableName, subscriptionManager : SubscriptionManager, feedUrl : FeedUrl, contents : Seq[ItemContent] ) => Seq[ItemContent]
+```
+
+under newer versions of `feedletter`.
+
+</div>
 
 So let's build a content customizer that replaces these with well-behaved `div` elements containing links to the resources that would have been
 in the `iframe`. We'll include a `class="embedded"` attribute on the `div` elements, so that we will be able to style them however we want.
