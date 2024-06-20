@@ -50,8 +50,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override val diffBinder : Option[DiffBinder] = Some( DiffBinder.JavaDiffUtils(TechSite) )
 
-    // DON'T use Instant.MIN when we do this for real!
-    //override val syntheticUpdateAnnouncementSpec : Option[SyntheticUpdateAnnouncementSpec] = Some( SyntheticUpdateAnnouncementSpec( "Update-o-Bot", Instant.MIN ) )
+    override val syntheticUpdateAnnouncementSpec : Option[SyntheticUpdateAnnouncementSpec] = Some( SyntheticUpdateAnnouncementSpec( "Update-o-Bot", Instant.parse("2024-06-19T10:15:30.00Z") ) )
 
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
@@ -67,8 +66,11 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
       val location = site.location("/archive.html")
       case class Input( renderLocation : SiteLocation, entryUntemplatesResolved : immutable.SortedSet[EntryResolved] )
 
+      def skippableSynthetic( ut : EntryUntemplate ) : Boolean =
+        ut.UntemplateSynthetic && Attribute.Key.SyntheticType.caseInsensitiveCheck(ut).flatMap( SimpleBlog.SyntheticType.lenientParse ) == Some(SimpleBlog.SyntheticType.UpdateAnnouncement)
+
       val task = zio.ZIO.attempt {
-         val contentsHtml = blog.layout_archive_html( Input( location, entriesResolved.filterNot( _.entryUntemplate.UntemplateSynthetic ) ) ).text
+         val contentsHtml = blog.layout_archive_html( Input( location, entriesResolved.filterNot( er => skippableSynthetic( er.entryUntemplate ) ) ) ).text
          layout_main_html( MainLayoutInput( location, contentsHtml, Nil ) ).text
       }
       val endpointBinding = ZTEndpointBinding.publicReadOnlyHtml( location, task, None, immutable.Set("archive") )
@@ -81,7 +83,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
          val contentsHtml = blog.subscribe_page_html().text
          layout_main_html( MainLayoutInput( location, contentsHtml, Nil ) ).text
       }
-      val endpointBinding = publicReadOnlyHtml( location, task, None, immutable.Set("subscribe"), resolveHashSpecials = true, memoize = true )
+      val endpointBinding = publicReadOnlyHtml( location, task, None, immutable.Set("subscribe"), resolveHashSpecials = true )
     end Subscribe
 
     override def endpointBindings : immutable.Seq[ZTEndpointBinding] = super.endpointBindings :+ Archive.endpointBinding :+ Subscribe.endpointBinding

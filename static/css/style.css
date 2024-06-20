@@ -190,6 +190,23 @@ a#rss-link span.bullet {
     font-size: smaller;
     box-shadow: 10px 8px 5px rgba(100,100,120,0.625);
 }
+#content article.synthetic p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+#content article.synthetic blockquote {
+    border-left: 0;
+    background-color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: 'SourceSerif4';
+    font-variation-settings: "wght" 500;
+}
+#content article.synthetic blockquote code {
+    background-color: rgba(50,0,50,0.1);
+}
 #content article.presentation-single.synthetic {
     margin-bottom: 1rem;
 }
