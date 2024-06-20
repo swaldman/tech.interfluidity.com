@@ -60,7 +60,7 @@ one not-piggyback post, but they should not trigger announcements on their own. 
 
 For subscribers to notication services that accept the hint, synthetic update posts will not cause people to get spammed with "here's an update!" messages.
 That would be annoying. On the other hand, e-mail subscribers will not be notified of all updates to existing posts. One-at-a-time subscribers will see none of the update notifications.
-Digest subscribers will see update notifications only when the digest would also include at least one "organic" post. One has to navigate a trade-off between annoyance and information.
+Digest subscribers will see update notifications only when the digest would also include at least one "organic" post. There is a trade-off to navigate between annoyance and information.
 
 For posts intended to evolve over time, that might invite the attention of particular followers or collaborators, authors can explicitly declare a post to be a "sprout".
 [Example](##green-shoots-of-sprouts#example-update-history).
