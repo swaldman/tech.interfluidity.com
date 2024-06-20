@@ -51,7 +51,7 @@ That post will have its own RSS [`guid`](https://www.rssboard.org/rss-specificat
 So, without requiring any change to the behavior of existing feed readers, followers will be
 notified of these updates.
 
-The RSS items generated for these updates will be marked [synthetic](##iffy-xml-namespace#iffy-synthetic), of [type](##iffy-xml-namespace#iffy-type)
+The RSS items generated for these updates will be marked "[synthetic](##iffy-xml-namespace#iffy-synthetic)", of "[type](##iffy-xml-namespace#iffy-type)"
 `UpdateAnnouncement`, so that announcers (for the moment only mine, but please join in!) can decide whether they wish to notify these items.
 
 They include a [hint](##iffy-xml-namespace#iffy-hint-announce)
