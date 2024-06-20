@@ -75,6 +75,31 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2024-06-20 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple synthetic">
+ <div class="entry-header">
+  <h1><a href="xml/iffy/index-updated-2024-06-20-11-05-00.html">Updated: The 'iffy' XML namespace</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <p>A significant update of <a href="xml/iffy/index.html"><i>The 'iffy' XML namespace</i></a> was made on 2024-06-20 @ 11:05 AM EDT.</p>
+  <blockquote>
+   → Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>.
+  </blockquote>
+  <p>The post was originally published 2024-05-13 @ 04:10 AM EDT.</p>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <a href="xml/iffy/index-updated-2024-06-20-11-05-00.html">11:05 AM EDT</a>
+   <div class="synthetic-note">
+    <em>This is an automatically generated post.</em>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2024-06-16 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple">
@@ -449,7 +474,7 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
   <hr class="below-title">
  </div>
  <div class="update-prepend rss-description-exclude">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-17 @ 11:50 PM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac.html">here</a>, diff <a href="xml/iffy/index-diff-b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac-to-current.html">here</a>. (See <a href="xml/iffy/index.html#update-history">update history</a>.) <br>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-20 @ 11:05 AM EDT. The previous revision is <a href="xml/iffy/index-oldcommit-f19e4870e2c719f71d2f5024cb3e2e8f477622dc.html">here</a>, diff <a href="xml/iffy/index-diff-f19e4870e2c719f71d2f5024cb3e2e8f477622dc-to-current.html">here</a>. (See <a href="xml/iffy/index.html#update-history">update history</a>.) <br>
     ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="xml/iffy/index-sprout.rss">here</a>. 
    <link rel="alternate" type="application/rss+xml" title="Update to The 'iffy' XML namespace" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"></em>
   <hr>
@@ -473,6 +498,7 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
     <li><a href="#iffy-restriction"><code>iffy:restriction</code></a></li>
     <li><a href="#iffy-revision"><code>iffy:revision</code></a></li>
     <li><a href="#iffy-synthetic"><code>iffy:synthetic</code></a></li>
+    <li><a href="#iffy-type"><code>iffy:type</code></a></li>
     <li><a href="#iffy-update"><code>iffy:update</code></a></li>
     <li><a href="#iffy-update-history"><code>iffy:update-history</code></a></li>
    </ul>
@@ -496,7 +522,7 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
      <li>
       <p><code>Content</code> commits that each item, either inside its <code>description</code> tag, or via an extension such as <code>content:encoded</code>, includes the full content of the items it includes, suitable for independent rendering by any client capable also of resolving references to linked media externally. No limitation is placed on whether the full content is placed in a <code>description</code> element, in <code>content:encoded</code>, or in some other extension.</p></li>
      <li>
-      <p><code>Media</code> augments <code>Content</code> by <em>embedding attachments to subsidiary media</em> inside the RSS document. Subsidiary media does not include all potential links, just links which share a prefix with the current RSS document, which by default means all links subsidiary to the parent of the RSS document as specified in an <code>atom:link</code></p>
+      <p><code>Media</code> augments <code>Content</code> by <em>embedding attachments to subsidiary media</em> inside the RSS document. Subsidiary media does not include all potential links, just links which share a prefix with the current RSS document, which by default means all links subsidiary to the parent of the RSS document as specified in an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a></p>
       <p><em>More information on this soon when <code>iffy:attachment</code> is defined</em></p></li>
     </ul>
     <p>The four values represent nested, hierarchical levels of commitment. <code>Ping</code> commits to nothing more than the spec requires. <code>Media</code> makes every commitment promised by the prior three levels, and an additional one.</p>
@@ -571,16 +597,16 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
    <p><a id="iffy-provenance" href=""></a><strong>Element — <code>iffy:provenance</code></strong></p>
    <div class="iffy-element-desc">
     <p><strong>When an item level element</strong></p>
-    <p>If present in an item, the item contains a sequence of one or more <a href="https://www.ietf.org/rfc/rfc4287.txt"><code>atom:link</code></a> elements, each of whose</p>
+    <p>If present in an item, the item contains a sequence of one or more <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> elements, each of whose</p>
     <ul>
      <li><code>rel</code> attribute is MUST BE <code>via</code></li>
      <li><code>href</code> attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn</li>
      <li><code>type</code> attribute SHOULD BE <code>application/rss+xml</code></li>
     </ul>
-    <p>If the item from which the current item was sourced does not contain an <code>iffy:provenance</code>, then the current item should include just one <code>atom:link</code>.</p>
+    <p>If the item from which the current item was sourced does not contain an <code>iffy:provenance</code>, then the current item should include just one <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a>.</p>
     <p>If the item from which the current item was sourced <em>does</em> contains an <code>iffy:provenance</code>, then the current feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced PREPENDED.</p>
-    <p>This will ensure the most immediate source will be the first <code>atom:link</code> element. The origin — or at least the source for which no further provenance is known — will be the last <code>atom:link</code> element.</p>
-    <p>Processors may expect a channel level <code>atom:link</code> element with <code>rel="self"</code> and <code>type="application/rss+xml"</code> to use as the basis for provenance in source documents. See <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Best Practices</a>.</p>
+    <p>This will ensure the most immediate source will be the first <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element. The origin — or at least the source for which no further provenance is known — will be the last <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element.</p>
+    <p>Processors may expect a channel level <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element with <code>rel="self"</code> and <code>type="application/rss+xml"</code> to use as the basis for provenance in source documents. See <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Best Practices</a>.</p>
     <p><strong>Example</strong> (from <a href="https://www.interfluidity.com/unify-rss/all-blogs.rss">here</a>):</p>
     <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 
@@ -622,17 +648,61 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
    <hr>
    <p><a id="iffy-synthetic" href=""></a><strong>Element — <code>iffy:synthetic</code></strong></p>
    <div class="iffy-element-desc">
-    <p>This element, usually empty, is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?</p>
+    <p>This element is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?</p>
+    <p>Can optionally contain an <a href="#iffy-type"><code>iffy-type</code></a>, and other type-specific subelements.</p>
     <p><strong>When a subelement of <code>channel</code></strong></p>
-    <p>If all the items in this feed are automatically rather than human generated, however you want to defined that, <code>iffy:synthetic</code> can mark an entire channel as synthetic, bot-produced.</p>
-    <p>Applications that include <code>iffy:synthetic</code> as a subject of channel SHOULD NOT also mark individual <code>item</code>s as <code>iffy:synthetic</code>, unless there is some meaningful sense in which some items are <em>more</em> synthetic than others. It serves no purpose to mark every item of a feed <code>iffy:synthetic</code> when the channel is already so marked.</p>
+    <p>If <em>all the items</em> in a feed are automatically rather than human generated (however you want to define that), <code>iffy:synthetic</code> can mark an entire channel as synthetic, bot-produced.</p>
+    <p>Applications that include <code>iffy:synthetic</code> as a direct child of channel SHOULD NOT also mark individual <code>item</code>s as <code>iffy:synthetic</code>, unless there is some meaningful sense in which some items are <em>more</em> synthetic than others. It serves no purpose to mark every item of a feed <code>iffy:synthetic</code> when the channel is already so marked.</p>
+    <p>Known types:</p>
+    <ul>
+     <li>
+      <p><code>ItemUpdateFeed</code> — A synthetic feed announcing updates of a particular logical item from another feed.</p>
+      <p>Elements SHOULD also include an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> with <code>rel</code> attribute set to <code>related</code>, pointing to the same resource as the <code>link</code> element of the item whose updates are being announced.</p></li>
+    </ul>
     <p><strong>When a subelement of <code>item</code></strong></p>
     <p>Marks items as "synthetic", that is <em>more</em> synthetic than other, unmarked items in the feed.</p>
     <p>Exactly what that means is not defined, but it should be <em>relative to the other items in the feed</em>. If every item in a feed is automatically generated — suppose a weather feed, announcing conditions on the hour — then those items should NOT be marked <code>iffy:synthetic</code>, because they are the usual for the feed. The <code>channel</code> as a whole might be marked <code>iffy:synthetic</code>.</p>
     <p>When <code>iffy:synthetic</code> is a subelement of <code>item</code>, it is intended to <em>distinguish</em> more automatic from less automatically produced items. It serves no purpose if it is used to mark all items.</p>
-    <p><strong>Example</strong>:</p>
-    <pre><code class="language-xml">&lt;iffy:synthetic/&gt;
+    <p>Known types:</p>
+    <ul>
+     <li><code>UpdateAnnouncement</code> — A synethetic item marking an update of an older item in the feed (or that once would have been in the feed)</li>
+    </ul>
+    <p><strong>Example — <code>channel &gt; iffy:synthetic &gt; iffy:type (ItemUpdateFeed)</code></strong>:</p>
+    <pre><code class="language-xml">  &lt;channel&gt;
+    &lt;!-- other channel elements --&gt;
+    &lt;iffy:synthetic&gt;
+      &lt;iffy:type&gt;ItemUpdateFeed&lt;/iffy:type&gt;
+      &lt;atom:link rel="related" href="https://tech.interfluidity.com/xml/iffy/index.html"/&gt;
+    &lt;/iffy:synthetic&gt;
+  &lt;/channel&gt;
 </code></pre>
+    <p><strong>Example — <code>item &gt; iffy:synthetic &gt; iffy:type (UpdateAnnouncement)</code></strong>:</p>
+    <pre><code class="language-xml">  &lt;item&gt;
+    &lt;!-- other item elements --&gt;
+    &lt;iffy:synthetic&gt;
+      &lt;iffy:type&gt;UpdateAnnouncement&lt;/iffy:type&gt;
+    &lt;/iffy:synthetic&gt;
+  &lt;/item&gt;
+</code></pre>
+   </div>
+   <hr>
+   <p><a id="iffy-type" href=""></a><strong>Element — <code>iffy:type</code></strong></p>
+   <div class="iffy-element-desc">
+    <p>In general, marks the "type" of its containing element.</p>
+    <p><strong>When a subelement of <code>channel</code> &gt; <a href="#iffy-synthetic"><code>iffy:synthetic</code></a></strong></p>
+    <p>Marks what kind of synthetic channel its parent is. Currently known values include</p>
+    <ul>
+     <li><code>ItemUpdateFeed</code> — A synthetic feed announcing updates of a particular logical item from another feed.</li>
+    </ul>
+    <p><strong>When a subelement of <code>item</code> &gt; <a href="#iffy-synthetic"><code>iffy:synthetic</code></a></strong></p>
+    <p>Marks what kind of synthetic item its parent is. Currently known values include</p>
+    <ul>
+     <li><code>UpdateAnnouncement</code> — A synethetic item marking an update of an older item in the feed (or that once would have been in the feed)</li>
+    </ul>
+    <p>Please see known containing elements, including</p>
+    <ul>
+     <li><a href="#iffy-synthetic"><code>iffy:synthetic</code></a>.</li>
+    </ul>
    </div>
    <hr>
    <p><a id="iffy-update" href=""></a><strong>Element — <code>iffy:update</code></strong></p>
@@ -715,7 +785,7 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
   <div class="post-metainfo">
    <a href="xml/iffy/index.html">04:10 AM EDT</a>
    <div class="updated-note">
-    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-06-17 @ 11:50 PM EDT</a>
+    <a href="xml/iffy/index.html#major-updates">Last major update at 2024-06-20 @ 11:05 AM EDT</a>
    </div>
   </div>
  </div>
@@ -863,65 +933,6 @@ extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-speci
  <div class="entry-footer">
   <div class="post-metainfo">
    <a href="2024/03/18/c3p0-and-loom/index.html">10:20 PM EDT</a>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2024-02-06 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple">
- <div class="entry-header">
-  <h1><a href="2024/02/06/what-does-private-mean-at-package-level-in-scala-3/index.html">What does private mean at package level in Scala 3?</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p><strong>TL; DR:</strong></p>
-   <ul>
-    <li><code>private</code> declarations at a top-level scope of a package in Scala 3 are equivalent to a <code>private[pkg]</code> in other contexts.</li>
-    <li>They are accessible to everything within the package and its subpackages, but nothing else.</li>
-   </ul>
-   <hr>
-   <p>In Scala 2, to place a declaration at the "package" level, one would define a "package object":</p>
-   <pre><code class="language-scala">package top
-
-package object pkg {
-  private val Hush = 0
-  val Loud = Int.MaxValue
-}
-</code></pre>
-   <p>Given this</p>
-   <ul>
-    <li>one might refer to <code>Loud</code> from anywhere with fully-qualified name <code>top.pkg.Loud</code></li>
-    <li><code>import top.pkg._</code> would pick it up</li>
-    <li>inside the package <code>top.pkg</code> one coul refer to it simply as <code>Loud</code></li>
-   </ul>
-   <p>So far, so intuitive.</p>
-   <p>In Scala 2, the semantics of <code>private val Loud</code> was also intuitive. A <code>package object</code> is just an <code>object</code>. A <code>private</code> member of an <code>object</code> is only visible within that <code>object</code>'s scope. While the Scala compiler does some magic to make nonprivate declarations more broadly visible, access to <code>private</code> members of the <code>package object</code> was restricted to the <code>object</code> in the ordinary way.</p>
-   <p>But Scala 3 introduces "naked" top-level declarations, which I find I use constantly.</p>
-   <p>So the declarations above might translate to:</p>
-   <pre><code class="language-scala">package top.pkg
-
-private val Hush = 0
-val Loud = Int.MaxValue
-</code></pre>
-   <p>There is no <code>object</code> scope! So what does private even mean in this context.</p>
-   <p>I could imagine four possibilities:</p>
-   <ol>
-    <li><code>private</code> to a virtual object scope constituted of all top-level declaraions</li>
-    <li><code>private</code> to the top-level of the current compilation unit (i.e. file)</li>
-    <li><code>private</code> to the current compilation unit (including nested scopes)</li>
-    <li><code>private</code> to the package as a whole, i.e. the same as <code>private[pkg]</code></li>
-   </ol>
-   <p>Playing around, it looks like #4 is the winner.</p>
-   <p>A <code>private</code> top-level declaration seems visible to any code in the package, even if defined in other files or directories. It is visible from anywhere in the <code>pkg</code> or subpackages of <code>pkg</code>.</p>
-   <p>So now I know! And so do you!</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <a href="2024/02/06/what-does-private-mean-at-package-level-in-scala-3/index.html">05:50 PM EST</a>
   </div>
  </div>
 </article>

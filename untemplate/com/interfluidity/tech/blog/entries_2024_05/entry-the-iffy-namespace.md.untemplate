@@ -1,4 +1,5 @@
 > val updateHistory =
+>    UpdateRecord("2024-06-20T11:05:00-04:00",Some("Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>."),Some("f19e4870e2c719f71d2f5024cb3e2e8f477622dc")) ::
 >    UpdateRecord("2024-06-17T23:50:00-04:00",Some("Document <code>iffy:synthetic</code>."),Some("b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac")) ::
 >    UpdateRecord("2024-06-11T14:10:00-04:00",Some("Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>."),Some("6c5fef82527bd419e8e9c7e7f3a6420c9925cf10")) ::
 >    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
@@ -43,6 +44,7 @@ The conventional prefix associated with this namespace will be `iffy`.
 * [`iffy:restriction`](#iffy-restriction)
 * [`iffy:revision`](#iffy-revision)
 * [`iffy:synthetic`](#iffy-synthetic)
+* [`iffy:type`](#iffy-type)
 * [`iffy:update`](#iffy-update)
 * [`iffy:update-history`](#iffy-update-history)
 
@@ -73,7 +75,7 @@ Contains one of the following four values:
   some other extension.
 * `Media` augments `Content` by _embedding attachments to subsidiary media_ inside the RSS document. Subsidiary media does not include
   all potential links, just links which share a prefix with the current RSS document, which by default means all links subsidiary to the parent
-  of the RSS document as specified in an `atom:link`
+  of the RSS document as specified in an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7)
 
   _More information on this soon when `iffy:attachment` is defined_
 
@@ -207,23 +209,23 @@ Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 **When an item level element**
 
-If present in an item, the item contains a sequence of one or more [`atom:link`](https://www.ietf.org/rfc/rfc4287.txt) elements,
+If present in an item, the item contains a sequence of one or more [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) elements,
 each of whose
 * `rel` attribute is MUST BE `via`
 * `href` attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn
 * `type` attribute SHOULD BE `application/rss+xml`
 
 If the item from which the current item was sourced does not contain an `iffy:provenance`, then the current
-item should include just one `atom:link`.
+item should include just one [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7).
 
 If the item from which the current item was sourced _does_ contains an `iffy:provenance`, then the current
 feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced
 PREPENDED.
 
-This will ensure the most immediate source will be the first `atom:link` element. The origin &mdash; or at least
-the source for which no further provenance is known &mdash; will be the last `atom:link` element.
+This will ensure the most immediate source will be the first [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element. The origin &mdash; or at least
+the source for which no further provenance is known &mdash; will be the last [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element.
 
-Processors may expect a channel level `atom:link` element with `rel="self"` and `type="application/rss+xml"` to
+Processors may expect a channel level [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element with `rel="self"` and `type="application/rss+xml"` to
 use as the basis for provenance in source documents. See [RSS Best Practices](https://www.rssboard.org/rss-profile#namespace-elements-atom-link).
 
 **Example** (from [here](https://www.interfluidity.com/unify-rss/all-blogs.rss)):
@@ -290,16 +292,25 @@ See also [`iffy:update-history` example](#iffy-update-history).
 
 <div class="iffy-element-desc">
 
-This element, usually empty, is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
+This element is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
+
+Can optionally contain an [`iffy-type`](#iffy-type), and other type-specific subelements.
 
 **When a subelement of `channel`**
 
-If all the items in this feed are automatically rather than human generated, however you want to defined that,
+If _all the items_ in a feed are automatically rather than human generated (however you want to define that),
 `iffy:synthetic` can mark an entire channel as synthetic, bot-produced.
 
-Applications that include `iffy:synthetic` as a subject of channel SHOULD NOT also mark individual `item`s as `iffy:synthetic`,
+Applications that include `iffy:synthetic` as a direct child of channel SHOULD NOT also mark individual `item`s as `iffy:synthetic`,
 unless there is some meaningful sense in which some items are _more_ synthetic than others. It serves no purpose to mark
 every item of a feed `iffy:synthetic` when the channel is already so marked.
+
+Known types:
+
+* `ItemUpdateFeed` &mdash; A synthetic feed announcing updates of a particular logical item from another feed.
+
+  Elements SHOULD also include an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) with `rel` attribute set to `related`, pointing to the same resource
+  as the `link` element of the item whose updates are being announced.
 
 **When a subelement of `item`**
 
@@ -313,10 +324,59 @@ The `channel` as a whole might be marked `iffy:synthetic`.
 When `iffy:synthetic` is a subelement of `item`, it is intended to _distinguish_ more automatic from less automatically
 produced items. It serves no purpose if it is used to mark all items.
 
-**Example**:
+Known types:
+
+* `UpdateAnnouncement` &mdash; A synethetic item marking an update of an older item in the feed
+  (or that once would have been in the feed)
+
+**Example &mdash; `channel > iffy:synthetic > iffy:type (ItemUpdateFeed)`**:
 ```xml
-<iffy:synthetic/>
+  <channel>
+    <!-- other channel elements -->
+    <iffy:synthetic>
+      <iffy:type>ItemUpdateFeed</iffy:type>
+      <atom:link rel="related" href="https://tech.interfluidity.com/xml/iffy/index.html"/>
+    </iffy:synthetic>
+  </channel>
 ```
+
+**Example &mdash; `item > iffy:synthetic > iffy:type (UpdateAnnouncement)`**:
+```xml
+  <item>
+    <!-- other item elements -->
+    <iffy:synthetic>
+      <iffy:type>UpdateAnnouncement</iffy:type>
+    </iffy:synthetic>
+  </item>
+```
+
+
+</div>
+
+---
+
+<a id="iffy-type"></a>**Element &mdash; `iffy:type`**
+
+<div class="iffy-element-desc">
+
+In general, marks the "type" of its containing element.
+
+**When a subelement of `channel` > [`iffy:synthetic`](#iffy-synthetic)**
+
+Marks what kind of synthetic channel its parent is. Currently known values include
+
+* `ItemUpdateFeed` &mdash; A synthetic feed announcing updates of a particular logical
+   item from another feed.
+
+**When a subelement of `item` > [`iffy:synthetic`](#iffy-synthetic)**
+
+Marks what kind of synthetic item its parent is. Currently known values include
+
+* `UpdateAnnouncement` &mdash; A synethetic item marking an update of an older item in the feed
+  (or that once would have been in the feed)
+
+Please see known containing elements, including
+* [`iffy:synthetic`](#iffy-synthetic).
 
 </div>
 
