@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</link>
     <description><![CDATA[Updates to Names too on the nose]]></description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Jun 2024 17:54:12 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2024 21:35:35 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
@@ -39,6 +39,19 @@ Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]>
 <li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-diff-c6e71f4d689f2b208c3eae19e647435322fa6d04-to-current.html">Diff from prior revision</a></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-02T03:40:00Z</atom:updated>
+          <atom:summary><![CDATA[Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]></atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-oldcommit-c6e71f4d689f2b208c3eae19e647435322fa6d04.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-diff-c6e71f4d689f2b208c3eae19e647435322fa6d04-to-current.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Tue, 21 May 2024 10:55:00 -0400</pubDate>
@@ -62,6 +75,13 @@ Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]>
 <li><a href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-05-21T14:55:00Z</atom:updated>
+          <atom:summary><![CDATA[Add Yahya Sinwar.]]></atom:summary>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Tue, 9 Apr 2024 01:15:00 -0400</pubDate>

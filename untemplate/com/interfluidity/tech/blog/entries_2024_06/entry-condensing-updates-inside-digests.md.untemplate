@@ -1,0 +1,74 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Condensing updates that appear in digests",
+>   "PubDate"       -> "2024-06-22T21:35:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   //"Anchor"      -> ??? // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+In the [previous post](##sprouted), I claimed to be "finished" my exploration of handling updates.
+
+Ha!
+
+I don't like how my update notifications appear in digests &mdash; in e-mail newsletters that
+gather up all the posts over a period of time.
+
+There are two problems:
+
+1. **Update notifications appear in digests as separate, cookie-cutter posts, which bury and dilute "real" posts.**
+
+   On websites, we can make synthetic update posts visually distinct to help guide visitors past them.
+   We could do that in HTML mail digests too, but I think update posts will still put people off actually reading new material when they
+   are going quickly through their e-mail, particularly when updates are more
+   recent and therefore come before the "real" posts.
+
+2. **Updates appear even for posts that are included in the current digest.**
+
+   [_feedletter_](##feedletter-tutorial) digests always include the most
+   recently seen version of a post, so from the digest reader's perspective,
+   the "update" notification tells them about nothing that isn't already in the post.
+
+To address this, I mean to do a bunch of things.
+
+1. I'm going to modify the definition of [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic), reversing course on my
+   my current admonition that
+
+   > Applications that include `iffy:synthetic` as a direct child of channel SHOULD NOT also mark individual `item`s as `iffy:synthetic`,
+   > unless there is some meaningful sense in which some items are _more_ synthetic than others. It serves no purpose to mark
+   > every item of a feed `iffy:synthetic` when the channel is already so marked.
+
+   Never mind.
+
+   Until now, [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) has been basically just a marker, so there was no point
+   in marking posts twice, when marking at the `channel` level implied the syntheticness and the types of the items.
+
+   But now we'll reconceive of [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) as also the carrier of the data on
+   which the item content (in [`description`](https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt),
+   [`content:encoded`](https://www.rssboard.org/rss-profile#namespace-elements-content-encoded),
+   or [`atom:content`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.1.3)) is based. The item content, of course,
+   should just be the post's HTML, whether it is a synthetic post or not. But we'll want the information we used to compose
+   that post to be present, in an [`iffy:type`](##iffy-xml-namespace#iffy-type)-dependent way, inside `item > iffy:synthetic`.
+   So even when a `channel` is marked synthetic, with a type that implies the type of elements, we will want explicitly
+   to include an [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) element in each item.
+
+   For synthethic items of type `UpdateAnnouncement` &mdash; the relevant case here &mdash; we've already defined an
+   element that carries most the relevant data, [`iffy:update`](##iffy-xml-namespace#iffy-update).
+
+   We'll also need the `guid` of the post updated. So we'll [bring back](/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html#iffy-original-guid) `iffy:original-guid`,
+   with a slightly modified role.
+
+2. I'll define a [_feedletter_ content `Customizer`](##feedletter-tutorial#16-advanced-customize-the-content) that
+   1. filters away upates to `items` already in the post;
+   2. combines the remaining updates into a single notification post; and
+   3. places that notification post at the end of the digest.
+
+So. We have a plan!
+
+Let's see if it works.

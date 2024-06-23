@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Jun 2024 17:54:12 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2024 21:35:35 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
@@ -36,6 +36,21 @@ Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</c
 <li><a href="https://tech.interfluidity.com/xml/iffy/index-diff-f19e4870e2c719f71d2f5024cb3e2e8f477622dc-to-current.html">Diff from prior revision</a></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-20T15:05:00Z</atom:updated>
+          <atom:summary>
+            <![CDATA[Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>.]]>
+          </atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-f19e4870e2c719f71d2f5024cb3e2e8f477622dc.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-f19e4870e2c719f71d2f5024cb3e2e8f477622dc-to-current.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Mon, 17 Jun 2024 23:50:00 -0400</pubDate>
@@ -55,6 +70,19 @@ Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</c
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-18T03:50:00Z</atom:updated>
+          <atom:summary><![CDATA[Document <code>iffy:synthetic</code>.]]></atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac-to-f19e4870e2c719f71d2f5024cb3e2e8f477622dc.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Tue, 11 Jun 2024 14:10:00 -0400</pubDate>
@@ -78,6 +106,21 @@ Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>if
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-11T18:10:00Z</atom:updated>
+          <atom:summary>
+            <![CDATA[Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>.]]>
+          </atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10-to-b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Sun, 2 Jun 2024 00:25:00 -0400</pubDate>
@@ -101,6 +144,21 @@ Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> fo
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-02T04:25:00Z</atom:updated>
+          <atom:summary>
+            <![CDATA[Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> for the same work.]]>
+          </atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-199e44561de3fd9e731a335d8b2a655f42d9bc04-to-6c5fef82527bd419e8e9c7e7f3a6420c9925cf10.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Sat, 1 Jun 2024 21:35:00 -0400</pubDate>
@@ -124,6 +182,19 @@ Add initial take on tags related to updates and revisions.]]>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-06-02T01:35:00Z</atom:updated>
+          <atom:summary><![CDATA[Add initial take on tags related to updates and revisions.]]></atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0-to-199e44561de3fd9e731a335d8b2a655f42d9bc04.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Sat, 25 May 2024 23:00:00 -0400</pubDate>
@@ -147,6 +218,19 @@ Add JS/CSS so that prior revisions are visually distinct from current.]]>
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-05-26T03:00:00Z</atom:updated>
+          <atom:summary><![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]></atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-13de0232319ceab2f830591c318089d18cbec78d-to-72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Fri, 24 May 2024 00:25:00 -0400</pubDate>
@@ -170,6 +254,21 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
 <li><a href="https://tech.interfluidity.com/xml/iffy/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
 </ul>]]>
       </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-05-24T04:25:00Z</atom:updated>
+          <atom:summary>
+            <![CDATA[Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, bad appraoch to updates.]]>
+          </atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
     </item>
     <item>
       <pubDate>Mon, 13 May 2024 04:10:00 -0400</pubDate>

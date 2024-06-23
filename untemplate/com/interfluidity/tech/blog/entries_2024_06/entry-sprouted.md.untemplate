@@ -6,7 +6,7 @@
 >   "Title"         -> "Sprouted",
 >   "PubDate"       -> "2024-06-20T15:05:00-04:00",
 >   "UpdateHistory" -> updateHistory,
->   //"Anchor"      -> ??? // a String
+>   "Anchor"        -> "sprouted" // a String
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
