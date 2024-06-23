@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/xml/iffy/index.html</link>
     <description><![CDATA[Updates to The 'iffy' XML namespace]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jun 2024 21:47:55 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 22 Jun 2024 22:32:14 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"/>
@@ -38,6 +38,7 @@ Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</c
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-20T15:05:00Z</atom:updated>
           <atom:summary>
@@ -72,6 +73,7 @@ Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</c
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-18T03:50:00Z</atom:updated>
           <atom:summary><![CDATA[Document <code>iffy:synthetic</code>.]]></atom:summary>
@@ -108,6 +110,7 @@ Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>if
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-11T18:10:00Z</atom:updated>
           <atom:summary>
@@ -146,6 +149,7 @@ Drop <code>iffy:timestamp</code>. We can just reuse <code>atom:updated</code> fo
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-02T04:25:00Z</atom:updated>
           <atom:summary>
@@ -184,6 +188,7 @@ Add initial take on tags related to updates and revisions.]]>
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-02T01:35:00Z</atom:updated>
           <atom:summary><![CDATA[Add initial take on tags related to updates and revisions.]]></atom:summary>
@@ -220,6 +225,7 @@ Add JS/CSS so that prior revisions are visually distinct from current.]]>
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-05-26T03:00:00Z</atom:updated>
           <atom:summary><![CDATA[Add JS/CSS so that prior revisions are visually distinct from current.]]></atom:summary>
@@ -256,6 +262,7 @@ Drop tags <code>iffy:when-updated</code> and <code>iffy:original-guid</code>, ba
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:original-guid>https://tech.interfluidity.com/xml/iffy/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-05-24T04:25:00Z</atom:updated>
           <atom:summary>
