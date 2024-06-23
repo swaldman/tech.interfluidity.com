@@ -47,14 +47,16 @@ To address this, I mean to do a bunch of things.
    Never mind.
 
    Until now, [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) has been basically just a marker, so there was no point
-   in marking posts twice, when marking at the `channel` level implied the syntheticness and the types at the item level.
+   in marking posts twice. Marking at the `channel` level implied the syntheticness and the types at the item level.
 
    But now we'll reconceive of [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) as also the carrier of the data on
    which the item content (in [`description`](https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt),
    [`content:encoded`](https://www.rssboard.org/rss-profile#namespace-elements-content-encoded),
-   or [`atom:content`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.1.3)) is based. The item content, of course,
-   should just be the post's HTML, whether it is a synthetic post or not. But we'll want the information we used to compose
-   that post to be present, in an [`iffy:type`](##iffy-xml-namespace#iffy-type)-dependent way, inside `item > iffy:synthetic`.
+   or [`atom:content`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.1.3)) is based.
+
+   The item content, of course,
+   remains the post's HTML, whether it is a synthetic post or not. But we'll want the information we used to _compose_
+   synthetic posts to be available, in an [`iffy:type`](##iffy-xml-namespace#iffy-type)-dependent way, inside `item > iffy:synthetic`.
    So even when a `channel` is marked synthetic, with a type that implies the type of elements, we will want explicitly
    to include an [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) element in each item.
 
