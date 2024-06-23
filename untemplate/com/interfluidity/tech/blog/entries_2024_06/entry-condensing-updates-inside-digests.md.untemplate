@@ -47,7 +47,7 @@ To address this, I mean to do a bunch of things.
    Never mind.
 
    Until now, [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) has been basically just a marker, so there was no point
-   in marking posts twice, when marking at the `channel` level implied the syntheticness and the types of the items.
+   in marking posts twice, when marking at the `channel` level implied the syntheticness and the types at the item level.
 
    But now we'll reconceive of [`iffy:synthetic`](##iffy-xml-namespace#iffy-synthetic) as also the carrier of the data on
    which the item content (in [`description`](https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt),
