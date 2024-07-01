@@ -75,6 +75,33 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2024-07-01 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple synthetic">
+ <div class="entry-header">
+  <h1><a href="xml/iffy/index-updated-2024-07-01-14-40-00.html">Updated: The 'iffy' XML namespace</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <p>A significant update of <a href="xml/iffy/index.html"><i>The 'iffy' XML namespace</i></a> was made on 2024-07-01 @ 02:40 PM EDT.</p>
+  <blockquote>
+   → Major revision of <code>iffy:synthetic</code>, generalize <code>iffy:initial</code>, <code>iffy:update</code>, <code>iffy:update-history</code>, define <code>iffy:uid</code>.
+  </blockquote>
+  <p>The post was originally published 2024-05-13 @ 04:10 AM EDT.</p>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div class="synthetic-note">
+    <em>This is an automatically generated post.</em>
+   </div>
+   <div>
+    <a href="xml/iffy/index-updated-2024-07-01-14-40-00.html" class="pubtime">02:40 PM EDT</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2024-06-22 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple">
@@ -543,85 +570,6 @@
    </div>
    <div>
     <a href="2024/06/02/readying-a-blog-for-revision-histories-and-sprouts-under-unstatic/index.html" class="pubtime">11:00 PM EDT</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2024-06-02 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-green-shoots-of-sprouts">
- <div class="entry-header">
-  <h1><a href="2024/06/02/green-shoots-of-sprouts/index.html">Green shoots of sprouts</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p><a href="https://mastodon.social/@erlend@writing.exchange">Erlend Sogge Heggen</a> pointed me to a <a href="https://v5.chriskrycho.com/essays/feeds-are-not-fit-for-gardening/">post by Chris Krycho on "sprouts"</a>.</p>
-   <p>Krycho points out that most of our online infrastructure is organized around feeds of posts, which are "published" or "announced" as finished work. But creative work naturally develops in drafts and increments. It might be best to publish at first only the barest outline of a thing, and then collaborate in the open to flesh it out and bring it forward. What we want to announce, then, are not new posts, but a beginning and then new milestones. If we can, we'd want to retain the full history of the process.</p>
-   <p>I've gone a fair distance towards implementing one version of this vision recently. My blogging infrastructure is my own static-site generation library <a href="https://github.com/swaldman/unstatic/">unstatic</a>, which is built on top of "<a href="https://github.com/swaldman/untemplate-doc#readme">untemplates</a>". Untemplates are just thin wrappers around Scala functions.</p>
-   <p>Like lots of static-site generators, I write in files that are mostly markdown, with some metadata in a special header. But in the untemplate header, I literally write Scala code.</p>
-   <p>Here's a very simple example, from a recent post, "<a href="2024/03/18/c3p0-and-loom/index.html">c3p0 and loom</a>":</p>
-   <pre><code class="language-plaintext">&gt; val UntemplateAttributes = immutable.Map[String,Any] (
-&gt;   "Title"     -&gt; "c3p0 and loom",
-&gt;   "PubDate"   -&gt; "2024-03-18T22:20:00-04:00",
-&gt;   "Anchor"    -&gt; "c3p0-and-loom"
-&gt; )
-
-given PageBase = PageBase.fromPage(input.renderLocation)
-
-(input : MainBlog.EntryInput)[]~()&gt;      ### modify Title/Author/Pubdate above, add markdown or html below!
-
-I write [a lot of open source software](https://github.com/swaldman), but I've only ever really had one "hit".
-That makes me pretty sad, actually. I think some of what I've written is pretty great, and it's lonesome to be the
-sole user...
-</code></pre>
-   <p>For most posts, I just copy and modify this header, and then write markdown text below. But if I want to do anything more fancy, well, I have the full Scala programming language to work with.</p>
-   <p>In order to realize a vision of "sprouts", I first implemented update histories as a simple <code>List</code> of <code>UpdateRecord</code> objects.</p>
-   <p>The <a href="xml/iffy/index.html">post prior to this one</a> has already become a particularly sprouty sprout. The post documents experiments with extensions to RSS. I try stuff out, then, as often as not, I untry it. So there's lots of revising. Here's the beginning of that post, for now: <a id="example-update-history" href=""></a></p>
-   <pre><code class="language-plaintext">&gt; val updateHistory =
-&gt;    UpdateRecord("2024-06-02T00:25:00-04:00",Some("Drop &lt;code&gt;iffy:timestamp&lt;/code&gt;. We can just reuse &lt;code&gt;atom:updated&lt;/code&gt; for the same work."),Some("199e44561de3fd9e731a335d8b2a655f42d9bc04")) ::
-&gt;    UpdateRecord("2024-06-01T21:35:00-04:00",Some("Add initial take on tags related to updates and revisions."),Some("72eaf9fdfebc9e627bff33bbe1102d4d250ad1d0")) ::
-&gt;    UpdateRecord("2024-05-25T23:00:00-04:00",Some("Add JS/CSS so that prior revisions are visually distinct from current."),Some("13de0232319ceab2f830591c318089d18cbec78d")) ::
-&gt;    UpdateRecord("2024-05-24T00:25:00-04:00",Some("Drop tags &lt;code&gt;iffy:when-updated&lt;/code&gt; and &lt;code&gt;iffy:original-guid&lt;/code&gt;, bad appraoch to updates."),Some("394986cb8d9c57f567d324e691a44d50102101ce")) ::
-&gt;    Nil
-&gt;
-&gt; val UntemplateAttributes = immutable.Map[String,Any] (
-&gt;   "Title"         -&gt; "The 'iffy' XML namespace",
-&gt;   "PubDate"       -&gt; "2024-05-13T04:10:00-04:00",
-&gt;   "Permalink"     -&gt; "/xml/iffy/index.html",
-&gt;   "UpdateHistory" -&gt; updateHistory,
-&gt;   "Sprout"        -&gt; true,
-&gt;   "Anchor"        -&gt; "iffy-xml-namespace"
-&gt; )
-
-given PageBase = PageBase.fromPage(input.renderLocation)
-
-(input : MainBlog.EntryInput)[]~()&gt;      ### modify Title/Author/Pubdate above, add markdown or html below!
-
-I want to do a lot of things with RSS that require
-extensions of RSS (as the RSS spec [foresees](https://www.rssboard.org/rss-specification#extendingRss))...
-</code></pre>
-   <p>Each <code>UpdateRecord</code> marks a discretionary choice, to declare a "significant" or "material" update. Most updates are not! There are typically several minor revisions, typo fixes, and tweaks, between these noted updates.</p>
-   <p>When I decide a revision is serious, I provide a timestamp, and, optionally, a description and a "revision spec". The description is self-explanatory. The revision spec is arbitrary. When I define a site, I optionally provide an <a href="https://github.com/swaldman/unstatic/blob/main/ztapir/src/unstatic/ztapir/simple/RevisionBinder.scala"><code>RevisionBinder</code></a> that is able to convert a revision spec and a path into the contents of a resource within the referenced revision.</p>
-   <p>There might be many different implementations of <code>RevisionBinder</code>, each with its own kind of revision specification. The one that exists for now just pulls resources from git commits.</p>
-   <p>The revision specs shown are just git commits, referenced in full-length hex. With each "major" update, I provide the hex for the commit <em>prior</em> to my update, the one it is superceding. That usually <em>will not</em> be the same commit as the "major" update prior, because most "major" updates are followed by a series of minor tweaks.</p>
-   <p>So, as I work on an evolving document, I note significant updates by adding records to a list, and I include the list I build in <code>UntemplateAttributes</code>, the standard <code>Map</code> in which I also define <code>Title</code>, <code>PubDate</code>, <code>Author</code>, etc. (The example posts omit <code>Author</code>, because this site has a default author — me! — if that field is left unset.)</p>
-   <p>The update history converts pretty directly into a user readable history. Let's <a href="xml/iffy/index.html#update-history">take a look</a>!</p>
-   <p>(If you want to see the template that lays out the update history, you can find it <a href="https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-update-history.html.untemplate">here</a>.)</p>
-   <p>To realize the "sprout" vision, we need more than this. We need some means by which people can follow the evolutions of the document. Ideally, when a "major update" is published, subscribers to the blog should see something about that in their feeds. The RSS feeds we generate include <code>&lt;atom:updated&gt;</code> tags, but as Krycho points out, very few feed readers do anything with that.</p>
-   <p>You'll note that in addition to the <code>UpdateHistory</code>, we've added to <code>UntemplateAttributes</code> a key called <code>Sprout</code>. When the site generator encounters a mapping of <code>Sprout</code> to <code>true</code> on an untemplate, it generates an additional RSS feed that will track the update history of just this post. For our example post, you can find that feed <a href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss">here</a></p>
-   <p>The <a href="https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-entry.html.untemplate">template that lays out blog entries</a> looks for an update history, and if it is there, checks for prior revisions references, diffs, and the <code>sprouts</code> flag. It prepends to the post a brief note with links, to the prior revision if it's available, to the update history, and to the post-specific RSS feed. Go ahead, check out the beginning of our <a href="xml/iffy/index.html">example post</a>.</p>
-   <p>Going forward, I think I will add the capability of generating "synthetic" posts when there are new major updates. They'd just be formulaic announcements of the updates. They might never appear on the blog front page. But they would be included in the RSS feed. I'd add metadata to the RSS items for these posts, indicating that they are synthetic and describing them, so that tools like <a href="2024/01/29/feedletter-tutorial/index.html"><code>feedletter</code></a> can make intelligent choices about whether and how subscribers should receive notificatios about these posts.</p>
-   <p>But that is all still to come!</p>
-   <p>For now, we have update histories with links to prior revisions and diffs, and dedicated RSS feeds by which dedicated collaborators can stay abreast of our burgeoning sprouts.</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div>
-    <a href="2024/06/02/green-shoots-of-sprouts/index.html" class="pubtime">03:15 AM EDT</a>
    </div>
   </div>
  </div>

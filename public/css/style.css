@@ -225,7 +225,7 @@ a#rss-link span.bullet {
     border: 1px solid black;
     max-width: 600px;
 }
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: 'FiraCode-SemiBold', "Lucida Console", "Courier New", monospace;
 }
 h1 {
@@ -236,6 +236,16 @@ h2 {
 }
 h3 {
     font-size: 12pt;
+}
+h4 {
+    font-size: 11pt;
+}
+.uid-iffy-xml-namespace h1, .uid-iffy-xml-namespace h2, .uid-iffy-xml-namespace h3, .uid-iffy-xml-namespace h4 {
+    font-family: 'SourceSerif4', Times, serif;
+    font-variation-settings: "wght" 700;
+}
+.uid-iffy-xml-namespace h4 {
+    font-family: 'SourceSerif4Italic';
 }
 #content article h1 {
     margin-top: 0;

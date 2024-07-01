@@ -6,14 +6,20 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</link>
     <description><![CDATA[Updates to Names too on the nose]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jun 2024 22:32:14 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 1 Jul 2024 14:42:23 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
     type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index-sprout.rss"/>
     <iffy:synthetic>
       <iffy:type>ItemUpdateFeed</iffy:type>
-      <atom:link rel="related" href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html"/>
+      <iffy:initial>
+        <atom:title><![CDATA[Names too on the nose]]></atom:title>
+        <atom:link href="https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html"/>
+        <iffy:uid>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</iffy:uid>
+        <atom:published>2024-04-09T05:15:00Z</atom:published>
+        <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      </iffy:initial>
     </iffy:synthetic>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
@@ -41,7 +47,6 @@ Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]>
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
-        <iffy:original-guid>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-02T03:40:00Z</atom:updated>
           <atom:summary><![CDATA[Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]></atom:summary>
@@ -78,7 +83,6 @@ Add update from Joe Crawford about potential mechanisms for on-the-nosedness.]]>
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
-        <iffy:original-guid>https://tech.interfluidity.com/2024/04/09/names-too-on-the-nose/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-05-21T14:55:00Z</atom:updated>
           <atom:summary><![CDATA[Add Yahya Sinwar.]]></atom:summary>

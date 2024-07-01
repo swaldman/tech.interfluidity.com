@@ -6,14 +6,20 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html</link>
     <description><![CDATA[Updates to Neonix]]></description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Jun 2024 22:32:13 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 1 Jul 2024 14:42:23 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
     type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"/>
     <iffy:synthetic>
       <iffy:type>ItemUpdateFeed</iffy:type>
-      <atom:link rel="related" href="https://tech.interfluidity.com/2024/06/06/neonix/index.html"/>
+      <iffy:initial>
+        <atom:title><![CDATA[Neonix]]></atom:title>
+        <atom:link href="https://tech.interfluidity.com/2024/06/06/neonix/index.html"/>
+        <iffy:uid>https://tech.interfluidity.com/2024/06/06/neonix/index.html</iffy:uid>
+        <atom:published>2024-06-06T19:35:00Z</atom:published>
+        <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      </iffy:initial>
     </iffy:synthetic>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
@@ -39,7 +45,6 @@ Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]>
       </content:encoded>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
-        <iffy:original-guid>https://tech.interfluidity.com/2024/06/06/neonix/index.html</iffy:original-guid>
         <iffy:update>
           <atom:updated>2024-06-06T22:30:00Z</atom:updated>
           <atom:summary><![CDATA[Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]></atom:summary>

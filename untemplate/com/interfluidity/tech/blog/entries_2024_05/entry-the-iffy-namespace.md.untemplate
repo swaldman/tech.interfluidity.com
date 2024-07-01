@@ -1,4 +1,9 @@
 > val updateHistory =
+>    UpdateRecord(
+>      "2024-07-01T14:40:00-04:00",
+>      Some("Major revision of <code>iffy:synthetic</code>, generalize <code>iffy:initial</code>, <code>iffy:update</code>, <code>iffy:update-history</code>, define <code>iffy:uid</code>."),
+>      Some("0df7787c056ab2b983e2de4d107c2fa477b7c8f4")
+>    ) ::
 >    UpdateRecord("2024-06-20T11:05:00-04:00",Some("Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>."),Some("f19e4870e2c719f71d2f5024cb3e2e8f477622dc")) ::
 >    UpdateRecord("2024-06-17T23:50:00-04:00",Some("Document <code>iffy:synthetic</code>."),Some("b8f2ae57694f9fb88b10df011f69ee9acfe4c0ac")) ::
 >    UpdateRecord("2024-06-11T14:10:00-04:00",Some("Document <code>iffy:hint-announce</code>, <code>iffy:policy</code>, and <code>iffy:restriction</code>."),Some("6c5fef82527bd419e8e9c7e7f3a6420c9925cf10")) ::
@@ -33,7 +38,7 @@ The conventional prefix associated with this namespace will be `iffy`.
 (`-SNAPSHOT` signifies that the version preceding that suffix has not yet been finalized. Much more to come!)
 
 ---
-**Table of Contents**
+## Table of Contents
 
 * [`iffy:completeness`](#iffy-completeness)
 * [`iffy:diff`](#iffy-diff)
@@ -45,15 +50,16 @@ The conventional prefix associated with this namespace will be `iffy`.
 * [`iffy:revision`](#iffy-revision)
 * [`iffy:synthetic`](#iffy-synthetic)
 * [`iffy:type`](#iffy-type)
+* [`iffy:uid`](#iffy-uid)
 * [`iffy:update`](#iffy-update)
 * [`iffy:update-history`](#iffy-update-history)
 
 ---
-<a id="iffy-completeness"></a>**Element &mdash; `iffy:completeness`**
+## Element &mdash; `iffy:completeness` <a id="iffy-completeness"></a>
 
 <div class="iffy-element-desc">
 
-**Solely a channel level element**
+### Solely a channel level element
 
 Contains one of the following four values:
 1. `Ping`
@@ -84,7 +90,7 @@ requires. `Media` makes every commitment promised by the prior three levels, and
 
 If not specified, no commitment is made, the feed should be considered `Ping`.
 
-**Example:**
+#### Example:
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
 
@@ -106,18 +112,18 @@ If not specified, no commitment is made, the feed should be considered `Ping`.
 
 ---
 
-<a id="iffy-diff"></a>**Element &mdash; `iffy:diff`**
+## Element &mdash; `iffy:diff` <a id="iffy-diff"></a>
 
 <div class="iffy-element-desc">
 
-**When a subelement of [`iffy:update`](#iffy-update-history)**
+### When a subelement of [`iffy:update`](#iffy-update)
 
 MUST contain a URL, URI, or [IRI](https://datatracker.ietf.org/doc/html/rfc3987)
 of a human-reviewable a [_diff_](https://en.wikipedia.org/wiki/Diff) of the current
 updated and _the final minor revision_ of the update prior (or of the initially published post,
 if the current update is the first declared update).
 
-**Example**:
+#### Example:
 ```xml
 <iffy:diff>https://tech.interfluidity.com/xml/iffy/index-diff-394986cb8d9c57f567d324e691a44d50102101ce-to-13de0232319ceab2f830591c318089d18cbec78d.html</iffy:diff>
 ```
@@ -128,11 +134,11 @@ See also [`iffy:update-history` example](#iffy-update-history).
 
 ---
 
-<a id="iffy-hint-announce"></a>**Element &mdash; `iffy:hint-announce`**
+## Element &mdash; `iffy:hint-announce` <a id="iffy-hint-announce"></a>
 
 <div class="iffy-element-desc">
 
-**When a subelement of `item`**
+### When a subelement of `item`
 
 Represents a _hint_ to RSS consumers that "push" &mdash; announce, rebroadcast, or notify &mdash; items
 whether this item should be so pushed. Consumers are free to ignore this hint or make use of it as they wish.
@@ -154,7 +160,7 @@ and all `iffy:hint-announce` elements containing an `iffy:restriction` contain a
 application-specific contexts. If that is not the case, how applications prioritize or respond to conflicting `iffy-hint-announce` elements whose restrictions
 both apply must be determined by the application.
 
-**Example**:
+#### Example:
 ```xml
 <iffy:hint-announce>
   <iffy:policy>Piggyback</iffy:policy>
@@ -165,18 +171,31 @@ both apply must be determined by the application.
 
 ---
 
-<a id="iffy-initial"></a>**Element &mdash; `iffy:initial`**
+## Element &mdash; `iffy:initial` <a id="iffy-initial"></a>
 
 <div class="iffy-element-desc">
 
-**When a subelement of [`iffy:update-history`](#iffy-update-history)**
+In general, describes the initial state of the item referred to by the element that contains it.
 
-MAY contain a sequence of [`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
-elements, defining the initial authorship of an item, if authorship has changed. Since the containing `item` should always reflect
-current authorship (that of the most recent revision), but no [`iffy:update`](#iffy-update) element is defined
-for the initially published version, this container is required for completeness.
+MAY contain any or all of
 
-**Example**:
+* an [`atom:title`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.14) element, containing the initial title of the item, which may have since been revised.
+* an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.14) element, containing the initial link to the item, which may have since been revised.
+* an [`iffy:uid`](#iffy-uid) element, containing the [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) of the item that has been updated.
+* an [`atom:published`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.9) element containing the date-time of initial publication
+* a sequence of [`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator) elements, describing the initial authorship of an item, which may since have been revised.
+
+_**Note:** We define an [`iffy:uid`](#iffy-uid) element, rather than rely upon [`atom:id`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.6), because
+`atom:id` requires that its contents be an IRI, but we mean to impose no such restriction._
+
+### When a subelement of `item` > [`iffy:update-history`](#iffy-update-history)
+
+An `iffy:initial` MAY BE included under `item` > [`iffy:update-history`](#iffy-update-history), but is recommended ONLY IF the title, authorship, or link have changed.
+
+Since `item` > `guid` and `item` > `pubDate` never change, generators SHOULD NOT include these items under `item` > `iffy:update-history`.
+They are available directly in the containing item.
+
+#### Example:
 ```xml
 <iffy:initial>
   <!-- Perhaps more recent updates, and the current item, include more authors -->
@@ -184,18 +203,76 @@ for the initially published version, this container is required for completeness
 </iffy:initial>
 ```
 
+### When a subelement of `item` > [`iffy:synthetic`](#iffy-synthetic) > [`iffy:update`](#iffy-update) AND [`iffy:type`](#iffy-type) of the synthetic element is `UpdateAnnouncement`
+
+An `iffy:initial` MUST BE provided containing all of the analogous values defined in the `item` _whose update the announcement describes_.
+
+This information _would not be otherwise available_, because values in the parent `item` describe the _synthetic update announcement post_,
+rather than the post whose update is announced.
+
+* If an `item` > `title` is defined in the post that was updated, that MUST BE recorded as `atom:title`
+* If an `item` > `link` is defined in the post that was updated, that MUST BE recorded as `atom:link`
+* If an `item` > `guid` is defined in the post that was updated, that MUST BE recorded as `iffy:uid`
+* If an `item` > `pubDate` is defined in the post that was updated, that MUST BE recorded as `atom:published`
+* If an `item` > `dc:creator` is defined in the post that was updated, that MUST BE recorded as `dc:creator`
+  If, in the post that was updated, authorship was defined using `item` > `author` or `item` > `atom:author` those items should be converted into a form appropriate
+  for `dc:creator` elements.
+
+#### Example:
+```xml
+<item>
+  <pubDate>Thu, 20 Jun 2024 13:10:00 -0400</pubDate>
+  <guid isPermalink="true">
+    https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html
+  </guid>
+  <link>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html</link>
+  <title>Updated: Feedletter tutorial</title>
+  <!-- other item elements -->
+  <iffy:synthetic>
+    <iffy:type>UpdateAnnouncement</iffy:type>
+    <iffy:update>
+      <atom:updated>2024-06-20T17:10:00Z</atom:updated>
+      <!-- other iffy:updated elements -->
+      <iffy:initial>
+        <atom:title><![CDATA[Feedletter tutorial]]></atom:title>
+        <atom:link href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html"/>
+        <iffy:uid>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html</iffy:uid>
+        <atom:published>2024-01-29T15:30:00Z</atom:published>
+        <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      </iffy:initial>
+    </iffy:update>
+  </iffy:synthetic>
+  <dc:creator><![CDATA[Update-o-Bot]]></dc:creator>
+</item>
+```
+
+### When a subelement of `item` > [`iffy:synthetic`](#iffy-synthetic) > [`iffy:update-history`](#iffy-update-history) AND [`iffy:type`](#iffy-type) of the synthetic element is `UpdateCumulation` <a id="iffy-initial-update-cumulation"></a>
+
+An `iffy:initial` MUST BE provided containing all of the analogous values defined in the `item` _whose update the announcement describes_.
+
+This information _would not be otherwise available_, because values in the parent `item` describe the _synthetic update cumulation (summary) post_,
+rather than the post whose update history is documented.
+
+* If an `item` > `title` is defined in the post that was updated, that MUST BE recorded as `atom:title`
+* If an `item` > `link` is defined in the post that was updated, that MUST BE recorded as `atom:link`
+* If an `item` > `guid` is defined in the post that was updated, that MUST BE recorded as `iffy:uid`
+* If an `item` > `pubDate` is defined in the post that was updated, that MUST BE recorded as `atom:published`
+* If an `item` > `dc:creator` is defined in the post that was updated, that MUST BE recorded as `dc:creator`
+  If, in the post that was updated, authorship was defined using `item` > `author` or `item` > `atom:author` those items should be converted into a form appropriate
+  for `dc:creator` elements.
+
 </div>
 
 ---
 
-<a id="iffy-policy"></a>**Element &mdash; `iffy:policy`**
+## Element &mdash; `iffy:policy` <a id="iffy-policy"></a>
 
 <div class="iffy-element-desc">
 
 In general, represents a statement of some kind of policy with respect to its containing element,
 suggested to feed consumers for handling a feed or item.
 
-**When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)**
+### When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)
 
 Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
@@ -203,11 +280,11 @@ Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 ---
 
-<a id="iffy-provenance"></a>**Element &mdash; `iffy:provenance`**
+## Element &mdash; `iffy:provenance` <a id="iffy-provenance"></a>
 
 <div class="iffy-element-desc">
 
-**When an item level element**
+### When an `item` level element
 
 If present in an item, the item contains a sequence of one or more [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) elements,
 each of whose
@@ -228,7 +305,7 @@ the source for which no further provenance is known &mdash; will be the last [`a
 Processors may expect a channel level [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element with `rel="self"` and `type="application/rss+xml"` to
 use as the basis for provenance in source documents. See [RSS Best Practices](https://www.rssboard.org/rss-profile#namespace-elements-atom-link).
 
-**Example** (from [here](https://www.interfluidity.com/unify-rss/all-blogs.rss)):
+#### Example (from [here](https://www.interfluidity.com/unify-rss/all-blogs.rss)):
 ```xml
 <?xml version='1.0' encoding='UTF-8'?>
 
@@ -255,13 +332,13 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
 
 ---
 
-<a id="iffy-restriction"></a>**Element &mdash; `iffy:restriction`**
+## Element &mdash; `iffy:restriction` <a id="iffy-restriction"></a>
 
 <div class="iffy-element-desc">
 
-In general, represents an expressin of some kind of restriction over the application of its containing element.
+In general, represents an expression of some kind of restriction over the application of its containing element.
 
-**When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)**
+### When a subelement of [`iffy:hint-announce`](#iffy-hint-announce)
 
 Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
@@ -269,7 +346,7 @@ Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 ---
 
-<a id="iffy-revision"></a>**Element &mdash; `iffy:revision`**
+## Element &mdash; `iffy:revision` <a id="iffy-revision"></a>
 
 <div class="iffy-element-desc">
 
@@ -282,54 +359,35 @@ of an item.
 <iffy:revision>https://tech.interfluidity.com/xml/iffy/index-oldcommit-13de0232319ceab2f830591c318089d18cbec78d.html</iffy:revision>
 ```
 
-See also [`iffy:update-history` example](#iffy-update-history).
+See [`iffy:update-history` example](#iffy-update-history).
 
 </div>
 
 ---
 
-<a id="iffy-synthetic"></a>**Element &mdash; `iffy:synthetic`**
+## Element &mdash; `iffy:synthetic` <a id="iffy-synthetic"></a>
 
 <div class="iffy-element-desc">
 
-This element is intended to mark channels or items that are in some sense "synthetic", rather than, um, hand-made?
+This element marks channels or items that are in some sense automated or "synthetic".
 
-Can optionally contain an [`iffy-type`](#iffy-type), and other type-specific subelements.
+SHOULD contain an [`iffy-type`](#iffy-type), and then other type-specific subelements.
 
-**When a subelement of `channel`**
+### When a subelement of `channel`
 
-If _all the items_ in a feed are automatically rather than human generated (however you want to define that),
-`iffy:synthetic` can mark an entire channel as synthetic, bot-produced.
-
-Applications that include `iffy:synthetic` as a direct child of channel SHOULD NOT also mark individual `item`s as `iffy:synthetic`,
-unless there is some meaningful sense in which some items are _more_ synthetic than others. It serves no purpose to mark
-every item of a feed `iffy:synthetic` when the channel is already so marked.
+`channel` > `iffy:synthetic` implies that ALL of the items in the channel are synthetic or automatically produced.
+An aggregation or curation of human-authored items SHOULD NOT be marked `iffy:synthetic`.
 
 Known types:
 
 * `ItemUpdateFeed` &mdash; A synthetic feed announcing updates of a particular logical item from another feed.
 
-  Elements SHOULD also include an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) with `rel` attribute set to `related`, pointing to the same resource
-  as the `link` element of the item whose updates are being announced.
+### When a subelement of `channel` AND [`iffy:type`](#iffy-type) is `ItemUpdateFeed`
 
-**When a subelement of `item`**
+SHOULD include an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) with `rel` attribute set to `related`, pointing to the same resource
+as the `link` element of the item whose updates are being announced.
 
-Marks items as "synthetic", that is _more_ synthetic than other, unmarked items in the feed.
-
-Exactly what that means is not defined, but it should be _relative to the other items in the feed_.
-If every item in a feed is automatically generated &mdash; suppose a weather feed, announcing conditions on the hour &mdash;
-then those items should NOT be marked `iffy:synthetic`, because they are the usual for the feed.
-The `channel` as a whole might be marked `iffy:synthetic`.
-
-When `iffy:synthetic` is a subelement of `item`, it is intended to _distinguish_ more automatic from less automatically
-produced items. It serves no purpose if it is used to mark all items.
-
-Known types:
-
-* `UpdateAnnouncement` &mdash; A synethetic item marking an update of an older item in the feed
-  (or that once would have been in the feed)
-
-**Example &mdash; `channel > iffy:synthetic > iffy:type (ItemUpdateFeed)`**:
+#### Example:
 ```xml
   <channel>
     <!-- other channel elements -->
@@ -339,41 +397,89 @@ Known types:
     </iffy:synthetic>
   </channel>
 ```
+### When a subelement of `item`
 
-**Example &mdash; `item > iffy:synthetic > iffy:type (UpdateAnnouncement)`**:
+The `iffy:synthetic` element of an `item` SHOULD contain &mdash; in some form of parsable XML &mdash; all the data from which the item
+content (as reflected in `item` > `content:encoded` or `item` > `atom:content`) has been generated.
+
+Consumers may opt to ignore these content items, and use the data from `iffy:synthetic` for custom renderings or further processing.
+
+Known types:
+
+* `UpdateAnnouncement` &mdash; A synthetic item marking an update of an older item in the feed
+  (or that once would have been in the feed)
+* `UpdateCumulation` &mdash; A synthetic item describing an aggregation of updates, which may
+  include updates of multiple items, and multiple updates for each item.
+
+### When a subelement of `item` AND [`iffy:type`](#iffy-type) is `UpdateAnnouncement`
+
+In addition to `iffy:type`, MUST contain an [`iffy:update`](#iffy-update) element,
+which in turn MUST contain an [`iffy:initial`](#iffy-initial) element describing the initial state of the updated post.
+
+#### Example:
 ```xml
-  <item>
-    <!-- other item elements -->
-    <iffy:synthetic>
-      <iffy:type>UpdateAnnouncement</iffy:type>
-    </iffy:synthetic>
-  </item>
+<item>
+  <pubDate>Thu, 20 Jun 2024 13:10:00 -0400</pubDate>
+  <guid isPermalink="true">
+    https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html
+  </guid>
+  <link>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html</link>
+  <title>Updated: Feedletter tutorial</title>
+  <!-- other item elements -->
+  <iffy:synthetic>
+    <iffy:type>UpdateAnnouncement</iffy:type>
+    <iffy:update>
+      <atom:updated>2024-06-20T17:10:00Z</atom:updated>
+      <atom:summary>
+        <![CDATA[Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial.]]>
+      </atom:summary>
+      <iffy:revision>
+        https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
+      </iffy:revision>
+      <iffy:diff>
+        https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-current.html
+      </iffy:diff>
+      <iffy:initial>
+        <atom:title><![CDATA[Feedletter tutorial]]></atom:title>
+        <atom:link href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html"/>
+        <iffy:uid>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html</iffy:uid>
+        <atom:published>2024-01-29T15:30:00Z</atom:published>
+        <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      </iffy:initial>
+    </iffy:update>
+  </iffy:synthetic>
+  <dc:creator><![CDATA[Update-o-Bot]]></dc:creator>
+  <content:encoded><!-- generated HTML content --></content:encoded>
+</item>
 ```
-
 
 </div>
 
 ---
 
-<a id="iffy-type"></a>**Element &mdash; `iffy:type`**
+## Element &mdash; `iffy:type` <a id="iffy-type"></a>
 
 <div class="iffy-element-desc">
 
 In general, marks the "type" of its containing element.
 
-**When a subelement of `channel` > [`iffy:synthetic`](#iffy-synthetic)**
+### When a subelement of `channel` > [`iffy:synthetic`](#iffy-synthetic)
 
 Marks what kind of synthetic channel its parent is. Currently known values include
 
 * `ItemUpdateFeed` &mdash; A synthetic feed announcing updates of a particular logical
    item from another feed.
 
-**When a subelement of `item` > [`iffy:synthetic`](#iffy-synthetic)**
+### When a subelement of `item` > [`iffy:synthetic`](#iffy-synthetic)
 
 Marks what kind of synthetic item its parent is. Currently known values include
 
-* `UpdateAnnouncement` &mdash; A synethetic item marking an update of an older item in the feed
+* `UpdateAnnouncement` &mdash; A synthetic item marking an update of an older item in the feed
   (or that once would have been in the feed)
+
+* `UpdateCumulation` &mdash; A synthetic item describing an aggregation of updates, which may
+  include updates of multiple items, and multiple updates for each item.
+
 
 Please see known containing elements, including
 * [`iffy:synthetic`](#iffy-synthetic).
@@ -382,11 +488,35 @@ Please see known containing elements, including
 
 ---
 
-<a id="iffy-update"></a>**Element &mdash; `iffy:update`**
+## Element &mdash; `iffy:uid` <a id="iffy-uid"></a>
 
 <div class="iffy-element-desc">
 
-**When a sub-element of [`iffy:update-history`](#iffy-update-history)**
+Used to refer to the [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) of an `item` from a different item or construct.
+
+_**Note:** We define an [`iffy:uid`](#iffy-uid) element, rather than rely upon [`atom:id`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.6), because
+`atom:id` requires that its contents be an IRI, but we mean to impose no such restriction._
+
+Please see known containing elements, including
+* [`iffy:initial`](#iffy-initial).
+
+</div>
+
+---
+
+## Element &mdash; `iffy:update` <a id="iffy-update"></a>
+
+<div class="iffy-element-desc">
+
+In general, describes or announces updates to previously published items.
+
+**_Typo fixes, small rephrasings, and other tweaks are not expected to be recorded as distinct updates.
+That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded._**
+
+Applications that want a more forensic history might consider including and exposing every published
+change in version control.
+
+### When a sub-element of `item` > [`iffy:update-history`](#iffy-update-history)
 
 MUST contain one [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15) element.
 
@@ -395,33 +525,54 @@ MAY also contain one each of
 * [`iffy:diff`](#iffy-diff)
 * [`iffy:revision`](#iffy-revision)
 
-MAY, but usually will not, contain any number of
-[`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
-elements, reflecting _authorship specific to this revision_. By default, an
-update's authors are the same as the authorship of the containing item,
-which always reflects the curren revisions authors.
-If authorship is evolving over time, it SHOULD be specified for every update
-except the most recent one.
-Initial authorship may be specified in an [`iffy:initial`](#iffy-initial) element.
+MAY contain an [`atom:title`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.14) element, if the title has been revised since a previous version
 
-**_Typo fixes, small rephrasings, and other tweaks are not expected to be recorded as distinct updates.
-That is, within a "single update" there may be a sequence of smaller revisions that go unrecorded._**
-Applications that want a more forensic history might consider including and exposing every published
-change in version control.
+MAY contain any number of
+[`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
+elements, reflecting _authorship specific to this revision_.
+
+By default, an
+update's title and authors are the same the containing item,
+which always reflects the _current_ revisions authors.
+
+If the title changes, or authorship is evolving over time, these items should be specified in every update
+that alters them.
+
+The initial title and authorship SHOULD BE specified in an [`iffy:initial`](#iffy-initial) element if either have been revised.
 
 See [`iffy:update-history` example](#iffy-update-history).
+
+### When a sub-element of `item` > [`iffy:synthetic`](#iffy-synthetic) with [`iffy:type`](#iffy-type) `UpdateAnnouncement`
+
+MUST contain one [`atom:updated`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15) element.
+
+MUST contain an [`iffy:initial`](#iffy-initial) describing the initial state of the item updated.
+
+(Information in the containing `item` refers to the _update announcement_ rather than the post whose update is announced,
+so an [`iffy:initial`](#iffy-initial) element is necessary.
+
+MAY also contain one each of
+* [`atom:summary`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.13)
+* [`iffy:diff`](#iffy-diff)
+* [`iffy:revision`](#iffy-revision)
+
+MAY contain an [`atom:title`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.14) element, if the title has been revised since a previous version.
+
+MAY contain any number of
+[`dc:creator`](https://www.rssboard.org/rss-profile#namespace-elements-dublin-creator)
+elements, if authorship has been revised since a previous version..
 
 </div>
 
 ---
 
-<a id="iffy-update-history"></a>**Element &mdash; `iffy:update-history`**
+## Element &mdash; `iffy:update-history` <a id="iffy-update-history"></a>
 
 <div class="iffy-element-desc">
 
-**When an item level element**
+### When an `item` level element
 
-SHOULD contain a sequence of [`iffy:update`](#iffy-update) elements, in reverse chronological order, describing
+MUST contain a sequence of [`iffy:update`](#iffy-update) elements, in reverse chronological order, describing
 the histories of _major revisions_ to an item.
 
 MAY contain one [`iffy:initial`](#iffy-initial) element.
@@ -434,7 +585,7 @@ That is, within a "single update" there may be a sequence of smaller revisions t
 Applications that want a more forensic history might consider including and exposing every published
 change in version control.
 
-<a id="iffy-update-history-example"></a>**Example**:
+#### Example: <a id="iffy-item-update-history-example"></a>
 ```xml
 <item>
   <!-- Other item elements -->
@@ -486,5 +637,15 @@ change in version control.
   </iffy:update-history>
 </item>
 ```
+
+### When a sub-element of [`iffy:synthetic`](#iffy-synthetic) with [`iffy:type`](#iffy-type) `UpdateCumulation`
+
+MUST contain a sequence of [`iffy:update`](#iffy-update) elements, in reverse chronological order, describing
+a sequence of _major revisions_ to an item.
+
+MUST contain one [`iffy:initial`](#iffy-initial) element, which MUST include an `iffy:uid` element identifying
+and describing the `item` whose updates are documented.
+
+See [discussion under `iffy:initial`](#iffy-initial-update-cumulation)
 
 </div>
