@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html</link>
     <description><![CDATA[Updates to Neonix]]></description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 1 Jul 2024 14:42:23 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 16 Aug 2024 11:24:39 -0400</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
@@ -23,6 +23,41 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     </iffy:synthetic>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
+      <pubDate>Fri, 16 Aug 2024 11:20:00 -0400</pubDate>
+      <guid isPermalink="false">https://tech.interfluidity.com/2024/06/06/neonix/index-sprout-2024-08-16-11-20-00</guid>
+      <description>
+        <![CDATA[Update — 2024-08-16 @ 11:20 AM EDT
+
+Add update regarding new location of Bill Mill's "modern unix tool list"]]>
+      </description>
+      <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html#sprout-2024-06-06-15-35-00</link>
+      <title>[Latest Update] Neonix</title>
+      <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
+      <content:encoded>
+        <![CDATA[<p><b>Update — 2024-08-16 @ 11:20 AM EDT</b></p>
+
+<p>Add update regarding new location of Bill Mill's "modern unix tool list"</p>
+
+<ul>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-diff-758902715b5d838eb65acaac13ac5dcda53f5314-to-current.html">Diff from prior revision</a></li>
+</ul>]]>
+      </content:encoded>
+      <iffy:synthetic>
+        <iffy:type>UpdateAnnouncement</iffy:type>
+        <iffy:update>
+          <atom:updated>2024-08-16T15:20:00Z</atom:updated>
+          <atom:summary><![CDATA[Add update regarding new location of Bill Mill's "modern unix tool list"]]></atom:summary>
+          <iffy:revision>
+            https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-758902715b5d838eb65acaac13ac5dcda53f5314.html
+          </iffy:revision>
+          <iffy:diff>
+            https://tech.interfluidity.com/2024/06/06/neonix/index-diff-758902715b5d838eb65acaac13ac5dcda53f5314-to-current.html
+          </iffy:diff>
+        </iffy:update>
+      </iffy:synthetic>
+    </item>
+    <item>
       <pubDate>Thu, 6 Jun 2024 18:30:00 -0400</pubDate>
       <guid isPermalink="false">https://tech.interfluidity.com/2024/06/06/neonix/index-sprout-2024-06-06-18-30-00</guid>
       <description>
@@ -30,8 +65,10 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
 
 Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]>
       </description>
-      <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html#sprout-2024-06-06-15-35-00</link>
-      <title>[Latest Update] Neonix</title>
+      <link>
+        https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-758902715b5d838eb65acaac13ac5dcda53f5314.html
+      </link>
+      <title>[Update] Neonix</title>
       <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
         <![CDATA[<p><b>Update — 2024-06-06 @ 06:30 PM EDT</b></p>
@@ -39,8 +76,9 @@ Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]>
 <p>Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"</p>
 
 <ul>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-758902715b5d838eb65acaac13ac5dcda53f5314.html">This revision</a></li>
+<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-758902715b5d838eb65acaac13ac5dcda53f5314.html">Diff from prior revision</a></li>
 <li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index.html">Current, latest revision</a> <em>(may be newer than the revision announced here!)</em></li>
-<li><a href="https://tech.interfluidity.com/2024/06/06/neonix/index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-current.html">Diff from prior revision</a></li>
 </ul>]]>
       </content:encoded>
       <iffy:synthetic>
@@ -52,7 +90,7 @@ Add Kartik Agaram's pointer to Bill Mill's "modern unix tools"]]>
             https://tech.interfluidity.com/2024/06/06/neonix/index-oldcommit-711778c5fa4d93cd89e9421da6b8d9fb6e71a534.html
           </iffy:revision>
           <iffy:diff>
-            https://tech.interfluidity.com/2024/06/06/neonix/index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-current.html
+            https://tech.interfluidity.com/2024/06/06/neonix/index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-758902715b5d838eb65acaac13ac5dcda53f5314.html
           </iffy:diff>
         </iffy:update>
       </iffy:synthetic>

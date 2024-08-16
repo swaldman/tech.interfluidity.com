@@ -1,5 +1,6 @@
 > val updateHistory =
 >   UpdateRecord("2024-06-06T18:30:00-04:00", Some("""Add Kartik Agaram's pointer to Bill Mill's "modern unix tools""""), Some("711778c5fa4d93cd89e9421da6b8d9fb6e71a534")) ::
+>   UpdateRecord("2024-08-16T11:20:00-04:00", Some("""Add update regarding new location of Bill Mill's "modern unix tool list""""), Some("758902715b5d838eb65acaac13ac5dcda53f5314")) ::
 >   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -51,8 +52,10 @@ p.s. apparently there's a [DJ called Neonix](https://www.insomniac.com/music/art
 ---
 
 **Update 2024-06-06:** Kartik Agaram's [points](https://merveilles.town/@akkartik/112571589796019251) me
-to [Bill Mill's "modern unix tools" page](https://notes.billmill.org/link_blog/2023/10/modern_unix_tools.html).
+to <s>[Bill Mill's "modern unix tools" page](https://notes.billmill.org/link_blog/2023/10/modern_unix_tools.html).</s> (See below.)
 Which itself contains a link to a ["Modern Unix" collection by Ibraheem Ahmed](https://github.com/ibraheemdev/modern-unix).
 So much to play with!
+
+**Update 2024-08-16:** The current version of Bill Mill's "modern unix tool list" is now [here](https://notes.billmill.org/computer_usage/cli_tips_and_tools/modern_unix_tool_list.html).
 
 

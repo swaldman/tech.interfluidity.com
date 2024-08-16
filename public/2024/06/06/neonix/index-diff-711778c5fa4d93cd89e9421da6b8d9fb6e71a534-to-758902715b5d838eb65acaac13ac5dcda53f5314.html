@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Diff of /2024/06/06/neonix/index.html</title>
+    <style>
+      body { font-family: monospace; font-stretch: condensed; }
+      table { width: 100%; border-spacing: 0; }
+      th, td { margin: 0; font-size: 10pt; }
+      td { background-color: #eeeeee; border: 1px solid #cccccc; margin: 0; padding 3;}
+      tr.EQUAL td { background-color: #cccccc; }
+      th { background-color: black; color: white; }
+      tr.GAP td { text-align: center; background-color: #cccccc; color: black; font-weight: bold; font-size: 18pt; }
+      tr.GAP th { text-align: center; background-color: black; color: white; font-weight: bold; font-size: 18pt; }
+      span.DELETE { background-color: #ff7777; text-decoration: line-through;}
+      span.CHANGE { background-color: cyan; }
+      span.OLD.CHANGE { text-decoration: line-through; }
+      span.NEW.CHANGE { text-decoration: underline; text-decoration-style: double; }
+      span.INSERT { background-color: #77ff77; text-decoration: underline; text-decoration-style: double; }
+    </style>
+  </head>
+  <body>
+    <h1>Diff of /2024/06/06/neonix/index.html</h1>
+    <h2>Revision 711778c5fa4d93cd89e9421da6b8d9fb6e71a534 => 758902715b5d838eb65acaac13ac5dcda53f5314</h2>
+    <hr>
+<table class="diff">
+<tr><th>Line</th><th>711778c5fa4d93cd89e9421da6b8d9fb6e71a534</th><th>758902715b5d838eb65acaac13ac5dcda53f5314</th></tr>
+<tr class="EQUAL"><th class="lineno">1</th><td>&lt;!DOCTYPE html&gt;</td><td>&lt;!DOCTYPE html&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">2</th><td>&lt;html&gt;</td><td>&lt;html&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">3</th><td>  &lt;head&gt;</td><td>  &lt;head&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">4</th><td>    &lt;meta charset="utf-8"&gt;</td><td>    &lt;meta charset="utf-8"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">5</th><td>    &lt;meta name="description" content="tech notebook @ interfluidity"&gt;</td><td>    &lt;meta name="description" content="tech notebook @ interfluidity"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">6</th><td>    &lt;meta name="keywords" content="Scala, tech, interfluidity"&gt;</td><td>    &lt;meta name="keywords" content="Scala, tech, interfluidity"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">7</th><td>    &lt;meta name="author" content="Steve Randy Waldman"&gt;</td><td>    &lt;meta name="author" content="Steve Randy Waldman"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">8</th><td>    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</td><td>    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</td></tr>
+<tr class="INSERT"><th class="lineno">9</th><td></td><td><span class="NEW INSERT"></span></td></tr>
+<tr class="INSERT"><th class="lineno">10</th><td></td><td><span class="NEW INSERT">    &lt;!-- icons / favicons --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">11</th><td></td><td><span class="NEW INSERT"></span></td></tr>
+<tr class="INSERT"><th class="lineno">12</th><td></td><td><span class="NEW INSERT">    &lt;!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">13</th><td></td><td><span class="NEW INSERT">    &lt;!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">14</th><td></td><td><span class="NEW INSERT">    &lt;link rel="icon" type="image/png" sizes="500x500" href="../../../../icon/interfluidity-wave-blank-square-500x500.png"&gt; </span></td></tr>
+<tr class="INSERT"><th class="lineno">15</th><td></td><td><span class="NEW INSERT">    &lt;link rel="icon" type="image/png" sizes="32x32" href="../../../../icon/interfluidity-wave-blank-square-32x32.png"&gt;     &lt;!-- swaldman added, for standard favicon size --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">16</th><td></td><td><span class="NEW INSERT">    &lt;link rel="icon" type="image/png" sizes="16x16" href="../../../../icon/interfluidity-wave-blank-square-16x16.png"&gt;     &lt;!-- swaldman added, for standard favicon size --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">17</th><td></td><td><span class="NEW INSERT">    &lt;link rel="icon" type="image/png" href="../../../../icon/interfluidity-wave-blank-square-57x57.png"&gt;                   &lt;!-- swaldman added, for small icons by default --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">18</th><td></td><td><span class="NEW INSERT"></span></td></tr>
+<tr class="INSERT"><th class="lineno">19</th><td></td><td><span class="NEW INSERT">    &lt;!-- at bigger sizes, we overlay a bit of text --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">20</th><td></td><td><span class="NEW INSERT">    &lt;!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">21</th><td></td><td><span class="NEW INSERT">    &lt;!-- For Chrome for Android: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">22</th><td></td><td><span class="NEW INSERT">    &lt;link rel="icon" sizes="192x192" href="../../../../icon/interfluidity-wave-tech-192x192.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">23</th><td></td><td><span class="NEW INSERT">    &lt;!-- For iPhone 6 Plus with @3× display: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">24</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../../../icon/interfluidity-wave-tech-180x180.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">25</th><td></td><td><span class="NEW INSERT">    &lt;!-- For iPad with @2× display running iOS ≥ 7: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">26</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../icon/interfluidity-wave-tech-152x152.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">27</th><td></td><td><span class="NEW INSERT">    &lt;!-- For iPad with @2× display running iOS ≤ 6: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">28</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../icon/interfluidity-wave-tech-144x144.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">29</th><td></td><td><span class="NEW INSERT">    &lt;!-- For iPhone with @2× display running iOS ≥ 7: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">30</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../icon/interfluidity-wave-tech-120x120.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">31</th><td></td><td><span class="NEW INSERT">    &lt;!-- For iPhone with @2× display running iOS ≤ 6: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">32</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../icon/interfluidity-wave-tech-114x114.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">33</th><td></td><td><span class="NEW INSERT">    &lt;!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">34</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../../icon/interfluidity-wave-tech-76x76.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">35</th><td></td><td><span class="NEW INSERT">    &lt;!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">36</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../icon/interfluidity-wave-tech-72x72.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">37</th><td></td><td><span class="NEW INSERT">    &lt;!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">38</th><td></td><td><span class="NEW INSERT">    &lt;link rel="apple-touch-icon-precomposed" href="../../../../icon/interfluidity-wave-blank-square-57x57.png"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">39</th><td></td><td><span class="NEW INSERT"></span></td></tr>
+<tr class="INSERT"><th class="lineno">40</th><td></td><td><span class="NEW INSERT">    &lt;!-- end icons / favicons --&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">41</th><td></td><td><span class="NEW INSERT">    </span></td></tr>
+<tr class="EQUAL"><th class="lineno">42</th><td>    &lt;link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss"&gt;</td><td>    &lt;link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">43</th><td>    &lt;link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss"&gt;</td><td>    &lt;link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">44</th><td>    &lt;link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss"&gt;</td><td>    &lt;link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss"&gt;</td></tr>
+<tr class="GAP"><th class="lineno">&#8942;</th><td>&#8942;</td><td>&#8942;</td></tr>
+<tr class="EQUAL"><th class="lineno">83</th><td>  &lt;hr class="below-title"&gt;</td><td>  &lt;hr class="below-title"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">84</th><td> &lt;/div&gt;</td><td> &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">85</th><td> &lt;div class="update-prepend rss-description-exclude"&gt;</td><td> &lt;div class="update-prepend rss-description-exclude"&gt;</td></tr>
+<tr class="CHANGE"><th class="lineno">86</th><td>  &lt;em&gt; ➣&nbsp;&nbsp;This post <span class="OLD CHANGE">is</span> <span class="OLD CHANGE">expected</span> <span class="OLD CHANGE">to</span> <span class="OLD CHANGE">evolve</span> <span class="OLD CHANGE">over</span> <span class="OLD CHANGE">time</span>. <span class="OLD CHANGE">You</span> <span class="OLD CHANGE">can</span> <span class="OLD CHANGE">subscribe</span> <span class="OLD CHANGE">to</span> <span class="OLD CHANGE">ongoing</span> <span class="OLD CHANGE">updates</span> &lt;a href="index-<span class="OLD CHANGE">sprout</span>.<span class="OLD CHANGE">rss"&gt;here&lt;</span>/a&gt;. </td><td>  &lt;em&gt; ➣&nbsp;&nbsp;This post <span class="NEW CHANGE">was</span> <span class="NEW CHANGE">meaningfully</span> <span class="NEW CHANGE">revised</span> <span class="NEW CHANGE">at</span> <span class="NEW CHANGE">2024-06-06</span> <span class="NEW CHANGE">@ 06:30 PM EDT</span>. <span class="NEW CHANGE">The</span> <span class="NEW CHANGE">previous</span> <span class="NEW CHANGE">revision</span> <span class="NEW CHANGE">is</span> <span class="NEW CHANGE">&lt;a</span> <span class="NEW CHANGE">href="index-oldcommit-711778c5fa4d93cd89e9421da6b8d9fb6e71a534.html"&gt;here&lt;/a&gt;,</span> <span class="NEW INSERT">diff </span>&lt;a href="index-<span class="NEW CHANGE">diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-current</span>.<span class="NEW CHANGE">html"&gt;here&lt;</span>/a&gt;. <span class="NEW INSERT">(See &lt;a href="index.html#update-history"&gt;update history&lt;/a&gt;.) &lt;br&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">87</th><td></td><td><span class="NEW INSERT">    ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates &lt;a href="index-sprout.rss"&gt;here&lt;/a&gt;. </span></td></tr>
+<tr class="EQUAL"><th class="lineno">88</th><td>   &lt;link rel="alternate" type="application/rss+xml" title="Update to Neonix" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"&gt;&lt;/em&gt;</td><td>   &lt;link rel="alternate" type="application/rss+xml" title="Update to Neonix" href="https://tech.interfluidity.com/2024/06/06/neonix/index-sprout.rss"&gt;&lt;/em&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">89</th><td>  &lt;hr&gt;</td><td>  &lt;hr&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">90</th><td> &lt;/div&gt;</td><td> &lt;/div&gt;</td></tr>
+<tr class="GAP"><th class="lineno">&#8942;</th><td>&#8942;</td><td>&#8942;</td></tr>
+<tr class="EQUAL"><th class="lineno">109</th><td>   &lt;p&gt;I'll add more as I, um, &lt;code&gt;fd&lt;/code&gt; them!&lt;/p&gt;</td><td>   &lt;p&gt;I'll add more as I, um, &lt;code&gt;fd&lt;/code&gt; them!&lt;/p&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">110</th><td>   &lt;hr&gt;</td><td>   &lt;hr&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">111</th><td>   &lt;p&gt;p.s. apparently there's a &lt;a href="https://www.insomniac.com/music/artists/neonix/"&gt;DJ called Neonix&lt;/a&gt;! Sorry! I'm using the, er, neologism to refer to neo-UNIX.&lt;/p&gt;</td><td>   &lt;p&gt;p.s. apparently there's a &lt;a href="https://www.insomniac.com/music/artists/neonix/"&gt;DJ called Neonix&lt;/a&gt;! Sorry! I'm using the, er, neologism to refer to neo-UNIX.&lt;/p&gt;</td></tr>
+<tr class="INSERT"><th class="lineno">112</th><td></td><td><span class="NEW INSERT">   &lt;hr&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">113</th><td></td><td><span class="NEW INSERT">   &lt;p&gt;&lt;strong&gt;Update 2024-06-06:&lt;/strong&gt; Kartik Agaram's &lt;a href="https://merveilles.town/@akkartik/112571589796019251"&gt;points&lt;/a&gt; me to &lt;a href="https://notes.billmill.org/link_blog/2023/10/modern_unix_tools.html"&gt;Bill Mill's "modern unix tools" page&lt;/a&gt;. Which itself contains a link to a &lt;a href="https://github.com/ibraheemdev/modern-unix"&gt;"Modern Unix" collection by Ibraheem Ahmed&lt;/a&gt;. So much to play with!&lt;/p&gt;</span></td></tr>
+<tr class="EQUAL"><th class="lineno">114</th><td>  &lt;/div&gt;</td><td>  &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">115</th><td> &lt;/div&gt;</td><td> &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">116</th><td> &lt;div class="entry-footer"&gt;</td><td> &lt;div class="entry-footer"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">117</th><td>  &lt;div class="post-metainfo"&gt;</td><td>  &lt;div class="post-metainfo"&gt;</td></tr>
+<tr class="CHANGE"><th class="lineno">118</th><td>   <span class="OLD CHANGE">&lt;a</span> <span class="OLD CHANGE">href="index.html"&gt;03:35 PM EDT&lt;/a&gt;</span></td><td>   <span class="NEW CHANGE">&lt;div</span> <span class="NEW CHANGE">class="updated-note"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">119</th><td></td><td><span class="NEW INSERT">    &lt;a href="index.html#major-updates"&gt;Last major update at 2024-06-06 @ 06:30 PM EDT&lt;/a&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">120</th><td></td><td><span class="NEW INSERT">   &lt;/div&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">121</th><td></td><td><span class="NEW INSERT">   &lt;div&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">122</th><td></td><td><span class="NEW INSERT">    &lt;a href="index.html" class="pubtime"&gt;03:35 PM EDT&lt;/a&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">123</th><td></td><td><span class="NEW INSERT">   &lt;/div&gt;</span></td></tr>
+<tr class="EQUAL"><th class="lineno">124</th><td>  &lt;/div&gt;</td><td>  &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">125</th><td> &lt;/div&gt;</td><td> &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">126</th><td>&lt;/article&gt;</td><td>&lt;/article&gt;</td></tr>
+<tr class="GAP"><th class="lineno">&#8942;</th><td>&#8942;</td><td>&#8942;</td></tr>
+<tr class="EQUAL"><th class="lineno">133</th><td>   &lt;a href="../../../../index.html"&gt;↑↑↑&lt;/a&gt;</td><td>   &lt;a href="../../../../index.html"&gt;↑↑↑&lt;/a&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">134</th><td>  &lt;/div&gt;</td><td>  &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">135</th><td>  &lt;div class="next"&gt;</td><td>  &lt;div class="next"&gt;</td></tr>
+<tr class="INSERT"><th class="lineno">136</th><td></td><td><span class="NEW INSERT">   &lt;a href="../../08/should-blogs-adopt-the-itunescategory-rss-tag/index.html"&gt;Should blogs adopt the itunes:category RSS tag? →&lt;/a&gt;</span></td></tr>
+<tr class="EQUAL"><th class="lineno">137</th><td>  &lt;/div&gt;</td><td>  &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">138</th><td> &lt;/div&gt;</td><td> &lt;/div&gt;</td></tr>
+<tr class="INSERT"><th class="lineno">139</th><td></td><td><span class="NEW INSERT"> &lt;div id="update-history" class="update-history"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">140</th><td></td><td><span class="NEW INSERT">  &lt;h3 class="update-history-title"&gt;&lt;a id="major-updates" href=""&gt;&lt;/a&gt;Major revisions:&lt;/h3&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">141</th><td></td><td><span class="NEW INSERT">  &lt;ul&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">142</th><td></td><td><span class="NEW INSERT">   &lt;li&gt;&lt;span class="update-timestamp"&gt;&lt;i&gt;2024-06-06 @ 06:30 PM EDT&lt;/i&gt;&lt;/span&gt; — Add Kartik Agaram's pointer to Bill Mill's "modern unix tools" (&lt;a href="index-diff-711778c5fa4d93cd89e9421da6b8d9fb6e71a534-to-current.html"&gt;diff&lt;/a&gt;)&lt;/li&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">143</th><td></td><td><span class="NEW INSERT">   &lt;li&gt;&lt;span class="update-timestamp"&gt;&lt;i&gt; &lt;a href="index-oldcommit-711778c5fa4d93cd89e9421da6b8d9fb6e71a534.html"&gt;2024-06-06 @ 03:35 PM EDT&lt;/a&gt;&lt;/i&gt;&lt;/span&gt; — Initial publication.&lt;/li&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">144</th><td></td><td><span class="NEW INSERT">  &lt;/ul&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">145</th><td></td><td><span class="NEW INSERT">  &lt;div class="update-history-note"&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">146</th><td></td><td><span class="NEW INSERT">   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the &lt;a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/"&gt;git repository commit history&lt;/a&gt;. The most recent minor modification of this entry occurred 2024-06-06 @ 06:23 PM EDT.</span></td></tr>
+<tr class="INSERT"><th class="lineno">147</th><td></td><td><span class="NEW INSERT">  &lt;/div&gt;</span></td></tr>
+<tr class="INSERT"><th class="lineno">148</th><td></td><td><span class="NEW INSERT"> &lt;/div&gt;</span></td></tr>
+<tr class="EQUAL"><th class="lineno">149</th><td>&lt;/div&gt;&lt;!-- after-article --&gt;</td><td>&lt;/div&gt;&lt;!-- after-article --&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">150</th><td>      &lt;/div&gt;</td><td>      &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">151</th><td>      &lt;div id="right-sidebar"&gt;</td><td>      &lt;div id="right-sidebar"&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">152</th><td>      &lt;/div&gt;</td><td>      &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">153</th><td>    &lt;/div&gt;</td><td>    &lt;/div&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">154</th><td>  &lt;/body&gt;</td><td>  &lt;/body&gt;</td></tr>
+<tr class="EQUAL"><th class="lineno">155</th><td>&lt;/html&gt;</td><td>&lt;/html&gt;</td></tr>
+</table>
+
+  </body>
+</html>
