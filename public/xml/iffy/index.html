@@ -263,17 +263,27 @@
    <hr>
    <h2><a href="#element--iffyprovenance-" id="element--iffyprovenance-" name="element--iffyprovenance-" class="anchorlink"></a>Element — <code>iffy:provenance</code> <a id="iffy-provenance" href=""></a></h2>
    <div class="iffy-element-desc">
-    <h3><a href="#when-an-item-level-element" id="when-an-item-level-element" name="when-an-item-level-element" class="anchorlink"></a>When an <code>item</code> level element</h3>
-    <p>If present in an item, the item contains a sequence of one or more <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> elements, each of whose</p>
+    <p>In general, this element tracks the provenance of a feed or item. It can be at the <code>channel</code>-level or at the <code>item</code>-level. Also, <code>iffy:provenance</code> elements can be nested within <code>iffy:provenance</code> elements (see below).</p>
+    <h3><a href="#when-no-shape-attribute-is-set-or-shapesequence" id="when-no-shape-attribute-is-set-or-shapesequence" name="when-no-shape-attribute-is-set-or-shapesequence" class="anchorlink"></a>When no <code>shape</code> attribute is set, or <code>shape="sequence"</code></h3>
+    <p><code>iffy:provenance</code> elements of shape <code>sequence</code> (the default) contain</p>
     <ul>
-     <li><code>rel</code> attribute is MUST BE <code>via</code></li>
-     <li><code>href</code> attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn</li>
-     <li><code>type</code> attribute SHOULD BE <code>application/rss+xml</code></li>
+     <li>a sequence of one or more <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> elements, each of whose 
+      <ul>
+       <li><code>rel</code> attribute is MUST BE <code>via</code></li>
+       <li><code>href</code> attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn</li>
+       <li><code>type</code> attribute SHOULD BE <code>application/rss+xml</code></li>
+      </ul></li>
+     <li>optionally, a terminating <code>iffy:provenance</code> whose shape attribute is set to <code>merge</code></li>
     </ul>
-    <p>If the item from which the current item was sourced does not contain an <code>iffy:provenance</code>, then the current item should include just one <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a>.</p>
-    <p>If the item from which the current item was sourced <em>does</em> contains an <code>iffy:provenance</code>, then the current feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced PREPENDED.</p>
-    <p>This will ensure the most immediate source will be the first <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element. The origin — or at least the source for which no further provenance is known — will be the last <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element.</p>
-    <p>Processors may expect a channel level <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element with <code>rel="self"</code> and <code>type="application/rss+xml"</code> to use as the basis for provenance in source documents. See <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Best Practices</a>.</p>
+    <p>If the item or channel from which the current item or channel was sourced does not contain an <code>iffy:provenance</code>, then the current item should include just one <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a>.</p>
+    <p>If the item from which the current item was sourced <em>does</em> contains an <code>iffy:provenance</code>:</p>
+    <ul>
+     <li>
+      <p>If the contained <code>iffy:provenance</code> has no <code>shape</code> attribute set, or if <code>shape</code> is set to <code>sequence</code>, then the current feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced PREPENDED as an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a>. This will ensure the most immediate source will be the first <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element. The origin — or at least the source for which no further provenance is known — will be the last <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> or <code>iffy:provenance</code> subelement.</p></li>
+     <li>
+      <p>If the contained <code>iffy:provenance</code> has a <code>shape</code> attribute set to <code>merge</code>, then the full element should be included as a subelement, after an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> to its source.</p></li>
+    </ul>
+    <p>If one is present, processors SHOULD use a channel level <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> element with <code>rel="self"</code> and <code>type="application/rss+xml"</code> to as the basis for provenance in source documents. See <a href="https://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Best Practices</a>. However, if no such <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> is available at the <code>channel</code> level, processes may default to the URL by which they accessed the source.</p>
     <h4><a href="#example-from-here" id="example-from-here" name="example-from-here" class="anchorlink"></a>Example (from <a href="https://www.interfluidity.com/unify-rss/all-blogs.rss">here</a>):</h4>
     <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 
@@ -295,6 +305,12 @@
   &lt;/channel&gt;
 &lt;/rss&gt;
 </code></pre>
+    <h3><a href="#when-the-shape-attribute-is-set-to-merge" id="when-the-shape-attribute-is-set-to-merge" name="when-the-shape-attribute-is-set-to-merge" class="anchorlink"></a>When the <code>shape</code> attribute is set to <code>merge</code></h3>
+    <p><code>iffy:provenance</code> elements of shape <code>merge</code> describe an <code>item</code> or <code>channel</code> that has derived from multiple sources. When <code>shape="merge"</code>, the ordering of items within <code>iffy:provenance</code> is not significant.</p>
+    <p>Any <code>iffy:provenance</code> element of shape <code>merge</code> can contain any number of <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> and <code>iffy:provenance</code> of shape <code>sequence</code>, or with no <code>shape</code> attribute set.</p>
+    <p>When merging items or feeds whose provenance is itself the result of a merge, processors SHOULD bring what would become elements of a nested <code>iffy:provenance</code> with <code>shape="merge"</code> into the top-level merge.</p>
+    <p>In other words, <code>iffy:provenance</code> elements with shape <code>merge</code> should not be <strong>directly</strong> nested, one inside the other. Elements of the inner <code>iffy:provenance</code> with <code>shape="merge"</code> should be flattened into the outer <code>iffy:provenance</code> with <code>shape="merge"</code>.</p>
+    <p><code>iffy:provenance</code> elements with shape <code>merge</code> CAN and SHOULD be <strong>indirectly</strong> nested, when a merge brings in an <code>iffy:provenance</code> element of shape <code>sequence</code> (or no shape set), which then includes a nested <code>iffy:provenance</code> elements with shape <code>merge</code>.</p>
    </div>
    <hr>
    <h2><a href="#element--iffyrestriction-" id="element--iffyrestriction-" name="element--iffyrestriction-" class="anchorlink"></a>Element — <code>iffy:restriction</code> <a id="iffy-restriction" href=""></a></h2>
@@ -405,7 +421,7 @@
    <hr>
    <h2><a href="#element--iffyuid-" id="element--iffyuid-" name="element--iffyuid-" class="anchorlink"></a>Element — <code>iffy:uid</code> <a id="iffy-uid" href=""></a></h2>
    <div class="iffy-element-desc">
-    <p>Used to refer to the <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> of an <code>item</code> from a different item or construct.</p>
+    <p>Refers to the <a href="https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt"><code>guid</code></a> of an <code>item</code> from a different item or construct.</p>
     <p><em><strong>Note:</strong> We define an <a href="#iffy-uid"><code>iffy:uid</code></a> element, rather than rely upon <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.6"><code>atom:id</code></a>, because <code>atom:id</code> requires that its contents be an IRI, but we mean to impose no such restriction.</em></p>
     <p>Please see known containing elements, including</p>
     <ul>
@@ -448,7 +464,7 @@
    <hr>
    <h2><a href="#element--iffyupdate-history-" id="element--iffyupdate-history-" name="element--iffyupdate-history-" class="anchorlink"></a>Element — <code>iffy:update-history</code> <a id="iffy-update-history" href=""></a></h2>
    <div class="iffy-element-desc">
-    <h3><a href="#when-an-item-level-element-1" id="when-an-item-level-element-1" name="when-an-item-level-element-1" class="anchorlink"></a>When an <code>item</code> level element</h3>
+    <h3><a href="#when-an-item-level-element" id="when-an-item-level-element" name="when-an-item-level-element" class="anchorlink"></a>When an <code>item</code> level element</h3>
     <p>MUST contain a sequence of <a href="#iffy-update"><code>iffy:update</code></a> elements, in reverse chronological order, describing the histories of <em>major revisions</em> to an item.</p>
     <p>MAY contain one <a href="#iffy-initial"><code>iffy:initial</code></a> element.</p>
     <p>Items containing an <code>iffy:update-history</code> SHOULD also include an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.15"><code>atom:updated</code></a> tag corresponding to the most recent update.</p>
@@ -505,9 +521,7 @@
 &lt;/item&gt;
 </code></pre>
     <h3><a href="#when-a-sub-element-of-iffysynthetic-with-iffytype-updatecumulation" id="when-a-sub-element-of-iffysynthetic-with-iffytype-updatecumulation" name="when-a-sub-element-of-iffysynthetic-with-iffytype-updatecumulation" class="anchorlink"></a>When a sub-element of <a href="#iffy-synthetic"><code>iffy:synthetic</code></a> with <a href="#iffy-type"><code>iffy:type</code></a> <code>UpdateCumulation</code></h3>
-    <p>MUST contain a sequence of <a href="#iffy-update"><code>iffy:update</code></a> elements, in reverse chronological order, describing a sequence of <em>major revisions</em> to an item.</p>
-    <p>MUST contain one <a href="#iffy-initial"><code>iffy:initial</code></a> element, which MUST include an <code>iffy:uid</code> element identifying and describing the <code>item</code> whose updates are documented.</p>
-    <p>See <a href="#iffy-initial-update-cumulation">discussion under <code>iffy:initial</code></a></p>
+    <p>MUST contain a sequence of <a href="#iffy-update-history"><code>iffy:update-history</code></a> elements, each of which contains <a href="#iffy-update"><code>iffy:update</code></a> elements in reverse chronological order, describing a sequence of <em>major revisions</em> to an item, and MUST ALSO contain one <a href="#iffy-initial"><code>iffy:initial</code></a> element, which MUST include an <code>iffy:uid</code> element identifying and describing the <code>item</code> whose updates are documented. See <a href="#iffy-initial-update-cumulation">discussion under <code>iffy:initial</code></a></p>
    </div>
   </div>
  </div>
@@ -548,7 +562,7 @@
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html">2024-05-13 @ 04:10 AM EDT</a></i></span> — Initial publication.</li>
   </ul>
   <div class="update-history-note">
-   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2024-07-01 @ 02:39 PM EDT.
+   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2024-08-23 @ 02:53 PM EDT.
   </div>
  </div>
 </div><!-- after-article -->

@@ -10,10 +10,9 @@ import unstatic.*, UrlPath.*
 
 import java.nio.file.Path as JPath
 
-import java.time.ZoneId
+import java.time.{Instant,ZoneId}
 
 import untemplate.Untemplate.AnyUntemplate
-import java.time.Instant
 
 import SimpleBlog.SyntheticUpdateAnnouncementSpec
 

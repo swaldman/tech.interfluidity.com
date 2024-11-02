@@ -284,26 +284,34 @@ Please see [`iffy:hint-announce`](#iffy-hint-announce).
 
 <div class="iffy-element-desc">
 
-### When an `item` level element
+In general, this element tracks the provenance of a feed or item. It can be at the `channel`-level or at the `item`-level. Also, `iffy:provenance` elements can be nested within `iffy:provenance` elements (see below).
 
-If present in an item, the item contains a sequence of one or more [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) elements,
-each of whose
-* `rel` attribute is MUST BE `via`
-* `href` attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn
-* `type` attribute SHOULD BE `application/rss+xml`
+### When no `shape` attribute is set, or `shape="sequence"`
 
-If the item from which the current item was sourced does not contain an `iffy:provenance`, then the current
+`iffy:provenance` elements of shape `sequence` (the default) contain
+
+* a sequence of one or more [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) elements, each of whose
+  * `rel` attribute is MUST BE `via`
+  * `href` attribute MUST BE the URL of an RSS feed from which the base contents of this item were drawn
+  * `type` attribute SHOULD BE `application/rss+xml`
+* optionally, a terminating `iffy:provenance` whose shape attribute is set to `merge`  
+
+If the item or channel from which the current item or channel was sourced does not contain an `iffy:provenance`, then the current
 item should include just one [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7).
 
-If the item from which the current item was sourced _does_ contains an `iffy:provenance`, then the current
-feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced
-PREPENDED.
+If the item from which the current item was sourced _does_ contains an `iffy:provenance`:
 
-This will ensure the most immediate source will be the first [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element. The origin &mdash; or at least
-the source for which no further provenance is known &mdash; will be the last [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element.
+* If the contained `iffy:provenance` has no `shape` attribute set, or if `shape` is set to `sequence`, then the current
+  feed SHOULD include all items of that element, with the URL of the feed from which the item was sourced PREPENDED as an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7).
+  This will ensure the most immediate source will be the first [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element. The origin &mdash; or at least
+  the source for which no further provenance is known &mdash; will be the last [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) or `iffy:provenance` subelement.
 
-Processors may expect a channel level [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element with `rel="self"` and `type="application/rss+xml"` to
-use as the basis for provenance in source documents. See [RSS Best Practices](https://www.rssboard.org/rss-profile#namespace-elements-atom-link).
+* If the contained `iffy:provenance` has a `shape` attribute set to `merge`, then the full element should be included as a subelement, after an [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7)
+  to its source.
+
+If one is present, processors SHOULD use a channel level [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) element with `rel="self"` and `type="application/rss+xml"` to
+as the basis for provenance in source documents. See [RSS Best Practices](https://www.rssboard.org/rss-profile#namespace-elements-atom-link). However, if no such [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7)
+is available at the `channel` level, processes may default to the URL by which they accessed the source.
 
 #### Example (from [here](https://www.interfluidity.com/unify-rss/all-blogs.rss)):
 ```xml
@@ -327,6 +335,23 @@ use as the basis for provenance in source documents. See [RSS Best Practices](ht
   </channel>
 </rss>
 ```
+
+### When the `shape` attribute is set to `merge`
+
+`iffy:provenance` elements of shape `merge` describe an `item` or `channel` that has derived from multiple sources.
+When `shape="merge"`, the ordering of items within `iffy:provenance` is not significant.
+
+Any `iffy:provenance` element of shape `merge` can contain any number of [`atom:link`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7) and
+`iffy:provenance` of shape `sequence`, or with no `shape` attribute set.
+
+When merging items or feeds whose provenance is itself the result of a merge, processors SHOULD bring what would become elements of
+a nested `iffy:provenance` with `shape="merge"` into the top-level merge.
+
+In other words, `iffy:provenance` elements with shape `merge` should not be **directly** nested, one inside the other. Elements of the inner
+`iffy:provenance` with `shape="merge"` should be flattened into the outer `iffy:provenance` with `shape="merge"`.
+
+`iffy:provenance` elements with shape `merge` CAN and SHOULD be **indirectly** nested, when a merge brings in an `iffy:provenance` element
+of shape `sequence` (or no shape set), which then includes a nested `iffy:provenance` elements with shape `merge`.
 
 </div>
 
@@ -492,7 +517,7 @@ Please see known containing elements, including
 
 <div class="iffy-element-desc">
 
-Used to refer to the [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) of an `item` from a different item or construct.
+Refers to the [`guid`](https://www.rssboard.org/rss-specification#ltguidgtSubelementOfLtitemgt) of an `item` from a different item or construct.
 
 _**Note:** We define an [`iffy:uid`](#iffy-uid) element, rather than rely upon [`atom:id`](https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.6), because
 `atom:id` requires that its contents be an IRI, but we mean to impose no such restriction._
@@ -640,12 +665,8 @@ change in version control.
 
 ### When a sub-element of [`iffy:synthetic`](#iffy-synthetic) with [`iffy:type`](#iffy-type) `UpdateCumulation`
 
-MUST contain a sequence of [`iffy:update`](#iffy-update) elements, in reverse chronological order, describing
-a sequence of _major revisions_ to an item.
-
-MUST contain one [`iffy:initial`](#iffy-initial) element, which MUST include an `iffy:uid` element identifying
-and describing the `item` whose updates are documented.
-
-See [discussion under `iffy:initial`](#iffy-initial-update-cumulation)
+MUST contain a sequence of [`iffy:update-history`](#iffy-update-history) elements, each of which contains [`iffy:update`](#iffy-update) elements in reverse chronological order, describing
+a sequence of _major revisions_ to an item, and MUST ALSO contain one [`iffy:initial`](#iffy-initial) element, which MUST include an `iffy:uid` element identifying
+and describing the `item` whose updates are documented. See [discussion under `iffy:initial`](#iffy-initial-update-cumulation)
 
 </div>
