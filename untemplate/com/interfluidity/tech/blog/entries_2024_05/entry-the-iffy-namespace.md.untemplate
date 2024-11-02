@@ -1,5 +1,10 @@
 > val updateHistory =
 >    UpdateRecord(
+>      "2024-11-02T17:15:00-04:00",
+>      Some("Clarifications of iffy:provenance and iffy:update-history."),
+>      Some("34d8dab8f187c6d9512615dbb83c95395aa49a3b")
+>    ) ::
+>    UpdateRecord(
 >      "2024-07-01T14:40:00-04:00",
 >      Some("Major revision of <code>iffy:synthetic</code>, generalize <code>iffy:initial</code>, <code>iffy:update</code>, <code>iffy:update-history</code>, define <code>iffy:uid</code>."),
 >      Some("0df7787c056ab2b983e2de4d107c2fa477b7c8f4")
