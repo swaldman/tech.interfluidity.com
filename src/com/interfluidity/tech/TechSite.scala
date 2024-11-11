@@ -22,7 +22,19 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
   override val serverUrl : Abs    = Abs("https://tech.interfluidity.com/")
   override val basePath  : Rooted = Rooted.root
 
-  case class MainLayoutInput( renderLocation : SiteLocation, mainContentHtml : String, sourceUntemplates : immutable.Seq[AnyUntemplate] = immutable.Seq.empty )
+  case class SingleItemRssSpec( siteRooted : Rooted, title : Option[String] ):
+    def htmlLinkAlternateRelative( fromSiteRooted : Rooted ) =
+      val titlePart =
+        title match
+          case Some( t ) =>
+            val safeTitle = t.replaceAll("\"","&quot;").replaceAll(">","&gt;").replaceAll("<","&lt;")
+            s"""title="${safeTitle}" """
+          case None =>
+            " "
+      s"""<link rel="alternate" type="application/x-single-item-rss+xml" ${titlePart}href="${fromSiteRooted.relativizeSibling(siteRooted)}">"""
+    
+  case class MainLayoutInput( renderLocation : SiteLocation, mainContentHtml : String, sourceUntemplates : immutable.Seq[AnyUntemplate] = immutable.Seq.empty, singleItemRssSpec : Option[SingleItemRssSpec] = None )
+
 
   object MainBlog extends SimpleBlog:
     override type Site = TechSite.type
@@ -51,6 +63,8 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override val syntheticUpdateAnnouncementSpec : Option[SyntheticUpdateAnnouncementSpec] = Some( SyntheticUpdateAnnouncementSpec( "Update-o-Bot", Instant.parse("2024-06-19T10:15:30.00Z") ) )
 
+    override val generateSingleItemRss: Boolean = true
+
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
     // overriding a def, but it's just a constant, so we override with val
@@ -58,7 +72,13 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     // here the blog shares the sites main overall layout
     override def layoutPage(input: Layout.Input.Page): String =
-      val mainLayoutInput = MainLayoutInput( input.renderLocation, input.mainContentHtml, input.sourceEntries.map( _.entryUntemplate ) )
+      val singleItemRssSpec =
+        if input.sourceEntries.length == 1 then
+          val info = input.sourceEntries.head.entryInfo
+          info.singleItemRssSiteRooted.map( siteRooted => SingleItemRssSpec( siteRooted, info.mbTitle ) )
+        else
+          None
+      val mainLayoutInput = MainLayoutInput( input.renderLocation, input.mainContentHtml, input.sourceEntries.map( _.entryUntemplate ), singleItemRssSpec )
       layout_main_html(mainLayoutInput).text
 
     object Archive:
