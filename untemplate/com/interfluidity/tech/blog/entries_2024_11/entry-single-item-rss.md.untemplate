@@ -10,7 +10,7 @@
 > )
 
 val singleSiteRssLoc =
-  site.location( blog.singleItemRssSiteRootedFromPermalinkSiteRooted( input.info.permalinkPathSiteRooted ) )
+  input.site.location( blog.singleItemRssSiteRootedFromPermalinkSiteRooted( input.info.permalinkPathSiteRooted ) )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
 
