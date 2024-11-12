@@ -9,11 +9,14 @@
 >   //"Anchor"      -> ??? // a String
 > )
 
+val singleSiteRssLoc =
+  site.location( blog.singleItemRssSiteRootedFromPermalinkSiteRooted( input.info.permalinkPathSiteRooted ) )
+
 given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
 
-This blog now [generates](index.rss) single-item RSS alongside each blog post.
+This blog now [generates](<( singleSiteRssLoc.relative )>) single-item RSS alongside each blog post.
 
 This is in preparation for how I mean to support blog-to-blog comments, most directly.
 
@@ -62,7 +65,7 @@ Here's the link you'll find in the source of this post.
 
 The single-item RSS links back to the HTML as a matter of course, via the standard `<link>` element within the sole `<item>`.
 
-Check out [the single-item RSS for this post](index.rss)!
+Check out [the single-item RSS for this post](<( singleSiteRssLoc.relative )>)!
 
 ---
 
