@@ -85,7 +85,7 @@
  </div>
  <div class="entry-body">
   <div class="flexmark markdown">
-   <p>This blog now <a href="index.rss">generates</a> single-item RSS alongside each blog post.</p>
+   <p>This blog now <a href="2024/11/12/supporting-single-item-rss/index.rss">generates</a> single-item RSS alongside each blog post.</p>
    <p>This is in preparation for how I mean to support blog-to-blog comments, most directly.</p>
    <p>But in general it is offered as an alternative to approaches like <a href="https://microformats.org/">microformats</a>.</p>
    <p>Microformats exist and other people use them. I feel a bit bad not to adopt them. But my preference is to have meta-data more cleanly separated from displayed HTML, even if it is "<a href="https://microformats.org/wiki/posh">POSH</a>". It seems to me like too many concerns are mixed.</p>
@@ -106,7 +106,7 @@
    <pre><code class="language-html">&lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting single-item RSS" href="index.rss"&gt;
 </code></pre>
    <p>The single-item RSS links back to the HTML as a matter of course, via the standard <code>&lt;link&gt;</code> element within the sole <code>&lt;item&gt;</code>.</p>
-   <p>Check out <a href="index.rss">the single-item RSS for this post</a>!</p>
+   <p>Check out <a href="2024/11/12/supporting-single-item-rss/index.rss">the single-item RSS for this post</a>!</p>
    <hr>
    <div style="font-size: smaller">
     <p><strong>Note:</strong> If an <code>&lt;atom:link rel="self" /&gt;</code> tag is included in the <code>&lt;channel&gt;</code> element of a single-item RSS stream, the type should be the standard <code>type="application/rss+xml"</code>, <span style="color: red"> <strong>and definitely not</strong> </span> <code>application/x-single-item-rss+xml</code>. (I recommend <code>&lt;atom:link rel="self" /&gt;</code> <em>always</em> be included in the <code>&lt;channel&gt;</code> of an RSS stream, whenever there exists a stable link to the stream.) Single-item RSS is just standard RSS for all purposes other than a feed-reader deciding whether to treat a feed as subscribable.</p>
