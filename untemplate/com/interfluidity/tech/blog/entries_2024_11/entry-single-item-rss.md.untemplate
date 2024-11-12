@@ -1,0 +1,85 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Supporting single-item RSS",
+>   "PubDate"       -> "2024-11-12T06:30:00-05:00",
+>   "UpdateHistory" -> updateHistory,
+>   //"Anchor"      -> ??? // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+This blog now [generates](index.rss) single-item RSS alongside each blog post.
+
+This is in preparation for how I mean to support blog-to-blog comments, most directly.
+
+But in general it is offered as an alternative to approaches like [microformats](https://microformats.org/).
+
+Microformats exist and other people use them. I feel a bit bad not to adopt them.
+But my preference is to have meta-data more cleanly separated from displayed HTML, even if it is "[POSH](https://microformats.org/wiki/posh)".
+It seems to me like too many concerns are mixed.
+
+If microformats were very widely adopted &mdash; particularly if the JVM ecosystem already had well-supported,
+widely used microformats parsers &mdash; I might swallow my own preference and run with them. But I don't think that's
+the case. I'm going to have to do my own parsing, and I have good tools for that with XML and RSS.
+
+[`unstatic`](https://github.com/swaldman/unstatic) `SimpleBlog` instances now support generating single-item RSS.
+Just override
+
+```scala
+val generateSingleItemRss : Boolean
+```
+
+to `true`, and they will appear.
+
+By default, each entry's single-item RSS is placed
+by converting each `whatever.html` to `whatever.rss`, under the same path. (If the leaf of the path does not
+end with `.html`, then `.rss` is simply appended to the full path.)
+
+If you prefer a different scheme, you can override
+
+```scala
+def singleItemRssSiteRootedFromPermalinkSiteRooted( permalinkSiteRooted : Rooted ) : Rooted
+```
+where `Rooted` is a [`unstantic.UrlPath.Rooted`](https://github.com/swaldman/unstatic/blob/main/src/unstatic/UrlPath.scala).
+
+Single-item RSS and the HTML "permalink" for the item should mutually refer to one another.
+
+In the HTML header tag, we add a `<link>` tag with `rel="alternate"` to point to the single-item RSS.
+
+We *don't*
+want feed readers to subscribe to single-item RSS, so, a bit clumsily, we make up a special content type that feed readers won't recognize, `application/x-single-item-rss+xml`.
+
+Here's the link you'll find in the source of this post.
+
+```html
+<link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting single-item RSS" href="index.rss">
+```
+
+The single-item RSS links back to the HTML as a matter of course, via the standard `<link>` element within the sole `<item>`.
+
+Check out [the single-item RSS for this post](index.rss)!
+
+---
+
+<div style="font-size: smaller">
+
+**Note:** If an `<atom:link rel="self" />` tag is included in the `<channel>` element of a single-item RSS stream,
+the type should be the standard `type="application/rss+xml"`, <span style="color: red"> **and definitely not** </span> `application/x-single-item-rss+xml`.
+(I recommend `<atom:link rel="self" />` *always* be included in the `<channel>` of an RSS stream, whenever there exists a stable link to the stream.)
+Single-item RSS is just standard RSS for all purposes other than a feed-reader deciding whether to treat a feed as subscribable.
+
+
+</div>
+
+
+
+
+
+
+
+

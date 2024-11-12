@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="../../../../icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="../../../../icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../../../icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../../icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+    
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting single-item RSS" href="index.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Supporting single-item RSS</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-11-12 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">Supporting single-item RSS</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>This blog now <a href="index.rss">generates</a> single-item RSS alongside each blog post.</p>
+   <p>This is in preparation for how I mean to support blog-to-blog comments, most directly.</p>
+   <p>But in general it is offered as an alternative to approaches like <a href="https://microformats.org/">microformats</a>.</p>
+   <p>Microformats exist and other people use them. I feel a bit bad not to adopt them. But my preference is to have meta-data more cleanly separated from displayed HTML, even if it is "<a href="https://microformats.org/wiki/posh">POSH</a>". It seems to me like too many concerns are mixed.</p>
+   <p>If microformats were very widely adopted — particularly if the JVM ecosystem already had well-supported, widely used microformats parsers — I might swallow my own preference and run with them. But I don't think that's the case. I'm going to have to do my own parsing, and I have good tools for that with XML and RSS.</p>
+   <p><a href="https://github.com/swaldman/unstatic"><code>unstatic</code></a> <code>SimpleBlog</code> instances now support generating single-item RSS. Just override</p>
+   <pre><code class="language-scala">val generateSingleItemRss : Boolean
+</code></pre>
+   <p>to <code>true</code>, and they will appear.</p>
+   <p>By default, each entry's single-item RSS is placed by converting each <code>whatever.html</code> to <code>whatever.rss</code>, under the same path. (If the leaf of the path does not end with <code>.html</code>, then <code>.rss</code> is simply appended to the full path.)</p>
+   <p>If you prefer a different scheme, you can override</p>
+   <pre><code class="language-scala">def singleItemRssSiteRootedFromPermalinkSiteRooted( permalinkSiteRooted : Rooted ) : Rooted
+</code></pre>
+   <p>where <code>Rooted</code> is a <a href="https://github.com/swaldman/unstatic/blob/main/src/unstatic/UrlPath.scala"><code>unstantic.UrlPath.Rooted</code></a>.</p>
+   <p>Single-item RSS and the HTML "permalink" for the item should mutually refer to one another.</p>
+   <p>In the HTML header tag, we add a <code>&lt;link&gt;</code> tag with <code>rel="alternate"</code> to point to the single-item RSS.</p>
+   <p>We <em>don't</em> want feed readers to subscribe to single-item RSS, so, a bit clumsily, we make up a special content type that feed readers won't recognize, <code>application/x-single-item-rss+xml</code>.</p>
+   <p>Here's the link you'll find in the source of this post.</p>
+   <pre><code class="language-html">&lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting single-item RSS" href="index.rss"&gt;
+</code></pre>
+   <p>The single-item RSS links back to the HTML as a matter of course, via the standard <code>&lt;link&gt;</code> element within the sole <code>&lt;item&gt;</code>.</p>
+   <p>Check out <a href="index.rss">the single-item RSS for this post</a>!</p>
+   <hr>
+   <div style="font-size: smaller">
+    <p><strong>Note:</strong> If an <code>&lt;atom:link rel="self" /&gt;</code> tag is included in the <code>&lt;channel&gt;</code> element of a single-item RSS stream, the type should be the standard <code>type="application/rss+xml"</code>, <span style="color: red"> <strong>and definitely not</strong> </span> <code>application/x-single-item-rss+xml</code>. (I recommend <code>&lt;atom:link rel="self" /&gt;</code> <em>always</em> be included in the <code>&lt;channel&gt;</code> of an RSS stream, whenever there exists a stable link to the stream.) Single-item RSS is just standard RSS for all purposes other than a feed-reader deciding whether to treat a feed as subscribable.</p>
+   </div>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="index.html" class="pubtime">06:30 AM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../../../xml/iffy/index-updated-2024-11-02-17-15-00.html">← Updated: The 'iffy' XML namespace</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>
