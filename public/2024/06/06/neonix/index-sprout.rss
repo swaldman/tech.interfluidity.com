@@ -6,7 +6,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <link>https://tech.interfluidity.com/2024/06/06/neonix/index.html</link>
     <description><![CDATA[Updates to Neonix]]></description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 12 Nov 2024 06:45:18 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 15 Nov 2024 01:10:26 -0500</lastBuildDate>
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
@@ -21,6 +21,9 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
         <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       </iffy:initial>
     </iffy:synthetic>
+    <iffy:curation>
+      <iffy:all/>
+    </iffy:curation>
     <iffy:completeness>Metadata</iffy:completeness>
     <item>
       <pubDate>Fri, 16 Aug 2024 11:20:00 -0400</pubDate>

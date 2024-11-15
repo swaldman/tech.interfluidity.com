@@ -10,31 +10,31 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
-    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-updated-2024-06-20-11-05-00.rss"/>
+    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/xml/iffy/index-updated-2024-11-15-01-10-00.rss"/>
     <iffy:curation>
       <iffy:single/>
     </iffy:curation>
     <iffy:completeness>Content</iffy:completeness>
     <item>
-      <pubDate>Thu, 20 Jun 2024 11:05:00 -0400</pubDate>
-      <guid isPermalink="true">https://tech.interfluidity.com/xml/iffy/index-updated-2024-06-20-11-05-00.html</guid>
+      <pubDate>Fri, 15 Nov 2024 01:10:00 -0500</pubDate>
+      <guid isPermalink="true">https://tech.interfluidity.com/xml/iffy/index-updated-2024-11-15-01-10-00.html</guid>
       <description>
-        <![CDATA[A significant update of The 'iffy' XML namespace was made on 2024-06-20 @ 11:05 AM EDT. → Document iffy:type, update documentation of iffy:synthetic as optionally including iffy:type. The post was originally published 2024-05-13 @ 04:10 AM EDT. This is an automatically generated post. by Update-o-Bot on 2024-06-20 @ 11:05 AM...]]>
+        <![CDATA[A significant update of The 'iffy' XML namespace was made on 2024-11-15 @ 01:10 AM EST. → Document iffy:curation, and curation type elements iffy:all, iffy:recent, iffy:selection, iffy:single. The post was originally published 2024-05-13 @ 04:10 AM EDT. This is an automatically generated post. by Update-o-Bot on 2024-11-15 @ 01:10 AM...]]>
       </description>
-      <link>https://tech.interfluidity.com/xml/iffy/index-updated-2024-06-20-11-05-00.html</link>
+      <link>https://tech.interfluidity.com/xml/iffy/index-updated-2024-11-15-01-10-00.html</link>
       <title>Updated: The 'iffy' XML namespace</title>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
         <iffy:update>
-          <atom:updated>2024-06-20T15:05:00Z</atom:updated>
+          <atom:updated>2024-11-15T06:10:00Z</atom:updated>
           <atom:summary>
-            <![CDATA[Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>.]]>
+            <![CDATA[Document <code>iffy:curation</code>, and curation type elements <code>iffy:all</code>, <code>iffy:recent</code>, <code>iffy:selection</code>, <code>iffy:single</code>.]]>
           </atom:summary>
           <iffy:revision>
-            https://tech.interfluidity.com/xml/iffy/index-oldcommit-f19e4870e2c719f71d2f5024cb3e2e8f477622dc.html
+            https://tech.interfluidity.com/xml/iffy/index-oldcommit-5fcd99373d2d940a0c6e1468979be59e2d6bcced.html
           </iffy:revision>
           <iffy:diff>
-            https://tech.interfluidity.com/xml/iffy/index-diff-f19e4870e2c719f71d2f5024cb3e2e8f477622dc-to-0df7787c056ab2b983e2de4d107c2fa477b7c8f4.html
+            https://tech.interfluidity.com/xml/iffy/index-diff-5fcd99373d2d940a0c6e1468979be59e2d6bcced-to-current.html
           </iffy:diff>
           <iffy:initial>
             <atom:title><![CDATA[The 'iffy' XML namespace]]></atom:title>
@@ -54,9 +54,9 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
  <div class="entry-header">
  </div>
  <div class="entry-body">
-  <p>A significant update of <a href="https://tech.interfluidity.com/xml/iffy/index.html"><i>The 'iffy' XML namespace</i></a> was made on 2024-06-20 @ 11:05 AM EDT.</p>
+  <p>A significant update of <a href="https://tech.interfluidity.com/xml/iffy/index.html"><i>The 'iffy' XML namespace</i></a> was made on 2024-11-15 @ 01:10 AM EST.</p>
   <blockquote>
-   → Document <code>iffy:type</code>, update documentation of <code>iffy:synthetic</code> as optionally including <code>iffy:type</code>.
+   → Document <code>iffy:curation</code>, and curation type elements <code>iffy:all</code>, <code>iffy:recent</code>, <code>iffy:selection</code>, <code>iffy:single</code>.
   </blockquote>
   <p>The post was originally published 2024-05-13 @ 04:10 AM EDT.</p>
  </div>
@@ -67,7 +67,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <em>This is an automatically generated post.</em>
    </div>
    <div>
-    by Update-o-Bot on 2024-06-20 @ <a href="https://tech.interfluidity.com/xml/iffy/index-updated-2024-06-20-11-05-00.html" class="pubtime">11:05 AM EDT</a>
+    by Update-o-Bot on 2024-11-15 @ <a href="https://tech.interfluidity.com/xml/iffy/index-updated-2024-11-15-01-10-00.html" class="pubtime">01:10 AM EST</a>
    </div>
   </div>
  </div>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="../../icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="../../icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="../../icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="../../icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="../../icon/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+    
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Updated: The 'iffy' XML namespace" href="index-updated-2024-11-15-01-10-00.rss">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Updated: The 'iffy' XML namespace</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../index.html">top</a>, <a href="../../archive.html">archive</a>, <a href="../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2024-11-15 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single synthetic">
+ <div class="entry-header">
+  <h1><a href="index-updated-2024-11-15-01-10-00.html">Updated: The 'iffy' XML namespace</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <p>A significant update of <a href="index.html"><i>The 'iffy' XML namespace</i></a> was made on 2024-11-15 @ 01:10 AM EST.</p>
+  <blockquote>
+   → Document <code>iffy:curation</code>, and curation type elements <code>iffy:all</code>, <code>iffy:recent</code>, <code>iffy:selection</code>, <code>iffy:single</code>.
+  </blockquote>
+  <p>The post was originally published 2024-05-13 @ 04:10 AM EDT.</p>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div class="synthetic-note">
+    <em>This is an automatically generated post.</em>
+   </div>
+   <div>
+    <a href="index-updated-2024-11-15-01-10-00.html" class="pubtime">01:10 AM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../2024/11/12/supporting-single-item-rss/index.html">← Supporting single-item RSS</a>
+  </div>
+  <div class="top">
+   <a href="../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

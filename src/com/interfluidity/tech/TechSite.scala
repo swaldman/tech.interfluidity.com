@@ -10,7 +10,7 @@ import unstatic.*, UrlPath.*
 
 import java.nio.file.Path as JPath
 
-import java.time.{Instant,ZoneId}
+import java.time.{Duration,Instant,ZoneId}
 
 import untemplate.Untemplate.AnyUntemplate
 
@@ -44,6 +44,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
     override val frontPage = site.location("/index.html")
     override val frontPageIdentifiers = super.frontPageIdentifiers ++ immutable.Set("home","home-page") // since we are using the blog as home
     override val maxFrontPageEntries = Some(10)
+    // override val feedEntriesWithinLast = Some( Duration.ofDays(90) ) // we just want to limit to last n, by default same as maxFrontPageEntries
     override val timeZone = ZoneId.of("America/New_York")
     override def entryUntemplates =
       IndexFilter.fromIndex( IndexedUntemplates )
