@@ -202,7 +202,7 @@ The next thing I should have done was...
 ```
 
 It prompts for a bunch of stuff, like certificate paths. It prompts whether you want to support
-dial-in participates, by making an account on their hosted Jitsu-as-a-service. I said no.
+dial-in participants, by making an account on their hosted Jitsu-as-a-service. I said no.
 It prints the following banner in case I change my mind:
 
 ```plaintext
