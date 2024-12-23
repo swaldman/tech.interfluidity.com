@@ -1,5 +1,10 @@
 > val updateHistory =
 >    UpdateRecord(
+>      "2024-12-22T10:40:00-05:00",
+>      Some("Document <code>iffy:item-ref</code> and <code>iffy:in-reply-to</code>."),
+>      Some("c1c3071b0ac3127c2969b24e26d439510fdc8c96")
+>    ) ::
+>    UpdateRecord(
 >      "2024-11-15T01:10:00-05:00",
 >      Some("Document <code>iffy:curation</code>, and curation type elements <code>iffy:all</code>, <code>iffy:recent</code>, <code>iffy:selection</code>, <code>iffy:single</code>."),
 >      Some("5fcd99373d2d940a0c6e1468979be59e2d6bcced")
@@ -55,7 +60,9 @@ The conventional prefix associated with this namespace will be `iffy`.
 * [`iffy:curation`](#iffy-curation)
 * [`iffy:diff`](#iffy-diff)
 * [`iffy:hint-announce`](#iffy-hint-announce)
+* [`iffy:in-reply-to`](#iffy-in-reply-to)
 * [`iffy:initial`](#iffy-initial)
+* [`iffy:item-ref`](#iffy-item-ref)
 * [`iffy:policy`](#iffy-policy)
 * [`iffy:provenance`](#iffy-provenance)
 * [`iffy:recent`](#iffy-recent)
@@ -259,6 +266,25 @@ both apply must be determined by the application.
 
 ---
 
+## Element &mdash; `iffy:in-reply-to` <a id="iffy-in-reply-to"></a>
+
+<div class="iffy-element-desc">
+
+### When a subelement of `item`
+
+Marks an item as a reply to some other `item`, which may be published anywhere. Contains one [`iffy:item-ref`](#iffy-item-ref).
+
+#### Example:
+```xml
+<iffy:in-reply-to>
+  <iffy:item-ref href="https://tech.interfluidity.com/feed/index.rss" type="application/rss+xml" guid="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.html" />
+</iffy:in-reply-to>
+```
+
+</div>
+
+---
+
 ## Element &mdash; `iffy:initial` <a id="iffy-initial"></a>
 
 <div class="iffy-element-desc">
@@ -348,6 +374,69 @@ rather than the post whose update history is documented.
 * If an `item` > `dc:creator` is defined in the post that was updated, that MUST BE recorded as `dc:creator`
   If, in the post that was updated, authorship was defined using `item` > `author` or `item` > `atom:author` those items should be converted into a form appropriate
   for `dc:creator` elements.
+
+</div>
+
+---
+
+## Element &mdash; `iffy:item-ref` <a id="iffy-item-ref"></a>
+
+<div class="iffy-element-desc">
+
+Represents a reference to an RSS `item` in RSS data available elsewhere.
+
+`iffy:item-ref` SHOULD be an empty XML element, given meaning by its attributes.
+
+* An `iffy:item-ref` MUST contain an `href` attribute, which points to a source of RSS data or to an HTML document
+  that refers to RSS data in an HTML `link` element.
+
+* An `iffy:item-ref` SHOULD contain a `type` attribute. The type should either be `text/html` or `application/*rss+xml` where the `*` may refer to
+  the empty string (so just `application/rss+xml`) or a prefix, [like](##supporting-single-item-rss) `application/x-single-item-rss+xml`. (If a type attribute
+  is missing, a consumer MAY try to examine the contents at `href` and do the right thing.)
+
+* An `iffy:item-ref` MUST contain a `guid` attribute UNLESS the `href` refers to [single-item RSS](##supporting-single-item-rss).
+
+To resolve an `iffy:item-ref` consumers should:
+
+1. Check the `type` attribute, or if missing, check the contents referred to by the `href`, to see whether the referent is an HTML or an RSS document.
+
+2. If the referent is an RSS document and the `iffy:item-ref` includes a `guid` attribute, the `item-ref` refers to the RSS `item` element containing
+   a `guid` element whose contents matched the `iffy:item-ref`'s `guid` attribute.
+
+3. If the referent is an RSS document and the `iffy:item-ref` does NOT include a `guid` attribute, then the `item-ref` refers to the single RSS item
+   in the document. If there is more than one RSS `item`, the resolution fails.
+
+4. If the referent is an HTML document and the `iffy:item-ref` contains a `guid` attribute, the consumer must gather all HTML `link` elements with `rel="alternative"` and `type="application/*rss+xml`
+   where the `*` may refer to the empty string (so just `application/rss+xml`) or a prefix, [like](##supporting-single-item-rss) `application/x-single-item-rss+xml`.
+   The consumer tries `link` elements whose `type` attribute is an exact match to the `iffy:item-ref`'s `type` attribute first, in the order they appear in the HTML file,
+   and then other `link` elements with `type="application/*rss+xml`, in the order they appear. For each `link` tried, if the 
+   linked RSS contains that an RSS `item` with the `item-ref`'s specified `guid`, then the `item-ref` refers to that `item` and the resolution process terminates immediately.
+
+5. If the referent is an HTML document and the `iffy:item-ref` DOES NOT contain a `guid` attribute, the consumer must search for an HTML `link` element whose `rel="alternative"`
+   and whose `type="application/x-single-item-rss+xml"`. If there are no or multiple `link` elements so specified, resoluton fails. If there is a unique
+   `<link rel="alternative" type="application/x-single-item-rss+xml" href="...">`, and its referent contains RSS data with a single `item` attribute, the `iffy:item-ref`
+   successfully resolves to that attribute.
+
+#### Example (single-item RSS):
+```xml
+<iffy:item-ref href="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.rss" type="application/x-single-item-rss+xml" />
+```
+
+#### Example (RSS, by guid):
+```xml
+<iffy:item-ref href="https://tech.interfluidity.com/feed/index.rss" type="application/rss+xml" guid="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.html" />
+```
+
+#### Example (HTML, search for single-item RSS):
+```xml
+<iffy:item-ref href="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.html" type="text/html" />
+```
+
+#### Example (HTML, search all feeds for guid):
+```xml
+<!-- here the item guid is also the permalink, that is the href. but that needn't always be the case! -->
+<iffy:item-ref href="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.html" type="text/html" guid="https://tech.interfluidity.com/2024/11/12/supporting-single-item-rss/index.html" />
+```
 
 </div>
 
