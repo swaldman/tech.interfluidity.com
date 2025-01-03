@@ -64,7 +64,9 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
 
     override val syntheticUpdateAnnouncementSpec : Option[SyntheticUpdateAnnouncementSpec] = Some( SyntheticUpdateAnnouncementSpec( "Update-o-Bot", Instant.parse("2024-06-19T10:15:30.00Z") ) )
 
-    override val generateSingleItemRss: Boolean = true
+    override val generateSingleItemRss : Boolean = true
+
+    override val allItemFeedSiteRooted : Option[Rooted] = Some(Rooted("/all-item-feed/index.rss"))
 
     override def layoutEntry(input: Layout.Input.Entry) : String = blog.layout_entry_html(input).text
 
