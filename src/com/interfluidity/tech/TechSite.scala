@@ -22,19 +22,7 @@ object TechSite extends ZTSite.SingleStaticRootComposite( JPath.of("static") ):
   override val serverUrl : Abs    = Abs("https://tech.interfluidity.com/")
   override val basePath  : Rooted = Rooted.root
 
-  case class SingleItemRssSpec( siteRooted : Rooted, title : Option[String] ):
-    def htmlLinkAlternateRelative( fromSiteRooted : Rooted ) =
-      val titlePart =
-        title match
-          case Some( t ) =>
-            val safeTitle = t.replaceAll("\"","&quot;").replaceAll(">","&gt;").replaceAll("<","&lt;")
-            s"""title="${safeTitle}" """
-          case None =>
-            " "
-      s"""<link rel="alternate" type="application/x-single-item-rss+xml" ${titlePart}href="${fromSiteRooted.relativizeSibling(siteRooted)}">"""
-    
   case class MainLayoutInput( renderLocation : SiteLocation, mainContentHtml : String, sourceUntemplates : immutable.Seq[AnyUntemplate] = immutable.Seq.empty, singleItemRssSpec : Option[SingleItemRssSpec] = None )
-
 
   object MainBlog extends SimpleBlog:
     override type Site = TechSite.type
