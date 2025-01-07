@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="../../../../icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="../../../../icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../../../icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../../icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+    
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/x-all-item-rss+xml" title="tech.interfluidity.com - all items" href="https://tech.interfluidity.com/all-item-feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting all-item RSS" href="index.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Supporting all-item RSS</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2025-01-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single uid-supporting-all-item-rss">
+ <div class="entry-header">
+  <h1><a href="index.html">Supporting all-item RSS</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>In addition to <a href="../../../../2024/11/12/supporting-single-item-rss/index.html">single-item RSS</a> for each post, this blog now offers <a href="/all-item-feed/index.rss">all-item-rss</a>. That effectively amounts to a full-content archive of the site, in the form of easy-to-parse RSS.</p>
+   <p><a href="drafts.interfluidity.com"><code>drafts.interfluidity.com</code></a> supports both of these features as well. (Here's the <a href="https://drafts.interfluidity.com/all-item-feed/index.rss">all-items-feed</a>, and an example <a href="https://drafts.interfluidity.com/2024/09/17/abundance-is-overcapacity/index.rss">single-item-feed</a>.)</p>
+   <p>The channel element of these feeds includes metadata describing them. <a href="../../../../xml/iffy/index.html#iffy-curation"><code>iffy:curation</code></a> describes how many and what sort of items are included in the feed. <a href="../../../../xml/iffy/index.html#iffy-completeness"><code>iffy:completeness</code></a> describes how complete <em>each</em> item is, i.e. whether it include full content, or even potentially embeds media.</p>
+   <p>Here's an example from an all-item feed:</p>
+   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    ...
+    &lt;iffy:curation&gt;
+      &lt;iffy:all/&gt;
+    &lt;/iffy:curation&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    ...
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   <p>Here is an example from a single-item feed:</p>
+   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    ...
+    &lt;iffy:curation&gt;
+      &lt;iffy:single/&gt;
+    &lt;/iffy:curation&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    ...
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   <p>These feeds, like syndication feeds, are discoverable in <code>&lt;link rel="alternate"&gt;</code> elements of the HTML pages of the blog.</p>
+   <p>But they are not intended to be discovered by feed readers, which expect short feeds of recent posts for syndication. In order to prevent discovery of these feeds by feed readers, we give them special MIME type <em>in HTML link elements only</em>. These are still RSS feeds. Their "true" MIME type is still <code>application/rss+xml</code>.</p>
+   <p>But in HTML link elements — only in HTML link elements — I use more specific, less standard MIME types, to throw unwitting feed readers off the scent. These MIME types are <code>application/x-all-item-rss+xml</code> and <code>application/x-single-item-rss+xml</code>.</p>
+   <p>Here's the HTML link element to a site's all-item feed:</p>
+   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-all-item-rss+xml" title="drafts.interfluidity.com - all items" href="https://drafts.interfluidity.com/all-item-feed/index.rss"&gt;
+</code></pre>
+   <p>Here's the HTML link element from a post permalink to that post's single-item feed:</p>
+   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Segmentation fault" href="index.rss"&gt;
+</code></pre>
+   <p>Whie ordinary feed readers should ignore these feeds, clients resolving <a href="../../../../xml/iffy/index.html#iffy-item-ref"><code>iffy:item-ref</code></a> tags might find single-item and all-item feeds very useful.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="index.html" class="pubtime">08:30 PM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../../../xml/iffy/index-updated-2024-12-22-10-40-00.html">← Updated: The 'iffy' XML namespace</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

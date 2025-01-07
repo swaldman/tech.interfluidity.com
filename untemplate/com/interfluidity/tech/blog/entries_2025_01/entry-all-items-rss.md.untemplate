@@ -1,0 +1,83 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Supporting all-item RSS",
+>   "PubDate"       -> "2025-01-06T20:30:00-05:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "supporting-all-item-rss" // a String
+> )
+
+val allItemRssLoc = input.blog.allItemFeedSiteRooted.map( input.site.location ).get // we know we support it!
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+In addition to [single-item RSS](##supporting-single-item-rss) for each post, this blog now offers [all-item-rss](<( allItemRssLoc )>).
+That effectively amounts to a full-content archive of the site, in the form of easy-to-parse RSS.
+
+[`drafts.interfluidity.com`](drafts.interfluidity.com) supports both of these features as well. (Here's the [all-items-feed](https://drafts.interfluidity.com/all-item-feed/index.rss),
+and an example [single-item-feed](https://drafts.interfluidity.com/2024/09/17/abundance-is-overcapacity/index.rss).)
+
+The channel element of these feeds includes metadata describing them. [`iffy:curation`](##iffy-xml-namespace#iffy-curation) describes how many and what sort of items are included in the feed.
+[`iffy:completeness`](##iffy-xml-namespace#iffy-completeness) describes how complete _each_ item is, i.e. whether it include full content, or even potentially embeds media.
+
+Here's an example from an all-item feed:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    ...
+    <iffy:curation>
+      <iffy:all/>
+    </iffy:curation>
+    <iffy:completeness>Content</iffy:completeness>
+    ...
+  </channel>
+</rss>
+```
+
+Here is an example from a single-item feed:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    ...
+    <iffy:curation>
+      <iffy:single/>
+    </iffy:curation>
+    <iffy:completeness>Content</iffy:completeness>
+    ...
+  </channel>
+</rss>
+```
+
+These feeds, like syndication feeds, are discoverable in `<link rel="alternate">` elements of the HTML pages of the blog.
+
+But they are not intended to be discovered by feed readers, which expect short feeds of recent posts for syndication.
+In order to prevent discovery of these feeds by feed readers, we give them special MIME type _in HTML link elements only_.
+These are still RSS feeds. Their "true" MIME type is still `application/rss+xml`.
+
+But in HTML link elements &mdash; only in HTML link elements &mdash; I use more specific, less standard MIME types,
+to throw unwitting feed readers off the scent. These MIME types are `application/x-all-item-rss+xml` and
+`application/x-single-item-rss+xml`.
+
+Here's the HTML link element to a site's all-item feed:
+
+```html
+  <link rel="alternate" type="application/x-all-item-rss+xml" title="drafts.interfluidity.com - all items" href="https://drafts.interfluidity.com/all-item-feed/index.rss">
+```
+
+Here's the HTML link element from a post permalink to that post's single-item feed:
+
+```html
+  <link rel="alternate" type="application/x-single-item-rss+xml" title="Segmentation fault" href="index.rss">
+```
+
+Whie ordinary feed readers should ignore these feeds, clients resolving [`iffy:item-ref`](##iffy-xml-namespace#iffy-item-ref) tags might find
+single-item and all-item feeds very useful.
+

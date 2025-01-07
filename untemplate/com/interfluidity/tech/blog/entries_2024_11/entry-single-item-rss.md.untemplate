@@ -6,7 +6,7 @@
 >   "Title"         -> "Supporting single-item RSS",
 >   "PubDate"       -> "2024-11-12T06:30:00-05:00",
 >   "UpdateHistory" -> updateHistory,
->   "Anchor"      -> "supporting-single-item-rss" // a String
+>   "Anchor"        -> "supporting-single-item-rss" // a String
 > )
 
 val singleSiteRssLoc =

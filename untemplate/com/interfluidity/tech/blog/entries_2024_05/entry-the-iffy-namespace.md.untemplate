@@ -392,7 +392,7 @@ Represents a reference to an RSS `item` in RSS data available elsewhere.
 
 * An `iffy:item-ref` SHOULD contain a `type` attribute. The type should either be `text/html` or `application/*rss+xml` where the `*` may refer to
   the empty string (so just `application/rss+xml`) or a prefix, [like](##supporting-single-item-rss) `application/x-single-item-rss+xml`. (If a type attribute
-  is missing, a consumer MAY try to examine the contents at `href` and do the right thing.)
+  is missing, a consumer MAY try to examine the contents at `href` and do the right thing.) (Mime types can, as always, include a parameter, like `text/html;charset=UTF-8`.)
 
 * An `iffy:item-ref` MUST contain a `guid` attribute UNLESS the `href` refers to [single-item RSS](##supporting-single-item-rss).
 
@@ -408,6 +408,7 @@ To resolve an `iffy:item-ref` consumers should:
 
 4. If the referent is an HTML document and the `iffy:item-ref` contains a `guid` attribute, the consumer must gather all HTML `link` elements with `rel="alternative"` and `type="application/*rss+xml`
    where the `*` may refer to the empty string (so just `application/rss+xml`) or a prefix, [like](##supporting-single-item-rss) `application/x-single-item-rss+xml`.
+   The type may also contain a parameter, like `application/x-single-item-rss+xml;completeness=Content`
    The consumer tries `link` elements whose `type` attribute is an exact match to the `iffy:item-ref`'s `type` attribute first, in the order they appear in the HTML file,
    and then other `link` elements with `type="application/*rss+xml`, in the order they appear. For each `link` tried, if the 
    linked RSS contains that an RSS `item` with the `item-ref`'s specified `guid`, then the `item-ref` refers to that `item` and the resolution process terminates immediately.

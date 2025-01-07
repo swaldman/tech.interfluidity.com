@@ -77,6 +77,66 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2025-01-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-supporting-all-item-rss">
+ <div class="entry-header">
+  <h1><a href="2025/01/06/supporting-all-item-rss/index.html">Supporting all-item RSS</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>In addition to <a href="2024/11/12/supporting-single-item-rss/index.html">single-item RSS</a> for each post, this blog now offers <a href="/all-item-feed/index.rss">all-item-rss</a>. That effectively amounts to a full-content archive of the site, in the form of easy-to-parse RSS.</p>
+   <p><a href="drafts.interfluidity.com"><code>drafts.interfluidity.com</code></a> supports both of these features as well. (Here's the <a href="https://drafts.interfluidity.com/all-item-feed/index.rss">all-items-feed</a>, and an example <a href="https://drafts.interfluidity.com/2024/09/17/abundance-is-overcapacity/index.rss">single-item-feed</a>.)</p>
+   <p>The channel element of these feeds includes metadata describing them. <a href="xml/iffy/index.html#iffy-curation"><code>iffy:curation</code></a> describes how many and what sort of items are included in the feed. <a href="xml/iffy/index.html#iffy-completeness"><code>iffy:completeness</code></a> describes how complete <em>each</em> item is, i.e. whether it include full content, or even potentially embeds media.</p>
+   <p>Here's an example from an all-item feed:</p>
+   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    ...
+    &lt;iffy:curation&gt;
+      &lt;iffy:all/&gt;
+    &lt;/iffy:curation&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    ...
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   <p>Here is an example from a single-item feed:</p>
+   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
+  &lt;channel&gt;
+    ...
+    &lt;iffy:curation&gt;
+      &lt;iffy:single/&gt;
+    &lt;/iffy:curation&gt;
+    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
+    ...
+  &lt;/channel&gt;
+&lt;/rss&gt;
+</code></pre>
+   <p>These feeds, like syndication feeds, are discoverable in <code>&lt;link rel="alternate"&gt;</code> elements of the HTML pages of the blog.</p>
+   <p>But they are not intended to be discovered by feed readers, which expect short feeds of recent posts for syndication. In order to prevent discovery of these feeds by feed readers, we give them special MIME type <em>in HTML link elements only</em>. These are still RSS feeds. Their "true" MIME type is still <code>application/rss+xml</code>.</p>
+   <p>But in HTML link elements — only in HTML link elements — I use more specific, less standard MIME types, to throw unwitting feed readers off the scent. These MIME types are <code>application/x-all-item-rss+xml</code> and <code>application/x-single-item-rss+xml</code>.</p>
+   <p>Here's the HTML link element to a site's all-item feed:</p>
+   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-all-item-rss+xml" title="drafts.interfluidity.com - all items" href="https://drafts.interfluidity.com/all-item-feed/index.rss"&gt;
+</code></pre>
+   <p>Here's the HTML link element from a post permalink to that post's single-item feed:</p>
+   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Segmentation fault" href="index.rss"&gt;
+</code></pre>
+   <p>Whie ordinary feed readers should ignore these feeds, clients resolving <a href="xml/iffy/index.html#iffy-item-ref"><code>iffy:item-ref</code></a> tags might find single-item and all-item feeds very useful.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="2025/01/06/supporting-all-item-rss/index.html" class="pubtime">08:30 PM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2024-12-22 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple synthetic">
@@ -382,30 +442,6 @@
    </div>
    <div>
     <a href="2024/06/20/sprouted/index.html" class="pubtime">03:05 PM EDT</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><article class="presentation-multiple synthetic">
- <div class="entry-header">
-  <h1><a href="2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html">Updated: Feedletter tutorial</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <p>A significant update of <a href="2024/01/29/feedletter-tutorial/index.html"><i>Feedletter tutorial</i></a> was made on 2024-06-20 @ 01:10 PM EDT.</p>
-  <blockquote>
-   → Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial.
-  </blockquote>
-  <p>The post was originally published 2024-01-29 @ 10:30 AM EST.</p>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div class="synthetic-note">
-    <em>This is an automatically generated post.</em>
-   </div>
-   <div>
-    <a href="2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html" class="pubtime">01:10 PM EDT</a>
    </div>
   </div>
  </div>
