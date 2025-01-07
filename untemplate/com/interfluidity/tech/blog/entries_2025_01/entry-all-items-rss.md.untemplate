@@ -95,6 +95,6 @@ Here's the HTML link element from a post permalink to that post's single-item fe
   <link rel="alternate" type="application/x-single-item-rss+xml" title="Segmentation fault" href="index.rss">
 ```
 
-Whie ordinary feed readers should ignore these feeds, clients resolving [`iffy:item-ref`](##iffy-xml-namespace#iffy-item-ref) tags might find
+While ordinary feed readers should ignore these feeds, clients resolving [`iffy:item-ref`](##iffy-xml-namespace#iffy-item-ref) tags might find
 single-item and all-item feeds very useful.
 
