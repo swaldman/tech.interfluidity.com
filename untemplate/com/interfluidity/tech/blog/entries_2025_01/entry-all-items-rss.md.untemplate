@@ -56,7 +56,24 @@ Here is an example from a single-item feed:
 </rss>
 ```
 
-These feeds, like syndication feeds, are discoverable in `<link rel="alternate">` elements of the HTML pages of the blog.
+An ordinary syndicatin feed that includes curation and completeness metadata looks like this:
+
+```xml
+<?xml version='1.0' encoding='UTF-8'?>
+<rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    ...
+    <iffy:curation>
+      <iffy:recent last="5"/>
+    </iffy:curation>
+    <iffy:completeness>Content</iffy:completeness>
+    ...
+  </channel>
+</rss>
+```
+
+
+All-item and single-item feeds, like syndication feeds, are discoverable in `<link rel="alternate">` elements of the HTML pages of the blog.
 
 But they are not intended to be discovered by feed readers, which expect short feeds of recent posts for syndication.
 In order to prevent discovery of these feeds by feed readers, we give them special MIME type _in HTML link elements only_.
