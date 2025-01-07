@@ -15,8 +15,8 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
 
-In addition to [single-item RSS](##supporting-single-item-rss) for each post, this blog now offers [all-item-rss](<( allItemRssLoc )>).
-That effectively amounts to a full-content archive of the site, in the form of easy-to-parse RSS.
+In addition to [single-item RSS](##supporting-single-item-rss) for each post, this blog now offers all-item-rss. [Check it out.](<( allItemRssLoc )>).
+It's effectively a full-content archive of the site, in the form of easy-to-parse RSS.
 
 [`drafts.interfluidity.com`](drafts.interfluidity.com) supports both of these features as well. (Here's the [all-items-feed](https://drafts.interfluidity.com/all-item-feed/index.rss),
 and an example [single-item-feed](https://drafts.interfluidity.com/2024/09/17/abundance-is-overcapacity/index.rss).)
