@@ -1414,3 +1414,6 @@ Developing custom front-ends is time-consuming detail work.
 
 I'd love it if you gave _feedletter_ a try!
 
+---
+
+**Update:** I've [added a tutorial](##syndicating-rss-to-mastodon-and-bluesky-with-feedletter) on using feedletter to syndicate post announcements from RSS to Mastodon and BlueSky.
