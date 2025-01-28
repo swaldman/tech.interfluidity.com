@@ -1,34 +1,97 @@
-> val updateHistory =
->    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
->    Nil
->
-> val UntemplateAttributes = immutable.Map[String,Any] (
->   "Title"         -> "Baby DeepSeek on a Mac laptop",
->   "PubDate"       -> "2025-01-28T00:20:00-05:00",
->   "UpdateHistory" -> updateHistory,
->   // "Anchor"        -> ??? // a String
-> )
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-given PageBase = PageBase.fromPage(input.renderLocation)
+    <!-- icons / favicons -->
 
-(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="../../../../icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
 
-**TL; DR:** It's really fun to watch DeepSeek-R1-1.5B, `<think>...</think>`.
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="../../../../icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../../../icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../../icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">
 
-But this tiniest DeepSeek model is, um, not so smart. It seems to misinterpret
-the prompt input a fair amount, and draws inferences that are not quite coherent, even though in some superficial but nonsensical way
-you can understand the connections it's drawing.
-
----
-
-For the heck of it, I decided to try to run the smallest [DeepSeek](https://www.deepseek.com/) generative AI model on my laptop.
-My laptop is an Intel MacBook Pro purchased in 2020 (but I think a 2019 model), 8 cores. It's tricked out with 64GB of memory.
-
-After checking out a [DigitalOcean tutorial](https://www.digitalocean.com/community/tutorials/deepseek-r1-gpu-droplets) for clues,
-Running the model was beyond trivial:
-
-```plaintext
-% brew install ollama
+    <!-- end icons / favicons -->
+    
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/x-all-item-rss+xml" title="tech.interfluidity.com - all items" href="https://tech.interfluidity.com/all-item-feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Baby DeepSeek on a Mac laptop" href="index.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Baby DeepSeek on a Mac laptop</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2025-01-28 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single">
+ <div class="entry-header">
+  <h1><a href="index.html">Baby DeepSeek on a Mac laptop</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong> It's really fun to watch DeepSeek-R1-1.5B, <code>&lt;think&gt;...&lt;/think&gt;</code>.</p>
+   <p>But this tiniest DeepSeek model is, um, not so smart. It seems to misinterpret the prompt input a fair amount, and draws inferences that are not quite coherent, even though in some superficial but nonsensical way you can understand the connections it's drawing.</p>
+   <hr>
+   <p>For the heck of it, I decided to try to run the smallest <a href="https://www.deepseek.com/">DeepSeek</a> generative AI model on my laptop. My laptop is an Intel MacBook Pro purchased in 2020 (but I think a 2019 model), 8 cores. It's tricked out with 64GB of memory.</p>
+   <p>After checking out a <a href="https://www.digitalocean.com/community/tutorials/deepseek-r1-gpu-droplets">DigitalOcean tutorial</a> for clues, Running the model was beyond trivial:</p>
+   <pre><code class="language-plaintext">% brew install ollama
 % brew services start ollama
 % ollama run deepseek-r1:1.5b
 pulling manifest 
@@ -40,24 +103,15 @@ pulling a85fe2a2e58e... 100% ▕████████████████
 verifying sha256 digest 
 writing manifest 
 success 
->>> Send a message (/? for help)
-```
-
-That last line is prompting me for a prompt.
-
-When I run prompts, I find that the model does not stress out my memory at all, but does use up 5 to 6 cores of CPU while it is active.
-
-For the purpose of this post, I tried what I thought would be a simple prompt:
-
-```plaintext
->>> Write a 'Hello, world!' haiku.
-```
-
-The model generates a `<think>...</think>` section in which it describes its own "thought" process.
-But it is so neurotic! Endearingly neurotic! It went around in circles. I eventually grew impatient and aborted it with `<ctrl-c>`.
-
-```plaintext
-<think>
+&gt;&gt;&gt; Send a message (/? for help)
+</code></pre>
+   <p>That last line is prompting me for a prompt.</p>
+   <p>When I run prompts, I find that the model does not stress out my memory at all, but does use up 5 to 6 cores of CPU while it is active.</p>
+   <p>For the purpose of this post, I tried what I thought would be a simple prompt:</p>
+   <pre><code class="language-plaintext">&gt;&gt;&gt; Write a 'Hello, world!' haiku.
+</code></pre>
+   <p>The model generates a <code>&lt;think&gt;...&lt;/think&gt;</code> section in which it describes its own "thought" process. But it is so neurotic! Endearingly neurotic! It went around in circles. I eventually grew impatient and aborted it with <code>&lt;ctrl-c&gt;</code>.</p>
+   <pre><code class="language-plaintext">&lt;think&gt;
 Okay, so I need to write a haiku in lowercase for "Hello, world!" that reads backwards both in the traditional way and when reversed again. Let me start by recalling what a haiku is. It's a three-line poem where the first line has five characters, the second eight, and the third five, 
 all in iambic pentameter.
 
@@ -142,14 +196,11 @@ So second line needs to be eight syllables. Maybe h-e-llo-w (h + e + l + l + o +
 
 Wait, I'm getting stuck here. Let me try to write the second line as h-e-llo-w with a hyphen in the middle or something, but^C
 
->>>
-```
-
-Then I tried a simpler variation:
-
-```plaintext
->>> Write me a joyful greeting, please?
-<think>
+&gt;&gt;&gt;
+</code></pre>
+   <p>Then I tried a simpler variation:</p>
+   <pre><code class="language-plaintext">&gt;&gt;&gt; Write me a joyful greeting, please?
+&lt;think&gt;
 Okay, so I just received this message: "Write me a joyful greeting, please?" Hmm, that's interesting. At first glance, it sounds like someone is trying to ask for a greeting but maybe they don't realize how important it is. Let me try to unpack what's going on here.
 
 So, the person wrote a greeting that ends with a question mark. That's a bit unusual because usually, greetings are polite and direct without any questions. Maybe they're testing something or just curious about why they're asking for this specific type of greeting. Perhaps they want to 
@@ -169,7 +220,7 @@ I should also consider if there are alternative greetings that might be more sui
 mark, so focusing back on a simple, heartfelt response makes sense.
 
 In summary, my approach should be to acknowledge their message, provide a genuine reply that shows appreciation, and keep it concise. This way, they know I'm listening without overcomplicating things.
-</think>
+&lt;/think&gt;
 
 Certainly! Here's a heartfelt greeting in the requested format:
 
@@ -180,38 +231,20 @@ Hey there! I hope you're doing well today. It sounds like your kind words are al
 ---
 
 This response is warm, genuine, and acknowledges their message while keeping it concise.
-```
-
-A bit off. But not terrible!
-
-Next I tried to see if it could code:
-
-```plaintext
->>> Please write a Scala program that prints "Hello, world!"
-```
-
-This... didn't go so well.
-
-To be fair, Scala is not likely to be its most prominant training language, and some of its attempts
-could be excused as not quite knowing whether to write Scala 2 or Scala 3. Its first attempt was closer to Scala 3 than Scala 2.
-(It offered a naked top-level function, supported as `main` entry points only in Scala 3.) So I tried to tutor it towards s Scala 3
-solution.
-
-It came pretty close! But after three or four back and forths over ~25 minutes, it still wasn't quite right and I gave up.
-
-This is the tiniest DeepSeek model. I wonder if I can run a bigger one, and if it performs a bit better?
-
-Stay tuned on that, I guess.
-
----
-
-**Postscript:**
-
-I'm pretty short storage space on the ol' laptop, so I want to clean up after this exercise.
-A bit of searching [tells me](https://www.restack.io/p/ollama-models-storage-answer-cat-ai) that on a Mac, models will be stored under a `~/.ollama` directory.
-
-```plaintext
-% find ~/.ollama 
+</code></pre>
+   <p>A bit off. But not terrible!</p>
+   <p>Next I tried to see if it could code:</p>
+   <pre><code class="language-plaintext">&gt;&gt;&gt; Please write a Scala program that prints "Hello, world!"
+</code></pre>
+   <p>This... didn't go so well.</p>
+   <p>To be fair, Scala is not likely to be its most prominant training language, and some of its attempts could be excused as not quite knowing whether to write Scala 2 or Scala 3. Its first attempt was closer to Scala 3 than Scala 2. (It offered a naked top-level function, supported as <code>main</code> entry points only in Scala 3.) So I tried to tutor it towards s Scala 3 solution.</p>
+   <p>It came pretty close! But after three or four back and forths over ~25 minutes, it still wasn't quite right and I gave up.</p>
+   <p>This is the tiniest DeepSeek model. I wonder if I can run a bigger one, and if it performs a bit better?</p>
+   <p>Stay tuned on that, I guess.</p>
+   <hr>
+   <p><strong>Postscript:</strong></p>
+   <p>I'm pretty short storage space on the ol' laptop, so I want to clean up after this exercise. A bit of searching <a href="https://www.restack.io/p/ollama-models-storage-answer-cat-ai">tells me</a> that on a Mac, models will be stored under a <code>~/.ollama</code> directory.</p>
+   <pre><code class="language-plaintext">% find ~/.ollama 
 /Users/swaldman/.ollama
 /Users/swaldman/.ollama/id_ed25519
 /Users/swaldman/.ollama/id_ed25519.pub
@@ -230,12 +263,9 @@ A bit of searching [tells me](https://www.restack.io/p/ollama-models-storage-ans
 /Users/swaldman/.ollama/history
 % du -sh ~/.ollama 
 1.0G	/Users/swaldman/.ollama
-```
-
-It's not huge, but I'm going to remove it anyway for now.
-
-```plaintext
-% ollama help
+</code></pre>
+   <p>It's not huge, but I'm going to remove it anyway for now.</p>
+   <pre><code class="language-plaintext">% ollama help
 Large language model runner
 
 Usage:
@@ -271,8 +301,33 @@ deleted 'deepseek-r1:1.5b'
 
 % du -sh ~/.ollama
  12K	/Users/swaldman/.ollama
-```
-
-All cleaned up!
-
-
+</code></pre>
+   <p>All cleaned up!</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="index.html" class="pubtime">12:20 AM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/index.html">← Syndicating RSS to Mastodon and BlueSky with feedletter</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>
