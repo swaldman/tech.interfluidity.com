@@ -49,7 +49,7 @@ so I'm not retaining models in `~/.ollama`, there's just the one model there.)
 
 Running the model was also trivial:
 
-```
+```plaintext
 % ollama run deepseek-r1:14b
 >>> Send a message (/? for help)
 ```
