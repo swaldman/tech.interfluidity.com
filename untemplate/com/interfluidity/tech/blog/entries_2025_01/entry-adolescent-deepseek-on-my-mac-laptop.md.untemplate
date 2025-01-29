@@ -203,6 +203,23 @@ Compiled project (Scala 3.6.3, JVM (17))
 Hello, world!
 ```
 
+Since it got it right, I thanked it! Its "thought-process" in response was kind of fun:
+
+```plaintext
+>>> Great! Thank you.
+<think>
+Alright, so the user just thanked me for the previous explanation on writing a "Hello, world!" program in Scala. They were probably satisfied with the answer, but I should think about how to respond appropriately. 
+
+I want to be polite and encouraging, so I'll acknowledge their gratitude. Maybe add an emoji to keep it friendly. Also, since they might be new to programming orScala, offering further help is a good idea. I can ask if there's anything else they need assistance with.
+
+Hmm, perhaps I should also provide options for what they might want next—like solving another problem or explaining more concepts. That way, it shows I'm ready to assist them in various ways.
+
+I should keep the response concise and positive, making sure they feel comfortable asking more questions if needed.
+</think>
+
+You're welcome! If you have any other questions or need help with anything else, feel free to ask! 😊
+```
+
 I really want to do whatever AI-using I eventually do on my own infrastructure, or infrastructure of someone I trust,
 rather than a distant megafirm. But this current family of models, on my current best hardware, won't get me there.
 
