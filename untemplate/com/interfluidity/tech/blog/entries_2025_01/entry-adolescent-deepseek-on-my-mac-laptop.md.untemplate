@@ -23,6 +23,8 @@ but the result quality is likely too poor to be very useful. For whatever I do w
 
 In the [previous post](##baby-deepseek-on-a-mac-laptop) I ran the "baby" [DeepSeek](https://www.deepseek.com/) generative AI model on my Mac laptop.
 
+(For instructions on how I installed `ollama`, and information about its basic use, see that [previous post](##baby-deepseek-on-a-mac-laptop) and its postscript.)
+
 The model ran fine, used a lot of CPI but not a lot of memory, generated output at a reasonable pace.
 Unfortunately, that model is not so "smart". It tells you how it's thinking, and it's not thinking very well. It misunderstands
 simple things and draws poor inferences.
