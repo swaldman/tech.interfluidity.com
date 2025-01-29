@@ -7,7 +7,7 @@
 >   "PubDate"       -> "2025-01-28T00:20:00-05:00",
 >   "UpdateHistory" -> updateHistory,
 >   "Permalink"     -> "/2025/01/28/baby-deepseek-on-on-mac-laptop/index.html",
->   // "Anchor"        -> ??? // a String
+>   "Anchor"        -> "baby-deepseek-on-a-mac-laptop" // a String
 > )
 
 given PageBase = PageBase.fromPage(input.renderLocation)
