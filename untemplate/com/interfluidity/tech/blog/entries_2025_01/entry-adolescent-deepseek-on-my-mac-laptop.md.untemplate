@@ -17,7 +17,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 (Or not! It'd take more experimentation to decide.)
 
 But it runs too slowly on my 5-year-old Intel-based MacBookPro, even tricked out with 64GB of RAM. Smaller models run with better performance,
-but the result quality is likely too poor to be very useful. For whatever I do with LLMs, I'm afraid I'm stuck with the online services for now.
+but the result quality is likely too poor to be useful. For whatever I do with LLMs, I'm afraid I'm stuck with the online services for now.
 
 ---
 
