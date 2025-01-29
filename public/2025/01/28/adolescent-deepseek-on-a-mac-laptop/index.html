@@ -91,7 +91,7 @@
    <hr>
    <p>In the <a href="../baby-deepseek-on-on-mac-laptop/index.html">previous post</a> I ran the "baby" <a href="https://www.deepseek.com/">DeepSeek</a> generative AI model on my Mac laptop.</p>
    <p>(For instructions on how I installed <code>ollama</code>, and information about its basic use, see that <a href="../baby-deepseek-on-on-mac-laptop/index.html">previous post</a> and its postscript.)</p>
-   <p>The model ran fine, used a lot of CPI but not a lot of memory, generated output at a reasonable pace. Unfortunately, that model is not so "smart". It tells you how it's thinking, and it's not thinking very well. It misunderstands simple things and draws poor inferences.</p>
+   <p>The model ran fine, used a lot of CPU but not a lot of memory, generated output at a reasonable pace. Unfortunately, that model is not so "smart". It tells you how it's thinking, and it's not thinking very well. It misunderstands simple things and draws poor inferences.</p>
    <p>So now I've decided to try out a still small but bigger, less toy-ish model. The baby model had 1.5B parameters. This one has 14B, so almost 10 times as big.</p>
    <p>Downloading the model was trivial with <code>ollama</code>:</p>
    <pre><code class="language-plaintext">% ollama pull deepseek-r1:14b
