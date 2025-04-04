@@ -1,6 +1,7 @@
 > val updateHistory =
 >   UpdateRecord("2024-06-06T18:30:00-04:00", Some("""Add Kartik Agaram's pointer to Bill Mill's "modern unix tools""""), Some("711778c5fa4d93cd89e9421da6b8d9fb6e71a534")) ::
 >   UpdateRecord("2024-08-16T11:20:00-04:00", Some("""Add update regarding new location of Bill Mill's "modern unix tool list""""), Some("758902715b5d838eb65acaac13ac5dcda53f5314")) ::
+>   UpdateRecord("2025-04-03T21:10:00-04:00", Some("""Add update regarding 'gum', ht Bill Mill"""), Some("bef1d5cfc2e26b7def96a2eed8d1b09663f01042")) ::
 >   Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -40,8 +41,12 @@ I can track these kinds of tools as I encounter them.
   A fuzzy-matching tool for interactively sorting through large command line and command completion outputs.
   See [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/fzf.html).
 
+* [`gum`](https://github.com/charmbracelet/gum)<br>
+  Elegant TUI effects composable for scripting  (ht [Bill Mill](https://notes.billmill.org/computer_usage/cli_tips_and_tools/gum.html), of course)
+  
 * [`rg`](https://github.com/BurntSushi/ripgrep)<br>
   "ripgrep". A new take on grep, super fast, seachers directories recursively, by default excluding `.git` and whatever is `.gitignore`-d.
+
 
 I'll add more as I, um, `fd` them!
 
