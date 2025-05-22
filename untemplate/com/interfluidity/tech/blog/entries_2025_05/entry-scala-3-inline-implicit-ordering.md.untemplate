@@ -47,7 +47,7 @@ Implicit resolution is also a compile-time operation. If implicit resolution hap
 then `LocalContext.printItLocally` might print `10`. If implicit resolution happens after the inlining is resolved,
 then `LocalContext.printItLocally` should print `22`.
 
-In reality, it prints 22.
+In reality, it prints `22`.
 
 The output of this program is
 

@@ -108,7 +108,7 @@
    <p>It's straightforward that calling <code>printIt</code> prints <code>10</code>.</p>
    <p>It's not so straightforward what <code>LocalContext.printItLocally</code> will do.</p>
    <p>Implicit resolution is also a compile-time operation. If implicit resolution happens before the inlining, then <code>LocalContext.printItLocally</code> might print <code>10</code>. If implicit resolution happens after the inlining is resolved, then <code>LocalContext.printItLocally</code> should print <code>22</code>.</p>
-   <p>In reality, it prints 22.</p>
+   <p>In reality, it prints <code>22</code>.</p>
    <p>The output of this program is</p>
    <pre><code class="language-plaintext">10
 22
