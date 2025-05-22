@@ -43,7 +43,7 @@
     <link rel="alternate" type="application/x-all-item-rss+xml" title="tech.interfluidity.com - all items" href="https://tech.interfluidity.com/all-item-feed/index.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
-    <link rel="alternate" type="application/x-single-item-rss+xml" title="Updated: Neonix" href="index-updated-2025-04-03-21-10-00.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Scala 3 inline vs implicit ordering" href="index.rss">
     <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
     <script src="../../../../js/highlight/highlight.min.js"></script>
@@ -60,7 +60,7 @@
           }
        });
     </script>
-    <title>Updated: Neonix</title>
+    <title>Scala 3 inline vs implicit ordering</title>
   </head>
   <body>
     <div id="top-banner"></div>
@@ -77,27 +77,53 @@
       </div>
       <div id="content">
         <div class="day-stamp">
- 2025-04-03 <span class="arrow">⇒</span>
+ 2025-05-22 <span class="arrow">⇒</span>
 </div>
-<article class="presentation-single synthetic">
+<article class="presentation-single uid-scala-3-inline-vs-implicit-ordering">
  <div class="entry-header">
-  <h1><a href="index-updated-2025-04-03-21-10-00.html">Updated: Neonix</a></h1>
+  <h1><a href="index.html">Scala 3 inline vs implicit ordering</a></h1>
   <hr class="below-title">
  </div>
  <div class="entry-body">
-  <p>A significant update of <a href="index.html"><i>Neonix</i></a> was made on 2025-04-03 @ 09:10 PM EDT.</p>
-  <blockquote>
-   → Add update regarding 'gum', ht Bill Mill
-  </blockquote>
-  <p>The post was originally published 2024-06-06 @ 03:35 PM EDT.</p>
+  <div class="flexmark markdown">
+   <p>I've been playing around with Scala 3's <a href="https://docs.scala-lang.org/scala3/guides/macros/inline.html">souped up</a> <a href="https://docs.scala-lang.org/scala3/reference/metaprogramming/inline.html"><code>inline</code></a> construct, which is a very cool, relatively approachable, bit of metaprogramming.</p>
+   <p>(See "Rock the JVM" for a <a href="https://rockthejvm.com/articles/scala-3-inlines">quick explainer</a>.)</p>
+   <p>A thing that confused me, though, is the ordering of inlining vs implicit resolution. Consider...</p>
+   <pre><code class="language-scala">object InlineImplicitOrdering:
+  given Int = 10
+
+  inline def printIt(using i : Int) : Unit =
+    println(summon[Int])
+
+  object LocalContext:
+    given Int = 22
+
+    def printItLocally : Unit = printIt
+
+  @main
+  def go() =
+    printIt
+    LocalContext.printItLocally
+</code></pre>
+   <p>It's straightforward that calling <code>printIt</code> prints <code>10</code>.</p>
+   <p>It's not so straightforward what <code>LocalContext.printItLocally</code> will do.</p>
+   <p>Implicit resolution is also a compile-time operation. If implicit resolution happens before the inlining, then <code>LocalContext.printItLocally</code> might print <code>10</code>. If implicit resolution happens after the inlining is resolved, then <code>LocalContext.printItLocally</code> should print <code>22</code>.</p>
+   <p>In reality, it prints 22.</p>
+   <p>The output of this program is</p>
+   <pre><code class="language-plaintext">10
+22
+</code></pre>
+   <p>I wondered whether this would always be the case, or whether adding modifiers might change this ordering. In particular I know that it's possible to declare <code>inline given</code>, rather than straight <code>given</code>, and I wondered whether this might cause the <code>printIt</code> function to collapse to <code>println(10)</code>.</p>
+   <p>The answer is no. As far as I can tell, there is no set of modifiers that would cause the implicit resolution to occur before the final inlining. Neither <code>inline given</code>, nor <code>transparent inline given</code>, nor marking the implicit argument <code>inline</code> has this effect.</p>
+   <p>As far as I can tell, the hard and fast rule is that inline resolution is completed prior to any implicit resolution. Implicits will be resolved at the ultimate, inlined call site, and never before.</p>
+   <p>Which is the behavior I find that I want! I am glad it does not seem to be fragile.</p>
+   <p>(I'd still like to understand what <code>inline given</code> is for, though.)</p>
+  </div>
  </div>
  <div class="entry-footer">
   <div class="post-metainfo">
-   <div class="synthetic-note">
-    <em>This is an automatically generated post.</em>
-   </div>
    <div>
-    <a href="index-updated-2025-04-03-21-10-00.html" class="pubtime">09:10 PM EDT</a>
+    <a href="index.html" class="pubtime">06:30 PM EDT</a>
    </div>
   </div>
  </div>
@@ -105,13 +131,12 @@
 <div class="after-article">
  <div class="prev-top-next">
   <div class="prev">
-   <a href="../../../../2025/01/28/adolescent-deepseek-on-a-mac-laptop/index.html">← Adolescent DeepSeek on a Mac laptop</a>
+   <a href="../../../../2024/06/06/neonix/index-updated-2025-04-03-21-10-00.html">← Updated: Neonix</a>
   </div>
   <div class="top">
    <a href="../../../../index.html">↑↑↑</a>
   </div>
   <div class="next">
-   <a href="../../../../2025/05/22/scala-3-inline-vs-implicit-ordering/index.html">Scala 3 inline vs implicit ordering →</a>
   </div>
  </div>
 </div><!-- after-article -->

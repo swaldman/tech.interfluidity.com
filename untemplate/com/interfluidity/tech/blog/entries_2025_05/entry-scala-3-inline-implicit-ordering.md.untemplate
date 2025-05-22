@@ -1,0 +1,73 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Scala 3 inline vs implicit ordering",
+>   "PubDate"       -> "2025-05-22T18:30:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "scala-3-inline-vs-implicit-ordering" // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+I've been playing around with Scala 3's [souped up](https://docs.scala-lang.org/scala3/guides/macros/inline.html)
+[`inline`](https://docs.scala-lang.org/scala3/reference/metaprogramming/inline.html) construct, which is a very cool, relatively approachable,
+bit of metaprogramming.
+
+(See "Rock the JVM" for a [quick explainer](https://rockthejvm.com/articles/scala-3-inlines).)
+
+A thing that confused me, though, is the ordering of inlining vs implicit resolution. Consider...
+
+```scala
+object InlineImplicitOrdering:
+  given Int = 10
+
+  inline def printIt(using i : Int) : Unit =
+    println(summon[Int])
+
+  object LocalContext:
+    given Int = 22
+
+    def printItLocally : Unit = printIt
+
+  @main
+  def go() =
+    printIt
+    LocalContext.printItLocally
+```
+
+It's straightforward that calling `printIt` prints `10`.
+
+It's not so straightforward what `LocalContext.printItLocally` will do.
+
+Implicit resolution is also a compile-time operation. If implicit resolution happens before the inlining,
+then `LocalContext.printItLocally` might print `10`. If implicit resolution happens after the inlining is resolved,
+then `LocalContext.printItLocally` should print `22`.
+
+In reality, it prints 22.
+
+The output of this program is
+
+```plaintext
+10
+22
+```
+
+I wondered whether this would always be the case, or whether adding modifiers might change this ordering.
+In particular I know that it's possible to declare `inline given`, rather than straight `given`, and I wondered
+whether this might cause the `printIt` function to collapse to `println(10)`.
+
+The answer is no. As far as I can tell, there is no set of modifiers that would cause the implicit resolution
+to occur before the final inlining. Neither `inline given`, nor `transparent inline given`, nor marking the
+implicit argument `inline` has this effect.
+
+As far as I can tell, the hard and fast rule is that inline resolution is completed prior to any implicit
+resolution. Implicits will be resolved at the ultimate, inlined call site, and never before.
+
+Which is the behavior I find that I want! I am glad it does not seem to be fragile.
+
+(I'd still like to understand what `inline given` is for, though.)
+
