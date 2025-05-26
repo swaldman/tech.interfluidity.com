@@ -105,7 +105,7 @@ Again, since logging facades are not really a performance bottleneck, there's no
 over using `mlog`. In informal testing of just the facade &mdash; that is, excluding the cost of actual logging,
 by sending messages at levels below the loggable threshold &mdash; I see a roughly 25% improvement using this
 resolved-at-compile-time facade over resolved-at-runtime `mlog`. In practice, the improvement would be even less, because
-many calls will hit logging IO (or add to an asynchronous queue requests for logging IO), rendering the facades,
+many calls will hit logging IO (or add requests for logging IO to an asynchronous queue), rendering the facades,
 static and dynamic, a smaller part of the overhead.
 
 Of course one of the benefits of facades &mdash; the reason why library authors often choose them! &mdash; is precisely
