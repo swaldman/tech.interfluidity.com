@@ -82,6 +82,11 @@ the native libraries, the field lookup would be behind an accessor. So the only 
 is the second, inner accessor call. Using a back-end library directly might provoke only
 a single hit to an accessor. But the cost of the additional accessor call is negligible.
 
+(And, a bit overzealously,
+the library actually economizes accessor calls on the backend by caching in ways typical library users do not.
+Note that `logger` and `Level.ERROR` are looked up once, rather than twice, in the bytecode above, although
+they are referred to twice. Many of these accessor calls are likely optimized away by modern JVMs at runtime anyway.)
+
 Beyond looking up the logger, the bytecode refers only to construct of the backend library,
 `org.apache.logging.log4j` constructs in this case. There is no method call on a `logadapter.Level`.
 There are method calls on an `org.apache.logging.log4j.Logger` supplying an `org.apache.logging.log4j.Level`
