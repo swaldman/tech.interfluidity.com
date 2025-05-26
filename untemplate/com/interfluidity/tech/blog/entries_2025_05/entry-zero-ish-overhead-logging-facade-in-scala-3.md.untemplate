@@ -40,7 +40,7 @@ I'm building a bunch of "daemon"-style services now, for which logging will be i
 seemed like a good time to give this a try. The result is called [`LogAdapter`](https://github.com/swaldman/logadapter-scala).
 
 The logging API style I developed for `mlog-scala`, which I am very happy with, is to call `log` methods
-directly on logging levels, with the "logger" messages get routed through determined by context (more specifically,
+directly on logging levels. The messages get routed to "loggers" determined by context (more specifically,
 by what Scala `given` or `implicit` values are in scope). For example, I might call:
 
 ```scala
