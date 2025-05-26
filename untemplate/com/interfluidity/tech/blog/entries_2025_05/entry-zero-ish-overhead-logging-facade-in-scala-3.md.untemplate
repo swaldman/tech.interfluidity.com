@@ -108,7 +108,7 @@ resolved-at-compile-time facade over resolved-at-runtime `mlog`. In practice, th
 many calls will hit logging IO (or add requests for logging IO to an asynchronous queue), rendering the facades,
 static and dynamic, a smaller part of the overhead.
 
-Of course one of the benefits of facades &mdash; the reason why library authors often choose them! &mdash; is precisely
+Of course one of the benefits of facades &mdash; a reason why library authors often choose them! &mdash; is precisely
 because which backend gets hit can be resolved at runtime. If your library will be used as part of a larger application,
 it's nice if it can be configured to log to the same backend that the larger application will, without having to modify
 and recompile library code.
