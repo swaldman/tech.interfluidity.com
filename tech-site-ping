@@ -1,6 +1,6 @@
 #!/usr/bin/env -S scala-cli shebang
 
-//> using scala "3.3.0"
-//> using lib "com.lihaoyi::requests:0.8.0"
+//> using scala "3.3.6"
+//> using lib "com.lihaoyi::requests:0.9.0"
 
 requests.get("https://pingomatic.com/ping/?title=tech.interfluidity.com&blogurl=https%3A%2F%2Ftech.interfluidity.com%2F&rssurl=https%3A%2F%2Ftech.interfluidity.com%2Ffeed%2Findex.rss&chk_blogs=on&chk_feedburner=on&chk_tailrank=on&chk_superfeedr=on")

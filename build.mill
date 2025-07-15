@@ -1,19 +1,23 @@
-import $meta._
+//| mill-version: 1.0.0
+//| mill-jvm-version: 17
+//| mvnDeps: ["com.mchange::untemplate-mill:0.2.0-SNAPSHOT"]
+//+---------------------------------------------------------------
+
+package build
 
 import mill._
 import mill.scalalib._
 
-import $ivy.`com.mchange::untemplate-mill:0.1.4`
 import untemplate.mill._
 
-val UnstaticVersion = "0.3.3-SNAPSHOT"
+val UnstaticVersion = "0.4.0-SNAPSHOT"
 
 object Dependency {
-  val Unstatic = ivy"com.mchange::unstatic:${UnstaticVersion}"
-  val UnstaticZTapir = ivy"com.mchange::unstatic-ztapir:${UnstaticVersion}"
+  val Unstatic = mvn"com.mchange::unstatic:${UnstaticVersion}"
+  val UnstaticZTapir = mvn"com.mchange::unstatic-ztapir:${UnstaticVersion}"
 }
 
-object tech extends RootModule with UntemplateModule {
+object `package` extends UntemplateModule {
   override def scalaVersion = "3.3.3"
 
   // we'll build an index!
@@ -32,12 +36,12 @@ object tech extends RootModule with UntemplateModule {
     out
   }
 
-  override def ivyDeps = T {
-    super.ivyDeps() ++
-      Agg (
+  override def mvnDeps = Task {
+    super.mvnDeps() ++
+      Seq (
         Dependency.Unstatic,
         Dependency.UnstaticZTapir,
-      ) // Agg
+      ) // Seq
   }
 }
 

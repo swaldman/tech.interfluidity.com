@@ -1,4 +1,4 @@
 #!/bin/bash
 
-./mill run gen
+./millw run gen
 
