@@ -13,7 +13,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
 
-I'm traveling, and found some sites I needed to access forbid traffic from my location.
+I'm traveling, and found that some sites I needed to access forbid traffic from my location.
 In order to, like, pay a utility bill and renew some insurance, I needed my requests to
 appear to be coming from the United States.
 
