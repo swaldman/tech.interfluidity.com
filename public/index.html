@@ -99,13 +99,17 @@
     <li>
      <p>Install Tailscale on a US-based linux machine</p>
      <ol>
-      <li>Check the linux version I'm running 
+      <li>
+       <p>Check the linux version I'm running</p>
        <ul>
         <li>I know it's a Debian, so <a href="https://unix.stackexchange.com/questions/177205/how-do-i-know-which-version-of-debian-im-running">run</a> <code>cat /etc/*-release</code></li>
        </ul></li>
-      <li>I'm skittish about <code>curl -fsSL whatever | sh</code> style installations, which Tailscale <a href="https://tailscale.com/kb/1031/install-linux">first suggests</a> for linux, so I ran (the not all that much safer) <a href="https://tailscale.com/kb/1187/install-ubuntu-2204">version-specific Tailscale installation</a>.</li>
-      <li>The <code>sudo apt-get</code> commands installed a new kernel. I rebooted after this part of the installation.</li>
-      <li>Running <code>tailscale up</code> prints an authetication URL and then hangs. I copy the URL, then authenticate the Linux machine from my Mac laptop, by pasting it into my browser.</li>
+      <li>
+       <p>I'm skittish about <code>curl -fsSL whatever | sh</code> style installations, which Tailscale <a href="https://tailscale.com/kb/1031/install-linux">first suggests</a> for linux, so I ran (the not all that much safer) <a href="https://tailscale.com/kb/1187/install-ubuntu-2204">version-specific Tailscale installation</a>.</p></li>
+      <li>
+       <p>The <code>sudo apt-get</code> commands installed a new kernel. I rebooted after this part of the installation.</p></li>
+      <li>
+       <p>Running <code>tailscale up</code> prints an authetication URL and then hangs. I copy the URL, then authenticate the Linux machine from my Mac laptop, by pasting it into my browser.</p></li>
      </ol></li>
     <li>
      <p>Enable IP forwarding for Tailscale, see <a href="https://tailscale.com/kb/1103/exit-nodes?tab=linux">the docs</a></p>
@@ -130,11 +134,16 @@
     <li>
      <p>Since I don't want (for now) to use Tailscale all the time, I turn Tailscale off:</p>
      <ol>
-      <li>On the linux box <code>tailscale down</code></li>
-      <li>On the Mac, via the Tailscale menu, reset the exit node to "None"</li>
-      <li>Turn the green "Connected" switch to gray "Not Connected"</li>
-      <li>Via the Tailscale menu again, quit the Tailscale app Hopefully now I am back to ordinary networking.</li>
-     </ol></li>
+      <li>
+       <p>On the linux box <code>tailscale down</code></p></li>
+      <li>
+       <p>On the Mac, via the Tailscale menu, reset the exit node to "None"</p></li>
+      <li>
+       <p>Turn the green "Connected" switch to gray "Not Connected"</p></li>
+      <li>
+       <p>Via the Tailscale menu again, quit the Tailscale app</p></li>
+     </ol>
+     <p>Hopefully now I am back to ordinary networking.</p></li>
    </ol>
    <p>I think (hope) that at any time, I can rerun the Tailscale app on my Mac, restore the "Not Connected" switch to "Connected", rerun <code>tailscale up --advertise-exit-node</code> on the linux box, then continue from Step 7 above.</p>
    <p>On linux <code>tailscale status</code> will tell you whether <code>tailscale</code> is running. I reboot and check, to ensure Tailscale is not set to start-up on boot.</p>
