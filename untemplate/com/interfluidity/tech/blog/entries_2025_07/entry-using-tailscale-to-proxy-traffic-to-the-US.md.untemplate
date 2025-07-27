@@ -28,8 +28,8 @@ use tier.
 
 3. Authenticate (I chose Apple as authentication provider) and give Tailscale VPN permissions
 
-4. Install Tailscale on a US-based Linux machine
-   1. Check linux version I'm running
+4. Install Tailscale on a US-based linux machine
+   1. Check the linux version I'm running
       * I know it's a Debian, so [run](https://unix.stackexchange.com/questions/177205/how-do-i-know-which-version-of-debian-im-running) `cat /etc/*-release`
    2. I'm skittish about `curl -fsSL whatever | sh` style installations, which Tailscale [first suggests](https://tailscale.com/kb/1031/install-linux) for linux, so I ran (the not all that much safer) [version-specific Tailscale installation](https://tailscale.com/kb/1187/install-ubuntu-2204).
    3. The `sudo apt-get` commands installed a new kernel. I rebooted after this part of the installation.
