@@ -77,6 +77,78 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2025-07-27 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-using-tailscale-to-proxy-traffic-to-the-us">
+ <div class="entry-header">
+  <h1><a href="2025/07/27/using-tailscale-to-proxy-traffic-to-the-us/index.html">Using Tailscale to proxy traffic to the US</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I'm traveling, and found some sites I needed to access forbid traffic from my location. In order to, like, pay a utility bill and renew some insurance, I needed my requests to appear to be coming from the United States.</p>
+   <p>Obviously, the easy thing would be just be to install one of a zillion VPNs that would let one do this. But they usually involve some subscription fee, this is a rare issue for me and I'm cheap, and I've been curious about <a href="https://tailscale.com/">Tailscale</a>, which has a free personal use tier.</p>
+   <ol>
+    <li>
+     <p>Download the Tailscale app on my Mac (from the app store)</p></li>
+    <li>
+     <p>Run the app</p></li>
+    <li>
+     <p>Authenticate (I chose Apple as authentication provider) and give Tailscale VPN permissions</p></li>
+    <li>
+     <p>Install Tailscale on a US-based Linux machine</p>
+     <ol>
+      <li>Check linux version I'm running 
+       <ul>
+        <li>I know it's a Debian, so <a href="https://unix.stackexchange.com/questions/177205/how-do-i-know-which-version-of-debian-im-running">run</a> <code>cat /etc/*-release</code></li>
+       </ul></li>
+      <li>I'm skittish about <code>curl -fsSL whatever | sh</code> style installations, which Tailscale <a href="https://tailscale.com/kb/1031/install-linux">first suggests</a> for linux, so I ran (the not all that much safer) <a href="https://tailscale.com/kb/1187/install-ubuntu-2204">version-specific Tailscale installation</a>.</li>
+      <li>The <code>sudo apt-get</code> commands installed a new kernel. I rebooted after this part of the installation.</li>
+      <li>Running <code>tailscale up</code> prints an authetication URL and then hangs. I copy the URL, then authenticate the Linux machine from my Mac laptop, by pasting it into my browser.</li>
+     </ol></li>
+    <li>
+     <p>Enable IP forwarding for Tailscale, see <a href="https://tailscale.com/kb/1103/exit-nodes?tab=linux">the docs</a></p>
+     <ul>
+      <li>For me this was the following, but do read the docs, it's system dependent: 
+       <pre><code class="language-plaintext">% echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+% echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+% sudo sysctl -p /etc/sysctl.d/99-tailscale.conf   
+</code></pre></li>
+     </ul></li>
+    <li>
+     <p>Allow my linux box to become an exit node with <code>tailscale up --advertise-exit-node</code></p>
+     <ul>
+      <li>Note there was no need to do a <code>tailscale down</code> before rerunning <code>tailscale up</code> with the <code>--advertise-exit-node</code> flag</li>
+     </ul></li>
+    <li>
+     <p>On my <a href="https://login.tailscale.com/admin/machines">Tailscale dashboard</a> (link will only work when you're authenticated into Tailscale) my linux box is visitable and is marked as a potential exit node. Click "..." in the entry for the linux box, then "Edit route settings...", and check "Use as exit node."</p></li>
+    <li>
+     <p>In the Tailscale menu visible in the Mac menu bar when Tailscale is running, go to the "Exit Nodes" submenu, then select the linux box</p></li>
+    <li>
+     <p>Traffic is now being proxied the the US-located linux machine</p></li>
+    <li>
+     <p>Since I don't want (for now) to use Tailscale all the time, I turn Tailscale off:</p>
+     <ol>
+      <li>On the linux box <code>tailscale down</code></li>
+      <li>On the Mac, via the Tailscale menu, reset the exit node to "None"</li>
+      <li>Turn the green "Connected" switch to gray "Not Connected"</li>
+      <li>Via the Tailscale menu again, quit the Tailscale app Hopefully now I am back to ordinary networking.</li>
+     </ol></li>
+   </ol>
+   <p>I think (hope) that at any time, I can rerun the Tailscale app on my Mac, restore the "Not Connected" switch to "Connected", rerun <code>tailscale up --advertise-exit-node</code> on the linux box, then continue from Step 7 above.</p>
+   <p>On linux <code>tailscale status</code> will tell you whether <code>tailscale</code> is running. I reboot and check, to ensure Tailscale is not set to start-up on boot.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="2025/07/27/using-tailscale-to-proxy-traffic-to-the-us/index.html" class="pubtime">07:00 AM EDT</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2025-05-26 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple uid-zeroish-overhead-logging-facade-in-scala-3">
@@ -1281,53 +1353,6 @@ Jan 13 20:16:41 temp-feedletter feedletter[70086]: 2025-01-13@20:16:41 [INFO] [c
    </div>
    <div>
     <a href="xml/iffy/index-updated-2024-11-15-01-10-00.html" class="pubtime">01:10 AM EST</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article">
-</div><!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2024-11-12 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-supporting-single-item-rss">
- <div class="entry-header">
-  <h1><a href="2024/11/12/supporting-single-item-rss/index.html">Supporting single-item RSS</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p>This blog now <a href="2024/11/12/supporting-single-item-rss/index.rss">generates</a> single-item RSS alongside each blog post.</p>
-   <p>This is in preparation for how I mean to support blog-to-blog comments, most directly.</p>
-   <p>But in general it is offered as an alternative to approaches like <a href="https://microformats.org/">microformats</a>.</p>
-   <p>Microformats exist and other people use them. I feel a bit bad not to adopt them. But my preference is to have meta-data more cleanly separated from displayed HTML, even if it is "<a href="https://microformats.org/wiki/posh">POSH</a>". It seems to me like too many concerns are mixed.</p>
-   <p>If microformats were very widely adopted — particularly if the JVM ecosystem already had well-supported, widely used microformats parsers — I might swallow my own preference and run with them. But I don't think that's the case. I'm going to have to do my own parsing, and I have good tools for that with XML and RSS.</p>
-   <p><a href="https://github.com/swaldman/unstatic"><code>unstatic</code></a> <code>SimpleBlog</code> instances now support generating single-item RSS. Just override</p>
-   <pre><code class="language-scala">val generateSingleItemRss : Boolean
-</code></pre>
-   <p>to <code>true</code>, and they will appear.</p>
-   <p>By default, each entry's single-item RSS is placed by converting each <code>whatever.html</code> to <code>whatever.rss</code>, under the same path. (If the leaf of the path does not end with <code>.html</code>, then <code>.rss</code> is simply appended to the full path.)</p>
-   <p>If you prefer a different scheme, you can override</p>
-   <pre><code class="language-scala">def singleItemRssSiteRootedFromPermalinkSiteRooted( permalinkSiteRooted : Rooted ) : Rooted
-</code></pre>
-   <p>where <code>Rooted</code> is a <a href="https://github.com/swaldman/unstatic/blob/main/src/unstatic/UrlPath.scala"><code>unstantic.UrlPath.Rooted</code></a>.</p>
-   <p>Single-item RSS and the HTML "permalink" for the item should mutually refer to one another.</p>
-   <p>In the HTML header tag, we add a <code>&lt;link&gt;</code> tag with <code>rel="alternate"</code> to point to the single-item RSS.</p>
-   <p>We <em>don't</em> want feed readers to subscribe to single-item RSS, so, a bit clumsily, we make up a special content type that feed readers won't recognize, <code>application/x-single-item-rss+xml</code>.</p>
-   <p>Here's the link you'll find in the source of this post.</p>
-   <pre><code class="language-html">&lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Supporting single-item RSS" href="index.rss"&gt;
-</code></pre>
-   <p>The single-item RSS links back to the HTML as a matter of course, via the standard <code>&lt;link&gt;</code> element within the sole <code>&lt;item&gt;</code>.</p>
-   <p>Check out <a href="2024/11/12/supporting-single-item-rss/index.rss">the single-item RSS for this post</a>!</p>
-   <hr>
-   <div style="font-size: smaller">
-    <p><strong>Note:</strong> If an <code>&lt;atom:link rel="self" /&gt;</code> tag is included in the <code>&lt;channel&gt;</code> element of a single-item RSS stream, the type should be the standard <code>type="application/rss+xml"</code>, <span style="color: red"> <strong>and definitely not</strong> </span> <code>application/x-single-item-rss+xml</code>. (I recommend <code>&lt;atom:link rel="self" /&gt;</code> <em>always</em> be included in the <code>&lt;channel&gt;</code> of an RSS stream, whenever there exists a stable link to the stream.) Single-item RSS is just standard RSS for all purposes other than a feed-reader deciding whether to treat a feed as subscribable.</p>
-   </div>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div>
-    <a href="2024/11/12/supporting-single-item-rss/index.html" class="pubtime">06:30 AM EST</a>
    </div>
   </div>
  </div>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="tech notebook @ interfluidity">
+    <meta name="keywords" content="Scala, tech, interfluidity">
+    <meta name="author" content="Steve Randy Waldman">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- icons / favicons -->
+
+    <!-- we just want the squared-corner image with no overlays for traditional favicon uses at tiny sizes -->
+    <!-- swaldman added, ick, firefox scales down the biggest size for its tab icon, so we use the graphic we want for small sizes as the largest... -->
+    <link rel="icon" type="image/png" sizes="500x500" href="../../../../icon/interfluidity-wave-blank-square-500x500.png"> 
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../icon/interfluidity-wave-blank-square-32x32.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../icon/interfluidity-wave-blank-square-16x16.png">     <!-- swaldman added, for standard favicon size -->
+    <link rel="icon" type="image/png" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">                   <!-- swaldman added, for small icons by default -->
+
+    <!-- at bigger sizes, we overlay a bit of text -->
+    <!-- icons as recommened by https://mathiasbynens.be/notes/touch-icons -->
+    <!-- For Chrome for Android: -->
+    <link rel="icon" sizes="192x192" href="../../../../icon/interfluidity-wave-tech-192x192.png">
+    <!-- For iPhone 6 Plus with @3× display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="../../../../icon/interfluidity-wave-tech-180x180.png">
+    <!-- For iPad with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../../../icon/interfluidity-wave-tech-152x152.png">
+    <!-- For iPad with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../../icon/interfluidity-wave-tech-144x144.png">
+    <!-- For iPhone with @2× display running iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="../../../../icon/interfluidity-wave-tech-120x120.png">
+    <!-- For iPhone with @2× display running iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../../../icon/interfluidity-wave-tech-114x114.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≥ 7: -->
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="../../../../icon/interfluidity-wave-tech-76x76.png">
+    <!-- For the iPad mini and the first- and second-generation iPad (@1× display) on iOS ≤ 6: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../../../icon/interfluidity-wave-tech-72x72.png">
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="../../../../icon/interfluidity-wave-blank-square-57x57.png">
+
+    <!-- end icons / favicons -->
+    
+    <link rel="alternate" type="application/rss+xml" title="tech.interfluidity.com updates" href="../../../../feed/index.rss">
+    <link rel="alternate" type="application/x-all-item-rss+xml" title="tech.interfluidity.com - all items" href="https://tech.interfluidity.com/all-item-feed/index.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
+    <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Using Tailscale to proxy traffic to the US" href="index.rss">
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
+    <script src="../../../../js/highlight/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const regex = /(^.*)\-oldcommit\-[0-9A-Fa-f]+\.html/;
+          const match = window.location.pathname.match(regex);
+          if (match) {
+              const b  = document.querySelector("body");
+              const tb = document.getElementById("top-banner");
+              b.classList.add("old-draft");
+              tb.innerHTML = "You are looking at an old, superceded version of this page. For the current version, please <a href=\"" + match[1] + ".html\">click here</a>.";
+          }
+       });
+    </script>
+    <title>Using Tailscale to proxy traffic to the US</title>
+  </head>
+  <body>
+    <div id="top-banner"></div>
+    <div id="header">
+      <div id="rss-link-container">
+        <a id="rss-link" href="../../../../feed/index.rss"><span class="outer">(</span><span class="middle">(</span><span class="inner">(</span><span class="bullet">&bull;</span><span class="inner">)</span><span class="middle">)</span><span class="outer">)</span></a>
+      </div>
+      <div class="main-title"><a href="https://tech.interfluidity.com/">tech.interfluidity.com</a></div>
+      <div class="tagline">a notebook by <a href="https://www.interfluidity.com/">steve&nbsp;randy&nbsp;waldman</a></div>
+      <div class="see-also">&rarr; See also <a href="../../../../index.html">top</a>, <a href="../../../../archive.html">archive</a>, <a href="../../../../subscribe.html">subscribe</a>, <a href="https://drafts.interfluidity.com/">drafts blog</a>, <a href="https://www.interfluidity.com/">interfluidity main</a></div>
+    </div>
+    <div id="main">
+      <div id="left-sidebar">
+      </div>
+      <div id="content">
+        <div class="day-stamp">
+ 2025-07-27 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-single uid-using-tailscale-to-proxy-traffic-to-the-us">
+ <div class="entry-header">
+  <h1><a href="index.html">Using Tailscale to proxy traffic to the US</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p>I'm traveling, and found some sites I needed to access forbid traffic from my location. In order to, like, pay a utility bill and renew some insurance, I needed my requests to appear to be coming from the United States.</p>
+   <p>Obviously, the easy thing would be just be to install one of a zillion VPNs that would let one do this. But they usually involve some subscription fee, this is a rare issue for me and I'm cheap, and I've been curious about <a href="https://tailscale.com/">Tailscale</a>, which has a free personal use tier.</p>
+   <ol>
+    <li>
+     <p>Download the Tailscale app on my Mac (from the app store)</p></li>
+    <li>
+     <p>Run the app</p></li>
+    <li>
+     <p>Authenticate (I chose Apple as authentication provider) and give Tailscale VPN permissions</p></li>
+    <li>
+     <p>Install Tailscale on a US-based Linux machine</p>
+     <ol>
+      <li>Check linux version I'm running 
+       <ul>
+        <li>I know it's a Debian, so <a href="https://unix.stackexchange.com/questions/177205/how-do-i-know-which-version-of-debian-im-running">run</a> <code>cat /etc/*-release</code></li>
+       </ul></li>
+      <li>I'm skittish about <code>curl -fsSL whatever | sh</code> style installations, which Tailscale <a href="https://tailscale.com/kb/1031/install-linux">first suggests</a> for linux, so I ran (the not all that much safer) <a href="https://tailscale.com/kb/1187/install-ubuntu-2204">version-specific Tailscale installation</a>.</li>
+      <li>The <code>sudo apt-get</code> commands installed a new kernel. I rebooted after this part of the installation.</li>
+      <li>Running <code>tailscale up</code> prints an authetication URL and then hangs. I copy the URL, then authenticate the Linux machine from my Mac laptop, by pasting it into my browser.</li>
+     </ol></li>
+    <li>
+     <p>Enable IP forwarding for Tailscale, see <a href="https://tailscale.com/kb/1103/exit-nodes?tab=linux">the docs</a></p>
+     <ul>
+      <li>For me this was the following, but do read the docs, it's system dependent: 
+       <pre><code class="language-plaintext">% echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+% echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+% sudo sysctl -p /etc/sysctl.d/99-tailscale.conf   
+</code></pre></li>
+     </ul></li>
+    <li>
+     <p>Allow my linux box to become an exit node with <code>tailscale up --advertise-exit-node</code></p>
+     <ul>
+      <li>Note there was no need to do a <code>tailscale down</code> before rerunning <code>tailscale up</code> with the <code>--advertise-exit-node</code> flag</li>
+     </ul></li>
+    <li>
+     <p>On my <a href="https://login.tailscale.com/admin/machines">Tailscale dashboard</a> (link will only work when you're authenticated into Tailscale) my linux box is visitable and is marked as a potential exit node. Click "..." in the entry for the linux box, then "Edit route settings...", and check "Use as exit node."</p></li>
+    <li>
+     <p>In the Tailscale menu visible in the Mac menu bar when Tailscale is running, go to the "Exit Nodes" submenu, then select the linux box</p></li>
+    <li>
+     <p>Traffic is now being proxied the the US-located linux machine</p></li>
+    <li>
+     <p>Since I don't want (for now) to use Tailscale all the time, I turn Tailscale off:</p>
+     <ol>
+      <li>On the linux box <code>tailscale down</code></li>
+      <li>On the Mac, via the Tailscale menu, reset the exit node to "None"</li>
+      <li>Turn the green "Connected" switch to gray "Not Connected"</li>
+      <li>Via the Tailscale menu again, quit the Tailscale app Hopefully now I am back to ordinary networking.</li>
+     </ol></li>
+   </ol>
+   <p>I think (hope) that at any time, I can rerun the Tailscale app on my Mac, restore the "Not Connected" switch to "Connected", rerun <code>tailscale up --advertise-exit-node</code> on the linux box, then continue from Step 7 above.</p>
+   <p>On linux <code>tailscale status</code> will tell you whether <code>tailscale</code> is running. I reboot and check, to ensure Tailscale is not set to start-up on boot.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="index.html" class="pubtime">07:00 AM EDT</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article">
+ <div class="prev-top-next">
+  <div class="prev">
+   <a href="../../../05/26/zero-ish-overhead-logging-facade-in-scala-3/index.html">← Zero-ish overhead logging facade in Scala 3</a>
+  </div>
+  <div class="top">
+   <a href="../../../../index.html">↑↑↑</a>
+  </div>
+  <div class="next">
+  </div>
+ </div>
+</div><!-- after-article -->
+      </div>
+      <div id="right-sidebar">
+      </div>
+    </div>
+  </body>
+</html>

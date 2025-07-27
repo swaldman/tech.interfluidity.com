@@ -18,7 +18,7 @@ object Dependency {
 }
 
 object `package` extends UntemplateModule {
-  override def scalaVersion = "3.3.3"
+  override def scalaVersion = "3.3.6"
 
   // we'll build an index!
   override def untemplateIndexNameFullyQualified : Option[String] = Some("com.interfluidity.tech.IndexedUntemplates")
