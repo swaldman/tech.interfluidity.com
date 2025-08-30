@@ -298,11 +298,14 @@ Created user with email swaldman@mchange.com
      <p>I've configured <code>csp.allowFraming</code> to <code>true</code>. I intend for my "collaboration server" to take the form of a palette of multiple apps embedded on a webpage in <code>iframe</code>s. Each frame would be maximizable, or you could view work with multiple frames at once. So I really want HedgeDoc to work from an iframe.</p>
      <ul>
       <li>The <a href="https://docs.hedgedoc.org/configuration/">docs</a> "<strong>strongly recommend disabling</strong> this option, as it increases the attack surface of XSS attacks." (Their emphasis!) If users do choose to enable framing, the docs <a href="https://docs.hedgedoc.org/faq/">recommend</a> serving over <code>https</code> and setting a <code>cookiePolicy</code> of <code>none</code>, which we do. So identification is by SSL session information, and there is no cookie to steal. I feel pretty okay with this, but what am I missing?</li>
-     </ul></li>
+     </ul>
+    </li>
     <li>
-     <p>As discussed above, I don't set <a href="https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters"><code>ssl_dhparam</code></a>) in my SSH config. I've never encountered this before, but now I wonder whether I shouldn't get in the habit of setting this up across the sites I maintain. How much does it matter?</p></li>
+     <p>As discussed above, I don't set <a href="https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters"><code>ssl_dhparam</code></a>) in my SSH config. I've never encountered this before, but now I wonder whether I shouldn't get in the habit of setting this up across the sites I maintain. How much does it matter?</p>
+    </li>
     <li>
-     <p>I often build services beneath the home directory of the user I create to run them. They are not run on machines on which users are likely to store sensitive personal information in home directories, but given the existence of the <code>systemd</code> <code>ProtectHome</code> restriction, perhaps it's a bad habit that I should revise?</p></li>
+     <p>I often build services beneath the home directory of the user I create to run them. They are not run on machines on which users are likely to store sensitive personal information in home directories, but given the existence of the <code>systemd</code> <code>ProtectHome</code> restriction, perhaps it's a bad habit that I should revise?</p>
+    </li>
    </ul>
    <p>I also remain concerned about the promiscuity of the <code>node</code> dependency ecosystem, and the possibility of supply chain attacks. I'm concerned about that across ecosystems: The JVM world in which I typically develop carries some of the same risks.</p>
    <p>But the problem is <a href="https://timotijhof.net/posts/2019/protect-yourself-from-npm/">arguably worse in the node ecosystem</a>. I'm not running in <code>docker</code> containers or <code>chroot</code> or anything like that.</p>
@@ -436,7 +439,8 @@ server {
    <a href="../../30/suppressing-bloop-for-scala-cli-managed-services/index.html">Suppressing bloop for scala-cli managed services →</a>
   </div>
  </div>
-</div><!-- after-article -->
+</div>
+<!-- after-article -->
       </div>
       <div id="right-sidebar">
       </div>

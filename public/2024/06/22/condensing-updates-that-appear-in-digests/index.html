@@ -93,10 +93,12 @@
    <ol>
     <li>
      <p><strong>Update notifications appear in digests as separate, cookie-cutter posts, which bury and dilute "real" posts.</strong></p>
-     <p>On websites, we can make synthetic update posts visually distinct to help guide visitors past them. We could do that in HTML mail digests too, but I think update posts will still put people off actually reading new material when they are going quickly through their e-mail, particularly when updates are more recent and therefore come before the "real" posts.</p></li>
+     <p>On websites, we can make synthetic update posts visually distinct to help guide visitors past them. We could do that in HTML mail digests too, but I think update posts will still put people off actually reading new material when they are going quickly through their e-mail, particularly when updates are more recent and therefore come before the "real" posts.</p>
+    </li>
     <li>
      <p><strong>Updates appear even for posts that are included in the current digest.</strong></p>
-     <p><a href="../../../01/29/feedletter-tutorial/index.html"><em>feedletter</em></a> digests always include the most recently seen version of a post, so from the digest reader's perspective, the "update" notification tells them about nothing that isn't already in the post.</p></li>
+     <p><a href="../../../01/29/feedletter-tutorial/index.html"><em>feedletter</em></a> digests always include the most recently seen version of a post, so from the digest reader's perspective, the "update" notification tells them about nothing that isn't already in the post.</p>
+    </li>
    </ol>
    <p>To address this, I mean to do a bunch of things.</p>
    <ol>
@@ -110,14 +112,16 @@
      <p>But now we'll reconceive of <a href="../../../../xml/iffy/index.html#iffy-synthetic"><code>iffy:synthetic</code></a> as also the carrier of the data on which the item content (in <a href="https://www.rssboard.org/rss-specification#hrelementsOfLtitemgt"><code>description</code></a>, <a href="https://www.rssboard.org/rss-profile#namespace-elements-content-encoded"><code>content:encoded</code></a>, or <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.1.3"><code>atom:content</code></a>) is based.</p>
      <p>The item content, of course, remains the post's HTML, whether it is a synthetic post or not. But we'll want the information we used to <em>compose</em> synthetic posts to be available, in an <a href="../../../../xml/iffy/index.html#iffy-type"><code>iffy:type</code></a>-dependent way, inside <code>item &gt; iffy:synthetic</code>. So even when a <code>channel</code> is marked synthetic, with a type that implies the type of elements, we will want explicitly to include an <a href="../../../../xml/iffy/index.html#iffy-synthetic"><code>iffy:synthetic</code></a> element in each item.</p>
      <p>For synthethic items of type <code>UpdateAnnouncement</code> — the relevant case here — we've already defined an element that carries most the relevant data, <a href="../../../../xml/iffy/index.html#iffy-update"><code>iffy:update</code></a>.</p>
-     <p>We'll also need the <code>guid</code> of the post updated. So we'll <a href="/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html#iffy-original-guid">bring back</a> <code>iffy:original-guid</code>, with a slightly modified role.</p></li>
+     <p>We'll also need the <code>guid</code> of the post updated. So we'll <a href="/xml/iffy/index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html#iffy-original-guid">bring back</a> <code>iffy:original-guid</code>, with a slightly modified role.</p>
+    </li>
     <li>
      <p>I'll define a <a href="../../../01/29/feedletter-tutorial/index.html#16-advanced-customize-the-content"><em>feedletter</em> content <code>Customizer</code></a> that</p>
      <ol>
       <li>filters away upates to <code>items</code> already in the post;</li>
       <li>combines the remaining updates into a single notification post; and</li>
       <li>places that notification post at the end of the digest.</li>
-     </ol></li>
+     </ol>
+    </li>
    </ol>
    <p>So. We have a plan!</p>
    <p>Let's see if it works.</p>
@@ -143,7 +147,8 @@
    <a href="../../../../xml/iffy/index-updated-2024-07-01-14-40-00.html">Updated: The 'iffy' XML namespace →</a>
   </div>
  </div>
-</div><!-- after-article -->
+</div>
+<!-- after-article -->
       </div>
       <div id="right-sidebar">
       </div>

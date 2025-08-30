@@ -113,7 +113,7 @@
    <p>So... We'll</p>
    <ol>
     <li>Steal <a href="https://github.com/swaldman/tech.interfluidity.com/blob/main/untemplate/com/interfluidity/tech/blog/layout-update-history.html.untemplate"><code>layout-update-history.html.untemplate</code></a> from the tech blog, and <a href="https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/mainblog/layout-update-history.html.untemplate">bring it in as a layout of drafts</a>. (I had to import <code>com.interfluidity.drafts.DraftsSite.MainBlog</code>, and modify the link in the note to point to the drafts got repository, rather than the tech rep.)</li>
-    <li>Modify <a href="https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/mainblog/layout-entry.html.untemplate"><code>layout-entry.html.untemplate</code></a> in drafts to bring in the new layout of update history. That turns out to be really easy, because we already have logic at the end of our entry layout to restrict addition of previous and next links to single page presentations. So all we have to do is add our update history layout just after the <code>div</code> for those links, but within the conditionally added region. It's literally just 
+    <li>Modify <a href="https://github.com/swaldman/drafts.interfluidity.com/blob/main/untemplate/com/interfluidity/drafts/mainblog/layout-entry.html.untemplate"><code>layout-entry.html.untemplate</code></a> in drafts to bring in the new layout of update history. That turns out to be really easy, because we already have logic at the end of our entry layout to restrict addition of previous and next links to single page presentations. So all we have to do is add our update history layout just after the <code>div</code> for those links, but within the conditionally added region. It's literally just
      <pre><code class="language-plaintext">&lt;( layout_update_history_html( input ) )&gt;
 </code></pre>
      <p>inserted just after that <code>div</code>, still within the conditional region.</p></li>
@@ -221,7 +221,8 @@
    Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2024-06-06 @ 02:26 PM EDT.
   </div>
  </div>
-</div><!-- after-article -->
+</div>
+<!-- after-article -->
       </div>
       <div id="right-sidebar">
       </div>
