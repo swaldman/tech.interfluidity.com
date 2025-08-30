@@ -85,7 +85,7 @@
   <hr class="below-title">
  </div>
  <div class="update-prepend rss-description-exclude">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2025-08-30 @ 06:50 PM EDT. The previous revision is <a href="index-oldcommit-7f272e9b81c08396eb5e1f9e2209e6977a2f39af.html">here</a>, diff <a href="index-diff-7f272e9b81c08396eb5e1f9e2209e6977a2f39af-to-current.html">here</a>. (See <a href="index.html#update-history">update history</a>.) <br>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-12-22 @ 10:40 AM EST. The previous revision is <a href="index-oldcommit-c1c3071b0ac3127c2969b24e26d439510fdc8c96.html">here</a>, diff <a href="index-diff-c1c3071b0ac3127c2969b24e26d439510fdc8c96-to-current.html">here</a>. (See <a href="index.html#update-history">update history</a>.) <br>
     ➣&nbsp;&nbsp;This post is expected to evolve over time. You can subscribe to ongoing updates <a href="index-sprout.rss">here</a>. 
    <link rel="alternate" type="application/rss+xml" title="Update to The 'iffy' XML namespace" href="https://tech.interfluidity.com/xml/iffy/index-sprout.rss"></em>
   <hr>
@@ -194,6 +194,7 @@
     <p><code>iffy:curation</code> provides a description of how the feed is curated relative to the body of work a subset of which it presents. It MUST include as a sub-element a <em>curation type</em>. The following curation types are defined:</p>
     <ul>
      <li><a href="#iffy-all"><code>iffy:all</code></a></li>
+     <li><a href="#iffy-recent"><code>iffy:recent</code></a></li>
      <li><a href="#iffy-selection"><code>iffy:selection</code></a></li>
      <li><a href="#iffy-single"><code>iffy:single</code></a></li>
     </ul>
@@ -205,9 +206,7 @@
     &lt;title&gt;tech — interfluidity&lt;/title&gt;
     &lt;atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/feed/index.rss"/&gt;
     &lt;iffy:curation&gt;
-      &lt;iffy:selection&gt;
-        &lt;iffy:recent since="2024-08-16T22:22:14.297722-04:00" last="10" operator="and"/&gt;
-      &lt;/iffy:selection&gt;
+      &lt;iffy:recent last="10"/&gt;
     &lt;/iffy:curation&gt;
     &lt;!-- Other channel elements --&gt;
     &lt;item&gt;
@@ -436,9 +435,10 @@
    <hr>
    <h2><a href="#element--iffyrecent-" id="element--iffyrecent-" name="element--iffyrecent-" class="anchorlink"></a>Element — <code>iffy:recent</code> <a id="iffy-recent" href=""></a></h2>
    <div class="iffy-element-desc">
-    <h3><a href="#when-beneath-iffyselection" id="when-beneath-iffyselection" name="when-beneath-iffyselection" class="anchorlink"></a>When beneath <a href="#iffy-selection"><code>iffy:selection</code></a></h3>
-    <p><code>iffy:recent</code> describes a <a href="#iffy-selection">selection</a> (see also <a href="#iffy-curation"><code>iffy:curation</code></a>) that represents the most recent posts to a feed.</p>
-    <p>(Curations that are selections of recent posts represent the most common use-case for RSS, although most feeds do not yet annotate themselves as such.)</p>
+    <h3><a href="#when-beneath-iffycuration-1" id="when-beneath-iffycuration-1" name="when-beneath-iffycuration-1" class="anchorlink"></a>When beneath <a href="#iffy-curation"><code>iffy:curation</code></a></h3>
+    <p><code>iffy:recent</code> is a <em>curation type</em>, a description of how the feed is curated relative to the body of work a subset of which it presents.</p>
+    <p>Curation type <code>iffy:recent</code> signifies that a subset consisting of the most work is represented by <code>item</code> elements in this feed.</p>
+    <p>(Curations of logically of type recent represent the most common use-case for RSS, although most feeds do not yet annotate themselves as such.)</p>
     <p><code>iffy:recent</code> has three attributes:</p>
     <ul>
      <li>
@@ -456,9 +456,7 @@
     &lt;title&gt;tech — interfluidity&lt;/title&gt;
     &lt;atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/feed/index.rss"/&gt;
     &lt;iffy:curation&gt;
-      &lt;iffy:selection&gt;
-        &lt;iffy:recent since="2024-08-16T22:22:14.297722-04:00" last="10" operator="and"/&gt;
-      &lt;iffy:selection&gt;
+      &lt;iffy:recent since="2024-08-16T22:22:14.297722-04:00" last="10" operator="and"/&gt;
     &lt;/iffy:curation&gt;
     &lt;!-- Other channel elements --&gt;
     &lt;item&gt;
@@ -480,35 +478,12 @@
    <hr>
    <h2><a href="#element--iffyselection-" id="element--iffyselection-" name="element--iffyselection-" class="anchorlink"></a>Element — <code>iffy:selection</code> <a id="iffy-selection" href=""></a></h2>
    <div class="iffy-element-desc">
-    <h3><a href="#when-beneath-iffycuration-1" id="when-beneath-iffycuration-1" name="when-beneath-iffycuration-1" class="anchorlink"></a>When beneath <a href="#iffy-curation"><code>iffy:curation</code></a></h3>
+    <h3><a href="#when-beneath-iffycuration-2" id="when-beneath-iffycuration-2" name="when-beneath-iffycuration-2" class="anchorlink"></a>When beneath <a href="#iffy-curation"><code>iffy:curation</code></a></h3>
     <p><code>iffy:selection</code> is a <em>curation type</em>, a description of how the feed is curated relative to the body of work a subset of which it presents.</p>
     <p>Curation type <code>iffy:selection</code> signifies that this feed is the result of a potentially arbitrary query against or restriction of the full body of work.</p>
     <p>An <code>iffy:selection</code> tag SHOULD contain subelements, documenting the query or restriction that produced this selection, ideally with sufficient information to reproduce the selection from a specified upstream source.</p>
-    <p>This specification defines only a single query type for <code>iffy:selection</code>:</p>
-    <ul>
-     <li><a href="#iffy-recent"><code>iffy:recent</code></a></li>
-    </ul>
-    <p>However, many other queries or selections are possible, and at least for now, there are no restrictions on descriptions that might be provide. It is a playground for developer creativity.</p>
-    <h4><a href="#example-recent-items" id="example-recent-items" name="example-recent-items" class="anchorlink"></a>Example (recent items):</h4>
-    <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-
-&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
-  &lt;channel&gt;
-    &lt;title&gt;tech — interfluidity&lt;/title&gt;
-    &lt;atom:link type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/feed/index.rss"/&gt;
-    &lt;iffy:curation&gt;
-      &lt;iffy:selection&gt;
-        &lt;iffy:recent since="2024-08-16T22:22:14.297722-04:00" last="10" operator="and"/&gt;
-      &lt;/iffy:selection&gt;
-    &lt;/iffy:curation&gt;
-    &lt;!-- Other channel elements --&gt;
-    &lt;item&gt;
-      &lt;!-- Other item elements --&gt;
-    &lt;/item&gt;
-  &lt;/channel&gt;
-&lt;/rss&gt;
-</code></pre>
-    <h4><a href="#example-arbitrary-query" id="example-arbitrary-query" name="example-arbitrary-query" class="anchorlink"></a>Example (arbitrary query):</h4>
+    <p>However, no standard yet described how queries and restrictions might be document. For now, it is a playground for developer creativity...</p>
+    <h4><a href="#example-9" id="example-9" name="example-9" class="anchorlink"></a>Example:</h4>
     <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 
 &lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
@@ -535,11 +510,11 @@
    <hr>
    <h2><a href="#element--iffysingle-" id="element--iffysingle-" name="element--iffysingle-" class="anchorlink"></a>Element — <code>iffy:single</code> <a id="iffy-single" href=""></a></h2>
    <div class="iffy-element-desc">
-    <h3><a href="#when-beneath-iffycuration-2" id="when-beneath-iffycuration-2" name="when-beneath-iffycuration-2" class="anchorlink"></a>When beneath <a href="#iffy-curation"><code>iffy:curation</code></a></h3>
+    <h3><a href="#when-beneath-iffycuration-3" id="when-beneath-iffycuration-3" name="when-beneath-iffycuration-3" class="anchorlink"></a>When beneath <a href="#iffy-curation"><code>iffy:curation</code></a></h3>
     <p><code>iffy:single</code> is a <em>curation type</em>, a description of how the feed is curated relative to the body of work a subset of which it presents.</p>
     <p>Curation type <code>iffy:single</code> signifies that this is <a href="../../2024/11/12/supporting-single-item-rss/index.html">single-item RSS</a>.</p>
     <p>The feed contains just one item, not by happenstance because there is only one recent item, nor because some <a href="#iffy-selection">selection</a> yielded just one item, but intentionally, so that metadata related to the item can have its own permanent RSS home.</p>
-    <h4><a href="#example-9" id="example-9" name="example-9" class="anchorlink"></a>Example:</h4>
+    <h4><a href="#example-10" id="example-10" name="example-10" class="anchorlink"></a>Example:</h4>
     <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
 
 &lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
@@ -570,7 +545,7 @@
     </ul>
     <h3><a href="#when-a-subelement-of-channel-and-iffytype-is-itemupdatefeed" id="when-a-subelement-of-channel-and-iffytype-is-itemupdatefeed" name="when-a-subelement-of-channel-and-iffytype-is-itemupdatefeed" class="anchorlink"></a>When a subelement of <code>channel</code> AND <a href="#iffy-type"><code>iffy:type</code></a> is <code>ItemUpdateFeed</code></h3>
     <p>SHOULD include an <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.7"><code>atom:link</code></a> with <code>rel</code> attribute set to <code>related</code>, pointing to the same resource as the <code>link</code> element of the item whose updates are being announced.</p>
-    <h4><a href="#example-10" id="example-10" name="example-10" class="anchorlink"></a>Example:</h4>
+    <h4><a href="#example-11" id="example-11" name="example-11" class="anchorlink"></a>Example:</h4>
     <pre><code class="language-xml">  &lt;channel&gt;
     &lt;!-- other channel elements --&gt;
     &lt;iffy:synthetic&gt;
@@ -589,7 +564,7 @@
     </ul>
     <h3><a href="#when-a-subelement-of-item-and-iffytype-is-updateannouncement" id="when-a-subelement-of-item-and-iffytype-is-updateannouncement" name="when-a-subelement-of-item-and-iffytype-is-updateannouncement" class="anchorlink"></a>When a subelement of <code>item</code> AND <a href="#iffy-type"><code>iffy:type</code></a> is <code>UpdateAnnouncement</code></h3>
     <p>In addition to <code>iffy:type</code>, MUST contain an <a href="#iffy-update"><code>iffy:update</code></a> element, which in turn MUST contain an <a href="#iffy-initial"><code>iffy:initial</code></a> element describing the initial state of the updated post.</p>
-    <h4><a href="#example-11" id="example-11" name="example-11" class="anchorlink"></a>Example:</h4>
+    <h4><a href="#example-12" id="example-12" name="example-12" class="anchorlink"></a>Example:</h4>
     <pre><code class="language-xml">&lt;item&gt;
   &lt;pubDate&gt;Thu, 20 Jun 2024 13:10:00 -0400&lt;/pubDate&gt;
   &lt;guid isPermalink="true"&gt;
@@ -757,7 +732,7 @@
  <div class="entry-footer">
   <div class="post-metainfo">
    <div class="updated-note">
-    <a href="index.html#major-updates">Last major update at 2025-08-30 @ 06:50 PM EDT</a>
+    <a href="index.html#major-updates">Last major update at 2024-12-22 @ 10:40 AM EST</a>
    </div>
    <div>
     <a href="index.html" class="pubtime">04:10 AM EDT</a>
@@ -780,8 +755,7 @@
  <div id="update-history" class="update-history">
   <h3 class="update-history-title"><a id="major-updates" href=""></a>Major revisions:</h3>
   <ul>
-   <li><span class="update-timestamp"><i>2025-08-30 @ 06:50 PM EDT</i></span> — Revise definition of curation, so it has only three types: all, selection, and single. iffy:recent becomes a query under selection. (<a href="index-diff-7f272e9b81c08396eb5e1f9e2209e6977a2f39af-to-current.html">diff</a>)</li>
-   <li><span class="update-timestamp"><i> <a href="index-oldcommit-7f272e9b81c08396eb5e1f9e2209e6977a2f39af.html">2024-12-22 @ 10:40 AM EST</a></i></span> — Document <code>iffy:item-ref</code> and <code>iffy:in-reply-to</code>. (<a href="index-diff-c1c3071b0ac3127c2969b24e26d439510fdc8c96-to-7f272e9b81c08396eb5e1f9e2209e6977a2f39af.html">diff</a>)</li>
+   <li><span class="update-timestamp"><i>2024-12-22 @ 10:40 AM EST</i></span> — Document <code>iffy:item-ref</code> and <code>iffy:in-reply-to</code>. (<a href="index-diff-c1c3071b0ac3127c2969b24e26d439510fdc8c96-to-current.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-c1c3071b0ac3127c2969b24e26d439510fdc8c96.html">2024-11-15 @ 01:10 AM EST</a></i></span> — Document <code>iffy:curation</code>, and curation type elements <code>iffy:all</code>, <code>iffy:recent</code>, <code>iffy:selection</code>, <code>iffy:single</code>. (<a href="index-diff-5fcd99373d2d940a0c6e1468979be59e2d6bcced-to-c1c3071b0ac3127c2969b24e26d439510fdc8c96.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-5fcd99373d2d940a0c6e1468979be59e2d6bcced.html">2024-11-02 @ 05:15 PM EDT</a></i></span> — Clarifications of iffy:provenance and iffy:update-history. (<a href="index-diff-34d8dab8f187c6d9512615dbb83c95395aa49a3b-to-5fcd99373d2d940a0c6e1468979be59e2d6bcced.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-34d8dab8f187c6d9512615dbb83c95395aa49a3b.html">2024-07-01 @ 02:40 PM EDT</a></i></span> — Major revision of <code>iffy:synthetic</code>, generalize <code>iffy:initial</code>, <code>iffy:update</code>, <code>iffy:update-history</code>, define <code>iffy:uid</code>. (<a href="index-diff-0df7787c056ab2b983e2de4d107c2fa477b7c8f4-to-34d8dab8f187c6d9512615dbb83c95395aa49a3b.html">diff</a>)</li>
@@ -795,7 +769,7 @@
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-394986cb8d9c57f567d324e691a44d50102101ce.html">2024-05-13 @ 04:10 AM EDT</a></i></span> — Initial publication.</li>
   </ul>
   <div class="update-history-note">
-   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2025-08-30 @ 06:50 PM EDT.
+   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2025-01-05 @ 11:03 PM EST.
   </div>
  </div>
 </div><!-- after-article -->
