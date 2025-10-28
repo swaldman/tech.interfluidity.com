@@ -1,0 +1,45 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Turn your Bluesky archive into a readable, hostable static site with fossilphant",
+>   "PubDate"       -> "2025-10-28T11:55:00-04:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "fossilphant-bluesky-tutorial" // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+<p>A couple of years ago, I wrote <a href="https://github.com/swaldman/fossilphant">fossilphant</a>, a utility for converting exported archives of Mastodon accounts into readable, self-hostable static sites. You can see what those look like <a href="http://www.interfluidity.com/microblog-archives/fosstodon">here</a> or <a href="http://www.interfluidity.com/microblog-archives/econtwitter">here</a> or <a href="http://www.interfluidity.com/microblog-archives/zirkus">here</a>. (I've wandered across three “instances” on Mastodon!)</p>
+
+<p>Now you can turn your Bluesky <a href="https://docs.bsky.app/blog/repo-export"><code>repo.car</code></a> file into a static site as well! Here's how!</p>
+<ol>
+    <li data-list-item-id="e5557116a631e7643925e3c6f0716d4bc">Install <a href="https://scala-cli.virtuslab.org/"><code>scala-cli</code></a>. It's <a href="https://scala-cli.virtuslab.org/install">very easy</a>!</li>
+    <li data-list-item-id="eb7ecdd593e7f698322cac465badde060">
+      <p>Download two scripts, <a href="https://github.com/swaldman/fossilphant/releases/download/v0.1.0/download-bluesky-images"><code>download-bluesky-images</code></a> and <a href="https://github.com/swaldman/fossilphant/releases/download/v0.1.0/fossilphant-bluesky"><code>fossilphant-bluesky</code></a>. (To be sure you are using the latest version, you can download them <a href="https://github.com/swaldman/fossilphant/releases">directly from github</a>.)<p>
+        <p>Make the scripts executable:</p>
+        <pre><code class="language-plaintext">% chmod +x download-bluesky-images
+% chmod +x fossilphant-bluesky</code></pre>
+        <p>Try <code>./download-bluesky-images --help</code> and <code>./fossilphant-bluesky --help</code> to get a sense of the many options you won't need to use.</p>
+        <p><strong>Note:</strong> <i>The first time you hit these scripts, they will download a bunch of stuff. That will only happen once.</i></p>
+    </li>
+    <li data-list-item-id="e679a976f8825c142b3725982466155a7">Download your <code>repo.car</code> file. In Bluesky go to <code>Settings &gt;Account &gt; Export my data</code>.</li>
+    <li data-list-item-id="e52aae9ff38b391d8d8ae45065ea08bce">
+        <p>Download you images into an images directory:</p>
+        <pre><code class="language-plaintext">% ./download-bluesky-images --repo repo.car --output images</code></pre>
+        <p>That may take a minute. When its done, you'll have a lot of images. Check out:</p>
+        <pre><code class="language-plaintext">% ls images</code></pre>
+    </li>
+    <li data-list-item-id="e9ea9f007c89e518a26e74b0a48207311">
+        <p>Now, build you6 static site!</p>
+        <pre><code class="language-plaintext">% ./fossilphant-bluesky --handle=interfluidity.com --images=images repo.car</code></pre>
+        <p>Note that you have to provide the DNS handle that you use for your Bluesky account. Your archive does not include this, just your <a href="https://atproto.com/specs/did">AT-proto "did"</a> ("decentralized identifier").</p>
+    </li>    
+    <li>    
+        <p>You'll find a directory called <code>public</code> has now appeared. Open its <code>index.html</code> file and behold!</p>
+    </li>
+</ol>
+<p>You can take a peek at my archive <a href="https://www.interfluidity.com/microblog-archives/bluesky/">here</a>. That's it!</p>
