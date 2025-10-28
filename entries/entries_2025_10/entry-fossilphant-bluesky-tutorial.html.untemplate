@@ -34,7 +34,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
         <pre><code class="language-plaintext">% ls images</code></pre>
     </li>
     <li data-list-item-id="e9ea9f007c89e518a26e74b0a48207311">
-        <p>Now, build you6 static site!</p>
+        <p>Now, build your static site!</p>
         <pre><code class="language-plaintext">% ./fossilphant-bluesky --handle=interfluidity.com --images=images repo.car</code></pre>
         <p>Note that you have to provide the DNS handle that you use for your Bluesky account. Your archive does not include this, just your <a href="https://atproto.com/specs/did">AT-proto "did"</a> ("decentralized identifier").</p>
     </li>    
