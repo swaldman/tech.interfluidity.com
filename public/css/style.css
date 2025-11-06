@@ -435,11 +435,23 @@ h4 {
     border-radius: 10px;
     font-size: 90%;
 }
+.archive {
+    background-color: rgba(255,255,255,0.25);
+}
 .archive h1 {
     font-family: 'FiraCode-SemiBold';
     letter-spacing: -1px;
     margin-top: 0.25rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+.archive p.zip-offer {
+    font-family: 'FiraCode-Light';
+    font-size: 9pt;
+    margin-top: 0;
+    margin-left: 1.5em;
+}
+.archive p.zip-offer a:link {
+    text-decoration: none;
 }
 .archive .archive-table {
     position: relative;
