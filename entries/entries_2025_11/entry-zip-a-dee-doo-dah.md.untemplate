@@ -43,7 +43,7 @@ beyond keeping the web server that hosts it on the internet.
 
 If you (1) have a static site, and (2) own the domain name for the site, then the site is yours. You can move it whenever you want, without breaking links.
 In the age of the internet, it's so easy to "own" almost nothing. Everything is licensed, you are dependent on some vendor.
-While it may be possible, it's costly and inconvenient to extricate yourself and reconstruct what you've lost.
+Even when it's possible, it's often costly and inconvenient to extricate yourself and reconstruct what you've lost.
 Static sites, however, are freedom.
 
 In addition to being movable, the fact that a static-site is basically a self-contained directory that can be wrapped
