@@ -51,7 +51,7 @@ into a zip file offers benefits to readers, not just to the site's owner. Reader
 site, for archiving purposes (including to keep the site publisher honest!), or to read the work offline.
 
 I've been embarrassed by that "at least in theory". My static sites &mdash; this one, and
-[`drafts.interfluidity.com`](https://drafts.interfluidity.com) did not, in practice, make it easy for users
+[`drafts.interfluidity.com`](https://drafts.interfluidity.com) &mdash; did not, in practice, make it easy for users
 to download the full site. Technical users have always been able to do so, since
 [both](https://github.com/swaldman/tech.interfluidity.com) [are](https://github.com/swaldman/drafts.interfluidity.com) hosted as public
 git repositories. But there was nothing as simple as "download the site as a zip file".
