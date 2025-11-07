@@ -463,10 +463,12 @@ h4 {
 .archive .archive-table td.timestamp {
     font-family: 'FiraCode-Regular';
     font-size: 80%;
+    white-space: nowrap;
 }
 .archive .archive-table td.timestamp a {
     color: var( --see-also-color );
     text-decoration: none;
+    white-space: nowrap;
 }
 .archive .archive-table td.timestamp a:visited {
     color: var( --see-also-color );
@@ -492,6 +494,9 @@ h4 {
     font-variation-settings: "wght" 600;
     */
     padding-left: 1rem;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
 .monospace-bold {
     font-family: 'FiraCode-SemiBold', monospace;

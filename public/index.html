@@ -77,6 +77,44 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2025-11-06 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-zip-a-dee-doo-dah">
+ <div class="entry-header">
+  <h1><a href="2025/11/06/zip-a-dee-doo-dah/index.html">Zip-A-Dee-Doo-Dah</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong> My two static sites (this site, <a href="https://drafts.interfluidity.com/">drafts.interfluidity.com</a>) can now be downloaded in full as zip files, for offline reading or archiving. Zip download links: <a href="https://zip.interfluidity.com/tech/latest" download>tech</a>, <a href="https://zip.interfluidity.com/drafts/latest" download>drafts</a></p>
+   <div style="text-align: center">***</div>
+   <p>Last week (during "<a href="https://www.interfluidity.com/office-hours/">office hours</a>"), I was asked why I was so fond of static sites and static-site generators for publishing writing. Aren't dynamic content management systems like WordPress or Drupal superior?</p>
+   <p>I really should have an answer to this! I now <a href="https://github.com/swaldman/protopost">devote a large share of my time</a> to an attempt to make static-site generation more functional and accessible for less technical authors.</p>
+   <p>There are a lot of reasons to prefer static sites. About a month ago, the venerable blogging service TypePad went down, and took with it the archives of some sites that are very important to me, like <code>economistsview.typepad.com</code> and <code>stublingandmumbling.typepad.com</code>.</p>
+   <p>There is no point making those names links. The sites are gone. All their links are broken.</p>
+   <p>(All is not entirely lost. The author of <code>stublingandmumbling.typepad.com</code> has moved to a <a href="https://chrisdillow.substack.com/">substack</a>.)</p>
+   <p>If these had been static sites, their authors could have simply downloaded the sites in full (as a zip file or something like that), and had them served from anywhere. Pretty much anything on the internet can serve a static site. Lots of services will host static sites essentially for free.</p>
+   <p>The infrastructure that serves static sites is the brainstem of the internet. WordPress constantly changes, is constantly under attack. It and the database that backs it requires constant maintenance. A static site requires almost no maintenance beyond keeping the web server that hosts it on the internet.</p>
+   <p>If you (1) have a static site, and (2) own the domain name for the site, then the site is yours. You can move it whenever you want, without breaking links. In the age of the internet, it's so easy to "own" almost nothing. Everything is licensed, you are dependent on some vendor. While it may be possible, it's costly and inconvenient to extricate yourself and reconstruct what you've lost. Static sites, however, are freedom.</p>
+   <p>In addition to being movable, the fact that a static-site is basically a self-contained directory that can be wrapped into a zip file offers benefits to readers, not just to the site's owner. Readers can, at least in theory, download the whole site, for archiving purposes (including to keep the site publisher honest!), or to read the work offline.</p>
+   <p>I've been embarrassed by that "at least in theory". My static sites — this one, and <a href="https://drafts.interfluidity.com"><code>drafts.interfluidity.com</code></a> did not, in practice, make it easy for users to download the full site. Technical users have always been able to do so, since <a href="https://github.com/swaldman/tech.interfluidity.com">both</a> <a href="https://github.com/swaldman/drafts.interfluidity.com">are</a> hosted as public git repositories. But there was nothing as simple as "download the site as a zip file".</p>
+   <p>So, now there is!</p>
+   <p>From the archive page of either site (<a href="archive.html">tech</a>, <a href="https://drafts.interfluidity.com/archive.html">drafts</a>), there are now links to a zip file, which typically will be updated nightly if there have been any changes. I've written <a href="https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/taskbin">scripts that maintain a zip directory</a> for each site, that are hit every night by <a href="https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/systemd">systemd timers</a>, and a <a href="https://github.com/swaldman/latest-zips-tickle">service</a> that serves the latest zip it finds in those directories. (As I <a href="2023/11/14/library--script-vs-application--config-file/index.html">like to do</a>, this service is a script backed by a <a href="https://github.com/swaldman/latest">library</a>, with the script effectively serving as configuration for the library.)</p>
+   <p>The zip files behind the links update themselves. The static sites need never change to stay current.</p>
+   <div style="text-align: center">***</div>
+   <p>p.s. Sometime soon I'd like also to offer more-convenient-for-offline-reading <a href="https://en.wikipedia.org/wiki/EPUB">epub files</a>. The static sites now feature <a href="2025/01/06/supporting-all-item-rss/index.html">full-content, all-item RSS</a>, which should be a straightforward source for building those.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="2025/11/06/zip-a-dee-doo-dah/index.html" class="pubtime">11:10 PM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article"></div>
+<!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2025-10-28 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple uid-fossilphant-bluesky-tutorial">
@@ -1328,79 +1366,6 @@ Jan 13 20:16:41 temp-feedletter feedletter[70086]: 2025-01-13@20:16:41 [INFO] [c
   <div class="post-metainfo">
    <div>
     <a href="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/index.html" class="pubtime">04:00 PM EST</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article"></div>
-<!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2025-01-06 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-supporting-all-item-rss">
- <div class="entry-header">
-  <h1><a href="2025/01/06/supporting-all-item-rss/index.html">Supporting all-item RSS</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p>In addition to <a href="2024/11/12/supporting-single-item-rss/index.html">single-item RSS</a> for each post, this blog now offers <em>all-item-rss</em>. <a href="/all-item-feed/index.rss">Check it out.</a>. It's effectively a full-content archive of the site, in the form of easy-to-parse RSS.</p>
-   <p><a href="drafts.interfluidity.com"><code>drafts.interfluidity.com</code></a> supports both of these features as well. (Here's the <a href="https://drafts.interfluidity.com/all-item-feed/index.rss">all-items-feed</a>, an example <a href="https://drafts.interfluidity.com/2024/09/17/abundance-is-overcapacity/index.rss">single-item-feed</a>.)</p>
-   <p>The channel element of these feeds includes metadata describing them. <a href="xml/iffy/index.html#iffy-curation"><code>iffy:curation</code></a> describes how many and what sort of items are included in the feed. <a href="xml/iffy/index.html#iffy-completeness"><code>iffy:completeness</code></a> describes how complete <em>each</em> item is, i.e. whether it include full content, or even potentially embeds media.</p>
-   <p>Here's an example from an all-item feed:</p>
-   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
-  &lt;channel&gt;
-    ...
-    &lt;iffy:curation&gt;
-      &lt;iffy:all/&gt;
-    &lt;/iffy:curation&gt;
-    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
-    ...
-  &lt;/channel&gt;
-&lt;/rss&gt;
-</code></pre>
-   <p>Here is an example from a single-item feed:</p>
-   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
-  &lt;channel&gt;
-    ...
-    &lt;iffy:curation&gt;
-      &lt;iffy:single/&gt;
-    &lt;/iffy:curation&gt;
-    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
-    ...
-  &lt;/channel&gt;
-&lt;/rss&gt;
-</code></pre>
-   <p>An ordinary syndicatin feed that includes curation and completeness metadata looks like this:</p>
-   <pre><code class="language-xml">&lt;?xml version='1.0' encoding='UTF-8'?&gt;
-&lt;rss version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"&gt;
-  &lt;channel&gt;
-    ...
-    &lt;iffy:curation&gt;
-      &lt;iffy:recent last="5"/&gt;
-    &lt;/iffy:curation&gt;
-    &lt;iffy:completeness&gt;Content&lt;/iffy:completeness&gt;
-    ...
-  &lt;/channel&gt;
-&lt;/rss&gt;
-</code></pre>
-   <p>All-item and single-item feeds, like syndication feeds, are discoverable in <code>&lt;link rel="alternate"&gt;</code> elements of the HTML pages of the blog.</p>
-   <p>But they are not intended to be discovered by feed readers, which expect short feeds of recent posts for syndication. In order to prevent discovery of these feeds by feed readers, we give them special MIME type <em>in HTML link elements only</em>. These are still RSS feeds. Their "true" MIME type is still <code>application/rss+xml</code>.</p>
-   <p>But in HTML link elements — only in HTML link elements — I use more specific, less standard MIME types, to throw unwitting feed readers off the scent. These MIME types are <code>application/x-all-item-rss+xml</code> and <code>application/x-single-item-rss+xml</code>.</p>
-   <p>Here's the HTML link element to a site's all-item feed:</p>
-   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-all-item-rss+xml" title="drafts.interfluidity.com - all items" href="https://drafts.interfluidity.com/all-item-feed/index.rss"&gt;
-</code></pre>
-   <p>Here's the HTML link element from a post permalink to that post's single-item feed:</p>
-   <pre><code class="language-html">  &lt;link rel="alternate" type="application/x-single-item-rss+xml" title="Segmentation fault" href="index.rss"&gt;
-</code></pre>
-   <p>While ordinary feed readers should ignore these feeds, clients resolving <a href="xml/iffy/index.html#iffy-item-ref"><code>iffy:item-ref</code></a> tags might find single-item and all-item feeds very useful.</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div>
-    <a href="2025/01/06/supporting-all-item-rss/index.html" class="pubtime">08:30 PM EST</a>
    </div>
   </div>
  </div>

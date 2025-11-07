@@ -43,7 +43,7 @@
     <link rel="alternate" type="application/x-all-item-rss+xml" title="tech.interfluidity.com - all items" href="https://tech.interfluidity.com/all-item-feed/index.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs" href="https://www.interfluidity.com/unify-rss/all-blogs.rss">
     <link rel="alternate" type="application/rss+xml" title="interfluidity - all blogs and microblogs" href="https://www.interfluidity.com/unify-rss/all-blogs-and-microblogs.rss">
-    <link rel="alternate" type="application/x-single-item-rss+xml" title="Turn your Bluesky archive into a readable, hostable static site with fossilphant" href="index.rss">
+    <link rel="alternate" type="application/x-single-item-rss+xml" title="Zip-A-Dee-Doo-Dah" href="index.rss">
     <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="stylesheet" href="../../../../css/highlightjs/steve-night-owl.css"><!-- theme for highlight.js -->
     <script src="../../../../js/highlight/highlight.min.js"></script>
@@ -60,7 +60,7 @@
           }
        });
     </script>
-    <title>Turn your Bluesky archive into a readable, hostable static site with fossilphant</title>
+    <title>Zip-A-Dee-Doo-Dah</title>
   </head>
   <body>
     <div id="top-banner"></div>
@@ -77,49 +77,38 @@
       </div>
       <div id="content">
         <div class="day-stamp">
- 2025-10-28 <span class="arrow">⇒</span>
+ 2025-11-06 <span class="arrow">⇒</span>
 </div>
-<article class="presentation-single uid-fossilphant-bluesky-tutorial">
+<article class="presentation-single uid-zip-a-dee-doo-dah">
  <div class="entry-header">
-  <h1><a href="index.html">Turn your Bluesky archive into a readable, hostable static site with fossilphant</a></h1>
+  <h1><a href="index.html">Zip-A-Dee-Doo-Dah</a></h1>
   <hr class="below-title">
  </div>
  <div class="entry-body">
-  <p>A couple of years ago, I wrote <a href="https://github.com/swaldman/fossilphant">fossilphant</a>, a utility for converting archives exported from Mastodon accounts into readable, self-hostable static sites. You can see what those look like <a href="http://www.interfluidity.com/microblog-archives/fosstodon">here</a> or <a href="http://www.interfluidity.com/microblog-archives/econtwitter">here</a> or <a href="http://www.interfluidity.com/microblog-archives/zirkus">here</a>. (I've wandered across three “instances” on Mastodon!)</p>
-  <p>Now you can turn your Bluesky <a href="https://docs.bsky.app/blog/repo-export"><code>repo.car</code></a> file into a static site as well. It supports embedded images, links, and quote-tweets too!</p>
-  <ol>
-   <li data-list-item-id="e5557116a631e7643925e3c6f0716d4bc">Install <a href="https://scala-cli.virtuslab.org/"><code>scala-cli</code></a>. It's <a href="https://scala-cli.virtuslab.org/install">very easy</a>!</li>
-   <li data-list-item-id="eb7ecdd593e7f698322cac465badde060">
-    <p>Download two scripts, <a href="https://github.com/swaldman/fossilphant/releases/download/v0.1.0/download-bluesky-images"><code>download-bluesky-images</code></a> and <a href="https://github.com/swaldman/fossilphant/releases/download/v0.1.0/fossilphant-bluesky"><code>fossilphant-bluesky</code></a>. (To be sure you are using the latest version, you can download them <a href="https://github.com/swaldman/fossilphant/releases">directly from github</a>.)</p>
-    <p></p>
-    <p>Make the scripts executable:</p>
-    <pre><code class="language-plaintext">% chmod +x download-bluesky-images
-% chmod +x fossilphant-bluesky</code></pre>
-    <p>Try <code>./download-bluesky-images --help</code> and <code>./fossilphant-bluesky --help</code> to get a sense of the many options you won't need to use.</p>
-    <p><strong>Note:</strong> <i>The first time you hit these scripts, they will download a bunch of stuff. That will only happen once.</i></p>
-   </li>
-   <li data-list-item-id="e679a976f8825c142b3725982466155a7">Download your <code>repo.car</code> file. In Bluesky go to <code>Settings &gt; Account &gt; Export my data</code>.</li>
-   <li data-list-item-id="e52aae9ff38b391d8d8ae45065ea08bce">
-    <p>Download your images into an images directory:</p>
-    <pre><code class="language-plaintext">% ./download-bluesky-images --repo repo.car --output images</code></pre>
-    <p>That may take a minute. When its done, you'll have a lot of images. Check out:</p>
-    <pre><code class="language-plaintext">% ls images</code></pre>
-   </li>
-   <li data-list-item-id="e9ea9f007c89e518a26e74b0a48207311">
-    <p>Now, build your static site!</p>
-    <pre><code class="language-plaintext">% ./fossilphant-bluesky --handle=interfluidity.com --images=images repo.car</code></pre>
-    <p>Note that you have to provide the DNS handle that you use for your Bluesky account. Your archive does not include this, just your <a href="https://atproto.com/specs/did">AT-proto "did"</a> ("decentralized identifier").</p>
-   </li>
-   <li>
-    <p>You'll find a directory called <code>public</code> has now appeared. Open its <code>index.html</code> file and behold!</p>
-   </li>
-  </ol>
-  <p>You can take a peek at my archive <a href="https://www.interfluidity.com/microblog-archives/bluesky/">here</a>. That's it!</p>
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong> My two static sites (this site, <a href="https://drafts.interfluidity.com/">drafts.interfluidity.com</a>) can now be downloaded in full as zip files, for offline reading or archiving. Zip download links: <a href="https://zip.interfluidity.com/tech/latest" download>tech</a>, <a href="https://zip.interfluidity.com/drafts/latest" download>drafts</a></p>
+   <div style="text-align: center">***</div>
+   <p>Last week (during "<a href="https://www.interfluidity.com/office-hours/">office hours</a>"), I was asked why I was so fond of static sites and static-site generators for publishing writing. Aren't dynamic content management systems like WordPress or Drupal superior?</p>
+   <p>I really should have an answer to this! I now <a href="https://github.com/swaldman/protopost">devote a large share of my time</a> to an attempt to make static-site generation more functional and accessible for less technical authors.</p>
+   <p>There are a lot of reasons to prefer static sites. About a month ago, the venerable blogging service TypePad went down, and took with it the archives of some sites that are very important to me, like <code>economistsview.typepad.com</code> and <code>stublingandmumbling.typepad.com</code>.</p>
+   <p>There is no point making those names links. The sites are gone. All their links are broken.</p>
+   <p>(All is not entirely lost. The author of <code>stublingandmumbling.typepad.com</code> has moved to a <a href="https://chrisdillow.substack.com/">substack</a>.)</p>
+   <p>If these had been static sites, their authors could have simply downloaded the sites in full (as a zip file or something like that), and had them served from anywhere. Pretty much anything on the internet can serve a static site. Lots of services will host static sites essentially for free.</p>
+   <p>The infrastructure that serves static sites is the brainstem of the internet. WordPress constantly changes, is constantly under attack. It and the database that backs it requires constant maintenance. A static site requires almost no maintenance beyond keeping the web server that hosts it on the internet.</p>
+   <p>If you (1) have a static site, and (2) own the domain name for the site, then the site is yours. You can move it whenever you want, without breaking links. In the age of the internet, it's so easy to "own" almost nothing. Everything is licensed, you are dependent on some vendor. While it may be possible, it's costly and inconvenient to extricate yourself and reconstruct what you've lost. Static sites, however, are freedom.</p>
+   <p>In addition to being movable, the fact that a static-site is basically a self-contained directory that can be wrapped into a zip file offers benefits to readers, not just to the site's owner. Readers can, at least in theory, download the whole site, for archiving purposes (including to keep the site publisher honest!), or to read the work offline.</p>
+   <p>I've been embarrassed by that "at least in theory". My static sites — this one, and <a href="https://drafts.interfluidity.com"><code>drafts.interfluidity.com</code></a> did not, in practice, make it easy for users to download the full site. Technical users have always been able to do so, since <a href="https://github.com/swaldman/tech.interfluidity.com">both</a> <a href="https://github.com/swaldman/drafts.interfluidity.com">are</a> hosted as public git repositories. But there was nothing as simple as "download the site as a zip file".</p>
+   <p>So, now there is!</p>
+   <p>From the archive page of either site (<a href="../../../../archive.html">tech</a>, <a href="https://drafts.interfluidity.com/archive.html">drafts</a>), there are now links to a zip file, which typically will be updated nightly if there have been any changes. I've written <a href="https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/taskbin">scripts that maintain a zip directory</a> for each site, that are hit every night by <a href="https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/systemd">systemd timers</a>, and a <a href="https://github.com/swaldman/latest-zips-tickle">service</a> that serves the latest zip it finds in those directories. (As I <a href="../../../../2023/11/14/library--script-vs-application--config-file/index.html">like to do</a>, this service is a script backed by a <a href="https://github.com/swaldman/latest">library</a>, with the script effectively serving as configuration for the library.)</p>
+   <p>The zip files behind the links update themselves. The static sites need never change to stay current.</p>
+   <div style="text-align: center">***</div>
+   <p>p.s. Sometime soon I'd like also to offer more-convenient-for-offline-reading <a href="https://en.wikipedia.org/wiki/EPUB">epub files</a>. The static sites now feature <a href="../../../01/06/supporting-all-item-rss/index.html">full-content, all-item RSS</a>, which should be a straightforward source for building those.</p>
+  </div>
  </div>
  <div class="entry-footer">
   <div class="post-metainfo">
    <div>
-    <a href="index.html" class="pubtime">11:55 AM EDT</a>
+    <a href="index.html" class="pubtime">11:10 PM EST</a>
    </div>
   </div>
  </div>
@@ -127,14 +116,12 @@
 <div class="after-article">
  <div class="prev-top-next">
   <div class="prev">
-   <a href="../../../../xml/iffy/index-updated-2025-08-30-18-50-00.html">← Updated: The 'iffy' XML namespace</a>
+   <a href="../../../10/28/turn-your-bluesky-archive-into-a-readable-hostable-static-site-with-fossilphant/index.html">← Turn your Bluesky archive into a readable, hostable static site with fossilphant</a>
   </div>
   <div class="top">
    <a href="../../../../index.html">↑↑↑</a>
   </div>
-  <div class="next">
-   <a href="../../../11/06/zip-a-dee-doo-dah/index.html">Zip-A-Dee-Doo-Dah →</a>
-  </div>
+  <div class="next"></div>
  </div>
 </div>
 <!-- after-article -->

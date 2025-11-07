@@ -34,7 +34,7 @@ val config = coolapp.Config(
       <title>(Library + Script) vs (Application + Config File)</title>
       <dc:creator><![CDATA[Steve Randy Waldman]]></dc:creator>
       <content:encoded>
-        <![CDATA[<article class="presentation-rss">
+        <![CDATA[<article class="presentation-rss uid-library-plus-script-vs-application-plus-config-file">
  <div class="entry-header"></div>
  <div class="entry-body">
   <div class="flexmark markdown">
