@@ -38,7 +38,7 @@ and had them served from anywhere. Pretty much anything on the internet can serv
 will host static sites essentially for free. 
 
 The infrastructure that serves static sites is the brainstem of the internet. WordPress constantly changes, is constantly
-under attack. It and the database that backs it requires constant maintenance. A static site requires almost no maintenance
+under attack. It and the database that backs it require maintenance. A static site requires almost no maintenance
 beyond keeping the web server that hosts it on the internet.
 
 If you (1) have a static site, and (2) own the domain name for the site, then the site is yours. You can move it whenever you want, without breaking links.
@@ -48,7 +48,7 @@ Static sites, however, are freedom.
 
 In addition to being movable, the fact that a static-site is basically a self-contained directory that can be wrapped
 into a zip file offers benefits to readers, not just to the site's owner. Readers can, at least in theory, download the whole
-site, for archiving purposes (including to keep the site publisher honest!), or to read the work offline.
+site, for archiving purposes (including to keep the site publisher honest), or to read the work offline.
 
 I've been embarrassed by that "at least in theory". My static sites &mdash; this one, and
 [`drafts.interfluidity.com`](https://drafts.interfluidity.com) &mdash; did not, in practice, make it easy for users
@@ -58,11 +58,11 @@ git repositories. But there was nothing as simple as "download the site as a zip
 
 So, now there is!
 
-From the archive page of either site ([tech](##/archive.html), [drafts](https://drafts.interfluidity.com/archive.html)), there are now links to a zip file, which typically will
-be updated nightly if there have been any changes. I've written
+From the archive page of either site ([tech](##/archive.html), [drafts](https://drafts.interfluidity.com/archive.html)), there are now download links, to a
+zip file updated nightly if there have been any changes. I've written
 [scripts that maintain a zip directory](https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/taskbin) for each site,
 that are hit every night by [systemd timers](https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/systemd),
-and a [service](https://github.com/swaldman/latest-zips-tickle) that serves the latest zip it finds in those directories.
+and then a [service](https://github.com/swaldman/latest-zips-tickle) that provides the latest zip it finds in each of those directories.
 (As I [like to do](##library-plus-script-vs-application-plus-config-file), this service is a script backed by a [library](https://github.com/swaldman/latest),
 with the script effectively serving as configuration for the library.)
 
