@@ -13,7 +13,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 (input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
 
-**TL; DR:** My two static sites (this site, [drafts.interfluidity.com](https://drafts.interfluidity.com/))
+**TL; DR:** My two static sites (this site, [`drafts.interfluidity.com`](https://drafts.interfluidity.com/))
 can now be downloaded in full as zip files, for offline reading or archiving. Zip download links: <a href="https://zip.interfluidity.com/tech/latest" download>tech</a>, <a href="https://zip.interfluidity.com/drafts/latest" download>drafts</a>
 
 <div style="text-align: center">***</div>
