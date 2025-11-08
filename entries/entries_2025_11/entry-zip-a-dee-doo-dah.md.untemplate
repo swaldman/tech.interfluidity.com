@@ -60,8 +60,8 @@ So, now there is!
 
 From the archive page of either site ([tech](##/archive.html), [drafts](https://drafts.interfluidity.com/archive.html)), there are now download links, to a
 zip file updated nightly if there have been any changes. I've written
-[scripts that maintain a zip directory](https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/taskbin) for each site,
-that are hit every night by [systemd timers](https://github.com/swaldman/mchange-sysadmin-scripts/tree/mchange-specific/systemd),
+[scripts that maintain a zip directory](https://github.com/swaldman/mchange-sysadmin-scripts/tree/main/taskbin) for each site,
+that are hit every night by [systemd timers](https://github.com/swaldman/mchange-sysadmin-scripts/tree/main/systemd),
 and then a [service](https://github.com/swaldman/latest-zips-tickle) that provides the latest zip it finds in each of those directories.
 (As I [like to do](##library-plus-script-vs-application-plus-config-file), this service is a script backed by a [library](https://github.com/swaldman/latest),
 with the script effectively serving as configuration for the library.)
