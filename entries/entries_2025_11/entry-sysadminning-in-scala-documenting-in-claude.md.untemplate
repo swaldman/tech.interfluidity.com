@@ -28,7 +28,7 @@ precisely check important prerequisites and provide detailed information about w
 
 So I love automating sysadmin tasks in Scala.
 
-Sysadmin tasks are high stakes. Often, you are letting
+Sysadmin tasks are high stakes. Often you are letting
 some piece of code run as root on production servers, doing something that really does need to be done.
 So I want to write my "scripts" neurotically. I want to have pretty complete and convenient information about
 what goes down when they run.
