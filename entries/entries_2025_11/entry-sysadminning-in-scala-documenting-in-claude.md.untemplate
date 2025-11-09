@@ -54,8 +54,8 @@ I started with a pretty dumb prompt:
 Like so much in LLM-land, the result was incredibly impressive but also deflating.
 Claude code seemed to understand
 my code very well, and did a good job of explaining it. But there were errors, often small surprising things. Overall, I felt like
-Claude got all the hard-stuff right, but occasionally whiffed trivialities. Nevertheless, discerning and addressing those
-small mistakes meant the exercise was in fact quite time-consuming.
+Claude got all the hard-stuff right, but occasionally whiffed trivialities. Discerning and addressing those
+small mistakes meant the exercise was somewhat time-consuming.
 
 It was not, to be clear, nearly as time-consuming or stressful as writing documentation by hand would have been.
 But we did go around with a bunch of revisions, and ultimately I saved less time than I'd initially imagined that I would.
