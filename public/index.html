@@ -77,6 +77,56 @@
       </div>
       <div id="content">
         <div class="day-stamp">
+ 2025-11-08 <span class="arrow">⇒</span>
+</div>
+<article class="presentation-multiple uid-sysadminning-in-scala-documenting-in-claude">
+ <div class="entry-header">
+  <h1><a href="2025/11/08/sysadminning-in-scala-documenting-in-claude/index.html">Sysadminning in Scala, documenting in Claude</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <p><strong>TL; DR:</strong> Me and Claude code collaborated on some <a href="https://github.com/swaldman/mchange-sysadmin-scala/blob/main/doc/TaskRunner-Developer-Guide.md">documentation</a> for my Scala sysadmin library. Is it any good? Maybe other people would use it?</p>
+   <div style="text-align: center">***</div>
+   <p>I don't like to do anything very complicated in a shell script. It feels too loosey-goosey. I don't quite know what's going to happen, how things will behave if anything goes wrong.</p>
+   <p>I love doing just about anything in Scala, a programming language as tight and neurotic as I am. When I write Scala, I feel like I have pretty complete command over what happens. I find it easy to precisely check important prerequisites and provide detailed information about whatever goes down.</p>
+   <p>So I love automating sysadmin tasks in Scala.</p>
+   <p>Sysadmin tasks are high stakes. Often, you are letting some piece of code run as root on production servers, doing something that really does need to be done. So I want to write my "scripts" neurotically. I want to have pretty complete and convenient information about what goes down when they run.</p>
+   <p>A few years ago I wrote <a href="https://github.com/swaldman/mchange-sysadmin-scala">a library in Scala</a> to structure my automation of self-reporting sysadmin tasks. I get <a href="2025/11/08/sysadminning-in-scala-documenting-in-claude/example-success.html">colorful HTML e-mails</a> when they run, with a big <code>SUCCEEDED</code> or <code>FAILED</code> in the subject line.</p>
+   <p>Like most of the software I write, I made my library available as open-source, but had little hope or expectation that anyone else would actually use it.</p>
+   <p>I certainly didn't put in the time to write documentation that would make it easy for other people to use it!</p>
+   <p>This week I was messing with the library a bit, and it occurred to me that if I didn't have time to write documentation, maybe Claude would. So I asked Claude code to do just that.</p>
+   <p>I started with a pretty dumb prompt:</p>
+   <pre><code class="language-plaintext">&gt; Could you write a comprehensive piece of documentation, in markdown, for developers interested in using TaskRunner?
+</code></pre>
+   <p>Like so much in LLM-land, the result was incredibly impressive but also deflating. Claude code seemed to understand my code very well, and did a good job of explaining it. But there were errors, often small surprising things. Overall, I felt like Claude got all the hard-stuff right, but occasionally whiffed trivialities. Nevertheless, discerning and addressing those small mistakes meant the exercise was in fact quite time-consuming.</p>
+   <p>It was not, to be clear, nearly as time-consuming or stressful as writing documentation by hand would have been. But we did go around with a bunch of revisions, and ultimately I saved less time than I'd initially imagined that I would.</p>
+   <p>At first I played manager to Claude the copy writer. I offered my observations and corrections in dialogue. Claude dutifully updated the text and fixed the errors.</p>
+   <p>(At one point, Claude was so attentive to my feedback that it offered to misstate the API in order to conform to my simplifying suggestion! I said no to that change.)</p>
+   <p>Eventually I went in and did some hand-editing.</p>
+   <p>The documentation that Claude produced is more long-winded than what I'd have written. But it is also more comprehensive!</p>
+   <p>Looking at Claude's examples, and how cumbersome they were, inspired me to change the API, significantly and for the better. That process seems like a contribution, even if you can't see it in the final product. (Claude cheerfully revised the examples to the new, less cumbersome API, so that's all you see.)</p>
+   <p>Claude was quite ambitious. It created a vast "Complete Examples" section, just inventing common sysadmin tasks and writing scripts for them. I took that out because they were scripts I couldn't run to verify — they relied on file systems and resources that weren't mine — and just inspecting them I pretty quickly found some problems and bugs. I'd rather have fewer examples than mistaken examples.</p>
+   <p>Claude agreed removing the section was for the best, but Claude pretty much always agrees.</p>
+   <p>In any case, while I'm vain enough to think that if I'd written the documentation from scratch it would be better, I think what our collaboration produced is pretty good.</p>
+   <p>And I would not have taken the time to write the documentation from scratch!</p>
+   <p>It strikes me that a relatively good outcome for LLM usage would be that, rather than replacing labor, we just do more of things that <em>might</em> prove useful and valuable, but that would previously have been too time-consuming and speculative to justify the opportunity cost of our effort.</p>
+   <p>I'd love it if other people found my library useful. But I think the likelihood that even comprehensive developer docs will bring interest to this project is pretty low. Given that, without Claude, I just wouldn't have devoted the time.</p>
+   <p>But with Claude, (co)authoring decent if not fabulous documentation is faster and easier than it used to be. So maybe I'll document more of my projects this way. The likelihood that other people find something in my portfolio worth using, <em>that</em> library if not <em>this</em> one, might increase.</p>
+   <p>It wouldn't be the singularity, but I'd score it a win.</p>
+   <p>Anyway, here are pointers to the <a href="https://github.com/swaldman/mchange-sysadmin-scala">library</a> and its <a href="https://github.com/swaldman/mchange-sysadmin-scala/blob/main/doc/TaskRunner-Developer-Guide.md">Claude co-authored documentation</a>, if you are interested.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="2025/11/08/sysadminning-in-scala-documenting-in-claude/index.html" class="pubtime">07:45 PM EST</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article"></div>
+<!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
  2025-11-06 <span class="arrow">⇒</span>
 </div>
 <article class="presentation-multiple uid-zip-a-dee-doo-dah">
@@ -850,522 +900,6 @@ deleted 'deepseek-r1:1.5b'
   <div class="post-metainfo">
    <div>
     <a href="2025/01/28/baby-deepseek-on-on-mac-laptop/index.html" class="pubtime">12:20 AM EST</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article"></div>
-<!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2025-01-14 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-syndicating-rss-to-mastodon-and-bluesky-with-feedletter">
- <div class="entry-header">
-  <h1><a href="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/index.html">Syndicating RSS to Mastodon and BlueSky with feedletter</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p><a href="https://github.com/swaldman/feedletter"><code>feedletter</code></a> is a service I wrote mostly to convert RSS newsfeeds into e-mail newsletters.</p>
-   <p>If you subscribe to this blog by e-mail, or to <a href="https://drafts.interfluidity.com/"><code>drafts.interfluidity.com</code></a>, <code>feedletter</code> is the service to which you subscribed, and which mails you my blogposts.</p>
-   <p>I wrote an <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html">elaborate tutorial</a> documenting how to set up newsletter subscriptions about a year ago.</p>
-   <p>But <code>feedletter</code> can also syndicate RSS announcements (or posts, length permitting) to Mastodon and BlueSky.</p>
-   <p>I thought I'd do a quick tutorial on how it works.</p>
-   <h3><a href="#table-of-contents" id="table-of-contents" name="table-of-contents" class="anchorlink"></a>Table of contents</h3>
-   <ol>
-    <li><a href="#1-prerequisites">Prerequisites</a></li>
-    <li><a href="#2-create-user-feedletter">Create user <code>feedletter</code></a></li>
-    <li><a href="#3-install-feedletter">Install <code>feedletter</code></a></li>
-    <li><a href="#4-prepare-the-postgres-database">Prepare the <code>postgres</code> database</a></li>
-    <li><a href="#5-create-the-etcfeedletter-directory">Create the <code>/etc/feedletter</code> directory</a></li>
-    <li><a href="#6-create-a-mastodon-app-password">Create a Mastodon app password</a></li>
-    <li><a href="#7-create-etcfeedletterfeedletter-secretsproperties-and-configure-mastodon-access">Create <code>/etc/feedletter/feedletter-secrets.properties</code> and configure Mastodon access</a></li>
-    <li><a href="#8-configure-bluesky-access">Configure BlueSky access</a></li>
-    <li><a href="#9-add-c3p0-database-configuration-to-etcfeedletterfeedletter-secretsproperties">Add <code>c3p0</code> (database) configuration to <code>/etc/feedletter/feedletter-secrets.properties</code></a></li>
-    <li><a href="#10-add-a-secret-salt-to-etcfeedletterfeedletter-secretsproperties">Add a "secret salt" to <code>/etc/feedletter/feedletter-secrets.properties</code></a></li>
-    <li><a href="#11-check-out-the-feedletter-app">Check out the feedletter app</a></li>
-    <li><a href="#12-initialize-the-feedletter-database">Initialize the feedletter database</a></li>
-    <li><a href="#13-add-a-feed-you-wish-to-syndicate">Add a feed you wish to syndicate</a></li>
-    <li><a href="#14-define-your-subscribables">Define your subscribables</a></li>
-    <li><a href="#15-subscribe-the-target-mastodon-and-bluesky-accounts-to-the-subscribables">Subscribe the target Mastodon and BlueSky accounts to the subscribables.</a></li>
-    <li><a href="#16-test-in-the-terminal">Test in the terminal</a></li>
-    <li><a href="#17-enable-feedletter-as-a-systemd-daemon">Enable <code>feedletter</code> as a <code>systemd</code> daemon</a></li>
-    <li><a href="#18-conclusion">Conclusion</a></li>
-   </ol>
-   <hr>
-   <h3><a href="#1-prerequisites" id="1-prerequisites" name="1-prerequisites" class="anchorlink"></a>1. Prerequisites</h3>
-   <p>You'll need a systemd-based server on the internet, git, postgres, and a Java 17+ JVM installed.</p>
-   <h3><a href="#2-create-user-feedletter" id="2-create-user-feedletter" name="2-create-user-feedletter" class="anchorlink"></a>2. Create user feedletter</h3>
-   <p>We'll create a passwordless user:</p>
-   <pre><code class="language-plaintext"># adduser --disabled-password feedletter
-</code></pre>
-   <h3><a href="#3-install-feedletter" id="3-install-feedletter" name="3-install-feedletter" class="anchorlink"></a>3. Install feedletter</h3>
-   <p>We just clone a git repository. We'll make it become <code>/opt/feedletter</code>, and make sure our new user <code>feedletter</code> owns it:</p>
-   <pre><code class="language-plaintext"># cd /opt
-# git clone https://github.com/swaldman/feedletter-install.git feedletter
-Cloning into 'feedletter'...
-remote: Enumerating objects: 81, done.
-remote: Counting objects: 100% (81/81), done.
-remote: Compressing objects: 100% (48/48), done.
-remote: Total 81 (delta 40), reused 64 (delta 23), pack-reused 0 (from 0)
-Receiving objects: 100% (81/81), 12.32 KiB | 4.10 MiB/s, done.
-Resolving deltas: 100% (40/40), done.
-# chown -R feedletter:feedletter feedletter
-</code></pre>
-   <h3><a href="#4-prepare-the-postgres-database" id="4-prepare-the-postgres-database" name="4-prepare-the-postgres-database" class="anchorlink"></a>4. Prepare the postgres database</h3>
-   <pre><code class="language-plaintext"># su - postgres
-$ createdb feedletter
-$ createuser feedletter
-$ psql
-psql (16.6 (Ubuntu 16.6-0ubuntu0.24.10.1))
-Type "help" for help.
-
-postgres=# ALTER DATABASE feedletter OWNER TO feedletter;
-ALTER DATABASE
-postgres=# ALTER USER feedletter WITH PASSWORD 'not-actually-this';
-ALTER ROLE
-postgres=# \q
-$ exit
-</code></pre>
-   <h3><a href="#5-create-the-etcfeedletter-directory" id="5-create-the-etcfeedletter-directory" name="5-create-the-etcfeedletter-directory" class="anchorlink"></a>5. Create the /etc/feedletter directory</h3>
-   <pre><code class="language-plaintext"># mkdir /etc/feedletter
-# chown feedletter:feedletter /etc/feedletter
-</code></pre>
-   <h3><a href="#6-create-a-mastodon-app-password-and-place-it-in-etcfeedletterfeedletter-secretsproperties" id="6-create-a-mastodon-app-password-and-place-it-in-etcfeedletterfeedletter-secretsproperties" name="6-create-a-mastodon-app-password-and-place-it-in-etcfeedletterfeedletter-secretsproperties" class="anchorlink"></a>6. Create a Mastodon app password, and place it in /etc/feedletter/feedletter-secrets.properties</h3>
-   <p>In the Mastodon account to which you intend to syndicate announcements, go to Settings &gt; Development, and click the "New Application" button.</p>
-   <p>Define an application name. We'll use "feedletter-syndication".</p>
-   <p><em><strong>Be sure to enable write permissions!</strong></em></p>
-   <p>Finally click the Submit button.</p>
-   <p>You should see your new application listed now in the applications page. Click on it. On the resulting page, note the field "Your access token". You'll need its value in the next step.</p>
-   <h3><a href="#7-create-etcfeedletterfeedletter-secretsproperties-and-configure-mastodon-access" id="7-create-etcfeedletterfeedletter-secretsproperties-and-configure-mastodon-access" name="7-create-etcfeedletterfeedletter-secretsproperties-and-configure-mastodon-access" class="anchorlink"></a>7. Create /etc/feedletter/feedletter-secrets.properties and configure Mastodon access</h3>
-   <p>We'll first become user feedletter, then open a text editor on <code>/etc/feedletter/feedletter-secrets.properties</code>.</p>
-   <pre><code class="language-plaintext"># su - feedletter
-$ touch /etc/feedletter/feedletter-secrets.properties
-$ chmod 600 /etc/feedletter/feedletter-secrets.properties
-$ emacs /etc/feedletter/feedletter-secrets.properties
-</code></pre>
-   <div class="note">
-    <p><code>feedletter</code> will insist that <code>/etc/feedletter/feedletter-secrets.properties</code> has restrictive permissions.</p>
-    <p>It will refuse to run if you skip the <code>chmod</code> bit.</p>
-    <pre><code>$ chmod 600 /etc/feedletter/feedletter-secrets.properties`
-</code></pre>
-   </div>
-   <p>Now we'll add an entry to our properties file in the form</p>
-   <pre><code class="language-plaintext">feedletter.masto.access.token.&lt;arbitrary-name&gt;=&lt;access-token&gt;`:
-</code></pre>
-   <p>Just to be dumb, we'll use "arbitrary-name" as our, um, arbitrary name.</p>
-   <pre><code class="language-plaintext">feedletter.masto.access.token.arbitrary-name=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-</code></pre>
-   <div class="note">
-    <p>Your access token probably is not all <code>XXXXXXXXXX</code>!</p>
-   </div>
-   <h3><a href="#8-configure-bluesky-access" id="8-configure-bluesky-access" name="8-configure-bluesky-access" class="anchorlink"></a>8. Configure BlueSky access</h3>
-   <p>In the BlueSky account you intend to syndicate to, go to Settings &gt; Privacy and security &gt; App passwords.</p>
-   <p>Click "Add App Password".</p>
-   <p>Give your app a name. We'll use "feedletter-syndication" again.</p>
-   <p>Your app password will appear.</p>
-   <p>Add a new line to <code>/etc/feedletter/feedletter-secrets.properties</code>, in the form <code>feedletter.bsky.identifier.&lt;identifier&gt;=&lt;app-password&gt;</code>.</p>
-   <div class="note">
-    <p>This is a bit different from Mastodon!</p>
-    <p>In Mastodon, a totally arbitrary name went at the end of the key. Here it is the <em>user identifier</em>, which usually a DNS handle (but it can also be a <a href="https://atproto.com/">atproto</a> <a href="https://atproto.com/specs/did"><code>did</code></a>).</p>
-   </div>
-   <p>The account we're syndicating to will be <code>testable-bsky.bsky.social</code></p>
-   <p>So <code>/etc/feedletter/feedletter-secrets.properties</code> should look something like this, albeit with a real access tokens / passwords.</p>
-   <pre><code class="language-plaintext">feedletter.masto.access.token.arbitrary-name=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-feedletter.bsky.identifier.testable-bsky.bsky.social=xxxx-xxxx-xxxx-xxxx
-</code></pre>
-   <h3><a href="#9-add-c3p0-database-configuration-to-etcfeedletterfeedletter-secretsproperties" id="9-add-c3p0-database-configuration-to-etcfeedletterfeedletter-secretsproperties" name="9-add-c3p0-database-configuration-to-etcfeedletterfeedletter-secretsproperties" class="anchorlink"></a>9. Add c3p0 (database) configuration to /etc/feedletter/feedletter-secrets.properties</h3>
-   <p>Remember when we set the Postgres password a while back? We'll use it now.</p>
-   <p>Postgres by default runs on port 5432, so let's add some database access and authentication information.</p>
-   <p><code>feedletter</code> uses the <code>c3p0</code> connection pooling library.</p>
-   <p>Edit <code>/etc/feedletter/feedletter-secrets.properties</code> so that it looks something like this:</p>
-   <pre><code class="language-plaintext">feedletter.masto.access.token.arbitrary-name=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-feedletter.bsky.identifier.testable-bsky.bsky.social=xxxx-xxxx-xxxx-xxxx
-c3p0.jdbcUrl=jdbc:postgresql://localhost:5432/feedletter
-c3p0.user=feedletter
-c3p0.password=not-actually-this
-</code></pre>
-   <h3><a href="#10-add-a-secret-salt-to-etcfeedletterfeedletter-secretsproperties" id="10-add-a-secret-salt-to-etcfeedletterfeedletter-secretsproperties" name="10-add-a-secret-salt-to-etcfeedletterfeedletter-secretsproperties" class="anchorlink"></a>10. Add a "secret salt" to /etc/feedletter/feedletter-secrets.properties</h3>
-   <p><code>/etc/feedletter/feedletter-secrets.properties</code> should contain a "secret salt", whose value is entirely arbitrary but should be kept secret. We'll add that, so <code>/etc/feedletter/feedletter-secrets.properties</code> now looks like:</p>
-   <pre><code class="language-plaintext">feedletter.masto.access.token.arbitrary-name=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-feedletter.bsky.identifier.testable-bsky.bsky.social=xxxx-xxxx-xxxx-xxxx
-c3p0.jdbcUrl=jdbc:postgresql://localhost:5432/feedletter
-c3p0.user=feedletter
-c3p0.password=not-actually-this
-feedletter.secret.salt=This is an arbitrary string.
-</code></pre>
-   <h3><a href="#11-check-out-the-feedletter-app" id="11-check-out-the-feedletter-app" name="11-check-out-the-feedletter-app" class="anchorlink"></a>11. Check out the feedletter app</h3>
-   <p>As user <code>feedletter</code>, cd into <code>/opt/feedletter</code> and type</p>
-   <pre><code class="language-plaintext">$ ./feedletter --help
-</code></pre>
-   <p>The first time you do this, it will download a lot of stuff!</p>
-   <p>Eventually you will see a help message, like this:</p>
-   <pre><code class="language-plaintext">Usage:
-     feedletter [--secrets &lt;propsfile&gt;] add-feed
-     feedletter [--secrets &lt;propsfile&gt;] alter-feed
-     feedletter [--secrets &lt;propsfile&gt;] daemon
-     feedletter [--secrets &lt;propsfile&gt;] db-dump
-     feedletter [--secrets &lt;propsfile&gt;] db-init
-     feedletter [--secrets &lt;propsfile&gt;] db-migrate
-     feedletter [--secrets &lt;propsfile&gt;] define-bluesky-subscribable
-     feedletter [--secrets &lt;propsfile&gt;] define-email-subscribable
-     feedletter [--secrets &lt;propsfile&gt;] define-mastodon-subscribable
-     feedletter [--secrets &lt;propsfile&gt;] drop-feed-and-subscribables
-     feedletter [--secrets &lt;propsfile&gt;] drop-subscribable
-     feedletter [--secrets &lt;propsfile&gt;] edit-subscribable
-     feedletter [--secrets &lt;propsfile&gt;] export-subscribers
-     feedletter [--secrets &lt;propsfile&gt;] list-config
-     feedletter [--secrets &lt;propsfile&gt;] list-feeds
-     feedletter [--secrets &lt;propsfile&gt;] list-items-excluded
-     feedletter [--secrets &lt;propsfile&gt;] list-subscribables
-     feedletter [--secrets &lt;propsfile&gt;] list-subscribers
-     feedletter [--secrets &lt;propsfile&gt;] list-untemplates
-     feedletter [--secrets &lt;propsfile&gt;] send-test-email
-     feedletter [--secrets &lt;propsfile&gt;] set-config
-     feedletter [--secrets &lt;propsfile&gt;] set-extra-params
-     feedletter [--secrets &lt;propsfile&gt;] set-untemplates
-     feedletter [--secrets &lt;propsfile&gt;] subscribe
- 
- Manage e-mail subscriptions to and notifications from RSS feeds.
- 
- Options and flags:
-     --help
-         Display this help text.
-     --secrets &lt;propsfile&gt;
-         Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
- 
- Environment Variables:
-     FEEDLETTER_SECRETS=&lt;path&gt;
-         Path to properties file containing SMTP, postgres, c3p0, and other configuration details.
- 
- Subcommands:
-     add-feed
-         Add a new feed from which mail or notifications may be generated.
-     alter-feed
-         Alter the timings of an already-defined feed.
-     daemon
-         Run daemon that watches feeds and sends notifications.
-     db-dump
-         Dump a backup of the database into a configured directory.
-     db-init
-         Initialize the database schema.
-     db-migrate
-         Migrate to the latest version of the database schema.
-     define-bluesky-subscribable
-         Define a BlueSky subscribable, a source from which BlueSky feeds can receive automatic posts..
-     define-email-subscribable
-         Define a new email subscribable, a mailing lost to which users can subscribe.
-     define-mastodon-subscribable
-         Define a Mastodon subscribable, a source from which Mastodon feeds can receive automatic posts..
-     drop-feed-and-subscribables
-         Removes a feed, along with any subscribables defined upon it, from the service.
-     drop-subscribable
-         Removes a subscribable from the service.
-     edit-subscribable
-         Edit an already-defined subscribable.
-     export-subscribers
-         Dump subscriber information for a subscribable in CSV format.
-     list-config
-         List all configuration parameters.
-     list-feeds
-         List all feeds the application is watching.
-     list-items-excluded
-         List items excluded from generating notifications.
-     list-subscribables
-         List all subscribables.
-     list-subscribers
-         List all subscribers to a subscribable.
-     list-untemplates
-         List available untemplates.
-     send-test-email
-         Send a brief email to test your SMTP configuration.
-     set-config
-         Set configuration parameters.
-     set-extra-params
-         Add, update, or remove extra params you may define to affect rendering of notifications and messages.
-     set-untemplates
-         Update the untemplates used to render subscriptions.
-     subscribe
-         Subscribe to a subscribable.
-</code></pre>
-   <div class="note">
-    <p>This might be surrounded by some noise from the <a href="https://mill-build.org/mill/index.html"><code>mill</code></a> process used to launch it. It might end with <code>Subprocess failed.</code></p>
-    <p>That's all fine.</p>
-   </div>
-   <h3><a href="#12-initialize-the-feedletter-database" id="12-initialize-the-feedletter-database" name="12-initialize-the-feedletter-database" class="anchorlink"></a>12. Initialize the feedletter database</h3>
-   <p>As user <code>feedletter</code>, from within <code>/opt/feedletter</code>, type</p>
-   <pre><code class="language-plaintext">$ ./feedletter db-init
-</code></pre>
-   <p>That's all!</p>
-   <h3><a href="#13-add-a-feed-you-wish-to-syndicate" id="13-add-a-feed-you-wish-to-syndicate" name="13-add-a-feed-you-wish-to-syndicate" class="anchorlink"></a>13. Add a feed you wish to syndicate</h3>
-   <p>As user <code>feedletter</code>, from within <code>/opt/feedletter</code>, type</p>
-   <pre><code class="language-plaintext">$ ./feedletter add-feed --help
-</code></pre>
-   <p>You should see</p>
-   <pre><code class="language-plaintext"> Usage:
-     feedletter add-feed --ping &lt;feed-url&gt;
-     feedletter add-feed [--min-delay-minutes &lt;minutes&gt;] [--await-stabilization-minutes &lt;minutes&gt;] [--max-delay-minutes &lt;minutes&gt;] [--recheck-every-minutes &lt;minutes&gt;] &lt;feed-url&gt;
- 
- Add a new feed from which mail or notifications may be generated.
- 
- Options and flags:
-     --help
-         Display this help text.
-     --ping
-         Check feed as often as possible, notify as soon as possible, regardless of (in)stability.
-     --min-delay-minutes &lt;minutes&gt;
-         Minimum wait (in miunutes) before a newly encountered item can be notified.
-     --await-stabilization-minutes &lt;minutes&gt;
-         Period (in minutes) over which an item should not have changed before it is considered stable and can be notified.
-     --max-delay-minutes &lt;minutes&gt;
-         Notwithstanding other settings, maximum period past which an item should be notified, regardless of its stability.
-     --recheck-every-minutes &lt;minutes&gt;
-         Delay between refreshes of feeds, and redetermining items' availability for notification.
-</code></pre>
-   <p><code>feedletter</code> is general very cautious about announcing / e-mailing posts. Since posts are often edited soon after they are published, by default it waits a period of time, and then checks to make sure the post has been stable a while before announcing or e-mailing. By default <code>min-delay-minutes</code> is 30, <code>await-stabilization-minutes</code> is 15, <code>max-delay-minutes</code> is 180, and <code>recheck-every-minutes</code> is 10.</p>
-   <p>It's probably best to use cautious settings like this, so you don't announce your links while you are still re-editing them. (I don't think I'm the only writer who inevitably finds important edits just after hitting publish.)</p>
-   <p>For this tutorial, I'm going to use a feed of all the articles in my newsreader, <a href="https://www.inoreader.com">inoreader</a>. Its URL looks like</p>
-   <blockquote>
-    <p><code>https://www.inoreader.com/stream/user/0000000000/tag/all-articles</code>,</p>
-   </blockquote>
-   <p>although <code>0000000000</code> is not in fact my user id, I'm altering that for privacy. You should use whatever feed you are interested in syndicating.</p>
-   <p>To use the defaults, you could just type</p>
-   <pre><code class="language-plaintext">$ ./feedletter add-feed https://www.inoreader.com/stream/user/0000000000/tag/all-articles
-</code></pre>
-   <p>For the purposes of our little experiment here, I want articles announced as soon as <code>feedletter</code> sees them, even if they have not "stabilized". For that, it will just be</p>
-   <pre><code class="language-plaintext">$ ./feedletter add-feed --ping https://www.inoreader.com/stream/user/0000000000/tag/all-articles
-</code></pre>
-   <p>You should see something like</p>
-   <pre><code class="language-plaintext">+---------+-------------------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
-¦ Feed ID ¦ Feed URL                                                          ¦ Min Delay Mins ¦ Await Stabilization Mins ¦ Max Delay Mins ¦ Recheck Every Mins ¦ Added                       ¦ Last Assigned               ¦
-+---------+-------------------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
-¦ 1       ¦ https://www.inoreader.com/stream/user/0000000000/tag/all-articles ¦ 0              ¦ 0                        ¦ 0              ¦ 0                  ¦ 2025-01-11T05:00:47.128363Z ¦ 2025-01-11T05:00:47.128363Z ¦
-+---------+-------------------------------------------------------------------+----------------+--------------------------+----------------+--------------------+-----------------------------+-----------------------------+
-</code></pre>
-   <p>The numbers will be different if you (wisely!) don't use the <code>--ping</code> flag.</p>
-   <div class="note">
-    <p>Using <code>--ping</code> will cause the feed to be checked very frequently, currently about once a minute. Some servers may grow cross! You may be blocked or rate-limited!</p>
-    <p>You can use <code>./feedletter alter-feed</code> to set a gentler <code>recheck-every-minutes</code>.</p>
-   </div>
-   <h3><a href="#14-define-your-subscribables" id="14-define-your-subscribables" name="14-define-your-subscribables" class="anchorlink"></a>14. Define your subscribables</h3>
-   <p><code>feedletter</code> is a layered application. First you tell it what feeds to watch, then you define different kinds of "subscribables" — e.g. email, Mastodon, BlueSky — to each of which multiple recipients can subscribe in order to receive notifications.</p>
-   <p>Typically an e-mail subscribable will have many — 100s, 1000s — of destinations.</p>
-   <p>BlueSky and Mastodon "subscribable" often have just one subscriber, the accounts to which entries will be syndicated. You can attach as many subscribers as you want, though, if you want to post announcements to many accounts.</p>
-   <p>Let's start with our Mastodon subscribable:</p>
-   <pre><code class="language-plaintext">$ ./feedletter define-mastodon-subscribable --help
-</code></pre>
-   <p>You'll see something like</p>
-   <pre><code class="language-plaintext"> Usage: feedletter define-mastodon-subscribable --feed-id &lt;feed-id&gt; --name &lt;name&gt; [--extra-param &lt;key:value&gt;]...
- 
- Define a Mastodon subscribable, a source from which Mastodon feeds can receive automatic posts..
- 
- Options and flags:
-     --help
-         Display this help text.
-     --feed-id &lt;feed-id&gt;
-         The ID of the RSS feed to be watched.
-     --name &lt;name&gt;
-         A name for the new subscribable.
-     --extra-param &lt;key:value&gt;
-         An extra parameter your notification renderers might use.
-</code></pre>
-   <p>We saw the <code>feed-id</code> in the output to <code>./feedletter add-feed</code> (and if we forget it, we can always run <code>./feedletter list-feeds</code>).</p>
-   <p>The subscribable name can be anything we want, but by default it will appear in announcements. I'm going to call this subscribable <code>stevefeeds-masto</code>:</p>
-   <pre><code class="language-plaintext">$ ./feedletter define-mastodon-subscribable --feed-id=1 --name=stevefeeds-masto
- 
- -*-*-*-
- 
- Subscribable Name:    stevefeeds-masto
- Feed ID:              1
- Subscription Manager: {
-     "extraParams": {},
-     "type": "Mastodon.Announce",
-     "version": 1
- }
- A Mastodon subscribable to feed with ID '1' named 'stevefeeds-masto' has been created.
-</code></pre>
-   <p>Let's do the same, and make a BlueSky subscribable:</p>
-   <pre><code class="language-plaintext">$ ./feedletter define-bluesky-subscribable --feed-id=1 --name=stevefeeds-bsky
-
- -*-*-*-
- 
- Subscribable Name:    stevefeeds-bsky
- Feed ID:              1
- Subscription Manager: {
-     "extraParams": {},
-     "type": "BlueSky.Announce",
-     "version": 1
- }
- A BlueSky subscribable to feed with ID '1' named 'stevefeeds-bsky' has been created.
-</code></pre>
-   <h3><a href="#15-subscribe-the-target-mastodon-and-bluesky-accounts-to-the-subscribables" id="15-subscribe-the-target-mastodon-and-bluesky-accounts-to-the-subscribables" name="15-subscribe-the-target-mastodon-and-bluesky-accounts-to-the-subscribables" class="anchorlink"></a>15. Subscribe the target Mastodon and BlueSky accounts to the subscribables.</h3>
-   <p>Let's check out the <code>subscribe</code> subcommand.</p>
-   <pre><code class="language-plaintext">$ ./feedletter subscribe --help
-
- Usage:
-     feedletter subscribe --subscribable-name &lt;name&gt; --e-mail &lt;address&gt; [--display-name &lt;name&gt;] [--unconfirmed]
-     feedletter subscribe --subscribable-name &lt;name&gt; --sms &lt;number&gt; [--unconfirmed]
-     feedletter subscribe --subscribable-name &lt;name&gt; --masto-instance-name &lt;name&gt; --masto-instance-url &lt;url&gt; [--unconfirmed]
-     feedletter subscribe --subscribable-name &lt;name&gt; --bsky-identifier &lt;identifier&gt; [--bsky-entryway-url &lt;name&gt;] [--unconfirmed]
- 
- Subscribe to a subscribable.
- 
- Options and flags:
-     --help
-         Display this help text.
-     --subscribable-name &lt;name&gt;
-         The name of an already-defined subscribable.
-     --e-mail &lt;address&gt;
-         The e-mail address to subscribe.
-     --display-name &lt;name&gt;
-         A display name to wrap around the e-mail address.
-     --sms &lt;number&gt;
-         The number to which messages should be sent.
-     --masto-instance-name &lt;name&gt;
-         A private name for this Mastodon instance.
-     --masto-instance-url &lt;url&gt;
-         The URL of the Mastodon instance
-     --bsky-identifier &lt;identifier&gt;
-         An account identifier, usually a DNS name or value beginning with 'did:'.
-     --bsky-entryway-url &lt;name&gt;
-         The base URL of the bluesky service.
-     --unconfirmed
-         Mark the subscription unconfirmed.
-</code></pre>
-   <p>Recall that when we placed our Mastodon access token in <code>feedletter-secrets.properties</code>, we gave it a name. We chose "arbitrary-name", because it's lovely. That becomes our <code>masto-instance-name</code>. The URL of the instance that hosts our accounts will be <code>masto-instance-url</code>. So we just...</p>
-   <pre><code class="language-plaintext">./feedletter subscribe --subscribable-name stevefeeds-masto --masto-instance-name arbitrary-name --masto-instance-url https://mas.to/
-</code></pre>
-   <p>For BlueSky, at least for now, we don't really need to provide a URL, there's just one. (In the future, hopefully there will be more BlueSky-like <a href="https://atproto.com/">atproto</a> services, for which you would provide and <code>entryway-url</code>). All you need to provide is <code>bsky-identifier</code>, the DNS handle or <a href="https://atproto.com/specs/did"><code>did</code></a> associated with your BlueSky account.</p>
-   <pre><code class="language-plaintext">./feedletter subscribe --subscribable-name stevefeeds-bsky --bsky-identifier testable-bsky.bsky.social
-</code></pre>
-   <h3><a href="#16-test-in-the-terminal" id="16-test-in-the-terminal" name="16-test-in-the-terminal" class="anchorlink"></a>16. Test in the terminal</h3>
-   <p>Finally, all of our setup is done!</p>
-   <p>We can get <code>feedletter</code> checking out our feed and syndicating announcements just by running what's usually the daemon process in the terminal.</p>
-   <pre><code class="language-plaintext">$ ./feedletter daemon
-
-Jan 13, 2025 5:33:34 PM com.mchange.v2.log.MLog 
-INFO: MLog clients using java 1.4+ standard logging.
-2025-01-13@17:33:36 [INFO] [com.mchange.feedletter.Daemon] feedletter-0.1.0-13-60e19c daemon (re)starting. 
-2025-01-13@17:33:36 [INFO] [com.mchange.feedletter.Daemon] Spawning daemon fibers. 
-2025-01-13@17:33:37 [INFO] [com.mchange.feedletter.Daemon] Starting web API service on interface '127.0.0.1', port 8024. 
-timestamp=2025-01-13T17:33:37.596959114Z level=INFO thread=#zio-fiber-1822226262 message="Starting the server..." location=com.mchange.feedletter.Daemon.webDaemon file=Daemon.scala line=189
-timestamp=2025-01-13T17:33:37.714089350Z level=INFO thread=#zio-fiber-1822226262 message="Server started" location=com.mchange.feedletter.Daemon.webDaemon file=Daemon.scala line=189
-2025-01-13@17:33:50 [FINE] [com.mchange.feedletter.db.PgDatabase] Deleting any as-yet-unassigned items that have been deleted from feed with ID 1 
-2025-01-13@17:33:50 [INFO] [com.mchange.feedletter.db.PgDatabase] Updated/assigned all items from feed with ID 1, feed URL 'https://www.inoreader.com/stream/user/0000000000/tag/all-articles' 
-2025-01-13@17:33:59 [FINE] [com.mchange.feedletter.db.PgDatabase] Deleting any as-yet-unassigned items that have been deleted from feed with ID 1 
-2025-01-13@17:33:59 [INFO] [com.mchange.feedletter.db.PgDatabase] Updated/assigned all items from feed with ID 1, feed URL 'https://www.inoreader.com/stream/user/0000000000/tag/all-articles' 
-2025-01-13@17:34:03 [FINE] [com.mchange.feedletter.db.PgDatabase] Deleting any as-yet-unassigned items that have been deleted from feed with ID 1 
-</code></pre>
-   <p>Great! This is what it looks like when the daemon is watch feeds. (In this case, just one feed.)</p>
-   <p>Eventually, when a new item is posted, you'll see entries like</p>
-   <pre><code class="language-plaintext">2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Added new item, feed ID 1, guid 'http://www.inoreader.com/article/3a9c6e7789e019a2'. 
-2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Item with GUID 'http://www.inoreader.com/article/3a9c6e7789e019a2' from feed with ID 1 has been assigned in subscribable 'stevefeeds-bsky' with assignable identifier 'http://www.inoreader.com/article/3a9c6e7789e019a2'. 
-2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Item with GUID 'http://www.inoreader.com/article/3a9c6e7789e019a2' from feed with ID 1 has been assigned in subscribable 'stevefeeds-masto' with assignable identifier 'http://www.inoreader.com/article/3a9c6e7789e019a2'. 
-2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Item with GUID 'http://www.inoreader.com/article/3a9c6e7789e019a2' from feed with ID 1 has been assigned (or refused assignment) in all subscribables to that feed. 
-</code></pre>
-   <p>In English, a new item has been found, and it's been "assigned" to the various subscribables watching the feed, here one that distributes to mastodon, and another that distributes to Mastodon and another that distributes to BlueSky. (You can also <a href="2024/01/29/feedletter-tutorial/index.html#12-define-subscribables-to-feeds">make various forms of e-mail subscribables</a>!)</p>
-   <p>Some subscribables collect many posts before distributing them. (For example, a weekly digest e-mail.)</p>
-   <p>But for Mastodon and BlueSky post announcements, each post should be distributed immediately following its observation. So soon after we see an add message, we'll see messages like...</p>
-   <pre><code class="language-plaintext">2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Queued Mastodon post for distribution. Content: [stevefeeds-masto] New Post: Thousands sign petition calling on ad titan WPP to rethink its 4-day RTO demand, by pthompson@insider.com (Polly Thompson) https://www.businessinsider.com/wpp-return-to-office-thousands-sign-petition-workers-2025-1 
-2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Assignable (item collection) defined by subscribable name 'stevefeeds-masto', within-type-id 'http://www.inoreader.com/article/3a9c6e7789e019b1' has been deleted. 
-2025-01-13@17:34:42 [FINE] [com.mchange.feedletter.db.PgDatabase] Cached values of items fully distributed have been cleared. 
-2025-01-13@17:34:42 [INFO] [com.mchange.feedletter.db.PgDatabase] Completed assignable 'http://www.inoreader.com/article/3a9c6e7789e019b1' with subscribable 'stevefeeds-masto'. 
-2025-01-13@17:34:42 [INFO] [com.mchange.feedletter.db.PgDatabase] Cleaned away data associated with completed assignable 'http://www.inoreader.com/article/3a9c6e7789e019b1' in subscribable 'stevefeeds-masto'. 
-</code></pre>
-   <p>After "completion", all data about the post is deleted, except the RSS guid and link are retained to prevent reannouncing the same post should it reappear in the RSS.</p>
-   <p>Once queued for distribution, you will see messages about postings to Mastodon and BlueSky.</p>
-   <p>Since on very active feeds, you can get a lot of posts at once when they are republished, <code>feedletter</code> spaces postings to a single account by one minute (currently hardcoded, eventually configurable), though it sends its posting streams to all subscribed accounts in parallel.</p>
-   <p>So you'll see stuff like this:</p>
-   <pre><code class="language-plaintext">2025-01-13@17:52:48 [INFO] [com.mchange.feedletter.db.PgDatabase] Posted BlueSky notification to (https://bsky.social/,testable-bsky.bsky.social) 
-2025-01-13@17:53:13 [FINE] [com.mchange.feedletter.db.PgDatabase] Deleting any as-yet-unassigned items that have been deleted from feed with ID 1 
-2025-01-13@17:53:13 [INFO] [com.mchange.feedletter.db.PgDatabase] Updated/assigned all items from feed with ID 1, feed URL 'https://www.inoreader.com/stream/user/0000000000/tag/all-articles' 
-2025-01-13@17:53:15 [INFO] [com.mchange.feedletter.db.PgDatabase] Posted Mastodon notification to (https://mas.to/,arbitrary-name) 
-</code></pre>
-   <p>And we see posts!</p>
-   <div style="text-align: center; margin-bottom: 1em;">
-    <img src="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/example-masto.png" width="80%">
-   </div>
-   <div style="text-align: center;">
-    <img src="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/example-bsky.png" width="80%">
-   </div>
-   <p>Sometimes things do go wrong!</p>
-   <pre><code class="language-plaintext">2025-01-13@17:56:49 [WARNING] [com.mchange.feedletter.db.PgDatabase] Failed attempt to post to Bluesky destination 'https://bsky.social/', retried = 0 (maxRetries: 10) 
-requests.RequestFailedException: Request to https://bsky.social/xrpc/com.atproto.repo.createRecord failed with status code 400
-{"error":"InvalidRequest","message":"Invalid app.bsky.feed.post record: Record/text must not be longer than 300 graphemes"}
-	at requests.Requester$$anon$1.readBytesThrough(Requester.scala:360)
-	at geny.Readable.writeBytesTo(Writable.scala:93)
-	at geny.Readable.writeBytesTo$(Writable.scala:91)
-        ...
-2025-01-13@17:56:49 [WARNING] [com.mchange.feedletter.db.PgDatabase] Attempt to post BlueSky notification to (https://bsky.social/,testable-bsky.bsky.social) failed or was skipped. Postable: BskyPostable(6,[stevefeeds-bsky] New Post: In DISSENT's winter issue, I make the case for left-YIMBYism in a debate with Brian Callaci and Sandeep Vaheesan https://www.dissentmagazine.org/article/supply-and-the-housing-crisis-a-debate/, by @resnikoff.bsky.social - Ned Resnikoff https://bsky.app/profile/resnikoff.bsky.social/post/3lfnb24zzbc2c,https://bsky.social/,testable-bsky.bsky.social,0,List()) 
-</code></pre>
-   <p><code>feedletter</code> will retry failed postings up to 10 times by default (the retry count is reconfigurable), then give up. This issue — the announcement is just too long to fit in BlueSky's 300 character limit — will not be cured, so that's what will happen. (I'll probably modify the BlueSky subscribable to just reject too-long posts, but for now they are just tried, retried, and eventually dropped.)</p>
-   <h3><a href="#17-enable-feedletter-as-a-systemd-daemon" id="17-enable-feedletter-as-a-systemd-daemon" name="17-enable-feedletter-as-a-systemd-daemon" class="anchorlink"></a>17. Enable feedletter as a systemd daemon</h3>
-   <p>We just place a systemd unit file <code>/opt/feedletter</code>, and then symlink it from <code>/etc/systemd/system</code>.</p>
-   <pre><code class="language-plaintext">[Unit]
-Description=Feedletter RSS-To-Mail-Etc Service
-After=syslog.target network.target
-
-[Service]
-Type=forking
-PIDFile=/opt/feedletter/feedletter.pid
-User=feedletter
-Group=feedletter
-WorkingDirectory=/opt/feedletter
-
-#
-# feedletter daemon behaves as a traditional forking service
-# when given the --fork flag
-#
-# its launcher, mill, will fork a feedletter process,
-# write a PID file for that process in the base working directory
-# and then exit
-#
-ExecStart=/opt/feedletter/feedletter daemon --fork
-
-TimeoutStopSec=90
-Restart=on-failure
-RestartSec=10s
-StandardError=journal
-StandardOutput=journal
-StandardInput=null
-
-[Install]
-WantedBy=multi-user.target
-</code></pre>
-   <p>Then it's just</p>
-   <pre><code class="language-plaintext"># systemctl enable feedletter
-# systemctl start feedletter
-</code></pre>
-   <p>We verify that the service is running.</p>
-   <pre><code class="language-plaintext"># journalctl -u feedletter --follow
-Jan 13 20:15:55 temp-feedletter systemd[1]: feedletter.service: Consumed 18.609s CPU time, 222M memory peak.
-Jan 13 20:15:55 temp-feedletter systemd[1]: Starting feedletter.service - Feedletter RSS-To-Mail-Etc Service...
-Jan 13 20:15:56 temp-feedletter feedletter[70034]: =========================================== runMainDaemon PreMain daemon --fork ======================================
-Jan 13 20:15:56 temp-feedletter feedletter[70034]: ======================================================================================================================
-Jan 13 20:15:59 temp-feedletter feedletter[70034]: [62/62] =================================== runMainDaemon PreMain daemon --fork =================================== 3s
-Jan 13 20:15:59 temp-feedletter feedletter[70034]: ======================================================================================================================
-Jan 13 20:16:00 temp-feedletter systemd[1]: Started feedletter.service - Feedletter RSS-To-Mail-Etc Service.
-Jan 13 20:16:01 temp-feedletter feedletter[70086]: Jan 13, 2025 8:16:01 PM com.mchange.v2.log.MLog
-Jan 13 20:16:01 temp-feedletter feedletter[70086]: INFO: MLog clients using java 1.4+ standard logging.
-Jan 13 20:16:03 temp-feedletter feedletter[70086]: 2025-01-13@20:16:03 [INFO] [com.mchange.feedletter.Daemon] feedletter-0.1.0-13-60e19c daemon (re)starting.
-Jan 13 20:16:03 temp-feedletter feedletter[70086]: 2025-01-13@20:16:03 [INFO] [com.mchange.feedletter.Daemon] Spawning daemon fibers.
-Jan 13 20:16:03 temp-feedletter feedletter[70086]: 2025-01-13@20:16:03 [INFO] [com.mchange.feedletter.Daemon] Starting web API service on interface '127.0.0.1', port 8024.
-Jan 13 20:16:04 temp-feedletter feedletter[70086]: timestamp=2025-01-13T20:16:04.337801942Z level=INFO thread=#zio-fiber-614230192 message="Starting the server..." location=com.mchange.feedletter.Daemon.webDaemon file=Daemon.scala line=189
-Jan 13 20:16:04 temp-feedletter feedletter[70086]: timestamp=2025-01-13T20:16:04.470643106Z level=INFO thread=#zio-fiber-614230192 message="Server started" location=com.mchange.feedletter.Daemon.webDaemon file=Daemon.scala line=189
-Jan 13 20:16:41 temp-feedletter feedletter[70086]: 2025-01-13@20:16:41 [FINE] [com.mchange.feedletter.db.PgDatabase] Deleting any as-yet-unassigned items that have been deleted from feed with ID 1
-Jan 13 20:16:41 temp-feedletter feedletter[70086]: 2025-01-13@20:16:41 [INFO] [com.mchange.feedletter.db.PgDatabase] Updated/assigned all items from feed with ID 1, feed URL 'https://www.inoreader.com/stream/user/0000000000/tag/all-articles'
-
-</code></pre>
-   <p>Looks Good!</p>
-   <h3><a href="#18-conclusion" id="18-conclusion" name="18-conclusion" class="anchorlink"></a>18. Conclusion</h3>
-   <p>That's it!</p>
-   <p>It seems like a lot, but it's much easier done than said. Give it a try. It won't bite.</p>
-   <p>It is also possible to customize the announcement messages that feedletter syndicates, or to include post text, length permitting. If that would be useful to you, <a href="mailto:swaldman@mchange.com">Let me know</a> and I'll add a quick tutorial on that.</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div>
-    <a href="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/index.html" class="pubtime">04:00 PM EST</a>
    </div>
   </div>
  </div>

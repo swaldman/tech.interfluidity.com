@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+ <head>
+  <style>
+      * {
+          font-family: sans-serif;
+      }
+      body {
+          margin-top: 1.5rem;
+          margin-left: 3rem;
+          margin-right: 3rem;
+          background-color: white;
+      }
+      .empty-list {
+              font-style: italic;
+              margin-top: 0.5rem;
+              margin-left: 1rem;
+              margin-bottom: 1rem;
+      }
+      .step-title {
+          font-weight: bold;
+          padding-bottom: 0.25rem;
+          margin-bottom: 0.5rem;
+          border-bottom: 1px solid black;
+      }
+      .step {
+          /* border: 1px solid black; */
+          margin: 0.5rem;
+          padding: 0.5rem;
+      }
+      .step-after-title {
+          margin-left: 0.5rem;
+      }
+      .step-field b {
+          font-size: 90%;
+      }
+      h2 {
+          margin-bottom: 0.5rem;
+      }
+      .timestamp {
+          /* font-family: monospace; */
+          font-style: italic;
+          white-space: no-wrap;
+      }
+      .success {
+        background-color: #aaddaa;
+      }
+      .failure {
+        background-color: #ffaaaa;
+      }
+      .skipped {
+        background-color: #ffff66;
+      }
+      .say-skipped {
+            margin-top: 0.5rem;
+            color: red;
+            font-weight: bold;
+      }
+      .labeled-text-outer, .labeled-no-text {
+          margin-top: 0.5rem;
+          font-weight: bold;
+          font-size: 90%;
+      }
+      .labeled-text-inner {
+          background-color: #eeeeee;
+          margin-top: 0.25rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          padding: 0.2rem;
+          font-family: monospace;
+          font-weight: normal;
+          font-size: 95%;
+          font-family: monospace;
+          white-space: pre;
+          overflow-x: auto;
+      }
+      h1 {
+        color: black;
+        
+      }
+      @media screen and (max-width: 700px) {
+        body {
+            margin-top: 0;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+        h1 {
+          font-size: 18pt; 
+        }
+        h2 {
+          font-size: 14pt; 
+        }
+      }
+    </style>
+  <title>[loiter] SUCCEEDED: Backup Postgres, all databases</title>
+ </head>
+ <body>
+  <h1>[loiter] SUCCEEDED: Backup Postgres, all databases</h1>
+  <div class="top-field">
+   <b>Succeeded overall?:</b> Yes
+  </div>
+  <div class="top-field">
+   <b>Timestamp:</b> <span class="timestamp">Sat, 8 Nov 2025 23:24:30 GMT</span>
+  </div>
+  <h2>Best-effort setups:</h2>
+  <div class="best-effort-setups">
+   <div class="empty-list">This task includes no best-effort-setup steps.</div>
+  </div>
+  <!-- best-effort-setups -->
+  <h2>Sequential steps:</h2>
+  <div class="sequential">
+   <div class="step success">
+    <div class="step-title">1. Ensure availability of rclone, if necessary</div>
+    <div class="step-after-title">
+     <div class="step-field">
+      <b>Action:</b> rclone --version
+     </div>
+     <div class="step-field">
+      <b>Succeeded?</b> Yes
+     </div>
+     <div class="step-field">
+      <b>Exit Code:</b> 0
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">out:</span>
+      <pre class="labeled-text-inner">rclone v1.68.0
+- os/version: ubuntu 22.04 (64 bit)
+- os/kernel: 5.15.0-144-generic (x86_64)
+- os/type: linux
+- os/arch: amd64
+- go/version: go1.23.1
+- go/linking: static
+- go/tags: none</pre>
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">err:</span> N/A
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">notes:</span>
+      <pre class="labeled-text-inner">destpath: onedrive:cloud-backups/postgres</pre>
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">carryforward:</span>
+      <pre class="labeled-text-inner">Pad(tmpDir = None, backupFile = None)</pre>
+     </div>
+    </div>
+   </div>
+   <div class="step success">
+    <div class="step-title">2. Create Temp Dir</div>
+    <div class="step-after-title">
+     <div class="step-field">
+      <b>Action:</b> os.temp.dir()
+     </div>
+     <div class="step-field">
+      <b>Succeeded?</b> Yes
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">out:</span> N/A
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">err:</span> N/A
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">carryforward:</span>
+      <pre class="labeled-text-inner">Pad(tmpDir = Some(/tmp/9854764446000826374), backupFile = None)</pre>
+     </div>
+    </div>
+   </div>
+   <div class="step success">
+    <div class="step-title">3. Perform Postgres Backup</div>
+    <div class="step-after-title">
+     <div class="step-field">
+      <b>Action:</b> postgres-dump-all-to-file &lt;temporary-backup-file&gt;
+     </div>
+     <div class="step-field">
+      <b>Succeeded?</b> Yes
+     </div>
+     <div class="step-field">
+      <b>Exit Code:</b> 0
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">out:</span> N/A
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">err:</span> N/A
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">notes:</span>
+      <pre class="labeled-text-inner">Backup size: 4.187 MiB</pre>
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">carryforward:</span>
+      <pre class="labeled-text-inner">Pad(
+  tmpDir = Some(/tmp/9854764446000826374),
+  backupFile = Some(/tmp/9854764446000826374/loiter.interfluidity.com-pgdumpall-2025-11-08)
+)</pre>
+     </div>
+    </div>
+   </div>
+   <div class="step success">
+    <div class="step-title">4. Copy backup to storage</div>
+    <div class="step-after-title">
+     <div class="step-field">
+      <b>Action:</b> 'rclone mkdir' then 'rclone copy' or else 'mkdir' then 'cp'
+     </div>
+     <div class="step-field">
+      <b>Succeeded?</b> Yes
+     </div>
+     <div class="step-field">
+      <b>Exit Code:</b> 0
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">out:</span> N/A
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">err:</span> N/A
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">carryforward:</span>
+      <pre class="labeled-text-inner">Pad(
+  tmpDir = Some(/tmp/9854764446000826374),
+  backupFile = Some(/tmp/9854764446000826374/loiter.interfluidity.com-pgdumpall-2025-11-08)
+)</pre>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- sequential -->
+  <h2>Best-effort followups:</h2>
+  <div class="best-effort-followups">
+   <div class="step success">
+    <div class="step-title">Remove temporary local backup.</div>
+    <div class="step-after-title">
+     <div class="step-field">
+      <b>Action:</b> os.remove( &lt;backup-file&gt; )
+     </div>
+     <div class="step-field">
+      <b>Succeeded?</b> Yes
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">out:</span> N/A
+     </div>
+     <div class="labeled-no-text">
+      <span class="label">err:</span> N/A
+     </div>
+     <div class="labeled-text-outer">
+      <span class="label">carryforward:</span>
+      <pre class="labeled-text-inner">Pad(
+  tmpDir = Some(/tmp/9854764446000826374),
+  backupFile = Some(/tmp/9854764446000826374/loiter.interfluidity.com-pgdumpall-2025-11-08)
+)</pre>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- best-effort-followups -->
+ </body>
+</html>
+

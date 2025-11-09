@@ -18,7 +18,7 @@ object Dependency {
 }
 
 object `package` extends UntemplateModule {
-  override def scalaVersion = "3.3.6"
+  override def scalaVersion = "3.3.7"
 
   override def untemplateSourcesFolders = super.untemplateSourcesFolders :+ "entries"
   override def untemplateSourcesPrefixPackagesFromModuleDir : Map[String,String] = Map("entries" -> "com.interfluidity.tech.blog")
