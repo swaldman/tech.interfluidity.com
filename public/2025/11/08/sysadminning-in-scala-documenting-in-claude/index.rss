@@ -48,7 +48,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
    <p>At first I played manager to Claude the copy writer. I offered my observations and corrections in dialogue. Claude dutifully updated the text and fixed the errors.</p>
    <p>(At one point, Claude was so attentive to my feedback that it offered to misstate the API in order to conform to my simplifying suggestion! I said no to that change.)</p>
    <p>Eventually I went in and did some hand-editing.</p>
-   <p>The documentation that Claude produced is more long-winded than what I'd have written. But it is also more comprehensive!</p>
+   <p>The documentation that Claude produced is more long-winded than what I'd have written. But it is also more comprehensive.</p>
    <p>Looking at Claude's examples, and how cumbersome they were, inspired me to change the API, significantly and for the better. That process seems like a contribution, even if you can't see it in the final product. (Claude cheerfully revised the examples to the new, less cumbersome API, so that's all you see.)</p>
    <p>Claude was quite ambitious. It created a vast "Complete Examples" section, just inventing common sysadmin tasks and writing scripts for them. I took that out because they were scripts I couldn't run to verify — they relied on file systems and resources that weren't mine — and just inspecting them I pretty quickly found some problems and bugs. I'd rather have fewer examples than mistaken examples.</p>
    <p>Claude agreed removing the section was for the best, but Claude pretty much always agrees.</p>
