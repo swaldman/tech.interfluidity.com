@@ -72,7 +72,7 @@ The documentation that Claude produced is more long-winded than what I'd have wr
 
 Looking at Claude's examples, and how cumbersome they were, inspired me to change the API, significantly and for the better.
 That process seems like a contribution, even if you can't see it in the final product.
-(Claude cheerfully revised the examples to the new, less cumbersome API, so that's all you see.)
+(Claude cheerfully revised the code to the new, less cumbersome API, so that's all you see.)
 
 Claude was quite ambitious. It created a vast "Complete Examples" section, just inventing common sysadmin tasks and
 writing scripts for them. I took that out because they were scripts I couldn't run to verify &mdash; they relied on file systems and resources that weren't mine &mdash;
