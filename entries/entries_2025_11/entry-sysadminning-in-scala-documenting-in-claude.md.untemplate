@@ -78,7 +78,7 @@ Claude was quite ambitious. It created a vast "Complete Examples" section, just 
 writing scripts for them. I took that out because they were scripts I couldn't run to verify &mdash; they relied on file systems and resources that weren't mine &mdash;
 and just inspecting them I pretty quickly found some problems and bugs. I'd rather have fewer examples than mistaken examples.
 
-Claude agreed removing the section was for the best, but Claude pretty much always agrees.
+Claude agreed removing the section was for the best. But Claude pretty much always agrees.
 
 In any case, while I'm vain enough to think that if I'd written the documentation from scratch it would be better,
 I think what our collaboration produced is pretty good.
