@@ -19,7 +19,7 @@ Maybe other people would use it?
 
 <div style="text-align: center">***</div>
 
-I don't like to do anything very complicated in a shell script. It feels too loosey-goosey. I don't quite
+I don't like to do anything very complicated in a shell script. It feels loosey-goosey. I don't quite
 know what's going to happen, how things will behave if anything goes wrong.
 
 I love doing just about anything in Scala, a programming language as tight and neurotic as I am.
