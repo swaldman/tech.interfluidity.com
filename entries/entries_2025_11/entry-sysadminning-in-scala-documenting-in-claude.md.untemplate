@@ -15,7 +15,7 @@ given PageBase = PageBase.fromPage(input.renderLocation)
 
 **TL; DR:** Me and Claude code collaborated on some
 [documentation](https://github.com/swaldman/mchange-sysadmin-scala/blob/main/doc/TaskRunner-Developer-Guide.md) for my Scala sysadmin library. Is it any good?
-Maybe other people would use it?
+Maybe other people would use the library?
 
 <div style="text-align: center">***</div>
 
