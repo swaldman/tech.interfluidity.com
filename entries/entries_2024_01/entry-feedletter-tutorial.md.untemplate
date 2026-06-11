@@ -430,7 +430,7 @@ $ ./feedletter db-init
 
 <div class="note">
 
-At this point, if you are running feedletter >=0.2.4 it's also a good idea to run
+At this point, if you are running feedletter >=0.2.5 it's also a good idea to run
 the following command:
 
 ```plaintext
