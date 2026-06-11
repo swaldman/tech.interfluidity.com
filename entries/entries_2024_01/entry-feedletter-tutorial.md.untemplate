@@ -4,6 +4,11 @@
 >      Some("""Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial."""),
 >      Some("acb84c08c1bbcc83036b9cad70f6a3c5d60865c4")
 >    ) ::
+>    UpdateRecord(
+>      "2026-06-11T13:30:00-03:00",
+>      Some("""Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those."""),
+>      Some("acb84c08c1bbcc83036b9cad70f6a3c5d60865c4")
+>    ) ::
 >    Nil
 >
 > val UntemplateAttributes = immutable.Map[String,Any] (
@@ -422,6 +427,31 @@ If we've set up the database and secrets file property, it should be as easy as
 $ cd feedletter-local
 $ ./feedletter db-init
 ```
+
+<div class="note">
+
+At this point, if you are running feedleter >=0.2.4 it's also a good idea to run
+the following command:
+
+```plaintext
+$ ./feedletter generate-starter-untemplates
+```
+
+That will make it simpler, going forward, to modify the look and feel of e-mails that
+you generate &mdash; newsletters, confirmation requests, etc.
+
+If you don't run this command, everything will still be fine, but you'll need to do a
+bit more work if you want to change the style of your e-mails.
+
+Be sure to perform this step *before [defining any subscribables](#12-define-subscribables-to-feeds)*.
+Any subscribables you define
+before generating the starter templates will use compiled-in untemplates, and you'll
+have to define new untemplates and update your subscriptions to use them if you want to
+change the styling. (See the notes in [Section 15](#15-tweak-the-newsletter-styles) of this tutorial.)
+
+(Update added 2026-06-11)
+</div>
+
 
 ## 10. Perform in-database configuration
 
@@ -1022,7 +1052,22 @@ with `--guid <guid>`.
 
 Let's see how we can restyle this post to make it a bit better.
 
-We have been using the built-in default untemplate to compose our items. We cannot modify that.
+If we ran `./feedletter generate-starter-templates` before defining your subscribables, as recommended in a note [above](#9-initialize-the-feedletter-database),
+things are very easy. In the `untemplates` directory you will find a subdirectory `default/subscription/email`. In that directory, you'll see a file called
+`composeUniversal.html.untemplate`.
+
+If we start editing that template, our edits will take effect immediately when running `feedletter-style`, like this:
+
+```plaintext
+$ ./feedletter-style compose-single --subscribable-name lgm  --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+```
+
+<div class="note">
+
+If we did not generate starter templates, we will have been using the compiled-in default untemplate to compose our items. We cannot modify that.
 
 But our feedletter installation directory contains a copy of this untemplate that we can deploy and tweak.
 
@@ -1064,9 +1109,12 @@ Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C 
 Starting single-page webserver on interface '0.0.0.0', port 45612...
 ```
 
-Initially it looks exactly the same, because it is just a copy of the default untemplate!
+</div>
 
-But now we can just modify that file, `untemplate/tutorial/lgmCompose.html.untemplate`, hit reload, and play!
+Initially it will look exactly the same, because it is just a copy of the default untemplate!
+
+But now we can just modify our untemplate
+(either `untemplate/default/subscription/email/composeUniversal.html.untemplate` or `untemplate/tutorial/lgmCompose.html.untemplate`), hit reload, and play around with it!
 
 This is why we needed a second terminal window. We edit the template in one terminal while `./feedletter-style` is running in the other.
 After each edit and save, we hit reload to see our changes. (We may have to wait 10-15 secs!)
@@ -1081,7 +1129,7 @@ You can [ask for help](mailto:swaldman@mchange.com)!)
 
 </div>
 
-Our new untemplate has a section that looks like this:
+Our untemplate has a section that looks like this:
 
 ```html
 <html>
@@ -1140,7 +1188,11 @@ Looks better!
 
 We can keep editing all we like. We add the `--random` flag and run our `./feedletter-style` command over and over to make sure that posts in general render well.
 
-When we are happy, we want to tell our subscription to use the new untemplate.
+When we are happy, we are done, if we've been editing the starter untemplate at `untemplate/default/subscription/email/composeUniversal.html.untemplate`. (If not, see the note just below.)
+
+<div class="note">
+
+If we created a new untemplate called `tutorial.lgmCompose_html`, we'll need to to tell our subscription to use the new untemplate.
 
 Remember, the name of the untemplate we've been editing was `tutorial.lgmCompose_html`.
 
@@ -1191,6 +1243,8 @@ Updated Subscription Manager: {
 }
 ```
 
+</div>
+
 And we are done! We have restyled our newsletter.
 
 We could (and should!) do the same with our other subscriptions (using `./feedletter-style compose-multiple`). We could also
@@ -1202,8 +1256,27 @@ Learn more about untemplates [here](https://github.com/swaldman/untemplate-doc#r
 
 The default compose untemplate actually accepts a [`ComposeInfo.Universal`](https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala),
 a parent type of both [`ComposeInfo.Single`](https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala) and
-[`ComposeInfo.Multiple`](https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala). So we can fix up the glitches we know
-about already in our `lgm-daily` subscribable just by setting for it the same compose untemplate:
+[`ComposeInfo.Multiple`](https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala).
+
+If we generated starter untemplates,
+our `lgm-daily` subscribable used the same compose untemplate we just edited by default. Run `./feedletter list-untemplates` to verify this.
+
+Let's take a look at what that subscription looks like.
+Because it shows multiple posts, we use the `compose-multiple` subcommand.
+
+```plaintext
+$ ./feedletter-style compose-multiple --subscribable-name lgm-daily --port 45612
+[50/50] runMainBackground 
+Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
+Starting single-page webserver on interface '0.0.0.0', port 45612...
+```
+
+We've already fixed our glitches in that subscription as well. It looks pretty good!
+
+<div class="note">
+
+If we did not `generate-starter-untemplates`, we still have to tell `lgm-daily` to use our new untemplate,
+just like we had to tell `lgm` before:
 
 ```plaintext
 $ ./feedletter set-untemplates --subscribable-name lgm-daily --compose-untemplate tutorial.lgmCompose_html
@@ -1234,6 +1307,8 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
 ```
 
 We'll find that it looks pretty good!
+
+</div>
 
 ## 16. Advanced: Customize the content
 

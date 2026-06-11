@@ -1,0 +1,35 @@
+import java.time.format.DateTimeFormatter
+import unstatic.ztapir.simple.Attribute.Key.*
+
+> val TimestampFormatter = DateTimeFormatter.ofPattern("""yyyy'-'MM'-'dd' @ 'hh':'mm' 'a' 'zzz""").withZone(java.time.ZoneId.systemDefault())
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+val site = input.renderLocation.site
+
+(input : MainBlog.Archive.Input)[]~()>
+<div class="archive">
+  <h1>archive</h1>
+  <p class="zip-offer">...you can also <a href="https://zip.interfluidity.com/tech/latest" download>download the complete site</a> as a zip file.</p>
+
+  <table class="archive-table">
+<()  
+  input.entryUntemplatesResolved.foreach { eutr =>
+    val pubDate      = eutr.entryInfo.pubDate
+    val permalinkLoc = site.location( eutr.entryInfo.permalinkPathSiteRooted )
+    val title        = eutr.entryInfo.mbTitle.getOrElse("Untitled Post")
+()>
+    <tr>
+      <td class="timestamp">
+	<a href="<( permalinkLoc.relative )>"><( TimestampFormatter.format(pubDate) )></a>
+      </td>
+      <td class="entry-link">
+        <a href="<( permalinkLoc.relative )>"><( title )></td>
+      </td>
+    </tr>
+<()
+  }
+()>
+  </table>
+</div>
+

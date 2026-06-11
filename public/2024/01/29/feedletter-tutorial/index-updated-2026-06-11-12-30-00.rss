@@ -9,33 +9,33 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <generator>https://github.com/swaldman/unstatic</generator>
     <docs>https://cyber.harvard.edu/rss/rss.html</docs>
     <atom:link
-    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.rss"/>
+    type="application/rss+xml" rel="self" href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2026-06-11-12-30-00.rss"/>
     <iffy:curation>
       <iffy:single/>
     </iffy:curation>
     <iffy:completeness>Content</iffy:completeness>
     <item>
-      <pubDate>Thu, 20 Jun 2024 13:10:00 -0400</pubDate>
+      <pubDate>Thu, 11 Jun 2026 12:30:00 -0400</pubDate>
       <guid isPermalink="true">
-        https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html
+        https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2026-06-11-12-30-00.html
       </guid>
       <description>
-        <![CDATA[A significant update of Feedletter tutorial was made on 2024-06-20 @ 01:10 PM EDT. → Add note to Section 16, "Advanced: Customize the content" documenting feedletter API changes that slightly modify this section of the tutorial. The post was originally published 2024-01-29 @ 10:30 AM EST. This is an automatically generated post. by Update-o-Bot on 2024-06-20 @ 01:10 PM...]]>
+        <![CDATA[A significant update of Feedletter tutorial was made on 2026-06-11 @ 12:30 PM EDT. → Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those. The post was originally published 2024-01-29 @ 10:30 AM EST. This is an automatically generated post. by Update-o-Bot on 2026-06-11 @ 12:30 PM...]]>
       </description>
-      <link>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html</link>
+      <link>https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2026-06-11-12-30-00.html</link>
       <title>Updated: Feedletter tutorial</title>
       <iffy:synthetic>
         <iffy:type>UpdateAnnouncement</iffy:type>
         <iffy:update>
-          <atom:updated>2024-06-20T17:10:00Z</atom:updated>
+          <atom:updated>2026-06-11T16:30:00Z</atom:updated>
           <atom:summary>
-            <![CDATA[Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial.]]>
+            <![CDATA[Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those.]]>
           </atom:summary>
           <iffy:revision>
             https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
           </iffy:revision>
           <iffy:diff>
-            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
+            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-current.html
           </iffy:diff>
           <iffy:initial>
             <atom:title><![CDATA[Feedletter tutorial]]></atom:title>
@@ -54,10 +54,8 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
         <![CDATA[<article class="presentation-rss synthetic">
  <div class="entry-header"></div>
  <div class="entry-body">
-  <p>A significant update of <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html"><i>Feedletter tutorial</i></a> was made on 2024-06-20 @ 01:10 PM EDT.</p>
-  <blockquote>
-   → Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial.
-  </blockquote>
+  <p>A significant update of <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index.html"><i>Feedletter tutorial</i></a> was made on 2026-06-11 @ 12:30 PM EDT.</p>
+  <blockquote>→ Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those.</blockquote>
   <p>The post was originally published 2024-01-29 @ 10:30 AM EST.</p>
  </div>
  <div class="entry-footer">
@@ -67,7 +65,7 @@ version="2.0" xmlns:iffy="http://tech.interfluidity.com/xml/iffy/" xmlns:atom="h
     <em>This is an automatically generated post.</em>
    </div>
    <div>
-    by Update-o-Bot on 2024-06-20 @ <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2024-06-20-13-10-00.html" class="pubtime">01:10 PM EDT</a>
+    by Update-o-Bot on 2026-06-11 @ <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-updated-2026-06-11-12-30-00.html" class="pubtime">12:30 PM EDT</a>
    </div>
   </div>
  </div>
