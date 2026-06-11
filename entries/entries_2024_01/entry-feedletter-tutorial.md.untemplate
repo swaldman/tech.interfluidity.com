@@ -430,7 +430,7 @@ $ ./feedletter db-init
 
 <div class="note">
 
-At this point, if you are running feedleter >=0.2.4 it's also a good idea to run
+At this point, if you are running feedletter >=0.2.4 it's also a good idea to run
 the following command:
 
 ```plaintext
@@ -1053,7 +1053,7 @@ with `--guid <guid>`.
 Let's see how we can restyle this post to make it a bit better.
 
 If we ran `./feedletter generate-starter-templates` before defining your subscribables, as recommended in a note [above](#9-initialize-the-feedletter-database),
-things are very easy. In the `untemplates` directory you will find a subdirectory `default/subscription/email`. In that directory, you'll see a file called
+things are very easy. In the `untemplate` directory you will find a subdirectory `default/subscription/email`. In that directory, you'll see a file called
 `composeUniversal.html.untemplate`.
 
 If we start editing that template, our edits will take effect immediately when running `feedletter-style`, like this:

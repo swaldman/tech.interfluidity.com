@@ -331,7 +331,7 @@ $ cd feedletter-local
 $ ./feedletter db-init
 </code></pre>
    <div class="note">
-    <p>At this point, if you are running feedleter &gt;=0.2.4 it's also a good idea to run the following command:</p>
+    <p>At this point, if you are running feedletter &gt;=0.2.4 it's also a good idea to run the following command:</p>
     <pre><code class="language-plaintext">$ ./feedletter generate-starter-untemplates
 </code></pre>
     <p>That will make it simpler, going forward, to modify the look and feel of e-mails that you generate — newsletters, confirmation requests, etc.</p>
@@ -784,7 +784,7 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
     <p>By default, we just pulled the first item (and most recent, since blogs are usually reverse-chronological) from the feed. We can also pull a random item off the feed to view with <code>--random</code>, or a particular item identified by its <code>&lt;guid&gt;</code> element in the feed with <code>--guid &lt;guid&gt;</code>.</p>
    </div>
    <p>Let's see how we can restyle this post to make it a bit better.</p>
-   <p>If we ran <code>./feedletter generate-starter-templates</code> before defining your subscribables, as recommended in a note <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/#9-initialize-the-feedletter-database">above</a>, things are very easy. In the <code>untemplates</code> directory you will find a subdirectory <code>default/subscription/email</code>. In that directory, you'll see a file called <code>composeUniversal.html.untemplate</code>.</p>
+   <p>If we ran <code>./feedletter generate-starter-templates</code> before defining your subscribables, as recommended in a note <a href="https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/#9-initialize-the-feedletter-database">above</a>, things are very easy. In the <code>untemplate</code> directory you will find a subdirectory <code>default/subscription/email</code>. In that directory, you'll see a file called <code>composeUniversal.html.untemplate</code>.</p>
    <p>If we start editing that template, our edits will take effect immediately when running <code>feedletter-style</code>, like this:</p>
    <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm  --port 45612
 [50/50] runMainBackground 
