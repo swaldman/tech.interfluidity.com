@@ -1,0 +1,93 @@
+> val updateHistory =
+>    //UpdateRecord("2024-06-20T17:50:00-04:00",Some("Add bold update crediting Maggie Appleton for some of these ideas."),Some("f22b4df6db0c2b09d42406fce93175d3fb7e1ed5")) ::
+>    Nil
+>
+> val UntemplateAttributes = immutable.Map[String,Any] (
+>   "Title"         -> "Feedletter dockerified",
+>   "PubDate"       -> "2026-06-11T19:30:00-05:00",
+>   "UpdateHistory" -> updateHistory,
+>   "Anchor"        -> "feedletter-dockerified" // a String
+> )
+
+given PageBase = PageBase.fromPage(input.renderLocation)
+
+(input : MainBlog.EntryInput)[]~()>      ### modify Title/Author/Pubdate above, add markdown or html below!
+
+<div style="border-bottom: 2px solid #cccccc;">
+
+**TL; DR:** You can try [`feedletter`](https://github.com/swaldman/feedletter) dockerified [here](https://github.com/swaldman/feedletter-docker).
+
+</div>
+
+One thing you can say about software or "tech" is it's always changing. A relatively small fraction of the change,
+in my view, necessarily counts as progress, but there is so much change that small percentage accumulates
+pretty fast.
+
+One of many, many trends in software that I never much mastered or paid attention to is "containerization".
+I am very accustomed to setting up old-school UNIX services (or kind of new school, since I tend to manage
+them under `systemd` these days). I haven't worked in the kind of high volume, dynamically scaling settings
+under which gadgets like Kubernetes makes sense. So, I've mostly ignored Docker and related technologies.
+
+But, in my long and lonesome life, one sorrow I have is that software I write, good software I think, often ends
+up with a single lonesome user, me, even though most of what I write I publish as free software.
+
+One thing I wrote that I think is very good is [`feedletter`](https://github.com/swaldman/feedletter).
+If you are seeing this note, it could very well be because feedletter pushed it to you, by e-mail, on Mastodon,
+or on Bluesky. Plus, I have *ideas* for feedletter. I mean to extend it to do a few more things pretty soon.
+
+When I first published `feedletter`, I wrote a long tutorial for it on this website. In fact, there are three
+instructional posts regarding `feedletter` here:
+
+* [Feedletter tutorial](##feedletter-tutorial)
+* [Style-by-mail in feedletter](##style-feedletter-by-mail)
+* [Syndicating RSS to Mastodon and BlueSky with feedletter](##syndicating-rss-to-mastodon-and-bluesky-with-feedletter)
+
+Nevertheless, I can't pretend `feedletter` isn't a bit intimidating to set up and use. A person accustomed to hosting
+UNIX services should find it's pretty easy work, but it is some hassle.
+
+So, I thought, why not try to learn a bit about Docker by Docker-ifying `feedletter`. Maybe it'd be an easier,
+less intimidating way for people to give the service a chance.
+
+I've been meaning to try this for a while, but the fixed cost of all I'd have to learn dissuaded me. But, now
+in the age of mysterious coding creatures, I thought why not see if I can't collaborate with
+[Claude code](https://claude.com/product/claude-code) and get it done quickly?
+
+So that's what I did. I don't think what I've done counts as "vibe coding". I inspected all the
+artifacts Claude generated, asked a lot of questions, learned some stuff about Linux namespaces.
+Where my actual application code was touched, I mostly touched it myself, although Claude has been a
+very helpful reviewer and bug spotter.
+
+But Claude did generate most of what's in the `feedletter-docker` repository, including its [README.md](https://github.com/swaldman/feedletter-docker#readme).
+
+I've worked through Claude's instructions there, and at this point everything seems to work fine, though we did have a few bumps along the way.
+
+("We." It's a fascinating question whether that's the right pronoun.)
+
+This mini project was, nevertheless, more time consuming than I expected. The coding &mdash; both the minor
+modifications I made to `feedletter` itself, and the artifacts Claude produced and edited with remarkable
+speed and accuracy &mdash; was a very small part of the time spent.
+
+Testing was the pain point. I don't know
+how to automate spinning up a server, installing Docker, editing environment and config files, running
+dockerified admin commands, etc. Most of the time I spent running and rerunning the service, hitting
+hiccups (more my errors than Claude's!), and restarting the cycle. (I didn't spin up new servers and
+reinstall Docker every time, but I did try to start with a fresh clone of my repository, imagining
+I was one of you folk out there giving it a try.)
+
+Still, the set up is much quicker than the native UNIX server. But some of the
+functionality it is quirkily arranged to manage frictions presented by the boundary between a
+container and outside file systems and networks.
+
+The default setup circumvents the hassle of configuring
+a web front end like `nginx` and getting SSL certificates, but at cost of letting `caddy` take exclusive control over
+ports 80 and 443, which many users will not abide.
+
+Claude generated an alternative path
+to run the Dockerized service behind a reverse-proxy front end, so that your feedletter installation
+can be one virtual host among many. (That's how I run my real feedletter service, though in un-Dockerized
+form.) I have not tested Claude's scheme for Dockerized feedletter with external TLS yet, though.
+
+Anyway, if this appeals to you, plase give it a try! I hope to have more to say about extensions
+to `feedletter` pretty soon.
+
+p.s. "Claude" here was Opus 4.8.

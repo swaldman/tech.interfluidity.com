@@ -79,7 +79,52 @@
         <div class="day-stamp">
  2026-06-11 <span class="arrow">⇒</span>
 </div>
-<article class="presentation-multiple synthetic">
+<article class="presentation-multiple uid-feedletter-dockerified">
+ <div class="entry-header">
+  <h1><a href="2026/06/11/feedletter-dockerified/index.html">Feedletter dockerified</a></h1>
+  <hr class="below-title">
+ </div>
+ <div class="entry-body">
+  <div class="flexmark markdown">
+   <div style="border-bottom: 2px solid #cccccc;">
+    <p><strong>TL; DR:</strong> You can try <a href="https://github.com/swaldman/feedletter"><code>feedletter</code></a> dockerified <a href="https://github.com/swaldman/feedletter-docker">here</a>.</p>
+   </div>
+   <p>One thing you can say about software or "tech" is it's always changing. A relatively small fraction of the change, in my view, necessarily counts as progress, but there is so much change that small percentage accumulates pretty fast.</p>
+   <p>One of many, many trends in software that I never much mastered or paid attention to is "containerization". I am very accustomed to setting up old-school UNIX services (or kind of new school, since I tend to manage them under <code>systemd</code> these days). I haven't worked in the kind of high volume, dynamically scaling settings under which gadgets like Kubernetes makes sense. So, I've mostly ignored Docker and related technologies.</p>
+   <p>But, in my long and lonesome life, one sorrow I have is that software I write, good software I think, often ends up with a single lonesome user, me, even though most of what I write I publish as free software.</p>
+   <p>One thing I wrote that I think is very good is <a href="https://github.com/swaldman/feedletter"><code>feedletter</code></a>. If you are seeing this note, it could very well be because feedletter pushed it to you, by e-mail, on Mastodon, or on Bluesky. Plus, I have <em>ideas</em> for feedletter. I mean to extend it to do a few more things pretty soon.</p>
+   <p>When I first published <code>feedletter</code>, I wrote a long tutorial for it on this website. In fact, there are three instructional posts regarding <code>feedletter</code> here:</p>
+   <ul>
+    <li><a href="2024/01/29/feedletter-tutorial/index.html">Feedletter tutorial</a></li>
+    <li><a href="2024/02/04/style-by-mail-in-feedletter/index.html">Style-by-mail in feedletter</a></li>
+    <li><a href="2025/01/14/syndicating-rss-to-mastodon-and-bluesky-with-feedletter/index.html">Syndicating RSS to Mastodon and BlueSky with feedletter</a></li>
+   </ul>
+   <p>Nevertheless, I can't pretend <code>feedletter</code> isn't a bit intimidating to set up and use. A person accustomed to hosting UNIX services should find it's pretty easy work, but it is some hassle.</p>
+   <p>So, I thought, why not try to learn a bit about Docker by Docker-ifying <code>feedletter</code>. Maybe it'd be an easier, less intimidating way for people to give the service a chance.</p>
+   <p>I've been meaning to try this for a while, but the fixed cost of all I'd have to learn dissuaded me. But, now in the age of mysterious coding creatures, I thought why not see if I can't collaborate with <a href="https://claude.com/product/claude-code">Claude code</a> and get it done quickly?</p>
+   <p>So that's what I did. I don't think what I've done counts as "vibe coding". I inspected all the artifacts Claude generated, asked a lot of questions, learned some stuff about Linux namespaces. Where my actual application code was touched, I mostly touched it myself, although Claude has been a very helpful reviewer and bug spotter.</p>
+   <p>But Claude did generate most of what's in the <code>feedletter-docker</code> repository, including its <a href="https://github.com/swaldman/feedletter-docker#readme">README.md</a>.</p>
+   <p>I've worked through Claude's instructions there, and at this point everything seems to work fine, though we did have a few bumps along the way.</p>
+   <p>("We." It's a fascinating question whether that's the right pronoun.)</p>
+   <p>This mini project was, nevertheless, more time consuming than I expected. The coding — both the minor modifications I made to <code>feedletter</code> itself, and the artifacts Claude produced and edited with remarkable speed and accuracy — was a very small part of the time spent.</p>
+   <p>Testing was the pain point. I don't know how to automate spinning up a server, installing Docker, editing environment and config files, running dockerified admin commands, etc. Most of the time I spent running and rerunning the service, hitting hiccups (more my errors than Claude's!), and restarting the cycle. (I didn't spin up new servers and reinstall Docker every time, but I did try to start with a fresh clone of my repository, imagining I was one of you folk out there giving it a try.)</p>
+   <p>Still, the set up is much quicker than the native UNIX server. But some of the functionality it is quirkily arranged to manage frictions presented by the boundary between a container and outside file systems and networks.</p>
+   <p>The default setup circumvents the hassle of configuring a web front end like <code>nginx</code> and getting SSL certificates, but at cost of letting <code>caddy</code> take exclusive control over ports 80 and 443, which many users will not abide.</p>
+   <p>Claude generated an alternative path to run the Dockerized service behind a reverse-proxy front end, so that your feedletter installation can be one virtual host among many. (That's how I run my real feedletter service, though in un-Dockerized form.) I have not tested Claude's scheme for Dockerized feedletter with external TLS yet, though.</p>
+   <p>Anyway, if this appeals to you, plase give it a try! I hope to have more to say about extensions to <code>feedletter</code> pretty soon.</p>
+   <p>p.s. "Claude" here was Opus 4.8.</p>
+  </div>
+ </div>
+ <div class="entry-footer">
+  <div class="post-metainfo">
+   <div>
+    <a href="2026/06/11/feedletter-dockerified/index.html" class="pubtime">08:30 PM EDT</a>
+   </div>
+  </div>
+ </div>
+</article>
+<div class="after-article"></div>
+<!-- after-article --><div class="entry-separator"></div><article class="presentation-multiple synthetic">
  <div class="entry-header">
   <h1><a href="2024/01/29/feedletter-tutorial/index-updated-2026-06-11-12-30-00.html">Updated: Feedletter tutorial</a></h1>
   <hr class="below-title">
@@ -501,195 +546,6 @@ if logger.isEnabled( Level.ERROR ) then logger.log( Level.ERROR, "This is bad." 
    </div>
    <div>
     <a href="2024/06/06/neonix/index-updated-2025-04-03-21-10-00.html" class="pubtime">09:10 PM EDT</a>
-   </div>
-  </div>
- </div>
-</article>
-<div class="after-article"></div>
-<!-- after-article --><div class="entry-separator"></div><div class="day-stamp">
- 2025-01-28 <span class="arrow">⇒</span>
-</div>
-<article class="presentation-multiple uid-adolescent-deepseek-on-a-mac-laptop">
- <div class="entry-header">
-  <h1><a href="2025/01/28/adolescent-deepseek-on-a-mac-laptop/index.html">Adolescent DeepSeek on a Mac laptop</a></h1>
-  <hr class="below-title">
- </div>
- <div class="entry-body">
-  <div class="flexmark markdown">
-   <p><strong>TL; DR:</strong> DeepSeek-R1-14B seems pretty "smart". For tasks that, um, don't involve syllable counting, it might be sophisticated enough to be useful. (Or not! It'd take more experimentation to decide.)</p>
-   <p>But it runs too slowly on my 5-year-old Intel-based MacBookPro, even tricked out with 64GB of RAM. Smaller models run with better performance, but the result quality is likely too poor to be useful. For whatever I do with LLMs, I'm afraid I'm stuck with the online services for now.</p>
-   <hr>
-   <p>In the <a href="2025/01/28/baby-deepseek-on-on-mac-laptop/index.html">previous post</a> I ran the "baby" <a href="https://www.deepseek.com/">DeepSeek</a> generative AI model on my Mac laptop.</p>
-   <p>(For instructions on how I installed <code>ollama</code>, and information about its basic use, see that <a href="2025/01/28/baby-deepseek-on-on-mac-laptop/index.html">previous post</a> and its postscript.)</p>
-   <p>The model ran fine, used a lot of CPU but not a lot of memory, generated output at a reasonable pace. Unfortunately, that model is not so "smart". It tells you how it's thinking, and it's not thinking very well. It misunderstands simple things and draws poor inferences.</p>
-   <p>So now I've decided to try out a still small but bigger, less toy-ish model. The baby model had 1.5B parameters. This one has 14B, so almost 10 times as big.</p>
-   <p>Downloading the model was trivial with <code>ollama</code>:</p>
-   <pre><code class="language-plaintext">% ollama pull deepseek-r1:14b
-</code></pre>
-   <p>It's actually a bit less 10 times as big as the baby model, which was about 1GB. Presumably there's some shared, fixed infrastructure, beyond the parameters. (I'm storage constrained, so I'm not retaining models in <code>~/.ollama</code>, there's just the one model there.)</p>
-   <pre><code class="language-plaintext">% du -sh ~/.ollama
-8.4G	/Users/swaldman/.ollama
-</code></pre>
-   <p>Running the model was also trivial:</p>
-   <pre><code class="language-plaintext">% ollama run deepseek-r1:14b
-&gt;&gt;&gt; Send a message (/? for help)
-</code></pre>
-   <p>I first tried the same prompt as yesterday, "Write a 'Hello, world!' haiku."</p>
-   <p>The model did run, but...</p>
-   <ol>
-    <li>
-     <p>It ran very, very slowly. The "baby" model ran quite briskly on my laptop. The 14B-parameter version ran like syrup.</p>
-    </li>
-    <li>
-     <p>The compute load was similar (5-6 full cores saturated), but this model also occupied ~10GB of memory when running. The 1.5B-parameter version used too little memory for me to notice or care.</p>
-    </li>
-   </ol>
-   <p>The 1.5B-parameter model failed to generate a haiku before I grew frustrated and quit it. The 14B-parameter also ultimately failed.</p>
-   <p>I think I chose a hard "Hello, world!" prompt for all of these models! Haikus are defined by lines with set numbers of syllables. The 1.5B-parameter model mistook letters for syllables. The 14B parameter mostly (but not always!) correctly identified syllables, but often miscounted them.</p>
-   <p>Even though it too ultimately went 'round and 'round until I interrupted it, the 14B-parameter model's <code>&lt;think&gt;...&lt;/think&gt;</code> process was much more relevant and coherent than the <a href="2025/01/28/baby-deepseek-on-on-mac-laptop/index.html">1.5B-parameter model</a>:</p>
-   <pre><code class="language-plaintext">&gt;&gt;&gt; Write a 'Hello, world!' haiku.
-&lt;think&gt;
-Okay, so I need to write a 'Hello, world!' haiku. Hmm, I remember that a haiku is a traditional Japanese poem with three lines. The structure is usually 5 syllables in the first line, then 7 syllables in the second, and ending with another 5 syllables. 
-
-Alright, so the theme here is "Hello, world!" which is pretty much about greeting the world or introducing oneself. I should think of imagery that represents a welcoming or introductory moment.
-
-Let me brainstorm some words related to saying hello and the world. Maybe morning, sunrise, nature sounds like a good setting for a greeting. Dawn could symbolize a new beginning or a fresh start, which fits with saying hello to the world.
-
-For the first line, I want something that captures attention and sets the scene. "Hello, gentle dawn" comes to mind. That's 5 syllables: He-ll-o, gen-tle, dawn. Yep, that works.
-
-Next, the second line needs to be 7 syllables and connect with the first line while expanding on the theme. I want something that shows interaction or response from the world. Maybe "The world whispers back." Let's count: The -world-whis-pers-back. That's 5 syllables? Wait, no. Let me 
-break it down.
-
-"The" (1), "world" (2), "whis-pers" (3), "back" (4). Oh, only 4 syllables. Hmm, I need three more. Maybe rephrase it. How about "The world hums a welcome"? That's 6 syllables: The-world-hums-a-wel-come. Wait, that might be stretching it.
-
-Alternatively, "The world greets me softly." Let's see: the (1), world (2), greets (3), me (4), soft-ly (5). No, still not 7. Maybe "The world responds with a smile." That's longer but syllables-wise: The (1), world (2), re-sponds (3), with (4), a (5), smile (6). Still only 6.
-
-Wait, maybe I'm overcomplicating it. Let me think of the action after the hello. Maybe something like "A new day begins." But that's more about the day starting. Alternatively, "Echoes of greeting fill the air." That's longer than 7 syllables though.
-
-Hmm, perhaps "The world says hello too." Wait, let me count: The (1), world (2), says (3), hel-lo (4), too (5). No, that's only 5. I need two more syllables. Maybe "The world hums in reply." That's He-world-hums-in-reply. Let me break it down: the (1), world (2), hums (3), in (4), re ply 
-(5 and 6). Wait, no, that's only 6.
-
-Wait, maybe I can use "The world answers back." The (1), world (2), an-sers (3), back (4). That's 4 syllables. Not enough. Hmm.
-
-Alternatively, think about nature sounds. Maybe "Birds sing in reply." That's 7 syllables: Birds (2), sing (1), in (1), reply (2). Wait, that doesn't add up. Let me count each word as syllables:
-
-"Birds" - 1
-"sing" - 1
-"in" -1
-"reply" -2
-
-Total: 5. Not enough.
-
-Wait, perhaps "Birdsong answers back." That's 7 syllables: Bird-song (2), an-swers (2), back (1). Wait, no:
-
-"Birdsong" is two syllables, "answers" is two, "back" is one. Total 5 again.
-
-I'm getting stuck on the second line. Maybe I should think of something else. How about a sunrise? "Sunrise breaks the silence." That's 7 syllables: Sun-rise (2), breaks (1), the (1), si-lence (2). Wait, that adds up to 6 syllables.
-
-Wait, no: Sunrise is two, breaks is one, the is one, silence is two. Total 6. Hmm.
-
-Alternatively, "Gentle breeze returns." That's 7? Gentle (2), breeze (1), re-turns (2). Wait, gentle is two syllables, breeze is one, returns is two: total 5.
-
-Hmm, maybe I'm overcomplicating. Let me try to think differently. Maybe the second line can be about reaching out or communication. "I reach out to you." That's 6 syllables: I (1), rea-ech (2), out (1), to (1), you (1). No, that's only 5.
-
-Wait, maybe "I send a greeting far and wide." That's way too long. Let me think about natural elements again. Maybe water? "Waves whisper hello." That's waves (1), whisper (2), hel-lo (2). Wait: waves (1), whisper (2), hello (2). Total 5 syllables, but I need 7.
-
-Alternatively, "Ripples greet the shore." Ripples (2), greet (1), the (1), shore (1). That's 5 again.
-
-I'm getting a bit stuck. Let me look back at the first line: "Hello, gentle dawn." Maybe the second line can continue that imagery. Dawn brings light, so perhaps something like "Light breaks the silence." That's 6 syllables: Light (1), breaks (1), the (1), si-lence (2). Total 5 again.
-
-Wait, maybe "Dawn greets the morning sky." That's dawn (1), greets (1), the (1), morn-ing (2), sky (1). Total is 6 syllables. Hmm.
-
-Alternatively, "A new day starts with a smile." New (1), day (1), starts (1), with (1), a (1), smile (1). That's 6.
-
-I'm still not hitting that 7-syllable mark for the second line. Maybe I should try something else. How about focusing on the feeling of greeting? "Heart beats in rhythm." Heart (1), beats (1), in (1), rhyth-m (2). Total is 5.
-
-Wait, maybe "Echoes fill the air." Echoes (2), fill (1), the^C
-</code></pre>
-   <p>As before, my next step was to see if the model could code a simple "Hello, world!" program in Scala. The 1.5B-parameter model failed abysmally. Even when presented with compiler errors, and then my suggestions to tutor it, it was not making progress towards a correct solution.</p>
-   <p>The 14B parameter produced a correct program on its first attempt. It's <code>&lt;think&gt;...&lt;/think&gt;</code>-ing was not perfect, but was mostly pretty good.</p>
-   <pre><code class="language-plaintext">&gt;&gt;&gt; Please write a Scala program that prints "Hello, world!"
-&lt;think&gt;
-Okay, I need to write a Scala program that prints "Hello, world!". Hmm, where do I start? Well, I know that in Scala, you can print something using the println function. So maybe I just call println("Hello, world!")?
-
-Wait, but how does aScala script work? Do I need to have an object or is it simpler than that? Oh right, for a simple program like this, I think you can just write it in a single line. But wait, when compiling with scalac, do I need to structure it as an object?
-
-Let me think. If I'm writing a script, maybe I can use the main method inside an object. So perhaps the code should be something like:
-
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, world!")
-  }
-}
-
-Yes, that makes sense. Because when you run a Scala program, it looks for an object with a main method. So this structure is correct.
-
-Alternatively, I remember that in older versions of Scala, you could just write the code without defining an object if using the scalaz script compiler or something like that. But perhaps the more standard way is to define an object with the main method.
-
-So putting it all together, the code should be an object named HelloWorld (or any name really), and inside the main function, we call println with the desired string.
-
-Let me double-check: When I run this program, either by compiling with scalac and then running with scala, or using a Scala IDE, it should print "Hello, world!" correctly. Yeah, that should work.
-&lt;/think&gt;
-
-To write a Scala program that prints "Hello, world!", follow these steps:
-
-1. **Create a new file** for your Scala program. It can be named `HelloWorld.scala`.
-
-2. **Write the code**: The code will define an object with a main method that calls `println` to output the desired message.
-
-Here's the complete Scala code:
-
-```scala
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, world!")
-  }
-}
-``` 
-
-3. **Run the program**:
-   - **Using the command line**:
-     - Compile the file using `scalac HelloWorld.scala`.
-     - Run it with ` scala HelloWorld`.
-   - **Using an IDE**: Simply run the script through your preferred Scala IDE.
-
-This program will output:
-
-``` 
-Hello, world!
-``` 
-</code></pre>
-   <p>And so it did.</p>
-   <pre><code class="language-plaintext">% scala-cli run hello-ds14b.scala 
-Compiling project (Scala 3.6.3, JVM (17))
-Compiled project (Scala 3.6.3, JVM (17))
-Hello, world!
-</code></pre>
-   <p>Since it got it right, I thanked it! Its "thought-process" in response was kind of fun:</p>
-   <pre><code class="language-plaintext">&gt;&gt;&gt; Great! Thank you.
-&lt;think&gt;
-Alright, so the user just thanked me for the previous explanation on writing a "Hello, world!" program in Scala. They were probably satisfied with the answer, but I should think about how to respond appropriately. 
-
-I want to be polite and encouraging, so I'll acknowledge their gratitude. Maybe add an emoji to keep it friendly. Also, since they might be new to programming orScala, offering further help is a good idea. I can ask if there's anything else they need assistance with.
-
-Hmm, perhaps I should also provide options for what they might want next—like solving another problem or explaining more concepts. That way, it shows I'm ready to assist them in various ways.
-
-I should keep the response concise and positive, making sure they feel comfortable asking more questions if needed.
-&lt;/think&gt;
-
-You're welcome! If you have any other questions or need help with anything else, feel free to ask! 😊
-</code></pre>
-   <hr>
-   <p>I really want to do whatever AI-using I eventually do on my own infrastructure, or infrastructure of someone I trust, rather than a distant megafirm. But this current family of models, on my current best hardware, won't get me there.</p>
-   <p>Sometime soon I may upgrade to an Apple Silicon Mac, and then retry these exercises.</p>
-   <p>I'd consider a cloud server I rent and fully control (as opposed to API access) "my own infrastructure", but cloud servers with the resources of my laptop are too pricey for me, for now. The trendy AI-ready GPU-endowed servers some cloud providers are renting are way beyond my price point.</p>
-   <p>So, for now, I think I'm stuck with the megafirms, to the degree that I use this stuff at all. But the DeepSeek models are a big step closer towards LLMs more consistent with our independence, and I'm grateful for that.</p>
-  </div>
- </div>
- <div class="entry-footer">
-  <div class="post-metainfo">
-   <div>
-    <a href="2025/01/28/adolescent-deepseek-on-a-mac-laptop/index.html" class="pubtime">10:00 PM EST</a>
    </div>
   </div>
  </div>
