@@ -85,7 +85,7 @@
   <hr class="below-title">
  </div>
  <div class="update-prepend rss-description-exclude">
-  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2026-06-11 @ 12:30 PM EDT. The previous revision is <a href="index-oldcommit-e55882f63ed583549888ac31d22c7fae968d7359.html">here</a>, diff <a href="index-diff-e55882f63ed583549888ac31d22c7fae968d7359-to-current.html">here</a>. (See <a href="index.html#update-history">update history</a>.) </em>
+  <em> ➣&nbsp;&nbsp;This post was meaningfully revised at 2024-06-20 @ 01:10 PM EDT. The previous revision is <a href="index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html">here</a>, diff <a href="index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-current.html">here</a>. (See <a href="index.html#update-history">update history</a>.) </em>
   <hr>
  </div>
  <div class="entry-body">
@@ -391,15 +391,6 @@ If you like Certbot, please consider supporting our work by:
 $ cd feedletter-local
 $ ./feedletter db-init
 </code></pre>
-   <div class="note">
-    <p>At this point, if you are running feedletter &gt;=0.2.5 it's also a good idea to run the following command:</p>
-    <pre><code class="language-plaintext">$ ./feedletter generate-starter-untemplates
-</code></pre>
-    <p>That will make it simpler, going forward, to modify the look and feel of e-mails that you generate — newsletters, confirmation requests, etc.</p>
-    <p>If you don't run this command, everything will still be fine, but you'll need to do a bit more work if you want to change the style of your e-mails.</p>
-    <p>Be sure to perform this step <em>before <a href="#12-define-subscribables-to-feeds">defining any subscribables</a></em>. Any subscribables you define before generating the starter templates will use compiled-in untemplates, and you'll have to define new untemplates and update your subscriptions to use them if you want to change the styling. (See the notes in <a href="#15-tweak-the-newsletter-styles">Section 15</a> of this tutorial.)</p>
-    <p>(Update added 2026-06-11)</p>
-   </div>
    <h2><a href="#10-perform-in-database-configuration" id="10-perform-in-database-configuration" name="10-perform-in-database-configuration" class="anchorlink"></a>10. Perform in-database configuration</h2>
    <p>Some of <em>feedletter</em>'s config sits in the secrets file, but much lives in the application's database itself.</p>
    <p>We can see <em>feedletter</em>'s current (default) configuration simply by running</p>
@@ -845,22 +836,14 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
     <p>By default, we just pulled the first item (and most recent, since blogs are usually reverse-chronological) from the feed. We can also pull a random item off the feed to view with <code>--random</code>, or a particular item identified by its <code>&lt;guid&gt;</code> element in the feed with <code>--guid &lt;guid&gt;</code>.</p>
    </div>
    <p>Let's see how we can restyle this post to make it a bit better.</p>
-   <p>If we ran <code>./feedletter generate-starter-templates</code> before defining your subscribables, as recommended in a note <a href="#9-initialize-the-feedletter-database">above</a>, things are very easy. In the <code>untemplate</code> directory you will find a subdirectory <code>default/subscription/email</code>. In that directory, you'll see a file called <code>composeUniversal.html.untemplate</code>.</p>
-   <p>If we start editing that template, our edits will take effect immediately when running <code>feedletter-style</code>, like this:</p>
-   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm  --port 45612
-[50/50] runMainBackground 
-Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
-Starting single-page webserver on interface '0.0.0.0', port 45612...
-</code></pre>
-   <div class="note">
-    <p>If we did not generate starter templates, we will have been using the compiled-in default untemplate to compose our items. We cannot modify that.</p>
-    <p>But our feedletter installation directory contains a copy of this untemplate that we can deploy and tweak.</p>
-    <p>To do so, we'll have to create a folder for this file under <code>untemplate</code>. We’ll call it <code>tutorial</code>. Then...</p>
-    <pre><code class="language-plaintext">$ mkdir untemplate/tutorial/
+   <p>We have been using the built-in default untemplate to compose our items. We cannot modify that.</p>
+   <p>But our feedletter installation directory contains a copy of this untemplate that we can deploy and tweak.</p>
+   <p>To do so, we'll have to create a folder for this file under <code>untemplate</code>. We’ll call it <code>tutorial</code>. Then...</p>
+   <pre><code class="language-plaintext">$ mkdir untemplate/tutorial/
 $ cp sample/defaultCompose.html.untemplate untemplate/tutorial/lgmCompose.html.untemplate
 </code></pre>
-    <p><code>feedletter</code> now has access to this untemplate, under a name you can find by calling <code>./feedletter list-untemplates</code>:</p>
-    <pre><code class="language-plaintext">$ ./feedletter list-untemplates
+   <p><code>feedletter</code> now has access to this untemplate, under a name you can find by calling <code>./feedletter list-untemplates</code>:</p>
+   <pre><code class="language-plaintext">$ ./feedletter list-untemplates
 [42/49] compile 
 [info] compiling 2 Scala sources to /home/feedletter/feedletter-local/out/compile.dest/classes ...
 [info] done compiling
@@ -877,21 +860,20 @@ $ cp sample/defaultCompose.html.untemplate untemplate/tutorial/lgmCompose.html.u
 ¦ tutorial.lgmCompose_html                                      ¦ com.mchange.feedletter.style.ComposeInfo.Universal                                                  ¦
 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------+
 </code></pre>
-    <p>Now we can ask <code>feedletter-style</code> to show us what this post would look like using our "new" untemplate to render it:</p>
-    <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --untemplate-name tutorial.lgmCompose_html --port 45612
+   <p>Now we can ask <code>feedletter-style</code> to show us what this post would look like using our "new" untemplate to render it:</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-single --subscribable-name lgm --untemplate-name tutorial.lgmCompose_html --port 45612
 [50/50] runMainBackground 
 Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
 Starting single-page webserver on interface '0.0.0.0', port 45612...
 </code></pre>
-   </div>
-   <p>Initially it will look exactly the same, because it is just a copy of the default untemplate!</p>
-   <p>But now we can just modify our untemplate (either <code>untemplate/default/subscription/email/composeUniversal.html.untemplate</code> or <code>untemplate/tutorial/lgmCompose.html.untemplate</code>), hit reload, and play around with it!</p>
+   <p>Initially it looks exactly the same, because it is just a copy of the default untemplate!</p>
+   <p>But now we can just modify that file, <code>untemplate/tutorial/lgmCompose.html.untemplate</code>, hit reload, and play!</p>
    <p>This is why we needed a second terminal window. We edit the template in one terminal while <code>./feedletter-style</code> is running in the other. After each edit and save, we hit reload to see our changes. (We may have to wait 10-15 secs!)</p>
    <div class="note">
     <p>Occasionally the autoreload glitches out, in which case you should manually &lt;ctrl-c&gt; and rerun your <code>./feedletter-style</code> command.</p>
     <p>If you see error messages when you rerun, you may have hit compilation errors (an <a href="https://github.com/swaldman/untemplate-doc#readme">untemplate is transformed into a Scala source code</a>, which is then compiled), which you will have to resolve. You can <a href="mailto:swaldman@mchange.com">ask for help</a>!)</p>
    </div>
-   <p>Our untemplate has a section that looks like this:</p>
+   <p>Our new untemplate has a section that looks like this:</p>
    <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
     &lt;style&gt;
@@ -934,12 +916,10 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
    <p>Looks better!</p>
    <img alt="Screenshot of web-served lgm newsletter with a better laid-out image." src="scotus-disqualify-good-good-endline.png" style="width: 100%;">
    <p>We can keep editing all we like. We add the <code>--random</code> flag and run our <code>./feedletter-style</code> command over and over to make sure that posts in general render well.</p>
-   <p>When we are happy, we are done, if we've been editing the starter untemplate at <code>untemplate/default/subscription/email/composeUniversal.html.untemplate</code>. (If not, see the note just below.)</p>
-   <div class="note">
-    <p>If we created a new untemplate called <code>tutorial.lgmCompose_html</code>, we'll need to to tell our subscription to use the new untemplate.</p>
-    <p>Remember, the name of the untemplate we've been editing was <code>tutorial.lgmCompose_html</code>.</p>
-    <p>Let's check that command out:</p>
-    <pre><code class="language-plaintext">$ ./feedletter set-untemplates --help
+   <p>When we are happy, we want to tell our subscription to use the new untemplate.</p>
+   <p>Remember, the name of the untemplate we've been editing was <code>tutorial.lgmCompose_html</code>.</p>
+   <p>Let's check that command out:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --help
 [49/49] runMain 
 Usage: feedletter set-untemplates --subscribable-name &lt;name&gt; [--compose-untemplate &lt;fully-qualified-name&gt;] [--confirm-untemplate &lt;fully-qualified-name&gt;] [--removal-notification-untemplate &lt;fully-qualified-name&gt;] [--status-change-untemplate &lt;fully-qualified-name&gt;]
 
@@ -961,8 +941,8 @@ Options and flags:
 1 targets failed
 runMain subprocess failed
 </code></pre>
-    <p>Okay. So we run...</p>
-    <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm --compose-untemplate tutorial.lgmCompose_html
+   <p>Okay. So we run...</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm --compose-untemplate tutorial.lgmCompose_html
 [49/49] runMain 
 Updated Subscription Manager: {
     "composeUntemplateName": "tutorial.lgmCompose_html",
@@ -979,22 +959,11 @@ Updated Subscription Manager: {
     "version": 1
 }
 </code></pre>
-   </div>
    <p>And we are done! We have restyled our newsletter.</p>
    <p>We could (and should!) do the same with our other subscriptions (using <code>./feedletter-style compose-multiple</code>). We could also do much more elaborate things then just mess with the stylesheet. Our compose untemplate was really the definition of a pretty arbitrary Scala function that accepted a <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Single</code></a> object and produced a String (embedded in an <code>untemplate.Result</code>).</p>
    <p>Learn more about untemplates <a href="https://github.com/swaldman/untemplate-doc#readme">here</a>.</p>
-   <p>The default compose untemplate actually accepts a <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Universal</code></a>, a parent type of both <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Single</code></a> and <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Multiple</code></a>.</p>
-   <p>If we generated starter untemplates, our <code>lgm-daily</code> subscribable used the same compose untemplate we just edited by default. Run <code>./feedletter list-untemplates</code> to verify this.</p>
-   <p>Let's take a look at what that subscription looks like. Because it shows multiple posts, we use the <code>compose-multiple</code> subcommand.</p>
-   <pre><code class="language-plaintext">$ ./feedletter-style compose-multiple --subscribable-name lgm-daily --port 45612
-[50/50] runMainBackground 
-Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
-Starting single-page webserver on interface '0.0.0.0', port 45612...
-</code></pre>
-   <p>We've already fixed our glitches in that subscription as well. It looks pretty good!</p>
-   <div class="note">
-    <p>If we did not <code>generate-starter-untemplates</code>, we still have to tell <code>lgm-daily</code> to use our new untemplate, just like we had to tell <code>lgm</code> before:</p>
-    <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm-daily --compose-untemplate tutorial.lgmCompose_html
+   <p>The default compose untemplate actually accepts a <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Universal</code></a>, a parent type of both <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Single</code></a> and <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/core.scala"><code>ComposeInfo.Multiple</code></a>. So we can fix up the glitches we know about already in our <code>lgm-daily</code> subscribable just by setting for it the same compose untemplate:</p>
+   <pre><code class="language-plaintext">$ ./feedletter set-untemplates --subscribable-name lgm-daily --compose-untemplate tutorial.lgmCompose_html
 [49/49] runMain 
 Updated Subscription Manager: {
     "composeUntemplateName": "tutorial.lgmCompose_html",
@@ -1011,14 +980,13 @@ Updated Subscription Manager: {
     "version": 1
 }
 </code></pre>
-    <p>If we take a look at that with <code>compose-multiple</code>..</p>
-    <pre><code class="language-plaintext">$ ./feedletter-style compose-multiple --subscribable-name lgm-daily --port 45612
+   <p>If we take a look at that with <code>compose-multiple</code>..</p>
+   <pre><code class="language-plaintext">$ ./feedletter-style compose-multiple --subscribable-name lgm-daily --port 45612
 [50/50] runMainBackground 
 Watching for changes to 14 paths and 9 other values... (Enter to re-run, Ctrl-C to exit)
 Starting single-page webserver on interface '0.0.0.0', port 45612...
 </code></pre>
-    <p>We'll find that it looks pretty good!</p>
-   </div>
+   <p>We'll find that it looks pretty good!</p>
    <h2><a href="#16-advanced-customize-the-content" id="16-advanced-customize-the-content" name="16-advanced-customize-the-content" class="anchorlink"></a>16. Advanced: Customize the content</h2>
    <p><em>feedletter</em> supports a variety of <a href="https://github.com/swaldman/feedletter/blob/main/src/com/mchange/feedletter/style/Customizer.scala">customizers</a>, including</p>
    <ul>
@@ -1143,7 +1111,7 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
  <div class="entry-footer">
   <div class="post-metainfo">
    <div class="updated-note">
-    <a href="index.html#major-updates">Last major update at 2026-06-11 @ 12:30 PM EDT</a>
+    <a href="index.html#major-updates">Last major update at 2024-06-20 @ 01:10 PM EDT</a>
    </div>
    <div>
     <a href="index.html" class="pubtime">10:30 AM EST</a>
@@ -1166,12 +1134,11 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
  <div id="update-history" class="update-history">
   <h3 class="update-history-title"><a id="major-updates" href=""></a>Major revisions:</h3>
   <ul>
-   <li><span class="update-timestamp"><i>2026-06-11 @ 12:30 PM EDT</i></span> — Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those. (<a href="index-diff-e55882f63ed583549888ac31d22c7fae968d7359-to-current.html">diff</a>)</li>
-   <li><span class="update-timestamp"><i> <a href="index-oldcommit-e55882f63ed583549888ac31d22c7fae968d7359.html">2024-06-20 @ 01:10 PM EDT</a></i></span> — Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial. (<a href="index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-e55882f63ed583549888ac31d22c7fae968d7359.html">diff</a>)</li>
+   <li><span class="update-timestamp"><i>2024-06-20 @ 01:10 PM EDT</i></span> — Add note to Section 16, "Advanced: Customize the content" documenting <i>feedletter</i> API changes that slightly modify this section of the tutorial. (<a href="index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-current.html">diff</a>)</li>
    <li><span class="update-timestamp"><i> <a href="index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html">2024-01-29 @ 10:30 AM EST</a></i></span> — Initial publication.</li>
   </ul>
   <div class="update-history-note">
-   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2026-06-12 @ 02:39 PM EDT.
+   Timestamps represent "major", substantative revisions. There may have been subsequent typo fixes and language reworkings within a major revision, after the time displayed. For a more complete and fine-grained update history, you can view the <a href="https://github.com/swaldman/tech.interfluidity.com/commits/main/">git repository commit history</a>. The most recent minor modification of this entry occurred 2025-01-14 @ 04:05 PM EST.
   </div>
  </div>
 </div>

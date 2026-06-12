@@ -1101,10 +1101,10 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
             <![CDATA[Modify the tutorial to encourage use of new './feedletter generate-starter-untemplates', and document by default in terms of those.]]>
           </atom:summary>
           <iffy:revision>
-            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
+            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-oldcommit-e55882f63ed583549888ac31d22c7fae968d7359.html
           </iffy:revision>
           <iffy:diff>
-            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-current.html
+            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-e55882f63ed583549888ac31d22c7fae968d7359-to-current.html
           </iffy:diff>
         </iffy:update>
         <iffy:update>
@@ -1116,7 +1116,7 @@ Starting single-page webserver on interface '0.0.0.0', port 45612...
             https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-oldcommit-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
           </iffy:revision>
           <iffy:diff>
-            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4.html
+            https://tech.interfluidity.com/2024/01/29/feedletter-tutorial/index-diff-acb84c08c1bbcc83036b9cad70f6a3c5d60865c4-to-e55882f63ed583549888ac31d22c7fae968d7359.html
           </iffy:diff>
         </iffy:update>
       </iffy:update-history>
