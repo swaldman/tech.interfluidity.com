@@ -39,6 +39,8 @@ Working with Claude code, I mostly "vibecoded" an "[indexcard](https://github.co
 
 I asked Claude to write code to hit Claude, in order to generate the teasers. It's pretty straightforward, trivial stuff. The code Claude generated proved a bit brittle. I modified the `MessageResponse` to be more tolerant of different kinds of valid responses than what Claude generated initially, and added the more forgiving timeouts. Unsurprisingly I've played around quite a bit with the teaser-generating prompt.
 
+_Note: If you are copying and pasting from the code below, note that I've replaced the pipe characters with a look alike (U+00&C => U+FF5C) to overcome a markdown rendering glitch. You'll want to replace the vertical bars with ordinary pipe characters._
+
 ```scala
  object Anthropic:
    // largely Claude-written code to access Claude...
