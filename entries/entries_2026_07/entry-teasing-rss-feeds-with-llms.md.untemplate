@@ -112,7 +112,7 @@ Price considerations have had me tumbling through different models:
  val model = "qwen3.6-flash"       // cheaper, let's see!
 ```
 
-When I switched to qwen, I also switched from anthropic to Alibaba Cloud, but they offer an Anthropic-compatible API, so that wasn't a lot of work. (It was here I had to make the Claude-generated response object a bit more tolerant, though. Qwen provided `type="thinking"` objects that broke the original, very prescriptive, response format.)
+When I switched to qwen, I also switched from Anthropic to Alibaba Cloud, but they offer an Anthropic-compatible API, so that wasn't a lot of work. (It was here I had to make the Claude-generated response object a bit more tolerant, though. Qwen provided `type="thinking"` objects that broke the original, very prescriptive, response format.)
 
 I think that running this with Qwen3.6-flash on Alibaba Cloud will cost me $1-$2 a day. Claude Sonnet would be around $10 a day, way too much. Long-term, probably $1 to $2 per day is still too much. I'll be looking for more economical ways to summarize. (Please [let me know](mailto:swaldman@mchange.com) if you have suggestions.)
 
